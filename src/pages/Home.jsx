@@ -14,9 +14,43 @@ const LOCATIONS = [
     lon: 36.82,
     description: "Hub for sustainable agriculture and renewable energy infrastructure across the region.",
     projects: [
-      { name: "Solar Micro-Grid Network", type: "engineering", description: "Deploying modular solar micro-grids to power 12 rural communities with clean, reliable energy.", year: "2025", team: "14 engineers", status: "active" },
-      { name: "Precision Drip Irrigation", type: "farming", description: "AI-driven irrigation system reducing water usage by 60% across 800 hectares of farmland.", year: "2024", team: "8 specialists", status: "active" },
-      { name: "Vertical Farm Pilot", type: "farming", description: "Urban vertical farming facility producing leafy greens year-round using hydroponics.", year: "2024", team: "6 agronomists", status: "completed" },
+      { 
+        name: "Solar Micro-Grid Network", 
+        type: "engineering", 
+        description: "Deploying modular solar micro-grids to power 12 rural communities with clean, reliable energy.", 
+        year: "2025", 
+        team: "14 engineers", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800",
+          "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800",
+          "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
+        ]
+      },
+      { 
+        name: "Precision Drip Irrigation", 
+        type: "farming", 
+        description: "AI-driven irrigation system reducing water usage by 60% across 800 hectares of farmland.", 
+        year: "2024", 
+        team: "8 specialists", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800",
+          "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800"
+        ]
+      },
+      { 
+        name: "Vertical Farm Pilot", 
+        type: "farming", 
+        description: "Urban vertical farming facility producing leafy greens year-round using hydroponics.", 
+        year: "2024", 
+        team: "6 agronomists", 
+        status: "completed",
+        images: [
+          "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800",
+          "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800"
+        ]
+      },
     ],
   },
   {
@@ -27,9 +61,41 @@ const LOCATIONS = [
     lon: -46.63,
     description: "Major operations center for tropical agriculture innovation and water engineering projects.",
     projects: [
-      { name: "Rainforest Reforestation Drones", type: "engineering", description: "Autonomous drone fleet planting 50,000 native trees monthly in deforested areas.", year: "2025", team: "10 engineers", status: "active" },
-      { name: "Cacao Agroforestry", type: "farming", description: "Shade-grown cacao integrated with native trees, restoring biodiversity while producing premium chocolate.", year: "2023", team: "22 farmers", status: "active" },
-      { name: "Flood Barrier System", type: "engineering", description: "Smart flood management infrastructure protecting 3 riverside communities.", year: "2024", team: "18 engineers", status: "completed" },
+      { 
+        name: "Rainforest Reforestation Drones", 
+        type: "engineering", 
+        description: "Autonomous drone fleet planting 50,000 native trees monthly in deforested areas.", 
+        year: "2025", 
+        team: "10 engineers", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800",
+          "https://images.unsplash.com/photo-1511406361295-0a1ff814c0ce?w=800"
+        ]
+      },
+      { 
+        name: "Cacao Agroforestry", 
+        type: "farming", 
+        description: "Shade-grown cacao integrated with native trees, restoring biodiversity while producing premium chocolate.", 
+        year: "2023", 
+        team: "22 farmers", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1511381939415-e44015466834?w=800",
+          "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=800"
+        ]
+      },
+      { 
+        name: "Flood Barrier System", 
+        type: "engineering", 
+        description: "Smart flood management infrastructure protecting 3 riverside communities.", 
+        year: "2024", 
+        team: "18 engineers", 
+        status: "completed",
+        images: [
+          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800"
+        ]
+      },
     ],
   },
   {
@@ -40,8 +106,29 @@ const LOCATIONS = [
     lon: 4.48,
     description: "European center for water management engineering and climate-adaptive agriculture.",
     projects: [
-      { name: "Floating Farm Platform", type: "farming", description: "Self-sustaining floating dairy farm producing milk with zero land footprint.", year: "2024", team: "12 specialists", status: "active" },
-      { name: "Tidal Energy Converter", type: "engineering", description: "Next-gen tidal turbines generating 5MW of clean energy from harbor currents.", year: "2025", team: "20 engineers", status: "active" },
+      { 
+        name: "Floating Farm Platform", 
+        type: "farming", 
+        description: "Self-sustaining floating dairy farm producing milk with zero land footprint.", 
+        year: "2024", 
+        team: "12 specialists", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800",
+          "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800"
+        ]
+      },
+      { 
+        name: "Tidal Energy Converter", 
+        type: "engineering", 
+        description: "Next-gen tidal turbines generating 5MW of clean energy from harbor currents.", 
+        year: "2025", 
+        team: "20 engineers", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800"
+        ]
+      },
     ],
   },
   {
@@ -52,9 +139,40 @@ const LOCATIONS = [
     lon: 77.59,
     description: "Technology-driven agricultural solutions and smart infrastructure development.",
     projects: [
-      { name: "Soil Health AI Platform", type: "farming", description: "Machine learning platform analyzing soil samples to optimize crop yields for 2,000+ smallholder farms.", year: "2025", team: "9 data scientists", status: "active" },
-      { name: "Rural Bridge Network", type: "engineering", description: "Modular steel bridges connecting 15 isolated villages to market centers.", year: "2023", team: "25 engineers", status: "completed" },
-      { name: "Millet Revival Program", type: "farming", description: "Reviving ancient millet varieties with modern processing for nutrition-dense food products.", year: "2024", team: "16 agronomists", status: "active" },
+      { 
+        name: "Soil Health AI Platform", 
+        type: "farming", 
+        description: "Machine learning platform analyzing soil samples to optimize crop yields for 2,000+ smallholder farms.", 
+        year: "2025", 
+        team: "9 data scientists", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
+          "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800"
+        ]
+      },
+      { 
+        name: "Rural Bridge Network", 
+        type: "engineering", 
+        description: "Modular steel bridges connecting 15 isolated villages to market centers.", 
+        year: "2023", 
+        team: "25 engineers", 
+        status: "completed",
+        images: [
+          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800"
+        ]
+      },
+      { 
+        name: "Millet Revival Program", 
+        type: "farming", 
+        description: "Reviving ancient millet varieties with modern processing for nutrition-dense food products.", 
+        year: "2024", 
+        team: "16 agronomists", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800"
+        ]
+      },
     ],
   },
   {
@@ -65,8 +183,28 @@ const LOCATIONS = [
     lon: -104.99,
     description: "Advanced research facility for arid-climate farming and renewable energy systems.",
     projects: [
-      { name: "Geothermal Greenhouse Complex", type: "engineering", description: "Year-round food production using geothermal heating in high-altitude greenhouses.", year: "2025", team: "11 engineers", status: "active" },
-      { name: "Regenerative Ranching Trial", type: "farming", description: "Holistic planned grazing restoring 5,000 acres of degraded grassland.", year: "2024", team: "7 ranchers", status: "active" },
+      { 
+        name: "Geothermal Greenhouse Complex", 
+        type: "engineering", 
+        description: "Year-round food production using geothermal heating in high-altitude greenhouses.", 
+        year: "2025", 
+        team: "11 engineers", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800"
+        ]
+      },
+      { 
+        name: "Regenerative Ranching Trial", 
+        type: "farming", 
+        description: "Holistic planned grazing restoring 5,000 acres of degraded grassland.", 
+        year: "2024", 
+        team: "7 ranchers", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800"
+        ]
+      },
     ],
   },
   {
@@ -77,8 +215,28 @@ const LOCATIONS = [
     lon: 141.35,
     description: "Cutting-edge robotics and cold-climate agriculture research center.",
     projects: [
-      { name: "Autonomous Harvest Robotics", type: "engineering", description: "Fleet of AI-powered robots performing precision harvesting of delicate crops.", year: "2025", team: "16 roboticists", status: "active" },
-      { name: "Snow Melt Aquaculture", type: "farming", description: "Sustainable fish farming utilizing pristine snowmelt water systems.", year: "2024", team: "5 marine biologists", status: "planned" },
+      { 
+        name: "Autonomous Harvest Robotics", 
+        type: "engineering", 
+        description: "Fleet of AI-powered robots performing precision harvesting of delicate crops.", 
+        year: "2025", 
+        team: "16 roboticists", 
+        status: "active",
+        images: [
+          "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800"
+        ]
+      },
+      { 
+        name: "Snow Melt Aquaculture", 
+        type: "farming", 
+        description: "Sustainable fish farming utilizing pristine snowmelt water systems.", 
+        year: "2024", 
+        team: "5 marine biologists", 
+        status: "planned",
+        images: [
+          "https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800"
+        ]
+      },
     ],
   },
 ];
@@ -107,12 +265,14 @@ export default function Home() {
         className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8"
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm">
-            <Globe2 className="w-5 h-5 text-amber-400" />
-          </div>
+          <img 
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/38ce93810_Brand_Icon_White.png"
+            alt="E2Eden"
+            className="w-10 h-10 object-contain"
+          />
           <div>
-            <h1 className="text-lg font-bold text-white tracking-tight">Global Projects</h1>
-            <p className="text-xs text-white/30">Engineering & Agriculture Worldwide</p>
+            <h1 className="text-lg font-bold text-white tracking-tight">E2Eden</h1>
+            <p className="text-xs text-white/30">The Next Green Revolution</p>
           </div>
         </div>
       </motion.div>
@@ -125,14 +285,14 @@ export default function Home() {
         className="absolute top-24 sm:top-28 left-6 sm:left-8 z-10 max-w-md"
       >
         <h2 className="text-3xl sm:text-4xl font-bold text-white/90 tracking-tight leading-tight">
-          Building the future,
+          Cultivating tomorrow,
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
-            one project at a time
+            sustaining today
           </span>
         </h2>
         <p className="text-sm text-white/30 mt-3 leading-relaxed max-w-sm">
-          Explore our global network of engineering and farming initiatives transforming communities across six continents.
+          Pioneering sustainable engineering and regenerative agriculture across six continents, transforming communities through innovation.
         </p>
       </motion.div>
 

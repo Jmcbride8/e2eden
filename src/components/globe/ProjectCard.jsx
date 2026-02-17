@@ -20,7 +20,7 @@ const typeConfig = {
   },
 };
 
-export default function ProjectCard({ project, index }) {
+export default function ProjectCard({ project, index, onClick }) {
   const config = typeConfig[project.type] || typeConfig.engineering;
   const Icon = config.icon;
 
@@ -29,6 +29,7 @@ export default function ProjectCard({ project, index }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08, duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+      onClick={onClick}
       className={`group relative rounded-xl border ${config.border} ${config.bg} backdrop-blur-sm p-4 
         hover:border-white/20 transition-all duration-300 cursor-pointer`}
     >

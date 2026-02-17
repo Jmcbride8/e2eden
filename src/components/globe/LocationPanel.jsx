@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MapPin, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
 
 export default function LocationPanel({ location, onClose }) {
+  const [selectedProject, setSelectedProject] = useState(null);
+  
   if (!location) return null;
 
   return (
@@ -76,12 +79,25 @@ export default function LocationPanel({ location, onClose }) {
             {/* Projects */}
             <div className="space-y-3">
               {location.projects.map((project, idx) => (
-                <ProjectCard key={project.name} project={project} index={idx} />
+                <ProjectCard 
+                  key={project.name} 
+                  project={project} 
+                  index={idx}
+                  onClick={() => setSelectedProject(project)}
+                />
               ))}
             </div>
           </div>
         </div>
       </motion.div>
+
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          location={location.name}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </AnimatePresence>
   );
 }

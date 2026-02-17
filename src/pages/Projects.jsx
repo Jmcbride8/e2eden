@@ -51,7 +51,18 @@ export default function Projects() {
         </div>
 
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">All Projects</h1>
+          <div className="flex items-center gap-3 mb-4">
+            <img 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png"
+              alt="E2Eden"
+              className="w-12 h-12 object-contain"
+            />
+            <div>
+              <h1 className="text-2xl font-bold text-white">E2Eden</h1>
+              <p className="text-sm text-white/40">The Next Green Revolution</p>
+            </div>
+          </div>
+          <h2 className="text-3xl font-bold text-white mb-2">All Projects</h2>
           <p className="text-white/40">Browse our complete portfolio of engineering and farming initiatives worldwide</p>
         </div>
 
