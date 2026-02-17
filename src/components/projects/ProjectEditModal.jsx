@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { base44 } from "@/api/base44Client";
 
 export default function ProjectEditModal({ project, onClose, onSave }) {
   const [formData, setFormData] = useState(project || {
     name: "",
-    type: "engineering",
+    type: [],
     description: "",
     location: "",
     country: "",
@@ -115,17 +116,28 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
                 />
               </div>
 
-              <div>
-                <Label className="text-white/70">Type</Label>
-                <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
-                  <SelectTrigger className="bg-white/[0.06] border-white/10 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="engineering">Engineering</SelectItem>
-                    <SelectItem value="farming">Farming</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="col-span-2">
+                <Label className="text-white/70 mb-2 block">Project Type</Label>
+                <div className="flex gap-4">
+                  {["Farming", "Tunnels", "Minerals"].map((type) => (
+                    <div key={type} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`type-${type}`}
+                        checked={formData.type?.includes(type) || false}
+                        onCheckedChange={(checked) => {
+                          const newTypes = checked
+                            ? [...(formData.type || []), type]
+                            : (formData.type || []).filter(t => t !== type);
+                          setFormData({ ...formData, type: newTypes });
+                        }}
+                        className="border-white/20 data-[state=checked]:bg-amber-500 data-[state=checked]:border-amber-500"
+                      />
+                      <Label htmlFor={`type-${type}`} className="text-white/70 cursor-pointer">
+                        {type}
+                      </Label>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div>
