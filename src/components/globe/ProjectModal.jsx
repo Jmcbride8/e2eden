@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, Users, MapPin, Wrench, Leaf } from "lucide-react";
+import { X, Calendar, Users, MapPin, Wrench, Leaf, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ProjectCarousel from "./ProjectCarousel";
+import { base44 } from "@/api/base44Client";
+import { useQueryClient } from "@tanstack/react-query";
 
 const typeConfig = {
   engineering: {
@@ -32,11 +34,36 @@ const tabs = [
 
 export default function ProjectModal({ project, location, onClose }) {
   const [activeTab, setActiveTab] = useState("backstory");
+  const [user, setUser] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const queryClient = useQueryClient();
+  
+  useEffect(() => {
+    base44.auth.me().then(setUser).catch(() => setUser(null));
+  }, []);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const result = await base44.integrations.Core.UploadFile({ file });
+      await base44.entities.Project.update(project.id, { hero_image: result.file_url });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      project.hero_image = result.file_url;
+    } catch (error) {
+      console.error("Upload failed:", error);
+    } finally {
+      setUploading(false);
+    }
+  };
   
   if (!project) return null;
 
   const config = typeConfig[project.type] || typeConfig.engineering;
   const Icon = config.icon;
+  const isAdmin = user?.role === 'admin';
 
   return (
     <AnimatePresence>
@@ -77,15 +104,58 @@ export default function ProjectModal({ project, location, onClose }) {
               <h2 className="text-2xl font-bold text-white mb-2">{project.name}</h2>
               
               {/* Hero Image */}
-              {project.hero_image && (
-                <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3">
+              {project.hero_image ? (
+                <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3 group">
                   <img 
                     src={project.hero_image} 
                     alt={project.name}
                     className="w-full h-full object-cover"
                   />
+                  {isAdmin && (
+                    <label className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                        disabled={uploading}
+                      />
+                      {uploading ? (
+                        <div className="flex items-center gap-2 text-white">
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <span className="text-sm">Uploading...</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2 text-white">
+                          <Upload className="w-5 h-5" />
+                          <span className="text-sm">Change Image</span>
+                        </div>
+                      )}
+                    </label>
+                  )}
                 </div>
-              )}
+              ) : isAdmin ? (
+                <label className="w-full h-64 rounded-xl border-2 border-dashed border-white/20 hover:border-white/40 flex items-center justify-center cursor-pointer transition-colors bg-white/[0.03] hover:bg-white/[0.06] mb-3">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    disabled={uploading}
+                  />
+                  {uploading ? (
+                    <div className="flex items-center gap-2 text-white/60">
+                      <div className="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin" />
+                      <span className="text-sm">Uploading...</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2 text-white/60">
+                      <Upload className="w-5 h-5" />
+                      <span className="text-sm">Upload Hero Image</span>
+                    </div>
+                  )}
+                </label>
+              ) : null}
               
               {location && (
                 <div className="flex items-center gap-1.5 text-sm text-white/40">
