@@ -51,15 +51,27 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Globe sphere — wireframe style
+    // Globe sphere with world map texture
     const sphereGeo = new THREE.SphereGeometry(globeRadius, 64, 64);
-    const sphereMat = new THREE.MeshBasicMaterial({
-      color: 0x1a2744,
+    const textureLoader = new THREE.TextureLoader();
+    const earthTexture = textureLoader.load(
+      'https://raw.githubusercontent.com/turban/webgl-earth/master/images/2_no_clouds_4k.jpg'
+    );
+    const sphereMat = new THREE.MeshPhongMaterial({
+      map: earthTexture,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.9,
+      shininess: 15,
     });
     const sphere = new THREE.Mesh(sphereGeo, sphereMat);
     globeGroup.add(sphere);
+
+    // Lighting for the textured globe
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(5, 3, 5);
+    scene.add(directionalLight);
 
     // Wireframe overlay
     const wireGeo = new THREE.SphereGeometry(globeRadius + 0.005, 40, 40);
