@@ -11,7 +11,7 @@ function latLonToVector3(lat, lon, radius) {
   );
 }
 
-export default function GlobeScene({ projects, selectedProject, onSelectProject }) {
+export default function GlobeScene({ projects, selectedProject, onSelectProject, isPaused }) {
   const containerRef = useRef(null);
   const sceneRef = useRef({});
   const isDragging = useRef(false);
@@ -148,10 +148,39 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject 
       globeGroup.add(new THREE.Line(lineGeo, gridMaterial));
     }
 
-    // Markers
+    // Markers and Labels
     markerMeshes.current = [];
     projects.forEach((project) => {
       const pos = latLonToVector3(project.lat, project.lon, globeRadius + 0.02);
+
+      // Create text label sprite
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.width = 512;
+      canvas.height = 128;
+      
+      context.fillStyle = 'rgba(0, 0, 0, 0.7)';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      
+      context.font = 'bold 48px Arial';
+      context.fillStyle = 'white';
+      context.textAlign = 'center';
+      context.textBaseline = 'middle';
+      context.fillText(project.name, canvas.width / 2, canvas.height / 2);
+      
+      const texture = new THREE.CanvasTexture(canvas);
+      const spriteMaterial = new THREE.SpriteMaterial({ 
+        map: texture,
+        transparent: true,
+        opacity: 0.9
+      });
+      const sprite = new THREE.Sprite(spriteMaterial);
+      
+      const labelPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.35);
+      sprite.position.copy(labelPos);
+      sprite.scale.set(0.8, 0.2, 1);
+      sprite.userData = { project };
+      globeGroup.add(sprite);
 
       // Outer ring
       const ringGeo = new THREE.RingGeometry(0.06, 0.085, 32);
@@ -279,12 +308,20 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject 
     return cleanup;
   }, [createGlobe]);
 
-  // Update selected project ref
+  // Update selected project ref and pause state
   useEffect(() => {
     if (selectedProject) {
       autoRotate.current = false;
     }
   }, [selectedProject]);
+
+  useEffect(() => {
+    if (isPaused) {
+      autoRotate.current = false;
+    } else if (!selectedProject) {
+      autoRotate.current = true;
+    }
+  }, [isPaused, selectedProject]);
 
   // Handle resize
   useEffect(() => {

@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ChevronUp, ChevronDown, Pause, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isDark, setIsDark] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollRef = useRef(null);
 
   const { data: projects = [] } = useQuery({
     queryKey: ['projects'],
@@ -25,6 +27,16 @@ export default function Home() {
   const handleClose = useCallback(() => {
     setSelectedProject(null);
   }, []);
+
+  const scrollProjects = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 200;
+      scrollRef.current.scrollBy({
+        top: direction === 'up' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <div className={`relative w-full h-screen overflow-hidden transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`}>
@@ -100,16 +112,49 @@ export default function Home() {
           projects={projects}
           selectedProject={selectedProject}
           onSelectProject={handleSelectProject}
+          isPaused={isPaused}
         />
       </div>
+
+      {/* Pause Button */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
+      >
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsPaused(!isPaused)}
+          className={`rounded-full transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/10 hover:bg-black/20 text-black'}`}
+        >
+          {isPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
+        </Button>
+      </motion.div>
 
       {/* Project Cards - Right Side */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute right-6 top-32 bottom-6 w-80 overflow-y-auto z-20 space-y-3 pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+        className="absolute right-6 top-32 bottom-6 w-80 flex flex-col z-20"
       >
+        {/* Up Arrow */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => scrollProjects('up')}
+          className={`mb-2 rounded-full self-center transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/10 hover:bg-black/20 text-black'}`}
+        >
+          <ChevronUp className="w-5 h-5" />
+        </Button>
+
+        {/* Scrollable Container */}
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-none"
+        >
         {projects.map((project, idx) => (
           <motion.div
             key={project.id}
@@ -139,6 +184,17 @@ export default function Home() {
             </div>
           </motion.div>
         ))}
+        </div>
+
+        {/* Down Arrow */}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => scrollProjects('down')}
+          className={`mt-2 rounded-full self-center transition-colors ${isDark ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-black/10 hover:bg-black/20 text-black'}`}
+        >
+          <ChevronDown className="w-5 h-5" />
+        </Button>
       </motion.div>
 
       {/* Project Modal */}
