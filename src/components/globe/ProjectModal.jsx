@@ -104,14 +104,14 @@ export default function ProjectModal({ project, location, onClose }) {
             {/* Description */}
             <div>
               <h3 className="text-sm font-semibold text-white/70 mb-2">About This Project</h3>
-              <p className="text-sm text-white/50 leading-relaxed">{project.description}</p>
+              <p className="text-sm text-white/90 leading-relaxed">{project.description}</p>
             </div>
 
             {/* Additional details if available */}
             {project.details && (
               <div>
                 <h3 className="text-sm font-semibold text-white/70 mb-2">Details</h3>
-                <p className="text-sm text-white/50 leading-relaxed">{project.details}</p>
+                <p className="text-sm text-white/90 leading-relaxed">{project.details}</p>
               </div>
             )}
           </div>
