@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
+import { createPageUrl } from "./utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import LocationPanel from "../components/globe/LocationPanel";
 import LocationMarkerList from "../components/globe/LocationMarkerList";
@@ -56,16 +58,30 @@ export default function Home() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8"
       >
-        <div className="flex items-center gap-3">
-          <img 
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/38ce93810_Brand_Icon_White.png"
-            alt="E2Eden"
-            className="w-10 h-10 object-contain"
-          />
-          <div>
-            <h1 className="text-lg font-bold text-white tracking-tight">E2Eden</h1>
-            <p className="text-xs text-white/30">The Next Green Revolution</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/38ce93810_Brand_Icon_White.png"
+              alt="E2Eden"
+              className="w-10 h-10 object-contain"
+            />
+            <div>
+              <h1 className="text-lg font-bold text-white tracking-tight">E2Eden</h1>
+              <p className="text-xs text-white/30">The Next Green Revolution</p>
+            </div>
           </div>
+          
+          <nav className="hidden sm:flex items-center gap-1">
+            <Link to={createPageUrl("Technology")} className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+              Technology
+            </Link>
+            <Link to={createPageUrl("Roadmap")} className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+              Roadmap
+            </Link>
+            <Link to={createPageUrl("Funding")} className="px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all">
+              Funding
+            </Link>
+          </nav>
         </div>
       </motion.div>
 
