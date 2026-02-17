@@ -50,6 +50,9 @@
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Projects from './pages/Projects';
+import Technology from './pages/Technology';
+import Roadmap from './pages/Roadmap';
+import Funding from './pages/Funding';
 import __Layout from './Layout.jsx';
 
 
@@ -57,6 +60,9 @@ export const PAGES = {
     "Home": Home,
     "Profile": Profile,
     "Projects": Projects,
+    "Technology": Technology,
+    "Roadmap": Roadmap,
+    "Funding": Funding,
 }
 
 export const pagesConfig = {
