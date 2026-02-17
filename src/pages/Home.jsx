@@ -56,7 +56,7 @@ export default function Home() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8"
+        className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8 pr-20 sm:pr-24"
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
