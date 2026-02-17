@@ -32,10 +32,18 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
     partners: ""
   });
   const [uploading, setUploading] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData);
+    setSaving(true);
+    try {
+      await onSave(formData);
+    } catch (error) {
+      console.error("Save failed:", error);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleImageUpload = async (e) => {
@@ -378,9 +386,18 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
               </div>
             </div>
 
-            <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-white">
-              <Save className="w-4 h-4 mr-2" />
-              Save Project
+            <Button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-white" disabled={saving || uploading}>
+              {saving ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Save className="w-4 h-4 mr-2" />
+                  Save Project
+                </>
+              )}
             </Button>
           </form>
         </motion.div>

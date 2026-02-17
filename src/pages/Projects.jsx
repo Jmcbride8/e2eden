@@ -56,11 +56,11 @@ export default function Projects() {
     },
   });
 
-  const handleSave = (data) => {
+  const handleSave = async (data) => {
     if (editingProject) {
-      updateMutation.mutate({ id: editingProject.id, data });
+      await updateMutation.mutateAsync({ id: editingProject.id, data });
     } else {
-      createMutation.mutate(data);
+      await createMutation.mutateAsync(data);
     }
   };
 
