@@ -71,7 +71,7 @@ export default function LocationPanel({ location, onClose }) {
 
             {/* Description */}
             {location.description && (
-              <p className="text-sm text-white/45 leading-relaxed mb-6">
+              <p className="text-sm text-white/90 leading-relaxed mb-6">
                 {location.description}
               </p>
             )}

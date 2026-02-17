@@ -83,7 +83,7 @@ export default function Home() {
             sustaining today
           </span>
         </h2>
-        <p className="text-sm text-white/30 mt-3 leading-relaxed max-w-sm">
+        <p className="text-sm text-white/90 mt-3 leading-relaxed max-w-sm">
           Pioneering sustainable engineering and regenerative agriculture across six continents, transforming communities through innovation.
         </p>
       </motion.div>
