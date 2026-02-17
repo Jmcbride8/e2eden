@@ -95,13 +95,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#0a0f1c]">
-      {/* Gradient background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f1c] via-[#0d1528] to-[#0a1020]" />
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-600/[0.03] rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-600/[0.03] rounded-full blur-[100px]" />
-      </div>
+    <div className="relative w-full h-screen overflow-hidden bg-black">
+      {/* Black backdrop */}
+      <div className="absolute inset-0 bg-black" />
 
       {/* Header */}
       <motion.div
@@ -166,7 +162,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#0a0f1c] to-transparent pointer-events-none z-[5]" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none z-[5]" />
     </div>
   );
 }
