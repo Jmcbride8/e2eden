@@ -124,6 +124,7 @@ export default function Home() {
                 src={project.hero_image}
                 alt={project.name}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                style={{ objectPosition: project.hero_image_position || 'center center' }}
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
