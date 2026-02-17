@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Save } from "lucide-react";
+import { X, Save, Upload, Image as ImageIcon, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { base44 } from "@/api/base44Client";
 
 export default function ProjectEditModal({ project, onClose, onSave }) {
   const [formData, setFormData] = useState(project || {
@@ -23,15 +24,33 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
     images: [],
     details: ""
   });
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSave(formData);
   };
 
-  const handleImageChange = (e) => {
-    const urls = e.target.value.split('\n').filter(url => url.trim());
-    setFormData({ ...formData, images: urls });
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    setUploading(true);
+    try {
+      const uploadPromises = files.map(file => base44.integrations.Core.UploadFile({ file }));
+      const results = await Promise.all(uploadPromises);
+      const newUrls = results.map(result => result.file_url);
+      setFormData({ ...formData, images: [...(formData.images || []), ...newUrls] });
+    } catch (error) {
+      console.error("Upload failed:", error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeImage = (index) => {
+    const newImages = formData.images.filter((_, i) => i !== index);
+    setFormData({ ...formData, images: newImages });
   };
 
   return (
@@ -197,13 +216,49 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
               </div>
 
               <div className="col-span-2">
-                <Label className="text-white/70">Image URLs (one per line)</Label>
-                <Textarea
-                  value={formData.images?.join('\n') || ""}
-                  onChange={handleImageChange}
-                  className="bg-white/[0.06] border-white/10 text-white h-24"
-                  placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
-                />
+                <Label className="text-white/70">Project Images</Label>
+                <div className="space-y-3">
+                  {/* Image previews */}
+                  {formData.images && formData.images.length > 0 && (
+                    <div className="grid grid-cols-3 gap-3">
+                      {formData.images.map((url, idx) => (
+                        <div key={idx} className="relative group aspect-video rounded-lg overflow-hidden border border-white/10">
+                          <img src={url} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                          <button
+                            type="button"
+                            onClick={() => removeImage(idx)}
+                            className="absolute top-2 right-2 p-1 bg-red-500/90 hover:bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <Trash2 className="w-3 h-3 text-white" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {/* Upload button */}
+                  <label className="flex items-center justify-center gap-2 w-full p-4 border-2 border-dashed border-white/20 hover:border-white/40 rounded-lg cursor-pointer transition-colors bg-white/[0.03] hover:bg-white/[0.06]">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      disabled={uploading}
+                    />
+                    {uploading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                        <span className="text-sm text-white/60">Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-4 h-4 text-white/60" />
+                        <span className="text-sm text-white/60">Click to upload images</span>
+                      </>
+                    )}
+                  </label>
+                </div>
               </div>
             </div>
 
