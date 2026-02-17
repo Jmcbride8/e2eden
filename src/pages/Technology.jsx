@@ -1,56 +1,51 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Zap, Droplet, Sprout, Wind, Cpu, Leaf } from "lucide-react";
+import { Waves, Droplets, Wind, Thermometer, Sprout, Zap } from "lucide-react";
 
 export default function Technology() {
+  const heroFeature = {
+    title: "Evaporative Cooling Walls",
+    subtitle: "Revolutionary Climate Technology",
+    description: "Our patented evaporative cooling wall system transforms arid environments into thriving agricultural zones. By harnessing the natural cooling power of water evaporation, these vertical structures create a blanket of cool, humid air that sweeps across farmland, dramatically reducing plant transpiration and water loss.",
+    benefits: [
+      { label: "Water Savings", value: "60%", description: "Reduced irrigation needs" },
+      { label: "Temperature Drop", value: "15°C", description: "Ambient cooling effect" },
+      { label: "Humidity Increase", value: "40%", description: "Optimal crop conditions" }
+    ]
+  };
+
   const technologies = [
     {
-      icon: Droplet,
-      category: "Water Management",
-      title: "Advanced Irrigation Systems",
-      description: "AI-powered precision irrigation reducing water consumption by up to 40% while maximizing crop yields through sensor networks and predictive analytics.",
-      color: "from-blue-500/20 to-cyan-500/20",
-      iconColor: "text-blue-400"
+      icon: Wind,
+      category: "Climate Engineering",
+      title: "Microclimate Management",
+      description: "Strategic placement of cooling walls creates localized climate zones, enabling cultivation in previously impossible conditions.",
+      color: "from-cyan-500/20 to-blue-500/20",
+      iconColor: "text-cyan-400"
     },
     {
-      icon: Zap,
-      category: "Renewable Energy",
-      title: "Hydroelectric Innovation",
-      description: "Harnessing natural elevation differences to generate clean, sustainable power. Our systems integrate seamlessly with local infrastructure.",
-      color: "from-amber-500/20 to-orange-500/20",
-      iconColor: "text-amber-400"
+      icon: Droplets,
+      category: "Water Conservation",
+      title: "Transpiration Control",
+      description: "The humid air envelope reduces plant water stress, minimizing transpiration rates and maximizing water efficiency across the entire farm.",
+      color: "from-blue-500/20 to-indigo-500/20",
+      iconColor: "text-blue-400"
     },
     {
       icon: Sprout,
       category: "Agriculture",
-      title: "Salt-Tolerant Crop Development",
-      description: "Pioneering halophyte cultivation techniques that transform challenging environments into productive farmland, working with native ecosystems.",
+      title: "Salt-Tolerant Crops",
+      description: "Pioneering halophyte cultivation that thrives in our engineered microclimates, transforming saline environments into productive farmland.",
       color: "from-green-500/20 to-emerald-500/20",
       iconColor: "text-green-400"
     },
     {
-      icon: Wind,
-      category: "Climate Adaptation",
-      title: "Microclimate Engineering",
-      description: "Creating localized climate zones through strategic water management and vegetation planning, enabling agriculture in extreme conditions.",
-      color: "from-purple-500/20 to-pink-500/20",
-      iconColor: "text-purple-400"
-    },
-    {
-      icon: Cpu,
-      category: "Monitoring",
-      title: "IoT Sensor Networks",
-      description: "Real-time environmental monitoring systems providing data-driven insights for optimal resource allocation and early intervention.",
-      color: "from-indigo-500/20 to-blue-500/20",
-      iconColor: "text-indigo-400"
-    },
-    {
-      icon: Leaf,
-      category: "Sustainability",
-      title: "Regenerative Practices",
-      description: "Implementing circular economy principles that restore soil health, increase biodiversity, and create long-term ecosystem resilience.",
-      color: "from-teal-500/20 to-green-500/20",
-      iconColor: "text-teal-400"
+      icon: Zap,
+      category: "Renewable Energy",
+      title: "Hydroelectric Integration",
+      description: "Water circulation through cooling systems doubles as micro-hydroelectric generation, powering monitoring equipment sustainably.",
+      color: "from-amber-500/20 to-orange-500/20",
+      iconColor: "text-amber-400"
     }
   ];
 
