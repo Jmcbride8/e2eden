@@ -104,100 +104,111 @@ export default function Projects() {
         </div>
 
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png"
-              alt="E2Eden"
-              className="w-12 h-12 object-contain"
-            />
-            <div>
-              <h1 className="text-2xl font-bold text-white">E2Eden</h1>
-              <p className="text-sm text-white/40">The Next Green Revolution</p>
-            </div>
-          </div>
           <h2 className="text-3xl font-bold text-white mb-2">All Projects</h2>
           <p className="text-white/40">Browse our complete portfolio of engineering and farming initiatives worldwide</p>
         </div>
 
         {isLoading ? (
           <div className="text-white/40 text-center py-12">Loading projects...</div>
-        ) : Object.keys(groupedProjects).length === 0 ? (
+        ) : projects.length === 0 ? (
           <div className="text-white/40 text-center py-12">
             No projects yet. {isAdmin && "Click 'Add Project' to create one."}
           </div>
         ) : (
-          <div className="space-y-8">
-            {Object.entries(groupedProjects).map(([location, locationProjects]) => (
-              <Card key={location} className="bg-white/[0.04] border-white/10 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-amber-400" />
-                    {location}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {locationProjects.map((project) => {
-                      const config = typeConfig[project.type];
-                      const Icon = config.icon;
-                      return (
-                        <div
-                          key={project.id}
-                          className={`relative p-4 rounded-xl border ${config.border} ${config.bg} backdrop-blur-sm`}
-                        >
-                          {isAdmin && (
-                            <div className="absolute top-2 right-2 flex gap-1">
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => setEditingProject(project)}
-                                className="h-6 w-6 text-white/40 hover:text-white hover:bg-white/10"
-                              >
-                                <Pencil className="w-3 h-3" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => handleDelete(project.id)}
-                                className="h-6 w-6 text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                              >
-                                <Trash2 className="w-3 h-3" />
-                              </Button>
-                            </div>
-                          )}
-                          <div className="flex items-start gap-3 mb-3">
-                            <div className={`p-2 rounded-lg ${config.bg} border ${config.border}`}>
-                              <Icon className={`w-4 h-4 ${config.color}`} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className="text-sm font-semibold text-white mb-1">{project.name}</h4>
-                              <Badge className={`${config.bg} ${config.color} text-[10px] px-1.5 py-0 border-0`}>
-                                {project.type}
+          <div className="bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Image</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Project</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Type</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Location</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Year</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Team</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Status</th>
+                  {isAdmin && <th className="text-right px-6 py-4 text-sm font-semibold text-white/70">Actions</th>}
+                </tr>
+              </thead>
+              <tbody>
+                {projects.map((project) => {
+                  const types = Array.isArray(project.type) ? project.type : [project.type].filter(Boolean);
+                  return (
+                    <tr key={project.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                      <td className="px-6 py-4">
+                        {project.hero_image ? (
+                          <img 
+                            src={project.hero_image} 
+                            alt={project.name}
+                            className="w-16 h-16 object-cover rounded-lg"
+                            style={{ objectPosition: project.hero_image_position || 'center center' }}
+                          />
+                        ) : (
+                          <div className="w-16 h-16 bg-white/5 rounded-lg flex items-center justify-center">
+                            <MapPin className="w-6 h-6 text-white/20" />
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-medium text-white">{project.name}</div>
+                        <div className="text-xs text-white/40 mt-1 line-clamp-1">{project.description}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex flex-wrap gap-1">
+                          {types.map((type) => {
+                            const Icon = type === 'Farming' ? Leaf : Wrench;
+                            const color = type === 'Farming' ? 'text-emerald-400' : type === 'Tunnels' ? 'text-amber-400' : 'text-purple-400';
+                            const bg = type === 'Farming' ? 'bg-emerald-500/10' : type === 'Tunnels' ? 'bg-amber-500/10' : 'bg-purple-500/10';
+                            return (
+                              <Badge key={type} className={`${bg} ${color} text-xs px-2 py-0.5 border-0 flex items-center gap-1`}>
+                                <Icon className="w-3 h-3" />
+                                {type}
                               </Badge>
-                            </div>
-                          </div>
-                          <p className="text-xs text-white/50 leading-relaxed mb-3">{project.description}</p>
-                          <div className="flex items-center gap-3 text-[11px] text-white/35">
-                            {project.year && (
-                              <span className="flex items-center gap-1">
-                                <Calendar className="w-3 h-3" />
-                                {project.year}
-                              </span>
-                            )}
-                            {project.team && (
-                              <span className="flex items-center gap-1">
-                                <Users className="w-3 h-3" />
-                                {project.team}
-                              </span>
-                            )}
-                          </div>
+                            );
+                          })}
                         </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-white/70">{project.location}</div>
+                        <div className="text-xs text-white/40">{project.country}</div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-white/70">{project.year || '-'}</td>
+                      <td className="px-6 py-4 text-sm text-white/70">{project.team || '-'}</td>
+                      <td className="px-6 py-4">
+                        <Badge className={`text-xs ${
+                          project.status === 'active' ? 'bg-emerald-500/20 text-emerald-400' :
+                          project.status === 'completed' ? 'bg-blue-500/20 text-blue-400' :
+                          'bg-amber-500/20 text-amber-400'
+                        }`}>
+                          {project.status}
+                        </Badge>
+                      </td>
+                      {isAdmin && (
+                        <td className="px-6 py-4">
+                          <div className="flex gap-2 justify-end">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => setEditingProject(project)}
+                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                            >
+                              <Pencil className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleDelete(project.id)}
+                              className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </td>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         )}
       </div>
