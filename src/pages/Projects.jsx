@@ -83,7 +83,7 @@ export default function Projects() {
   const isAdmin = user?.role === "admin";
 
   return (
-    <div className="min-h-screen p-6 sm:p-8">
+    <div className="min-h-screen p-6 sm:p-8 pt-24 sm:pt-28">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 flex items-center gap-4">
           <Link to={createPageUrl("Home")}>
