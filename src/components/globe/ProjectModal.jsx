@@ -59,12 +59,12 @@ export default function ProjectModal({ project, location, onClose }) {
     try {
       const result = await base44.integrations.Core.UploadFile({ file });
       await base44.entities.Project.update(project.id, { hero_image: result.file_url });
-      queryClient.invalidateQueries({ queryKey: ['projects'] });
-      project.hero_image = result.file_url;
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {
       setUploading(false);
+      e.target.value = '';
     }
   };
 
@@ -72,8 +72,7 @@ export default function ProjectModal({ project, location, onClose }) {
     setImagePosition(position);
     try {
       await base44.entities.Project.update(project.id, { hero_image_position: position });
-      queryClient.invalidateQueries({ queryKey: ['projects'] });
-      project.hero_image_position = position;
+      await queryClient.invalidateQueries({ queryKey: ['projects'] });
     } catch (error) {
       console.error("Position update failed:", error);
     }
