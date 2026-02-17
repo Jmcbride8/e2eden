@@ -75,6 +75,18 @@ export default function ProjectModal({ project, location, onClose }) {
                 </Badge>
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">{project.name}</h2>
+              
+              {/* Hero Image */}
+              {project.hero_image && (
+                <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3">
+                  <img 
+                    src={project.hero_image} 
+                    alt={project.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              
               {location && (
                 <div className="flex items-center gap-1.5 text-sm text-white/40">
                   <MapPin className="w-4 h-4" />
@@ -82,17 +94,6 @@ export default function ProjectModal({ project, location, onClose }) {
                 </div>
               )}
             </div>
-
-            {/* Hero Image */}
-            {project.hero_image && (
-              <div className="relative w-full h-64 rounded-xl overflow-hidden">
-                <img 
-                  src={project.hero_image} 
-                  alt={project.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            )}
 
             {/* Meta info */}
             <div className="flex items-center gap-6 text-sm">
