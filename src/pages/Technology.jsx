@@ -61,9 +61,15 @@ export default function Technology() {
           className="mb-20"
         >
           <div className="relative overflow-hidden rounded-3xl">
+            {/* Background image */}
+            <img 
+              src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1600&h=900&fit=crop"
+              alt="Evaporative cooling system"
+              className="absolute inset-0 w-full h-full object-cover opacity-30"
+            />
             {/* Animated background gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-emerald-500/10 animate-pulse" style={{ animationDuration: '4s' }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
             
             <div className="relative p-12 sm:p-16">
               <div className="flex items-center gap-3 mb-6">
@@ -130,7 +136,14 @@ export default function Technology() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {technologies.map((tech, idx) => (
+            {technologies.map((tech, idx) => {
+              const images = [
+                "https://images.unsplash.com/photo-1534531173927-aeb928d54385?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1597633544424-4da83252c14e?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=600&fit=crop",
+                "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop"
+              ];
+              return (
               <motion.div
                 key={tech.title}
                 initial={{ opacity: 0, y: 30 }}
@@ -138,8 +151,13 @@ export default function Technology() {
                 transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
                 className="relative group"
               >
+                <img 
+                  src={images[idx % images.length]}
+                  alt={tech.title}
+                  className="absolute inset-0 w-full h-full object-cover rounded-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"
+                />
                 <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl`} />
-                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 group-hover:border-white/20 transition-all duration-300">
+                <div className="relative p-8 rounded-2xl bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-xl border border-white/10 group-hover:border-white/20 transition-all duration-300">
                   <div className="flex items-start gap-4">
                     <div className={`p-3 rounded-xl bg-white/[0.06] ${tech.iconColor} group-hover:scale-110 transition-transform duration-300`}>
                       <tech.icon className="w-6 h-6" />
@@ -158,7 +176,7 @@ export default function Technology() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )})}
           </div>
         </motion.div>
 
