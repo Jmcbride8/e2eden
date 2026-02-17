@@ -8,19 +8,26 @@ import { base44 } from "@/api/base44Client";
 import { useQueryClient } from "@tanstack/react-query";
 
 const typeConfig = {
-  engineering: {
-    icon: Wrench,
-    color: "text-blue-400",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/20",
-    badge: "bg-blue-500/20 text-blue-300",
-  },
-  farming: {
+  Farming: {
     icon: Leaf,
     color: "text-emerald-400",
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/20",
     badge: "bg-emerald-500/20 text-emerald-300",
+  },
+  Tunnels: {
+    icon: Wrench,
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+    badge: "bg-amber-500/20 text-amber-300",
+  },
+  Minerals: {
+    icon: Wrench,
+    color: "text-purple-400",
+    bg: "bg-purple-500/10",
+    border: "border-purple-500/20",
+    badge: "bg-purple-500/20 text-purple-300",
   },
 };
 
@@ -74,8 +81,7 @@ export default function ProjectModal({ project, location, onClose }) {
   
   if (!project) return null;
 
-  const config = typeConfig[project.type] || typeConfig.engineering;
-  const Icon = config.icon;
+  const types = Array.isArray(project.type) ? project.type : [project.type].filter(Boolean);
   const isAdmin = user?.role === 'admin';
 
   return (
@@ -106,13 +112,17 @@ export default function ProjectModal({ project, location, onClose }) {
           <div className="space-y-6">
             {/* Header */}
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className={`p-2 rounded-lg ${config.bg} border ${config.border}`}>
-                  <Icon className={`w-5 h-5 ${config.color}`} />
-                </div>
-                <Badge className={`${config.badge} text-xs px-2 py-0.5 border-0`}>
-                  {project.type}
-                </Badge>
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
+                {types.map((type) => {
+                  const config = typeConfig[type] || typeConfig.Tunnels;
+                  const Icon = config.icon;
+                  return (
+                    <Badge key={type} className={`${config.badge} text-xs px-2 py-0.5 border-0 flex items-center gap-1`}>
+                      <Icon className="w-3 h-3" />
+                      {type}
+                    </Badge>
+                  );
+                })}
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">{project.name}</h2>
               
