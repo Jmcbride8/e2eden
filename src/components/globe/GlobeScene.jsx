@@ -11,7 +11,7 @@ function latLonToVector3(lat, lon, radius) {
   );
 }
 
-export default function GlobeScene({ locations, selectedLocation, onSelectLocation }) {
+export default function GlobeScene({ projects, selectedProject, onSelectProject }) {
   const containerRef = useRef(null);
   const sceneRef = useRef({});
   const isDragging = useRef(false);
@@ -150,8 +150,8 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
 
     // Markers
     markerMeshes.current = [];
-    locations.forEach((loc) => {
-      const pos = latLonToVector3(loc.lat, loc.lon, globeRadius + 0.02);
+    projects.forEach((project) => {
+      const pos = latLonToVector3(project.lat, project.lon, globeRadius + 0.02);
 
       // Outer ring
       const ringGeo = new THREE.RingGeometry(0.06, 0.085, 32);
@@ -177,7 +177,7 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
       const dot = new THREE.Mesh(dotGeo, dotMat);
       dot.position.copy(pos);
       dot.lookAt(new THREE.Vector3(0, 0, 0));
-      dot.userData = { location: loc };
+      dot.userData = { project };
       globeGroup.add(dot);
 
       // Pulse ring
@@ -193,7 +193,7 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
       pulse.lookAt(new THREE.Vector3(0, 0, 0));
       globeGroup.add(pulse);
 
-      markerMeshes.current.push({ dot, ring, pulse, location: loc });
+      markerMeshes.current.push({ dot, ring, pulse, project });
     });
 
     // Ambient particles
@@ -241,13 +241,13 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
       globeGroup.rotation.x = Math.max(-1.2, Math.min(1.2, globeGroup.rotation.x));
 
       // Pulse animation on markers
-      markerMeshes.current.forEach(({ pulse, ring, dot, location }, i) => {
+      markerMeshes.current.forEach(({ pulse, ring, dot, project }, i) => {
         const scale = 1 + 0.4 * Math.sin(elapsed * 2 + i);
         pulse.scale.set(scale, scale, 1);
         pulse.material.opacity = 0.4 * (1 - (scale - 1) / 0.4);
 
-        const isSelected = selectedLocation?.name === location.name;
-        const isHovered = hoveredMarker.current === location.name;
+        const isSelected = selectedProject?.id === project.id;
+        const isHovered = hoveredMarker.current === project.id;
         const targetOpacity = isSelected ? 1 : isHovered ? 0.95 : 0.9;
         const targetScale = isSelected ? 1.5 : isHovered ? 1.3 : 1;
         
@@ -272,19 +272,19 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
       renderer.dispose();
       container.removeChild(renderer.domElement);
     };
-  }, [locations]);
+  }, [projects]);
 
   useEffect(() => {
     const cleanup = createGlobe();
     return cleanup;
   }, [createGlobe]);
 
-  // Update selected location ref
+  // Update selected project ref
   useEffect(() => {
-    if (selectedLocation) {
+    if (selectedProject) {
       autoRotate.current = false;
     }
-  }, [selectedLocation]);
+  }, [selectedProject]);
 
   // Handle resize
   useEffect(() => {
@@ -337,8 +337,8 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
         const dots = markerMeshes.current.map(m => m.dot);
         const intersects = raycaster.current.intersectObjects(dots);
         if (intersects.length > 0) {
-          const loc = intersects[0].object.userData.location;
-          hoveredMarker.current = loc?.name || null;
+          const proj = intersects[0].object.userData.project;
+          hoveredMarker.current = proj?.id || null;
           container.style.cursor = "pointer";
         } else {
           hoveredMarker.current = null;
@@ -359,14 +359,14 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
             const dots = markerMeshes.current.map(m => m.dot);
             const intersects = raycaster.current.intersectObjects(dots);
             if (intersects.length > 0) {
-              const loc = intersects[0].object.userData.location;
-              if (loc) onSelectLocation(loc);
+              const proj = intersects[0].object.userData.project;
+              if (proj) onSelectProject(proj);
             }
           }
         }
       }
       isDragging.current = false;
-      if (!selectedLocation) {
+      if (!selectedProject) {
         setTimeout(() => { autoRotate.current = true; }, 3000);
       }
     };
@@ -382,7 +382,7 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
       container.removeEventListener("pointerup", onPointerUp);
       container.removeEventListener("pointerleave", () => {});
     };
-  }, [onSelectLocation, selectedLocation]);
+  }, [onSelectProject, selectedProject]);
 
   return (
     <div

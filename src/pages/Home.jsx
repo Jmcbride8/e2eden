@@ -6,12 +6,11 @@ import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
-import LocationPanel from "../components/globe/LocationPanel";
-import LocationMarkerList from "../components/globe/LocationMarkerList";
+import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [isDark, setIsDark] = useState(true);
 
   const { data: projects = [] } = useQuery({
@@ -19,33 +18,12 @@ export default function Home() {
     queryFn: () => base44.entities.Project.list(),
   });
 
-  // Group projects by location
-  const locations = React.useMemo(() => {
-    const grouped = projects.reduce((acc, project) => {
-      const key = project.location;
-      if (!acc[key]) {
-        acc[key] = {
-          name: project.location,
-          country: project.country,
-          region: project.region || "",
-          lat: project.lat,
-          lon: project.lon,
-          description: "",
-          projects: [],
-        };
-      }
-      acc[key].projects.push(project);
-      return acc;
-    }, {});
-    return Object.values(grouped);
-  }, [projects]);
-
-  const handleSelectLocation = useCallback((loc) => {
-    setSelectedLocation(loc);
+  const handleSelectProject = useCallback((project) => {
+    setSelectedProject(project);
   }, []);
 
   const handleClose = useCallback(() => {
-    setSelectedLocation(null);
+    setSelectedProject(null);
   }, []);
 
   return (
@@ -117,27 +95,22 @@ export default function Home() {
       </motion.div>
 
       {/* Globe */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-out ${
-        selectedLocation ? "translate-x-[-15%] sm:translate-x-[-10%]" : ""
-      }`}>
+      <div className="absolute inset-0">
         <GlobeScene
-          locations={locations}
-          selectedLocation={selectedLocation}
-          onSelectLocation={handleSelectLocation}
+          projects={projects}
+          selectedProject={selectedProject}
+          onSelectProject={handleSelectProject}
         />
       </div>
 
-      {/* Location markers list */}
-      <LocationMarkerList
-        locations={locations}
-        selectedLocation={selectedLocation}
-        onSelect={handleSelectLocation}
-      />
-
-      {/* Side panel */}
+      {/* Project Modal */}
       <AnimatePresence>
-        {selectedLocation && (
-          <LocationPanel location={selectedLocation} onClose={handleClose} />
+        {selectedProject && (
+          <ProjectModal 
+            project={selectedProject} 
+            location={selectedProject.location}
+            onClose={handleClose} 
+          />
         )}
       </AnimatePresence>
 
