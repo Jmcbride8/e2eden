@@ -1,36 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Wrench, Leaf, MapPin, Calendar, Users, ArrowLeft } from "lucide-react";
+import { Wrench, Leaf, MapPin, Calendar, Users, ArrowLeft, Plus, Pencil, Trash2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { base44 } from "@/api/base44Client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPageUrl } from "../utils";
-
-const ALL_PROJECTS = [
-  {
-    location: "Nairobi, Kenya",
-    projects: [
-      { name: "Solar Micro-Grid Network", type: "engineering", description: "Deploying modular solar micro-grids to power 12 rural communities.", year: "2025", team: "14 engineers", status: "active" },
-      { name: "Precision Drip Irrigation", type: "farming", description: "AI-driven irrigation system reducing water usage by 60%.", year: "2024", team: "8 specialists", status: "active" },
-      { name: "Vertical Farm Pilot", type: "farming", description: "Urban vertical farming facility producing leafy greens year-round.", year: "2024", team: "6 agronomists", status: "completed" },
-    ],
-  },
-  {
-    location: "São Paulo, Brazil",
-    projects: [
-      { name: "Rainforest Reforestation Drones", type: "engineering", description: "Autonomous drone fleet planting 50,000 native trees monthly.", year: "2025", team: "10 engineers", status: "active" },
-      { name: "Cacao Agroforestry", type: "farming", description: "Shade-grown cacao integrated with native trees.", year: "2023", team: "22 farmers", status: "active" },
-      { name: "Flood Barrier System", type: "engineering", description: "Smart flood management infrastructure protecting 3 communities.", year: "2024", team: "18 engineers", status: "completed" },
-    ],
-  },
-  {
-    location: "Rotterdam, Netherlands",
-    projects: [
-      { name: "Floating Farm Platform", type: "farming", description: "Self-sustaining floating dairy farm with zero land footprint.", year: "2024", team: "12 specialists", status: "active" },
-      { name: "Tidal Energy Converter", type: "engineering", description: "Next-gen tidal turbines generating 5MW of clean energy.", year: "2025", team: "20 engineers", status: "active" },
-    ],
-  },
-];
+import ProjectEditModal from "../components/projects/ProjectEditModal";
+import { toast } from "sonner";
 
 const typeConfig = {
   engineering: { icon: Wrench, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
@@ -38,6 +16,72 @@ const typeConfig = {
 };
 
 export default function Projects() {
+  const [user, setUser] = useState(null);
+  const [editingProject, setEditingProject] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    base44.auth.me().then(setUser).catch(() => setUser(null));
+  }, []);
+
+  const { data: projects = [], isLoading } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => base44.entities.Project.list(),
+  });
+
+  const createMutation = useMutation({
+    mutationFn: (data) => base44.entities.Project.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      setShowAddModal(false);
+      toast.success("Project created successfully");
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.Project.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      setEditingProject(null);
+      toast.success("Project updated successfully");
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => base44.entities.Project.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      toast.success("Project deleted successfully");
+    },
+  });
+
+  const handleSave = (data) => {
+    if (editingProject) {
+      updateMutation.mutate({ id: editingProject.id, data });
+    } else {
+      createMutation.mutate(data);
+    }
+  };
+
+  const handleDelete = (id) => {
+    if (confirm("Are you sure you want to delete this project?")) {
+      deleteMutation.mutate(id);
+    }
+  };
+
+  // Group projects by location
+  const groupedProjects = projects.reduce((acc, project) => {
+    const key = `${project.location}, ${project.country}`;
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(project);
+    return acc;
+  }, {});
+
+  const isAdmin = user?.role === "admin";
+
   return (
     <div className="min-h-screen p-6 sm:p-8">
       <div className="max-w-6xl mx-auto">
@@ -48,6 +92,15 @@ export default function Projects() {
               Back to Globe
             </Button>
           </Link>
+          {isAdmin && (
+            <Button
+              onClick={() => setShowAddModal(true)}
+              className="ml-auto bg-amber-500 hover:bg-amber-600 text-white"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Add Project
+            </Button>
+          )}
         </div>
 
         <div className="mb-8">
@@ -66,60 +119,99 @@ export default function Projects() {
           <p className="text-white/40">Browse our complete portfolio of engineering and farming initiatives worldwide</p>
         </div>
 
-        <div className="space-y-8">
-          {ALL_PROJECTS.map((location) => (
-            <Card key={location.location} className="bg-white/[0.04] border-white/10 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-amber-400" />
-                  {location.location}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {location.projects.map((project) => {
-                    const config = typeConfig[project.type];
-                    const Icon = config.icon;
-                    return (
-                      <div
-                        key={project.name}
-                        className={`p-4 rounded-xl border ${config.border} ${config.bg} backdrop-blur-sm`}
-                      >
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className={`p-2 rounded-lg ${config.bg} border ${config.border}`}>
-                            <Icon className={`w-4 h-4 ${config.color}`} />
+        {isLoading ? (
+          <div className="text-white/40 text-center py-12">Loading projects...</div>
+        ) : Object.keys(groupedProjects).length === 0 ? (
+          <div className="text-white/40 text-center py-12">
+            No projects yet. {isAdmin && "Click 'Add Project' to create one."}
+          </div>
+        ) : (
+          <div className="space-y-8">
+            {Object.entries(groupedProjects).map(([location, locationProjects]) => (
+              <Card key={location} className="bg-white/[0.04] border-white/10 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-amber-400" />
+                    {location}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {locationProjects.map((project) => {
+                      const config = typeConfig[project.type];
+                      const Icon = config.icon;
+                      return (
+                        <div
+                          key={project.id}
+                          className={`relative p-4 rounded-xl border ${config.border} ${config.bg} backdrop-blur-sm`}
+                        >
+                          {isAdmin && (
+                            <div className="absolute top-2 right-2 flex gap-1">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setEditingProject(project)}
+                                className="h-6 w-6 text-white/40 hover:text-white hover:bg-white/10"
+                              >
+                                <Pencil className="w-3 h-3" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleDelete(project.id)}
+                                className="h-6 w-6 text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </Button>
+                            </div>
+                          )}
+                          <div className="flex items-start gap-3 mb-3">
+                            <div className={`p-2 rounded-lg ${config.bg} border ${config.border}`}>
+                              <Icon className={`w-4 h-4 ${config.color}`} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm font-semibold text-white mb-1">{project.name}</h4>
+                              <Badge className={`${config.bg} ${config.color} text-[10px] px-1.5 py-0 border-0`}>
+                                {project.type}
+                              </Badge>
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-semibold text-white mb-1">{project.name}</h4>
-                            <Badge className={`${config.bg} ${config.color} text-[10px] px-1.5 py-0 border-0`}>
-                              {project.type}
-                            </Badge>
+                          <p className="text-xs text-white/50 leading-relaxed mb-3">{project.description}</p>
+                          <div className="flex items-center gap-3 text-[11px] text-white/35">
+                            {project.year && (
+                              <span className="flex items-center gap-1">
+                                <Calendar className="w-3 h-3" />
+                                {project.year}
+                              </span>
+                            )}
+                            {project.team && (
+                              <span className="flex items-center gap-1">
+                                <Users className="w-3 h-3" />
+                                {project.team}
+                              </span>
+                            )}
                           </div>
                         </div>
-                        <p className="text-xs text-white/50 leading-relaxed mb-3">{project.description}</p>
-                        <div className="flex items-center gap-3 text-[11px] text-white/35">
-                          {project.year && (
-                            <span className="flex items-center gap-1">
-                              <Calendar className="w-3 h-3" />
-                              {project.year}
-                            </span>
-                          )}
-                          {project.team && (
-                            <span className="flex items-center gap-1">
-                              <Users className="w-3 h-3" />
-                              {project.team}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
+
+      {(showAddModal || editingProject) && (
+        <ProjectEditModal
+          project={editingProject}
+          onClose={() => {
+            setShowAddModal(false);
+            setEditingProject(null);
+          }}
+          onSave={handleSave}
+        />
+      )}
     </div>
   );
 }

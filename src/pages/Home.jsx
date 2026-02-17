@@ -1,248 +1,40 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe2 } from "lucide-react";
+import { base44 } from "@/api/base44Client";
+import { useQuery } from "@tanstack/react-query";
 import GlobeScene from "../components/globe/GlobeScene";
 import LocationPanel from "../components/globe/LocationPanel";
 import LocationMarkerList from "../components/globe/LocationMarkerList";
 
-const LOCATIONS = [
-  {
-    name: "Nairobi",
-    country: "Kenya",
-    region: "East Africa",
-    lat: -1.29,
-    lon: 36.82,
-    description: "Hub for sustainable agriculture and renewable energy infrastructure across the region.",
-    projects: [
-      { 
-        name: "Solar Micro-Grid Network", 
-        type: "engineering", 
-        description: "Deploying modular solar micro-grids to power 12 rural communities with clean, reliable energy.", 
-        year: "2025", 
-        team: "14 engineers", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800",
-          "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=800",
-          "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800"
-        ]
-      },
-      { 
-        name: "Precision Drip Irrigation", 
-        type: "farming", 
-        description: "AI-driven irrigation system reducing water usage by 60% across 800 hectares of farmland.", 
-        year: "2024", 
-        team: "8 specialists", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800",
-          "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800"
-        ]
-      },
-      { 
-        name: "Vertical Farm Pilot", 
-        type: "farming", 
-        description: "Urban vertical farming facility producing leafy greens year-round using hydroponics.", 
-        year: "2024", 
-        team: "6 agronomists", 
-        status: "completed",
-        images: [
-          "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800",
-          "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800"
-        ]
-      },
-    ],
-  },
-  {
-    name: "São Paulo",
-    country: "Brazil",
-    region: "South America",
-    lat: -23.55,
-    lon: -46.63,
-    description: "Major operations center for tropical agriculture innovation and water engineering projects.",
-    projects: [
-      { 
-        name: "Rainforest Reforestation Drones", 
-        type: "engineering", 
-        description: "Autonomous drone fleet planting 50,000 native trees monthly in deforested areas.", 
-        year: "2025", 
-        team: "10 engineers", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800",
-          "https://images.unsplash.com/photo-1511406361295-0a1ff814c0ce?w=800"
-        ]
-      },
-      { 
-        name: "Cacao Agroforestry", 
-        type: "farming", 
-        description: "Shade-grown cacao integrated with native trees, restoring biodiversity while producing premium chocolate.", 
-        year: "2023", 
-        team: "22 farmers", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1511381939415-e44015466834?w=800",
-          "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=800"
-        ]
-      },
-      { 
-        name: "Flood Barrier System", 
-        type: "engineering", 
-        description: "Smart flood management infrastructure protecting 3 riverside communities.", 
-        year: "2024", 
-        team: "18 engineers", 
-        status: "completed",
-        images: [
-          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800"
-        ]
-      },
-    ],
-  },
-  {
-    name: "Rotterdam",
-    country: "Netherlands",
-    region: "Europe",
-    lat: 51.92,
-    lon: 4.48,
-    description: "European center for water management engineering and climate-adaptive agriculture.",
-    projects: [
-      { 
-        name: "Floating Farm Platform", 
-        type: "farming", 
-        description: "Self-sustaining floating dairy farm producing milk with zero land footprint.", 
-        year: "2024", 
-        team: "12 specialists", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1500076656116-558758c991c1?w=800",
-          "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=800"
-        ]
-      },
-      { 
-        name: "Tidal Energy Converter", 
-        type: "engineering", 
-        description: "Next-gen tidal turbines generating 5MW of clean energy from harbor currents.", 
-        year: "2025", 
-        team: "20 engineers", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800"
-        ]
-      },
-    ],
-  },
-  {
-    name: "Bangalore",
-    country: "India",
-    region: "South Asia",
-    lat: 12.97,
-    lon: 77.59,
-    description: "Technology-driven agricultural solutions and smart infrastructure development.",
-    projects: [
-      { 
-        name: "Soil Health AI Platform", 
-        type: "farming", 
-        description: "Machine learning platform analyzing soil samples to optimize crop yields for 2,000+ smallholder farms.", 
-        year: "2025", 
-        team: "9 data scientists", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800",
-          "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800"
-        ]
-      },
-      { 
-        name: "Rural Bridge Network", 
-        type: "engineering", 
-        description: "Modular steel bridges connecting 15 isolated villages to market centers.", 
-        year: "2023", 
-        team: "25 engineers", 
-        status: "completed",
-        images: [
-          "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800"
-        ]
-      },
-      { 
-        name: "Millet Revival Program", 
-        type: "farming", 
-        description: "Reviving ancient millet varieties with modern processing for nutrition-dense food products.", 
-        year: "2024", 
-        team: "16 agronomists", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=800"
-        ]
-      },
-    ],
-  },
-  {
-    name: "Denver",
-    country: "United States",
-    region: "North America",
-    lat: 39.74,
-    lon: -104.99,
-    description: "Advanced research facility for arid-climate farming and renewable energy systems.",
-    projects: [
-      { 
-        name: "Geothermal Greenhouse Complex", 
-        type: "engineering", 
-        description: "Year-round food production using geothermal heating in high-altitude greenhouses.", 
-        year: "2025", 
-        team: "11 engineers", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800"
-        ]
-      },
-      { 
-        name: "Regenerative Ranching Trial", 
-        type: "farming", 
-        description: "Holistic planned grazing restoring 5,000 acres of degraded grassland.", 
-        year: "2024", 
-        team: "7 ranchers", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800"
-        ]
-      },
-    ],
-  },
-  {
-    name: "Hokkaido",
-    country: "Japan",
-    region: "East Asia",
-    lat: 43.06,
-    lon: 141.35,
-    description: "Cutting-edge robotics and cold-climate agriculture research center.",
-    projects: [
-      { 
-        name: "Autonomous Harvest Robotics", 
-        type: "engineering", 
-        description: "Fleet of AI-powered robots performing precision harvesting of delicate crops.", 
-        year: "2025", 
-        team: "16 roboticists", 
-        status: "active",
-        images: [
-          "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800"
-        ]
-      },
-      { 
-        name: "Snow Melt Aquaculture", 
-        type: "farming", 
-        description: "Sustainable fish farming utilizing pristine snowmelt water systems.", 
-        year: "2024", 
-        team: "5 marine biologists", 
-        status: "planned",
-        images: [
-          "https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=800"
-        ]
-      },
-    ],
-  },
-];
-
 export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState(null);
+
+  const { data: projects = [] } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => base44.entities.Project.list(),
+  });
+
+  // Group projects by location
+  const locations = React.useMemo(() => {
+    const grouped = projects.reduce((acc, project) => {
+      const key = project.location;
+      if (!acc[key]) {
+        acc[key] = {
+          name: project.location,
+          country: project.country,
+          region: project.region || "",
+          lat: project.lat,
+          lon: project.lon,
+          description: "",
+          projects: [],
+        };
+      }
+      acc[key].projects.push(project);
+      return acc;
+    }, {});
+    return Object.values(grouped);
+  }, [projects]);
 
   const handleSelectLocation = useCallback((loc) => {
     setSelectedLocation(loc);
@@ -301,7 +93,7 @@ export default function Home() {
         selectedLocation ? "translate-x-[-15%] sm:translate-x-[-10%]" : ""
       }`}>
         <GlobeScene
-          locations={LOCATIONS}
+          locations={locations}
           selectedLocation={selectedLocation}
           onSelectLocation={handleSelectLocation}
         />
@@ -309,7 +101,7 @@ export default function Home() {
 
       {/* Location markers list */}
       <LocationMarkerList
-        locations={LOCATIONS}
+        locations={locations}
         selectedLocation={selectedLocation}
         onSelect={handleSelectLocation}
       />
