@@ -103,6 +103,43 @@ export default function Home() {
         />
       </div>
 
+      {/* Project Cards - Right Side */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="absolute right-6 top-32 bottom-6 w-80 overflow-y-auto z-20 space-y-3 pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+      >
+        {projects.map((project, idx) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
+            onClick={() => handleSelectProject(project)}
+            className="relative h-40 rounded-xl overflow-hidden cursor-pointer group"
+          >
+            {project.hero_image ? (
+              <img 
+                src={project.hero_image}
+                alt={project.name}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 left-0 right-0 p-4">
+              <h3 className="text-white font-semibold text-lg leading-tight drop-shadow-lg">
+                {project.name}
+              </h3>
+              <p className="text-white/70 text-xs mt-1">{project.location}</p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+
       {/* Project Modal */}
       <AnimatePresence>
         {selectedProject && (
