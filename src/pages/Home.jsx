@@ -4,7 +4,7 @@ import { Globe2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { createPageUrl } from "./utils";
+import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import LocationPanel from "../components/globe/LocationPanel";
 import LocationMarkerList from "../components/globe/LocationMarkerList";
