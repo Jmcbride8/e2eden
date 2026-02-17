@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Calendar, Users, MapPin, Wrench, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,17 @@ const typeConfig = {
   },
 };
 
+const tabs = [
+  { id: "backstory", label: "Backstory" },
+  { id: "our_solution", label: "Our Solution" },
+  { id: "project_updates", label: "Project Updates" },
+  { id: "funding", label: "Funding" },
+  { id: "partners", label: "Partners" }
+];
+
 export default function ProjectModal({ project, location, onClose }) {
+  const [activeTab, setActiveTab] = useState("backstory");
+  
   if (!project) return null;
 
   const config = typeConfig[project.type] || typeConfig.engineering;
@@ -73,9 +83,15 @@ export default function ProjectModal({ project, location, onClose }) {
               )}
             </div>
 
-            {/* Image Carousel */}
-            {project.images && project.images.length > 0 && (
-              <ProjectCarousel images={project.images} />
+            {/* Hero Image */}
+            {project.hero_image && (
+              <div className="relative w-full h-64 rounded-xl overflow-hidden">
+                <img 
+                  src={project.hero_image} 
+                  alt={project.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             )}
 
             {/* Meta info */}
@@ -101,19 +117,91 @@ export default function ProjectModal({ project, location, onClose }) {
               </div>
             </div>
 
-            {/* Description */}
-            <div>
-              <h3 className="text-sm font-semibold text-white/70 mb-2">About This Project</h3>
-              <p className="text-sm text-white/90 leading-relaxed">{project.description}</p>
+            {/* Tabs */}
+            <div className="border-b border-white/10">
+              <div className="flex gap-1 overflow-x-auto">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors relative ${
+                      activeTab === tab.id
+                        ? "text-white"
+                        : "text-white/50 hover:text-white/70"
+                    }`}
+                  >
+                    {tab.label}
+                    {activeTab === tab.id && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Additional details if available */}
-            {project.details && (
-              <div>
-                <h3 className="text-sm font-semibold text-white/70 mb-2">Details</h3>
-                <p className="text-sm text-white/90 leading-relaxed">{project.details}</p>
-              </div>
-            )}
+            {/* Tab Content */}
+            <div className="min-h-[200px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-sm text-white/90 leading-relaxed"
+                >
+                  {activeTab === "backstory" && (
+                    <div>
+                      {project.backstory ? (
+                        <p className="whitespace-pre-wrap">{project.backstory}</p>
+                      ) : (
+                        <p className="text-white/40 italic">No backstory added yet.</p>
+                      )}
+                    </div>
+                  )}
+                  {activeTab === "our_solution" && (
+                    <div>
+                      {project.our_solution ? (
+                        <p className="whitespace-pre-wrap">{project.our_solution}</p>
+                      ) : (
+                        <p className="text-white/40 italic">No solution details added yet.</p>
+                      )}
+                    </div>
+                  )}
+                  {activeTab === "project_updates" && (
+                    <div>
+                      {project.project_updates ? (
+                        <p className="whitespace-pre-wrap">{project.project_updates}</p>
+                      ) : (
+                        <p className="text-white/40 italic">No updates available yet.</p>
+                      )}
+                    </div>
+                  )}
+                  {activeTab === "funding" && (
+                    <div>
+                      {project.funding ? (
+                        <p className="whitespace-pre-wrap">{project.funding}</p>
+                      ) : (
+                        <p className="text-white/40 italic">No funding information available yet.</p>
+                      )}
+                    </div>
+                  )}
+                  {activeTab === "partners" && (
+                    <div>
+                      {project.partners ? (
+                        <p className="whitespace-pre-wrap">{project.partners}</p>
+                      ) : (
+                        <p className="text-white/40 italic">No partners listed yet.</p>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
       </motion.div>

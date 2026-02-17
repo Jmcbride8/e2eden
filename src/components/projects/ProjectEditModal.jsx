@@ -22,7 +22,13 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
     team: "",
     status: "active",
     images: [],
-    details: ""
+    details: "",
+    hero_image: "",
+    backstory: "",
+    our_solution: "",
+    project_updates: "",
+    funding: "",
+    partners: ""
   });
   const [uploading, setUploading] = useState(false);
 
@@ -51,6 +57,21 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
   const removeImage = (index) => {
     const newImages = formData.images.filter((_, i) => i !== index);
     setFormData({ ...formData, images: newImages });
+  };
+
+  const handleHeroImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const result = await base44.integrations.Core.UploadFile({ file });
+      setFormData({ ...formData, hero_image: result.file_url });
+    } catch (error) {
+      console.error("Upload failed:", error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -212,6 +233,89 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
                   value={formData.details || ""}
                   onChange={(e) => setFormData({ ...formData, details: e.target.value })}
                   className="bg-white/[0.06] border-white/10 text-white h-20"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <Label className="text-white/70">Hero Image</Label>
+                <div className="space-y-3">
+                  {formData.hero_image && (
+                    <div className="relative w-full h-48 rounded-lg overflow-hidden border border-white/10">
+                      <img src={formData.hero_image} alt="Hero" className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, hero_image: "" })}
+                        className="absolute top-2 right-2 p-1.5 bg-red-500/90 hover:bg-red-600 rounded-full"
+                      >
+                        <Trash2 className="w-4 h-4 text-white" />
+                      </button>
+                    </div>
+                  )}
+                  <label className="flex items-center justify-center gap-2 w-full p-4 border-2 border-dashed border-white/20 hover:border-white/40 rounded-lg cursor-pointer transition-colors bg-white/[0.03] hover:bg-white/[0.06]">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleHeroImageUpload}
+                      className="hidden"
+                      disabled={uploading}
+                    />
+                    {uploading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                        <span className="text-sm text-white/60">Uploading...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-4 h-4 text-white/60" />
+                        <span className="text-sm text-white/60">{formData.hero_image ? "Change" : "Upload"} hero image</span>
+                      </>
+                    )}
+                  </label>
+                </div>
+              </div>
+
+              <div className="col-span-2">
+                <Label className="text-white/70">Backstory</Label>
+                <Textarea
+                  value={formData.backstory || ""}
+                  onChange={(e) => setFormData({ ...formData, backstory: e.target.value })}
+                  className="bg-white/[0.06] border-white/10 text-white h-24"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <Label className="text-white/70">Our Solution</Label>
+                <Textarea
+                  value={formData.our_solution || ""}
+                  onChange={(e) => setFormData({ ...formData, our_solution: e.target.value })}
+                  className="bg-white/[0.06] border-white/10 text-white h-24"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <Label className="text-white/70">Project Updates</Label>
+                <Textarea
+                  value={formData.project_updates || ""}
+                  onChange={(e) => setFormData({ ...formData, project_updates: e.target.value })}
+                  className="bg-white/[0.06] border-white/10 text-white h-24"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <Label className="text-white/70">Funding Information</Label>
+                <Textarea
+                  value={formData.funding || ""}
+                  onChange={(e) => setFormData({ ...formData, funding: e.target.value })}
+                  className="bg-white/[0.06] border-white/10 text-white h-24"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <Label className="text-white/70">Partners</Label>
+                <Textarea
+                  value={formData.partners || ""}
+                  onChange={(e) => setFormData({ ...formData, partners: e.target.value })}
+                  className="bg-white/[0.06] border-white/10 text-white h-24"
                 />
               </div>
 
