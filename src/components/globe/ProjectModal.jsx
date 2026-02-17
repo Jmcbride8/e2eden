@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, Users, MapPin, Wrench, Leaf, Upload } from "lucide-react";
+import { X, Calendar, Users, MapPin, Wrench, Leaf, Upload, Move } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import ProjectCarousel from "./ProjectCarousel";
@@ -36,6 +36,8 @@ export default function ProjectModal({ project, location, onClose }) {
   const [activeTab, setActiveTab] = useState("backstory");
   const [user, setUser] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [positioning, setPositioning] = useState(false);
+  const [imagePosition, setImagePosition] = useState(project.hero_image_position || "center center");
   const queryClient = useQueryClient();
   
   useEffect(() => {
@@ -56,6 +58,17 @@ export default function ProjectModal({ project, location, onClose }) {
       console.error("Upload failed:", error);
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handlePositionChange = async (position) => {
+    setImagePosition(position);
+    try {
+      await base44.entities.Project.update(project.id, { hero_image_position: position });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      project.hero_image_position = position;
+    } catch (error) {
+      console.error("Position update failed:", error);
     }
   };
   
@@ -110,28 +123,68 @@ export default function ProjectModal({ project, location, onClose }) {
                     src={project.hero_image} 
                     alt={project.name}
                     className="w-full h-full object-cover"
+                    style={{ objectPosition: imagePosition }}
                   />
-                  {isAdmin && (
-                    <label className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                        disabled={uploading}
-                      />
-                      {uploading ? (
-                        <div className="flex items-center gap-2 text-white">
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span className="text-sm">Uploading...</span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2 text-white">
-                          <Upload className="w-5 h-5" />
-                          <span className="text-sm">Change Image</span>
-                        </div>
-                      )}
-                    </label>
+                  {isAdmin && !positioning && (
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                      <label className="cursor-pointer">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                          disabled={uploading}
+                        />
+                        {uploading ? (
+                          <div className="flex items-center gap-2 text-white px-4 py-2 bg-white/10 rounded-lg">
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span className="text-sm">Uploading...</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2 text-white px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
+                            <Upload className="w-4 h-4" />
+                            <span className="text-sm">Change</span>
+                          </div>
+                        )}
+                      </label>
+                      <button
+                        onClick={() => setPositioning(true)}
+                        className="flex items-center gap-2 text-white px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                      >
+                        <Move className="w-4 h-4" />
+                        <span className="text-sm">Position</span>
+                      </button>
+                    </div>
+                  )}
+                  {isAdmin && positioning && (
+                    <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-4 p-4">
+                      <div className="text-white text-sm mb-2">Adjust Image Position</div>
+                      <div className="grid grid-cols-3 gap-2">
+                        {['top left', 'top center', 'top right',
+                          'center left', 'center center', 'center right',
+                          'bottom left', 'bottom center', 'bottom right'].map((pos) => (
+                          <button
+                            key={pos}
+                            onClick={() => handlePositionChange(pos)}
+                            className={`px-3 py-2 rounded-lg text-xs transition-colors ${
+                              imagePosition === pos 
+                                ? 'bg-white text-black' 
+                                : 'bg-white/10 text-white hover:bg-white/20'
+                            }`}
+                          >
+                            {pos.split(' ').map(w => w[0].toUpperCase()).join('')}
+                          </button>
+                        ))}
+                      </div>
+                      <Button
+                        onClick={() => setPositioning(false)}
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                      >
+                        Done
+                      </Button>
+                    </div>
                   )}
                 </div>
               ) : isAdmin ? (
