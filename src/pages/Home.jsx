@@ -153,7 +153,11 @@ export default function Home() {
         {/* Scrollable Container */}
         <div
           ref={scrollRef}
-          className="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-none"
+          className="flex-1 overflow-y-auto space-y-3 pr-2 [&::-webkit-scrollbar]:hidden"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
         >
         {projects.map((project, idx) => (
           <motion.div
