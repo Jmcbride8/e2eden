@@ -51,45 +51,61 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Globe sphere with world map texture
-    const sphereGeo = new THREE.SphereGeometry(globeRadius, 64, 64);
+    // Globe sphere with high-res world map texture
+    const sphereGeo = new THREE.SphereGeometry(globeRadius, 128, 128);
     const textureLoader = new THREE.TextureLoader();
+    
+    // High-quality Earth texture
     const earthTexture = textureLoader.load(
-      'https://raw.githubusercontent.com/turban/webgl-earth/master/images/2_no_clouds_4k.jpg'
+      'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
     );
+    earthTexture.anisotropy = 16;
+    
+    // Bump map for terrain relief
+    const bumpTexture = textureLoader.load(
+      'https://unpkg.com/three-globe/example/img/earth-topology.png'
+    );
+    
     const sphereMat = new THREE.MeshPhongMaterial({
       map: earthTexture,
-      transparent: true,
-      opacity: 0.9,
-      shininess: 15,
+      bumpMap: bumpTexture,
+      bumpScale: 0.015,
+      specular: new THREE.Color(0x222222),
+      shininess: 12,
+      transparent: false,
     });
     const sphere = new THREE.Mesh(sphereGeo, sphereMat);
     globeGroup.add(sphere);
 
-    // Lighting for the textured globe
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Enhanced lighting for photorealism
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
     directionalLight.position.set(5, 3, 5);
     scene.add(directionalLight);
+    
+    const fillLight = new THREE.DirectionalLight(0x4477ff, 0.3);
+    fillLight.position.set(-5, -1, -3);
+    scene.add(fillLight);
 
-    // Wireframe overlay
+    // Subtle wireframe overlay
     const wireGeo = new THREE.SphereGeometry(globeRadius + 0.005, 40, 40);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0x2d4a7a,
+      color: 0x4488ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.08,
+      opacity: 0.03,
     });
     globeGroup.add(new THREE.Mesh(wireGeo, wireMat));
 
-    // Atmosphere glow
-    const glowGeo = new THREE.SphereGeometry(globeRadius + 0.15, 64, 64);
+    // Photorealistic atmosphere glow
+    const glowGeo = new THREE.SphereGeometry(globeRadius + 0.18, 64, 64);
     const glowMat = new THREE.ShaderMaterial({
       transparent: true,
       side: THREE.BackSide,
       uniforms: {
-        glowColor: { value: new THREE.Color(0x3b82f6) },
+        glowColor: { value: new THREE.Color(0x4499ff) },
       },
       vertexShader: `
         varying vec3 vNormal;
@@ -102,15 +118,15 @@ export default function GlobeScene({ locations, selectedLocation, onSelectLocati
         varying vec3 vNormal;
         uniform vec3 glowColor;
         void main() {
-          float intensity = pow(0.6 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 3.0);
-          gl_FragColor = vec4(glowColor, intensity * 0.3);
+          float intensity = pow(0.65 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.5);
+          gl_FragColor = vec4(glowColor, intensity * 0.4);
         }
       `,
     });
     globeGroup.add(new THREE.Mesh(glowGeo, glowMat));
 
-    // Latitude/longitude grid lines
-    const gridMaterial = new THREE.LineBasicMaterial({ color: 0x2d4a7a, transparent: true, opacity: 0.12 });
+    // Subtle latitude/longitude grid lines
+    const gridMaterial = new THREE.LineBasicMaterial({ color: 0x4488ff, transparent: true, opacity: 0.06 });
     
     // Latitude lines
     for (let lat = -60; lat <= 60; lat += 30) {
