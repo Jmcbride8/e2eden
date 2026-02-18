@@ -153,14 +153,11 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
     projects.forEach((project) => {
       const pos = latLonToVector3(project.lat, project.lon, globeRadius + 0.02);
 
-      // Create text label sprite
+      // Create text label sprite (no background)
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       canvas.width = 512;
       canvas.height = 128;
-      
-      context.fillStyle = 'rgba(0, 0, 0, 0.7)';
-      context.fillRect(0, 0, canvas.width, canvas.height);
       
       context.font = 'bold 48px Arial';
       context.fillStyle = 'white';
@@ -181,6 +178,17 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       sprite.scale.set(0.8, 0.2, 1);
       sprite.userData = { project };
       globeGroup.add(sprite);
+
+      // Add line from marker to label
+      const lineMaterial = new THREE.LineBasicMaterial({ 
+        color: 0xfbbf24, 
+        transparent: true, 
+        opacity: 0.6 
+      });
+      const linePoints = [pos, labelPos];
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(linePoints);
+      const line = new THREE.Line(lineGeometry, lineMaterial);
+      globeGroup.add(line);
 
       // Outer ring
       const ringGeo = new THREE.RingGeometry(0.06, 0.085, 32);
