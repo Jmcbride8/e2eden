@@ -179,14 +179,18 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       sprite.userData = { project };
       globeGroup.add(sprite);
 
-      // Add line from marker to label
+      // Add line from marker to label (ending at first letter)
       const lineMaterial = new THREE.LineBasicMaterial({ 
         color: 0xffffff, 
         transparent: true, 
         opacity: 0.6,
         linewidth: 2
       });
-      const linePoints = [pos, labelPos];
+      // Calculate left edge position (first letter)
+      const directionToLabel = labelPos.clone().normalize();
+      const right = new THREE.Vector3(0, 1, 0).cross(directionToLabel).normalize();
+      const leftEdgePos = labelPos.clone().add(right.multiplyScalar(-0.4));
+      const linePoints = [pos, leftEdgePos];
       const lineGeometry = new THREE.BufferGeometry().setFromPoints(linePoints);
       const line = new THREE.Line(lineGeometry, lineMaterial);
       globeGroup.add(line);
