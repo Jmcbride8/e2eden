@@ -218,7 +218,7 @@ export default function Home() {
 
       {/* Story Content Section */}
       <div className={`relative z-10 ${isDark ? 'bg-black' : 'bg-white'} transition-colors duration-700`}>
-        {/* Our Story */}
+        {/* 1. Running Out of Water */}
         <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black via-gray-900 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -228,58 +228,51 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Our Story
+                We're Running Out of Water
               </h2>
               <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                E2Eden was born from a simple yet powerful vision: to revolutionize agriculture and make deserts bloom. 
-                Our journey began when our founders witnessed firsthand the devastating impact of water scarcity on communities 
-                and agricultural productivity.
+                By 2050, the world will need to feed 10 billion people. But there's a crisis looming: we're running out 
+                of fresh water. Rivers are drying up, aquifers are depleting, and climate change is making water scarcity 
+                more severe every year.
               </p>
               <p className={`text-xl leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                We realized that nature had already solved this problem millions of years ago through evaporative cooling. 
-                By harnessing this natural process, we've developed technology that not only conserves water but transforms 
-                arid landscapes into productive agricultural zones.
+                Without water, there is no food. Without food, there is no future. The clock is ticking, and we need 
+                solutions now.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Mission & Vision */}
+        {/* 2. The Problem is Agriculture */}
         <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className={`p-8 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}
-              >
-                <h3 className="text-3xl font-bold mb-4 text-amber-400">Our Mission</h3>
-                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                  To provide sustainable agricultural solutions that feed humanity while preserving our planet's precious 
-                  water resources. We're committed to making food security a reality for the next 7 billion people.
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                The Problem: Agriculture Uses 85% of Our Water
+              </h2>
+              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                Agriculture consumes a staggering 85% of global freshwater resources. Traditional farming methods are 
+                incredibly inefficient—most water evaporates or runs off before crops can even use it.
+              </p>
+              <div className={`p-8 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}>
+                <div className="text-7xl font-bold text-amber-400 mb-4">85%</div>
+                <p className={`text-2xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  Of global freshwater goes to agriculture
                 </p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className={`p-8 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}
-              >
-                <h3 className="text-3xl font-bold mb-4 text-amber-400">Our Vision</h3>
-                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                  A world where water scarcity is no longer a barrier to agricultural productivity. Where deserts transform 
-                  into thriving ecosystems, and every community has access to sustainable food production.
+                <p className={`text-lg ${isDark ? 'text-white/60' : 'text-gray-600'}`}>
+                  Yet billions go hungry. We can't keep farming this way.
                 </p>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Technology Impact */}
+        {/* 3. The Solution */}
         <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-black' : 'bg-white'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -290,18 +283,48 @@ export default function Home() {
               className="text-center mb-16"
             >
               <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                The Impact of Our Innovation
+                The Solution: Evaporative Cellulose Panels + Brines
               </h2>
-              <p className={`text-xl ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                Our evaporative cooling walls are transforming agriculture across the globe
+              <p className={`text-xl mb-12 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                We've developed revolutionary technology that mimics nature's own cooling system
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className={`p-8 rounded-2xl ${isDark ? 'bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20' : 'bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200'}`}
+              >
+                <h3 className="text-2xl font-bold mb-4 text-amber-400">Evaporative Cellulose Panels</h3>
+                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  Our patented cooling walls use natural evaporation to reduce temperatures by up to 15°C, increase 
+                  humidity by 50%, and save 90% of water compared to traditional irrigation.
+                </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className={`p-8 rounded-2xl ${isDark ? 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20' : 'bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200'}`}
+              >
+                <h3 className="text-2xl font-bold mb-4 text-blue-400">Brine Utilization</h3>
+                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  We turn waste into resource. By using brackish water and agricultural brines, we unlock water sources 
+                  that were previously unusable, making deserts bloom where nothing could grow before.
+                </p>
+              </motion.div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
               {[
-                { number: "90%", label: "Water Savings", desc: "Compared to traditional irrigation methods" },
-                { number: "15°C", label: "Temperature Reduction", desc: "Creating optimal growing conditions" },
-                { number: "50%", label: "Humidity Increase", desc: "Preventing crop stress and wilting" }
+                { number: "90%", label: "Water Savings" },
+                { number: "15°C", label: "Temperature Reduction" },
+                { number: "50%", label: "Humidity Increase" }
               ].map((stat, idx) => (
                 <motion.div
                   key={idx}
@@ -309,18 +332,17 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.1 }}
-                  className={`p-8 rounded-2xl text-center ${isDark ? 'bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20' : 'bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200'}`}
+                  className={`p-6 rounded-xl text-center ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-50 border border-gray-200'}`}
                 >
-                  <div className="text-6xl font-bold text-amber-400 mb-2">{stat.number}</div>
-                  <div className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.label}</div>
-                  <div className={`text-sm ${isDark ? 'text-white/60' : 'text-gray-600'}`}>{stat.desc}</div>
+                  <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
+                  <div className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Video/Image Placeholder */}
+        {/* 4. Getting Started - Imperial Valley */}
         <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black to-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -329,43 +351,100 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className={`aspect-video rounded-2xl overflow-hidden ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}>
+              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Getting Started: Imperial Valley, California
+              </h2>
+              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                We chose Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
+                one of the most productive agricultural regions in the world. If we can make it work here, we can make 
+                it work anywhere.
+              </p>
+              <div className={`aspect-video rounded-2xl overflow-hidden mb-6 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}>
                 <img 
-                  src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200&h=675&fit=crop"
-                  alt="Agricultural Innovation"
+                  src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop"
+                  alt="Imperial Valley Agriculture"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className={`text-center mt-6 text-lg ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                Watch how our technology transforms barren land into productive farmland
+              <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                Our first installations are already demonstrating dramatic water savings and improved crop yields. 
+                This is just the beginning of a global transformation.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Call to Action */}
+        {/* 5. Scale */}
         <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center"
+            >
+              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Built to Scale
+              </h2>
+              <p className={`text-xl leading-relaxed mb-12 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                {[
+                  { region: "North America", projects: "Active", desc: "Imperial Valley, Salton Sea" },
+                  { region: "Africa", projects: "Expanding", desc: "Kenya, Tanzania" },
+                  { region: "Middle East", projects: "Planned", desc: "UAE, Saudi Arabia" }
+                ].map((location, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: idx * 0.1 }}
+                    className={`p-8 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}
+                  >
+                    <h3 className={`text-2xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{location.region}</h3>
+                    <div className="text-amber-400 font-semibold mb-2">{location.projects}</div>
+                    <p className={`text-sm ${isDark ? 'text-white/60' : 'text-gray-600'}`}>{location.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 6. Change the World */}
+        <section className={`py-32 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black via-amber-950/20 to-black' : 'bg-gradient-to-b from-white via-amber-50 to-white'}`}>
+          <div className="max-w-5xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Join Us in the Green Revolution
+              <h2 className={`text-6xl font-bold mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Together, We Can Change the World
               </h2>
-              <p className={`text-xl mb-10 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
-                Together, we can create a sustainable future for generations to come
+              <p className={`text-2xl leading-relaxed mb-6 ${isDark ? 'text-white/80' : 'text-gray-700'}`}>
+                Feed 10 billion people. Save our water. Make deserts bloom.
+              </p>
+              <p className={`text-xl leading-relaxed mb-12 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                This isn't just about technology—it's about survival. It's about creating abundance where there was 
+                scarcity. It's about ensuring that no child goes hungry because we ran out of water.
+              </p>
+              <p className={`text-2xl font-bold text-amber-400 mb-12`}>
+                The next green revolution starts now. Join us.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to={createPageUrl("Partnerships")}>
-                  <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-6 text-lg">
+                  <Button className="bg-amber-500 hover:bg-amber-600 text-white px-10 py-7 text-xl font-semibold shadow-2xl shadow-amber-500/30">
                     Partner With Us
                   </Button>
                 </Link>
                 <Link to={createPageUrl("Funding")}>
-                  <Button variant="outline" className={`px-8 py-6 text-lg ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
+                  <Button variant="outline" className={`px-10 py-7 text-xl font-semibold ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
                     Support Our Mission
                   </Button>
                 </Link>
