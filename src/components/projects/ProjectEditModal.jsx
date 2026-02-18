@@ -13,6 +13,8 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
   const [formData, setFormData] = useState(project || {
     name: "",
     type: [],
+    phase: "R&D",
+    ownership_type: "E2Eden",
     description: "",
     location: "",
     country: "",
@@ -146,6 +148,34 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              <div>
+                <Label className="text-white/70">Phase</Label>
+                <Select value={formData.phase} onValueChange={(value) => setFormData({ ...formData, phase: value })}>
+                  <SelectTrigger className="bg-white/[0.06] border-white/10 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="R&D">R&D</SelectItem>
+                    <SelectItem value="Commercialization">Commercialization</SelectItem>
+                    <SelectItem value="Transformation">Transformation</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label className="text-white/70">Ownership Type</Label>
+                <Select value={formData.ownership_type} onValueChange={(value) => setFormData({ ...formData, ownership_type: value })}>
+                  <SelectTrigger className="bg-white/[0.06] border-white/10 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="E2Eden">E2Eden</SelectItem>
+                    <SelectItem value="Partner">Partner</SelectItem>
+                    <SelectItem value="Joint Venture">Joint Venture</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
