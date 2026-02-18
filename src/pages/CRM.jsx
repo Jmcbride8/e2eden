@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Search, Filter, Phone, Mail, Globe, Calendar, DollarSign, Edit, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, DollarSign, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,20 +11,17 @@ import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import LeadModal from "../components/crm/LeadModal";
 
-const statusConfig = {
-  new: { label: "New", color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
-  contacted: { label: "Contacted", color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
-  qualified: { label: "Qualified", color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" },
-  proposal: { label: "Proposal", color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
-  negotiation: { label: "Negotiation", color: "bg-orange-500/20 text-orange-400 border-orange-500/30" },
-  closed_won: { label: "Closed Won", color: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" },
-  closed_lost: { label: "Closed Lost", color: "bg-red-500/20 text-red-400 border-red-500/30" }
-};
-
-const priorityConfig = {
-  low: { color: "text-gray-400" },
-  medium: { color: "text-amber-400" },
-  high: { color: "text-red-400" }
+const leadTypeConfig = {
+  "Customer": { color: "bg-blue-500/20 text-blue-300 border-blue-500/30", icon: "💼" },
+  "Partnership": { color: "bg-purple-500/20 text-purple-300 border-purple-500/30", icon: "🤝" },
+  "Investor": { color: "bg-green-500/20 text-green-300 border-green-500/30", icon: "💰" },
+  "University": { color: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30", icon: "🎓" },
+  "Government": { color: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30", icon: "🏛️" },
+  "NGO/Foundation": { color: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30", icon: "🌍" },
+  "Media/Reporter": { color: "bg-orange-500/20 text-orange-300 border-orange-500/30", icon: "📰" },
+  "Supplier/Vendor": { color: "bg-amber-500/20 text-amber-300 border-amber-500/30", icon: "📦" },
+  "Community Leader": { color: "bg-pink-500/20 text-pink-300 border-pink-500/30", icon: "👥" },
+  "Consultant/Advisor": { color: "bg-violet-500/20 text-violet-300 border-violet-500/30", icon: "💡" }
 };
 
 export default function CRM() {
@@ -66,15 +63,15 @@ export default function CRM() {
     const matchesSearch = lead.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          lead.contact_person?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          lead.company?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === "all" || lead.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    const matchesType = typeFilter === "all" || lead.lead_type === typeFilter;
+    return matchesSearch && matchesType;
   });
 
   const stats = {
     total: leads.length,
-    new: leads.filter(l => l.status === "new").length,
-    qualified: leads.filter(l => l.status === "qualified").length,
-    won: leads.filter(l => l.status === "closed_won").length
+    customers: leads.filter(l => l.lead_type === "Customer").length,
+    investors: leads.filter(l => l.lead_type === "Investor").length,
+    partnerships: leads.filter(l => l.lead_type === "Partnership").length
   };
 
   return (
@@ -104,10 +101,10 @@ export default function CRM() {
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total Leads", value: stats.total, color: "text-blue-400" },
-            { label: "New", value: stats.new, color: "text-purple-400" },
-            { label: "Qualified", value: stats.qualified, color: "text-cyan-400" },
-            { label: "Won", value: stats.won, color: "text-emerald-400" }
+            { label: "Total Leads", value: stats.total, color: "text-white" },
+            { label: "Customers", value: stats.customers, color: "text-blue-400" },
+            { label: "Investors", value: stats.investors, color: "text-green-400" },
+            { label: "Partnerships", value: stats.partnerships, color: "text-purple-400" }
           ].map((stat, idx) => (
             <Card key={idx} className="bg-white/[0.04] border-white/10 backdrop-blur-sm">
               <CardContent className="pt-6">
@@ -130,13 +127,13 @@ export default function CRM() {
             />
           </div>
           <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
             className="px-4 py-2 rounded-md bg-white/[0.04] border border-white/10 text-white text-sm"
           >
-            <option value="all">All Status</option>
-            {Object.entries(statusConfig).map(([key, config]) => (
-              <option key={key} value={key}>{config.label}</option>
+            <option value="all">All Types</option>
+            {Object.keys(leadTypeConfig).map((type) => (
+              <option key={type} value={type}>{type}</option>
             ))}
           </select>
         </div>
@@ -163,9 +160,11 @@ export default function CRM() {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <CardTitle className="text-white text-lg mb-2">{lead.name}</CardTitle>
-                        <Badge className={`${statusConfig[lead.status]?.color || statusConfig.new.color} text-xs border`}>
-                          {statusConfig[lead.status]?.label || "New"}
-                        </Badge>
+                        {lead.lead_type && (
+                          <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border`}>
+                            {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
+                          </Badge>
+                        )}
                       </div>
                       <div className="flex gap-1">
                         <Button
@@ -224,11 +223,6 @@ export default function CRM() {
                       <div className="flex items-center gap-2 text-sm text-emerald-400">
                         <DollarSign className="w-4 h-4" />
                         <span>${lead.estimated_value.toLocaleString()}</span>
-                      </div>
-                    )}
-                    {lead.priority && (
-                      <div className={`text-xs ${priorityConfig[lead.priority]?.color || 'text-white/40'}`}>
-                        Priority: {lead.priority.toUpperCase()}
                       </div>
                     )}
                   </CardContent>
