@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Handshake, Globe, Lightbulb, Users, DollarSign, CheckCircle2, Mail } from "lucide-react";
+import { ArrowLeft, Handshake, Globe, Lightbulb, Users, DollarSign, CheckCircle2, Mail, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createPageUrl } from "../utils";
+import { base44 } from "@/api/base44Client";
 
 const partnershipTypes = [
   {
@@ -78,6 +79,17 @@ export default function Partnerships() {
   const [showForm, setShowForm] = React.useState(false);
   const [selectedPartner, setSelectedPartner] = React.useState(null);
   const [formData, setFormData] = React.useState({ name: "", email: "", company: "", message: "" });
+  const [editingCategory, setEditingCategory] = React.useState(null);
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const [categories, setCategories] = React.useState(partnershipTypes);
+
+  React.useEffect(() => {
+    const checkAdmin = async () => {
+      const user = await base44.auth.me();
+      setIsAdmin(user?.role === 'admin');
+    };
+    checkAdmin();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -128,14 +140,22 @@ export default function Partnerships() {
         >
           <h2 className="text-2xl font-bold text-white mb-6">Partners</h2>
           <div className="grid gap-6">
-            {partnershipTypes.map((type, idx) => (
+            {categories.map((type, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
               >
-                <Card className={`bg-white/[0.04] border ${type.border} backdrop-blur-sm h-full hover:bg-white/[0.06] transition-colors`}>
+                <Card className={`bg-white/[0.04] border ${type.border} backdrop-blur-sm h-full hover:bg-white/[0.06] transition-colors relative`}>
+                  {isAdmin && (
+                    <button
+                      onClick={() => setEditingCategory(idx)}
+                      className="absolute top-4 right-4 p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                  )}
                   <CardHeader>
                     <div className="flex items-start gap-4">
                       <div className={`p-3 rounded-xl ${type.bg} border ${type.border}`}>
