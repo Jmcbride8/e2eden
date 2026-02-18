@@ -14,7 +14,12 @@ const partnershipTypes = [
     benefits: ["Joint project development", "Shared resources", "Co-branding opportunities"],
     color: "text-blue-400",
     bg: "bg-blue-500/10",
-    border: "border-blue-500/20"
+    border: "border-blue-500/20",
+    partners: [
+      { name: "Global Environmental Fund", focus: "Climate Solutions", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" },
+      { name: "International Water Alliance", focus: "Water Management", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop" },
+      { name: "World Agriculture Network", focus: "Food Security", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop" }
+    ]
   },
   {
     icon: Lightbulb,
@@ -23,7 +28,12 @@ const partnershipTypes = [
     benefits: ["R&D collaboration", "Technology integration", "Innovation labs"],
     color: "text-amber-400",
     bg: "bg-amber-500/10",
-    border: "border-amber-500/20"
+    border: "border-amber-500/20",
+    partners: [
+      { name: "SolarTech Innovations", focus: "Renewable Energy", image: "https://images.unsplash.com/photo-1559027615-cd2628902d4a?w=400&h=300&fit=crop" },
+      { name: "Smart Agricultural Systems", focus: "IoT Solutions", image: "https://images.unsplash.com/photo-1551431009-381d36ac3a49?w=400&h=300&fit=crop" },
+      { name: "Climate Tech Lab", focus: "Data Analytics", image: "https://images.unsplash.com/photo-1460925895917-aeb19be489c7?w=400&h=300&fit=crop" }
+    ]
   },
   {
     icon: DollarSign,
@@ -34,9 +44,9 @@ const partnershipTypes = [
     bg: "bg-emerald-500/10",
     border: "border-emerald-500/20",
     partners: [
-      { name: "MIT Sustainable Agriculture Lab", focus: "Climate Tech Research" },
-      { name: "UC Davis Agricultural Research", focus: "Crop Optimization" },
-      { name: "Oxford Environmental Science", focus: "Water Systems" }
+      { name: "MIT Sustainable Agriculture Lab", focus: "Climate Tech Research", image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=300&fit=crop" },
+      { name: "UC Davis Agricultural Research", focus: "Crop Optimization", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" },
+      { name: "Oxford Environmental Science", focus: "Water Systems", image: "https://images.unsplash.com/photo-1509391366360-2e938d440dbb?w=400&h=300&fit=crop" }
     ]
   },
   {
@@ -48,9 +58,9 @@ const partnershipTypes = [
     bg: "bg-purple-500/10",
     border: "border-purple-500/20",
     partners: [
-      { name: "Imperial Valley Collective", focus: "Large-scale Operations" },
-      { name: "African Smallholder Network", focus: "Community Farming" },
-      { name: "Middle East Agricultural Alliance", focus: "Desert Farming" }
+      { name: "Imperial Valley Collective", focus: "Large-scale Operations", image: "https://images.unsplash.com/photo-1500595046891-5b978c4d076b?w=400&h=300&fit=crop" },
+      { name: "African Smallholder Network", focus: "Community Farming", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop" },
+      { name: "Middle East Agricultural Alliance", focus: "Desert Farming", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" }
     ]
   }
 ];
@@ -150,11 +160,14 @@ export default function Partnerships() {
                       {type.partners && (
                         <div className="border-t border-white/10 pt-4">
                           <h4 className="text-sm font-semibold text-white mb-3">Our {type.title}</h4>
-                          <div className="space-y-2 mb-4">
+                          <div className="grid grid-cols-1 gap-3 mb-4">
                             {type.partners.map((partner, i) => (
-                              <div key={i} className="p-2 rounded bg-white/[0.03] border border-white/5">
-                                <p className="text-sm text-white font-medium">{partner.name}</p>
-                                <p className="text-xs text-white/50">{partner.focus}</p>
+                              <div key={i} className="rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                                <img src={partner.image} alt={partner.name} className="w-full h-24 object-cover" />
+                                <div className="p-2">
+                                  <p className="text-sm text-white font-medium">{partner.name}</p>
+                                  <p className="text-xs text-white/50">{partner.focus}</p>
+                                </div>
                               </div>
                             ))}
                           </div>
