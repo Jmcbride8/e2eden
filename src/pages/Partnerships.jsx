@@ -138,7 +138,6 @@ export default function Partnerships() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-white mb-6">Partners</h2>
           <div className="grid gap-6">
             {categories.map((type, idx) => (
               <motion.div
@@ -167,7 +166,6 @@ export default function Partnerships() {
                       </div>
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-white mb-3">Our {type.title}</h4>
                       <div className="flex gap-3">
                         {type.partners.map((partner, i) => (
                           <div key={i} className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
