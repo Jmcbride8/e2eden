@@ -17,13 +17,10 @@ export default function LeadModal({ lead, onClose }) {
     phone: "",
     company: "",
     website: "",
-    status: "new",
-    source: "",
-    interest: "",
+    lead_type: "",
     notes: "",
     next_follow_up: "",
-    estimated_value: "",
-    priority: "medium"
+    estimated_value: ""
   });
   const [isSaving, setIsSaving] = useState(false);
   const queryClient = useQueryClient();
@@ -147,55 +144,24 @@ export default function LeadModal({ lead, onClose }) {
               </div>
 
               <div>
-                <Label className="text-white/80 mb-2">Status *</Label>
-                <Select value={formData.status} onValueChange={(value) => handleChange("status", value)}>
+                <Label className="text-white/80 mb-2">Lead Type</Label>
+                <Select value={formData.lead_type} onValueChange={(value) => handleChange("lead_type", value)}>
                   <SelectTrigger className="bg-white/[0.04] border-white/10 text-white">
-                    <SelectValue />
+                    <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="new">New</SelectItem>
-                    <SelectItem value="contacted">Contacted</SelectItem>
-                    <SelectItem value="qualified">Qualified</SelectItem>
-                    <SelectItem value="proposal">Proposal</SelectItem>
-                    <SelectItem value="negotiation">Negotiation</SelectItem>
-                    <SelectItem value="closed_won">Closed Won</SelectItem>
-                    <SelectItem value="closed_lost">Closed Lost</SelectItem>
+                    <SelectItem value="Customer">Customer</SelectItem>
+                    <SelectItem value="Partnership">Partnership</SelectItem>
+                    <SelectItem value="Investor">Investor</SelectItem>
+                    <SelectItem value="University">University</SelectItem>
+                    <SelectItem value="Government">Government</SelectItem>
+                    <SelectItem value="NGO/Foundation">NGO/Foundation</SelectItem>
+                    <SelectItem value="Media/Reporter">Media/Reporter</SelectItem>
+                    <SelectItem value="Supplier/Vendor">Supplier/Vendor</SelectItem>
+                    <SelectItem value="Community Leader">Community Leader</SelectItem>
+                    <SelectItem value="Consultant/Advisor">Consultant/Advisor</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
-
-              <div>
-                <Label className="text-white/80 mb-2">Priority</Label>
-                <Select value={formData.priority} onValueChange={(value) => handleChange("priority", value)}>
-                  <SelectTrigger className="bg-white/[0.04] border-white/10 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="low">Low</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="high">High</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-white/80 mb-2">Source</Label>
-                <Input
-                  value={formData.source}
-                  onChange={(e) => handleChange("source", e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white"
-                  placeholder="e.g., Website, Referral"
-                />
-              </div>
-
-              <div>
-                <Label className="text-white/80 mb-2">Interest</Label>
-                <Input
-                  value={formData.interest}
-                  onChange={(e) => handleChange("interest", e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white"
-                  placeholder="Partnership type or area"
-                />
               </div>
 
               <div>
