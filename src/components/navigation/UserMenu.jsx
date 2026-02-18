@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, User, Briefcase, Settings, LogOut } from "lucide-react";
+import { Menu, X, User, Briefcase, Settings, LogOut, Users } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPageUrl } from "../../utils";
 import { base44 } from "@/api/base44Client";
@@ -19,6 +19,7 @@ export default function UserMenu() {
 
   const menuItems = [
     { icon: Briefcase, label: "Projects", path: createPageUrl("Projects") },
+    { icon: Users, label: "CRM", path: createPageUrl("CRM") },
     { icon: Settings, label: "Profile Settings", path: createPageUrl("Profile") },
   ];
 
