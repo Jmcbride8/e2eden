@@ -15,7 +15,7 @@ export default function Layout({ children, currentPageName }) {
           />
           <div>
             <h1 className="text-lg font-bold text-amber-400 tracking-tight">E2Eden</h1>
-            <p className="text-xs text-white/30">The Next Green Revolution</p>
+            <p className="text-xs text-white/80">The Next Green Revolution</p>
           </div>
         </Link>
       </div>
