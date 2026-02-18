@@ -267,6 +267,83 @@ export default function Partnerships() {
           </Card>
         </motion.div>
 
+        {/* Edit Category Modal */}
+        {editingCategory !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setEditingCategory(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              <h3 className="text-xl font-bold text-white mb-4">Edit {categories[editingCategory]?.title}</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm text-white/70 mb-2 block">Description</label>
+                  <textarea
+                    defaultValue={categories[editingCategory]?.description}
+                    className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 h-20 resize-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-white/70 mb-2 block">Partners</label>
+                  <div className="space-y-3">
+                    {categories[editingCategory]?.partners?.map((partner, i) => (
+                      <div key={i} className="p-3 rounded bg-white/5 border border-white/10">
+                        <div className="flex items-start gap-3">
+                          <img src={partner.image} alt={partner.name} className="w-16 h-16 rounded object-cover" />
+                          <div className="flex-1">
+                            <input
+                              type="text"
+                              defaultValue={partner.name}
+                              placeholder="Partner name"
+                              className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm mb-1"
+                            />
+                            <input
+                              type="text"
+                              defaultValue={partner.focus}
+                              placeholder="Focus area"
+                              className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm mb-1"
+                            />
+                            <input
+                              type="text"
+                              defaultValue={partner.image}
+                              placeholder="Image URL"
+                              className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex gap-2 pt-4">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setEditingCategory(null)}
+                    className="flex-1 border-white/20 text-white hover:bg-white/10"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={() => setEditingCategory(null)}
+                    className="flex-1 bg-amber-500 hover:bg-amber-600 text-white"
+                  >
+                    Save Changes
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
         {/* Partnership Form Modal */}
         {showForm && (
           <motion.div
