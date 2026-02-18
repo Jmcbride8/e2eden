@@ -13,7 +13,7 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isDark, setIsDark] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
-  const [selectedPhases, setSelectedPhases] = useState(["R&D", "Commercialization", "Transformation"]);
+  const [selectedPhase, setSelectedPhase] = useState("R&D");
   const scrollRef = useRef(null);
 
   const { data: allProjects = [] } = useQuery({
@@ -22,16 +22,8 @@ export default function Home() {
   });
 
   const projects = allProjects.filter(project => 
-    selectedPhases.includes(project.phase)
+    project.phase === selectedPhase
   );
-
-  const togglePhase = (phase) => {
-    setSelectedPhases(prev => 
-      prev.includes(phase) 
-        ? prev.filter(p => p !== phase)
-        : [...prev, phase]
-    );
-  };
 
   const handleSelectProject = useCallback((project) => {
     setSelectedProject(project);
@@ -119,9 +111,9 @@ export default function Home() {
         </p>
         <div className="flex flex-wrap gap-3 mt-6">
           <Button 
-            onClick={() => togglePhase("R&D")}
+            onClick={() => setSelectedPhase("R&D")}
             className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhases.includes("R&D")
+              selectedPhase === "R&D"
                 ? isDark 
                   ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' 
                   : 'bg-amber-500/20 hover:bg-amber-500/30 text-gray-900 border border-amber-500'
@@ -133,9 +125,9 @@ export default function Home() {
             R&D
           </Button>
           <Button 
-            onClick={() => togglePhase("Commercialization")}
+            onClick={() => setSelectedPhase("Commercialization")}
             className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhases.includes("Commercialization")
+              selectedPhase === "Commercialization"
                 ? isDark 
                   ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' 
                   : 'bg-amber-500/20 hover:bg-amber-500/30 text-gray-900 border border-amber-500'
@@ -147,9 +139,9 @@ export default function Home() {
             Commercialization
           </Button>
           <Button 
-            onClick={() => togglePhase("Transformation")}
+            onClick={() => setSelectedPhase("Transformation")}
             className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhases.includes("Transformation")
+              selectedPhase === "Transformation"
                 ? isDark 
                   ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' 
                   : 'bg-amber-500/20 hover:bg-amber-500/30 text-gray-900 border border-amber-500'
