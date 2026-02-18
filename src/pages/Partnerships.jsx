@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Handshake, Globe, Lightbulb, Users, DollarSign, CheckCircle2, Mail, Edit2 } from "lucide-react";
+import { ArrowLeft, Handshake, Globe, Lightbulb, Users, DollarSign, CheckCircle2, Mail, Edit2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createPageUrl } from "../utils";
@@ -181,11 +181,11 @@ export default function Partnerships() {
                             setSelectedPartner(type);
                             setShowForm(true);
                           }}
-                          className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors flex items-center justify-center"
+                          className="flex-1 rounded overflow-hidden bg-white/10 border border-white/20 hover:border-white/40 transition-colors flex items-center justify-center"
                         >
                           <div className="text-center p-4">
-                            <Mail className="w-6 h-6 text-white/40 mx-auto mb-2" />
-                            <p className="text-sm font-medium text-white/60 hover:text-white">Join Us</p>
+                            <Mail className="w-6 h-6 text-white mx-auto mb-2" />
+                            <p className="text-sm font-medium text-white">Join Us</p>
                           </div>
                         </button>
                       </div>
@@ -290,8 +290,18 @@ export default function Partnerships() {
                   <label className="text-sm text-white/70 mb-2 block">Partners</label>
                   <div className="space-y-3">
                     {categories[editingCategory]?.partners?.map((partner, i) => (
-                      <div key={i} className="p-3 rounded bg-white/5 border border-white/10">
-                        <div className="flex items-start gap-3">
+                      <div key={i} className="p-3 rounded bg-white/5 border border-white/10 relative">
+                        <button
+                          onClick={() => {
+                            const newCategories = [...categories];
+                            newCategories[editingCategory].partners.splice(i, 1);
+                            setCategories(newCategories);
+                          }}
+                          className="absolute top-2 right-2 p-1 rounded bg-red-500/20 hover:bg-red-500/30 text-red-400 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                        <div className="flex items-start gap-3 pr-8">
                           <img src={partner.image} alt={partner.name} className="w-16 h-16 rounded object-cover" />
                           <div className="flex-1">
                             <input
