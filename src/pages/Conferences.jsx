@@ -3,8 +3,15 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Plus, Calendar, MapPin, DollarSign, ExternalLink, Edit, Trash2, Check, HelpCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { createPageUrl } from "../utils";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -116,161 +123,137 @@ export default function Conferences() {
           )}
         </div>
 
-        {/* Conferences List */}
+        {/* Conferences Table */}
         {isLoading ? (
           <div className="text-white/60 text-center py-12">Loading...</div>
         ) : conferences.length === 0 ? (
-          <Card className="bg-white/[0.04] border-white/10 backdrop-blur-sm">
-            <CardContent className="py-12 text-center">
-              <p className="text-white/40">No conferences scheduled yet</p>
-            </CardContent>
-          </Card>
+          <div className="bg-white/[0.04] border border-white/10 backdrop-blur-sm rounded-lg p-12 text-center">
+            <p className="text-white/40">No conferences scheduled yet</p>
+          </div>
         ) : (
-          <div className="space-y-4">
-            {conferences.map((conference) => {
-              const userAttendance = getUserAttendance(conference.id);
-              const counts = getAttendanceCounts(conference.id);
-              const isPast = new Date(conference.start_date) < new Date();
+          <div className="bg-white/[0.04] border border-white/10 backdrop-blur-sm rounded-lg overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-white/10 hover:bg-white/[0.02]">
+                  <TableHead className="text-white/80 font-semibold">Conference</TableHead>
+                  <TableHead className="text-white/80 font-semibold">Dates</TableHead>
+                  <TableHead className="text-white/80 font-semibold">Location</TableHead>
+                  <TableHead className="text-white/80 font-semibold">Cost</TableHead>
+                  <TableHead className="text-white/80 font-semibold">Attendance</TableHead>
+                  <TableHead className="text-white/80 font-semibold">Actions</TableHead>
+                  {isAdmin && <TableHead className="text-white/80 font-semibold">Admin</TableHead>}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {conferences.map((conference) => {
+                  const userAttendance = getUserAttendance(conference.id);
+                  const counts = getAttendanceCounts(conference.id);
+                  const isPast = new Date(conference.start_date) < new Date();
 
-              return (
-                <motion.div
-                  key={conference.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <Card className={`bg-white/[0.04] border-white/10 backdrop-blur-sm hover:bg-white/[0.06] transition-colors ${isPast ? 'opacity-60' : ''}`}>
-                    <CardContent className="p-6">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-start gap-4 mb-4">
-                            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
-                              <Calendar className="w-6 h-6 text-amber-400" />
-                            </div>
-                            <div className="flex-1">
-                              <div className="flex items-start justify-between gap-2">
-                                <div>
-                                  <h3 className="text-xl font-semibold text-white mb-1">{conference.name}</h3>
-                                  {isPast && <Badge className="bg-gray-500/20 text-gray-400 border-gray-500/30">Past Event</Badge>}
-                                </div>
-                                {isAdmin && (
-                                  <div className="flex gap-1">
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                                      onClick={() => handleEdit(conference)}
-                                    >
-                                      <Edit className="w-4 h-4" />
-                                    </Button>
-                                    <Button
-                                      variant="ghost"
-                                      size="icon"
-                                      className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
-                                      onClick={() => handleDelete(conference.id)}
-                                    >
-                                      <Trash2 className="w-4 h-4" />
-                                    </Button>
-                                  </div>
-                                )}
-                              </div>
-                              
-                              <div className="space-y-2 mt-3">
-                                <div className="flex items-center gap-2 text-sm text-white/60">
-                                  <Calendar className="w-4 h-4 text-white/40" />
-                                  <span>
-                                    {format(new Date(conference.start_date), 'MMM d, yyyy')}
-                                    {conference.end_date && conference.end_date !== conference.start_date && 
-                                      ` - ${format(new Date(conference.end_date), 'MMM d, yyyy')}`}
-                                  </span>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm text-white/60">
-                                  <MapPin className="w-4 h-4 text-white/40" />
-                                  <span>{conference.location}</span>
-                                </div>
-                                {conference.cost !== undefined && conference.cost !== null && (
-                                  <div className="flex items-center gap-2 text-sm text-white/60">
-                                    <DollarSign className="w-4 h-4 text-white/40" />
-                                    <span>{conference.cost === 0 ? 'Free' : `$${conference.cost}`}</span>
-                                  </div>
-                                )}
-                                {conference.link && (
-                                  <div className="flex items-center gap-2 text-sm">
-                                    <ExternalLink className="w-4 h-4 text-white/40" />
-                                    <a 
-                                      href={conference.link} 
-                                      target="_blank" 
-                                      rel="noopener noreferrer"
-                                      className="text-amber-400 hover:text-amber-300 transition-colors"
-                                    >
-                                      Event Link
-                                    </a>
-                                  </div>
-                                )}
-                                {conference.owner && (
-                                  <div className="text-xs text-white/40 mt-2">
-                                    Added by {conference.owner}
-                                  </div>
-                                )}
-                                {conference.description && (
-                                  <p className="text-sm text-white/50 mt-2">{conference.description}</p>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Attendance Section */}
-                          <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                            <div className="flex gap-4 text-sm text-white/60">
-                              <span className="flex items-center gap-1">
-                                <Check className="w-4 h-4 text-emerald-400" />
-                                {counts.attending} attending
-                              </span>
-                              <span className="flex items-center gap-1">
-                                <HelpCircle className="w-4 h-4 text-amber-400" />
-                                {counts.maybe} maybe
-                              </span>
-                            </div>
-                            
-                            {user && !isPast && (
-                              <div className="flex gap-2">
-                                <Button
-                                  size="sm"
-                                  variant={userAttendance?.status === 'attending' ? 'default' : 'outline'}
-                                  onClick={() => attendanceMutation.mutate({ 
-                                    conferenceId: conference.id, 
-                                    status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
-                                  })}
-                                  className={userAttendance?.status === 'attending' 
-                                    ? 'bg-emerald-500 hover:bg-emerald-600 text-white' 
-                                    : 'border-white/10 text-white/70 hover:bg-white/10'}
-                                >
-                                  <Check className="w-4 h-4 mr-1" />
-                                  {userAttendance?.status === 'attending' ? 'Attending' : 'Will Attend'}
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant={userAttendance?.status === 'maybe' ? 'default' : 'outline'}
-                                  onClick={() => attendanceMutation.mutate({ 
-                                    conferenceId: conference.id, 
-                                    status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
-                                  })}
-                                  className={userAttendance?.status === 'maybe' 
-                                    ? 'bg-amber-500 hover:bg-amber-600 text-white' 
-                                    : 'border-white/10 text-white/70 hover:bg-white/10'}
-                                >
-                                  <HelpCircle className="w-4 h-4 mr-1" />
-                                  {userAttendance?.status === 'maybe' ? 'Maybe' : 'May Attend'}
-                                </Button>
-                              </div>
-                            )}
-                          </div>
+                  return (
+                    <TableRow key={conference.id} className={`border-white/10 hover:bg-white/[0.02] ${isPast ? 'opacity-60' : ''}`}>
+                      <TableCell className="font-medium">
+                        <div>
+                          <div className="text-white mb-1">{conference.name}</div>
+                          {conference.link && (
+                            <a 
+                              href={conference.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                              Event Link
+                            </a>
+                          )}
+                          {conference.description && (
+                            <p className="text-xs text-white/50 mt-1 max-w-xs">{conference.description}</p>
+                          )}
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
+                      </TableCell>
+                      <TableCell className="text-white/70">
+                        <div className="text-sm">
+                          {format(new Date(conference.start_date), 'MMM d, yyyy')}
+                          {conference.end_date && conference.end_date !== conference.start_date && (
+                            <div className="text-xs text-white/50">to {format(new Date(conference.end_date), 'MMM d, yyyy')}</div>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-white/70 text-sm">{conference.location}</TableCell>
+                      <TableCell className="text-white/70 text-sm">
+                        {conference.cost === 0 ? 'Free' : `$${conference.cost}`}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex gap-3 text-xs text-white/60">
+                          <span className="flex items-center gap-1">
+                            <Check className="w-3 h-3 text-emerald-400" />
+                            {counts.attending}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <HelpCircle className="w-3 h-3 text-amber-400" />
+                            {counts.maybe}
+                          </span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        {user && !isPast && (
+                          <div className="flex gap-1">
+                            <Button
+                              size="sm"
+                              onClick={() => attendanceMutation.mutate({ 
+                                conferenceId: conference.id, 
+                                status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
+                              })}
+                              className={userAttendance?.status === 'attending' 
+                                ? 'bg-emerald-500 hover:bg-emerald-600 text-white h-8 px-2 text-xs' 
+                                : 'border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
+                              variant={userAttendance?.status === 'attending' ? 'default' : 'outline'}
+                            >
+                              <Check className="w-3 h-3" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              onClick={() => attendanceMutation.mutate({ 
+                                conferenceId: conference.id, 
+                                status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
+                              })}
+                              className={userAttendance?.status === 'maybe' 
+                                ? 'bg-amber-500 hover:bg-amber-600 text-white h-8 px-2 text-xs' 
+                                : 'border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
+                              variant={userAttendance?.status === 'maybe' ? 'default' : 'outline'}
+                            >
+                              <HelpCircle className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        )}
+                      </TableCell>
+                      {isAdmin && (
+                        <TableCell>
+                          <div className="flex gap-1">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                              onClick={() => handleEdit(conference)}
+                            >
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
+                              onClick={() => handleDelete(conference.id)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
           </div>
         )}
       </div>
