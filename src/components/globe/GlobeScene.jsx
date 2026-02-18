@@ -181,9 +181,10 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
 
       // Add line from marker to label
       const lineMaterial = new THREE.LineBasicMaterial({ 
-        color: 0xfbbf24, 
+        color: 0xffffff, 
         transparent: true, 
-        opacity: 0.6 
+        opacity: 0.6,
+        linewidth: 2
       });
       const linePoints = [pos, labelPos];
       const lineGeometry = new THREE.BufferGeometry().setFromPoints(linePoints);
