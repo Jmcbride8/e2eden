@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { DollarSign, TrendingUp, Award, Heart, Building2, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
+import DonationModal from "../components/funding/DonationModal";
 
 export default function Funding() {
+  const [donationModal, setDonationModal] = useState({ isOpen: false, projectName: null });
+
   const { data: projects = [] } = useQuery({
     queryKey: ['projects'],
     queryFn: () => base44.entities.Project.list('sort_order'),
@@ -118,9 +121,12 @@ export default function Funding() {
                 <p className="text-sm text-white/70 leading-relaxed mb-4">
                   Make a direct impact through donations that fund research, training, and pilot programs in underserved regions.
                 </p>
-                <a href="mailto:donate@e2eden.org" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-medium transition-colors border border-pink-500/20">
+                <button
+                  onClick={() => setDonationModal({ isOpen: true, projectName: null })}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-medium transition-colors border border-pink-500/20"
+                >
                   Donate to E2Eden
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -160,12 +166,12 @@ export default function Funding() {
                     <p className="text-sm text-white/70 leading-relaxed mb-3 line-clamp-2">
                       {project.description}
                     </p>
-                    <a 
-                      href={`mailto:donate@e2eden.org?subject=Donation for ${project.name}`}
+                    <button
+                      onClick={() => setDonationModal({ isOpen: true, projectName: project.name })}
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-medium transition-colors border border-amber-500/20 text-sm"
                     >
                       Donate to Project
-                    </a>
+                    </button>
                   </div>
                 </motion.div>
               ))}
@@ -266,6 +272,12 @@ export default function Funding() {
           </div>
         </motion.div>
       </div>
+
+      <DonationModal
+        isOpen={donationModal.isOpen}
+        onClose={() => setDonationModal({ isOpen: false, projectName: null })}
+        projectName={donationModal.projectName}
+      />
     </div>
   );
 }
