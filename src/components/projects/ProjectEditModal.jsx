@@ -227,16 +227,6 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
                 />
               </div>
 
-              <div>
-                <Label className="text-white/70">Team</Label>
-                <Input
-                  value={formData.team}
-                  onChange={(e) => setFormData({ ...formData, team: e.target.value })}
-                  className="bg-white/[0.06] border-white/10 text-white"
-                  placeholder="e.g., 14 engineers"
-                />
-              </div>
-
               <div className="col-span-2">
                 <Label className="text-white/70">Description</Label>
                 <Textarea

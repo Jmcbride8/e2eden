@@ -17,7 +17,7 @@ export default function Home() {
 
   const { data: projects = [] } = useQuery({
     queryKey: ['projects'],
-    queryFn: () => base44.entities.Project.list(),
+    queryFn: () => base44.entities.Project.list('sort_order'),
   });
 
   const handleSelectProject = useCallback((project) => {

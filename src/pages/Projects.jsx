@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Wrench, Leaf, MapPin, Calendar, Users, ArrowLeft, Plus, Pencil, Trash2 } from "lucide-react";
+import { Wrench, Leaf, MapPin, Calendar, ArrowLeft, Plus, Pencil, Trash2, GripVertical } from "lucide-react";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,7 +28,7 @@ export default function Projects() {
 
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ['projects'],
-    queryFn: () => base44.entities.Project.list(),
+    queryFn: () => base44.entities.Project.list('sort_order'),
   });
 
   const createMutation = useMutation({
@@ -68,6 +69,22 @@ export default function Projects() {
     if (confirm("Are you sure you want to delete this project?")) {
       deleteMutation.mutate(id);
     }
+  };
+
+  const handleDragEnd = async (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(projects);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    // Update sort_order for all projects
+    const updates = items.map((project, index) => 
+      base44.entities.Project.update(project.id, { sort_order: index })
+    );
+    
+    await Promise.all(updates);
+    queryClient.invalidateQueries({ queryKey: ['projects'] });
   };
 
   // Group projects by location
@@ -119,96 +136,119 @@ export default function Projects() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-white/10">
+                  {isAdmin && <th className="w-12"></th>}
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Image</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Project</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Type</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Location</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Year</th>
-                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Team</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Status</th>
                   {isAdmin && <th className="text-right px-6 py-4 text-sm font-semibold text-white/70">Actions</th>}
                 </tr>
               </thead>
-              <tbody>
-                {projects.map((project) => {
-                  const rawTypes = Array.isArray(project.type) ? project.type : [project.type].filter(Boolean);
-                  const types = rawTypes.filter(t => ['Farming', 'Tunnels', 'Minerals'].includes(t));
-                  return (
-                    <tr key={project.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                      <td className="px-6 py-4">
-                        {project.hero_image ? (
-                          <img 
-                            src={project.hero_image} 
-                            alt={project.name}
-                            className="w-16 h-16 object-cover rounded-lg"
-                            style={{ objectPosition: project.hero_image_position || 'center center' }}
-                          />
-                        ) : (
-                          <div className="w-16 h-16 bg-white/5 rounded-lg flex items-center justify-center">
-                            <MapPin className="w-6 h-6 text-white/20" />
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-white">{project.name}</div>
-                        <div className="text-xs text-white/40 mt-1 line-clamp-1">{project.description}</div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex flex-wrap gap-1">
-                          {types.map((type) => {
-                            const Icon = type === 'Farming' ? Leaf : Wrench;
-                            const color = type === 'Farming' ? 'text-emerald-400' : type === 'Tunnels' ? 'text-amber-400' : 'text-purple-400';
-                            const bg = type === 'Farming' ? 'bg-emerald-500/10' : type === 'Tunnels' ? 'bg-amber-500/10' : 'bg-purple-500/10';
-                            return (
-                              <Badge key={type} className={`${bg} ${color} text-xs px-2 py-0.5 border-0 flex items-center gap-1`}>
-                                <Icon className="w-3 h-3" />
-                                {type}
-                              </Badge>
-                            );
-                          })}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="text-sm text-white/70">{project.location}</div>
-                        <div className="text-xs text-white/40">{project.country}</div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-white/70">{project.year || '-'}</td>
-                      <td className="px-6 py-4 text-sm text-white/70">{project.team || '-'}</td>
-                      <td className="px-6 py-4">
-                        <Badge className={`text-xs ${
-                          project.status === 'active' ? 'bg-emerald-500/20 text-emerald-400' :
-                          project.status === 'completed' ? 'bg-blue-500/20 text-blue-400' :
-                          'bg-amber-500/20 text-amber-400'
-                        }`}>
-                          {project.status}
-                        </Badge>
-                      </td>
-                      {isAdmin && (
-                        <td className="px-6 py-4">
-                          <div className="flex gap-2 justify-end">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => setEditingProject(project)}
-                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                            >
-                              <Pencil className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => handleDelete(project.id)}
-                              className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </td>
-                      )}
-                    </tr>
-                  );
-                })}
-              </tbody>
+              <DragDropContext onDragEnd={handleDragEnd}>
+                <Droppable droppableId="projects">
+                  {(provided) => (
+                    <tbody ref={provided.innerRef} {...provided.droppableProps}>
+                      {projects.map((project, index) => {
+                        const rawTypes = Array.isArray(project.type) ? project.type : [project.type].filter(Boolean);
+                        const types = rawTypes.filter(t => ['Farming', 'Tunnels', 'Minerals'].includes(t));
+                        return (
+                          <Draggable key={project.id} draggableId={project.id} index={index} isDragDisabled={!isAdmin}>
+                            {(provided, snapshot) => (
+                              <tr
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                className={`border-b border-white/5 hover:bg-white/[0.02] transition-colors ${
+                                  snapshot.isDragging ? 'bg-white/[0.05]' : ''
+                                }`}
+                              >
+                                {isAdmin && (
+                                  <td className="px-2">
+                                    <div {...provided.dragHandleProps} className="cursor-grab active:cursor-grabbing text-white/40 hover:text-white/70">
+                                      <GripVertical className="w-5 h-5" />
+                                    </div>
+                                  </td>
+                                )}
+                                <td className="px-6 py-4">
+                                  {project.hero_image ? (
+                                    <img 
+                                      src={project.hero_image} 
+                                      alt={project.name}
+                                      className="w-16 h-16 object-cover rounded-lg"
+                                      style={{ objectPosition: project.hero_image_position || 'center center' }}
+                                    />
+                                  ) : (
+                                    <div className="w-16 h-16 bg-white/5 rounded-lg flex items-center justify-center">
+                                      <MapPin className="w-6 h-6 text-white/20" />
+                                    </div>
+                                  )}
+                                </td>
+                                <td className="px-6 py-4">
+                                  <div className="text-sm font-medium text-white">{project.name}</div>
+                                  <div className="text-xs text-white/40 mt-1 line-clamp-1">{project.description}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                  <div className="flex flex-wrap gap-1">
+                                    {types.map((type) => {
+                                      const Icon = type === 'Farming' ? Leaf : Wrench;
+                                      const color = type === 'Farming' ? 'text-emerald-400' : type === 'Tunnels' ? 'text-amber-400' : 'text-purple-400';
+                                      const bg = type === 'Farming' ? 'bg-emerald-500/10' : type === 'Tunnels' ? 'bg-amber-500/10' : 'bg-purple-500/10';
+                                      return (
+                                        <Badge key={type} className={`${bg} ${color} text-xs px-2 py-0.5 border-0 flex items-center gap-1`}>
+                                          <Icon className="w-3 h-3" />
+                                          {type}
+                                        </Badge>
+                                      );
+                                    })}
+                                  </div>
+                                </td>
+                                <td className="px-6 py-4">
+                                  <div className="text-sm text-white/70">{project.location}</div>
+                                  <div className="text-xs text-white/40">{project.country}</div>
+                                </td>
+                                <td className="px-6 py-4 text-sm text-white/70">{project.year || '-'}</td>
+                                <td className="px-6 py-4">
+                                  <Badge className={`text-xs ${
+                                    project.status === 'active' ? 'bg-emerald-500/20 text-emerald-400' :
+                                    project.status === 'completed' ? 'bg-blue-500/20 text-blue-400' :
+                                    'bg-amber-500/20 text-amber-400'
+                                  }`}>
+                                    {project.status}
+                                  </Badge>
+                                </td>
+                                {isAdmin && (
+                                  <td className="px-6 py-4">
+                                    <div className="flex gap-2 justify-end">
+                                      <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => setEditingProject(project)}
+                                        className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                                      >
+                                        <Pencil className="w-4 h-4" />
+                                      </Button>
+                                      <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => handleDelete(project.id)}
+                                        className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                                      >
+                                        <Trash2 className="w-4 h-4" />
+                                      </Button>
+                                    </div>
+                                  </td>
+                                )}
+                              </tr>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                      {provided.placeholder}
+                    </tbody>
+                  )}
+                </Droppable>
+              </DragDropContext>
             </table>
           </div>
         )}
