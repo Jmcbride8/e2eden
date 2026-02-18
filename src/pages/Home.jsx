@@ -104,6 +104,17 @@ export default function Home() {
         <p className={`text-sm mt-3 leading-relaxed max-w-sm transition-colors ${isDark ? 'text-white/90' : 'text-gray-700'}`}>
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
+        <div className="flex flex-wrap gap-3 mt-6">
+          <Button className={`px-6 py-3 text-sm font-semibold rounded-lg ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
+            Farms
+          </Button>
+          <Button className={`px-6 py-3 text-sm font-semibold rounded-lg ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
+            Tunnels
+          </Button>
+          <Button className={`px-6 py-3 text-sm font-semibold rounded-lg ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
+            Seas
+          </Button>
+        </div>
       </motion.div>
 
       {/* Globe */}
@@ -214,28 +225,6 @@ export default function Home() {
 
       {/* Bottom gradient fade */}
       <div className={`absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] transition-colors duration-700 ${isDark ? 'from-black to-transparent' : 'from-blue-50 to-transparent'}`} />
-      </div>
-
-      {/* Category Buttons */}
-      <div className={`relative z-20 -mt-16 px-6 sm:px-12 ${isDark ? 'bg-transparent' : 'bg-transparent'}`}>
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button className={`px-8 py-6 text-lg font-semibold rounded-xl ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
-              Farms
-            </Button>
-            <Button className={`px-8 py-6 text-lg font-semibold rounded-xl ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
-              Tunnels
-            </Button>
-            <Button className={`px-8 py-6 text-lg font-semibold rounded-xl ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
-              Seas
-            </Button>
-          </motion.div>
-        </div>
       </div>
 
       {/* Story Content Section */}
