@@ -206,8 +206,7 @@ export default function Conferences() {
                               })}
                               className={userAttendance?.status === 'attending' 
                                 ? 'bg-emerald-500 hover:bg-emerald-600 text-white h-8 px-2 text-xs' 
-                                : 'border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
-                              variant={userAttendance?.status === 'attending' ? 'default' : 'outline'}
+                                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
                             >
                               <Check className="w-3 h-3" />
                             </Button>
@@ -219,8 +218,7 @@ export default function Conferences() {
                               })}
                               className={userAttendance?.status === 'maybe' 
                                 ? 'bg-amber-500 hover:bg-amber-600 text-white h-8 px-2 text-xs' 
-                                : 'border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
-                              variant={userAttendance?.status === 'maybe' ? 'default' : 'outline'}
+                                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
                             >
                               <HelpCircle className="w-3 h-3" />
                             </Button>
