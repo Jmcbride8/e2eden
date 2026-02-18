@@ -93,14 +93,14 @@ export default function Home() {
         className="absolute top-24 sm:top-28 left-6 sm:left-8 z-10 max-w-md"
       >
         <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight leading-tight transition-colors ${isDark ? 'text-white/90' : 'text-gray-900'}`}>
-          Cultivating tomorrow,
+          Solving water scarcity,
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
-            sustaining today
+            to transform our planet
           </span>
         </h2>
         <p className={`text-sm mt-3 leading-relaxed max-w-sm transition-colors ${isDark ? 'text-white/90' : 'text-gray-700'}`}>
-          Pioneering sustainable engineering and regenerative agriculture across six continents, transforming communities through innovation.
+          Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
       </motion.div>
 
