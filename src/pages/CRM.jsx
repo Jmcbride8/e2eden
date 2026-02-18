@@ -155,7 +155,6 @@ export default function CRM() {
                   <tr>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Name</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Type</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Contact</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Email</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Website</th>
                     <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Last Engaged</th>
@@ -181,17 +180,6 @@ export default function CRM() {
                           <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border whitespace-nowrap`}>
                             {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
                           </Badge>
-                        )}
-                      </td>
-                      <td className="px-4 py-4">
-                        <div className="text-sm text-white/70">
-                          {lead.contact_person || "-"}
-                        </div>
-                        {lead.phone && (
-                          <div className="flex items-center gap-1 text-xs text-white/50 mt-1">
-                            <Phone className="w-3 h-3" />
-                            {lead.phone}
-                          </div>
                         )}
                       </td>
                       <td className="px-4 py-4">
