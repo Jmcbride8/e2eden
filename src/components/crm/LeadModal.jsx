@@ -183,9 +183,9 @@ export default function LeadModal({ lead, onClose }) {
             <div className="flex justify-end gap-3 pt-4">
               <Button
                 type="button"
-                variant="outline"
+                variant="ghost"
                 onClick={onClose}
-                className="border-white/10 text-white hover:bg-white/10"
+                className="text-white/70 hover:text-white hover:bg-white/10"
               >
                 Cancel
               </Button>
