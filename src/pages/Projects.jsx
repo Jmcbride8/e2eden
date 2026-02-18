@@ -131,7 +131,8 @@ export default function Projects() {
               </thead>
               <tbody>
                 {projects.map((project) => {
-                  const types = Array.isArray(project.type) ? project.type : [project.type].filter(Boolean);
+                  const rawTypes = Array.isArray(project.type) ? project.type : [project.type].filter(Boolean);
+                  const types = rawTypes.filter(t => ['Farming', 'Tunnels', 'Minerals'].includes(t));
                   return (
                     <tr key={project.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
                       <td className="px-6 py-4">
