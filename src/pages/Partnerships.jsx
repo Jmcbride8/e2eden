@@ -168,11 +168,11 @@ export default function Partnerships() {
                     <div>
                       <div className="flex gap-3">
                         {type.partners.map((partner, i) => (
-                          <div key={i} className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
-                            <img src={partner.image} alt={partner.name} className="w-full h-24 object-cover" />
-                            <div className="p-2">
-                              <p className="text-sm text-white font-medium">{partner.name}</p>
-                              <p className="text-xs text-white/50">{partner.focus}</p>
+                          <div key={i} className="flex-1 aspect-square rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors flex flex-col">
+                            <img src={partner.image} alt={partner.name} className="w-full h-2/3 object-cover" />
+                            <div className="p-2 flex flex-col justify-center flex-1">
+                              <p className="text-sm text-white font-medium truncate">{partner.name}</p>
+                              <p className="text-xs text-white/50 truncate">{partner.focus}</p>
                             </div>
                           </div>
                         ))}
@@ -331,9 +331,8 @@ export default function Partnerships() {
                 <div className="flex gap-2 pt-4">
                   <Button
                     type="button"
-                    variant="outline"
                     onClick={() => setEditingCategory(null)}
-                    className="flex-1 border-white/20 text-white hover:bg-white/10"
+                    className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20"
                   >
                     Cancel
                   </Button>
