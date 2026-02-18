@@ -49,22 +49,24 @@
  */
 import Funding from './pages/Funding';
 import Home from './pages/Home';
+import Partnerships from './pages/Partnerships';
 import Profile from './pages/Profile';
 import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
 import Technology from './pages/Technology';
-import Partnerships from './pages/Partnerships';
+import CRM from './pages/CRM';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Funding": Funding,
     "Home": Home,
+    "Partnerships": Partnerships,
     "Profile": Profile,
     "Projects": Projects,
     "Roadmap": Roadmap,
     "Technology": Technology,
-    "Partnerships": Partnerships,
+    "CRM": CRM,
 }
 
 export const pagesConfig = {
