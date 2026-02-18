@@ -1,42 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { DollarSign, Users, TrendingUp, Award, Globe2, Heart } from "lucide-react";
+import { DollarSign, TrendingUp, Award, Heart, Building2, FileText } from "lucide-react";
+import { base44 } from "@/api/base44Client";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Funding() {
-  const fundingTypes = [
-    {
-      icon: Globe2,
-      title: "Strategic Investment",
-      description: "Partner with us on large-scale infrastructure projects that generate both environmental and financial returns.",
-      min: "$5M+",
-      color: "from-blue-500/20 to-cyan-500/20",
-      iconColor: "text-blue-400"
-    },
-    {
-      icon: TrendingUp,
-      title: "Project Financing",
-      description: "Fund specific initiatives with clear milestones, ROI projections, and measurable impact metrics.",
-      min: "$500K+",
-      color: "from-amber-500/20 to-orange-500/20",
-      iconColor: "text-amber-400"
-    },
-    {
-      icon: Users,
-      title: "Community Grants",
-      description: "Support grassroots projects that empower local communities through sustainable agriculture and renewable energy.",
-      min: "$50K+",
-      color: "from-green-500/20 to-emerald-500/20",
-      iconColor: "text-green-400"
-    },
-    {
-      icon: Heart,
-      title: "Philanthropic Support",
-      description: "Make a direct impact through donations that fund research, training, and pilot programs in underserved regions.",
-      min: "Any amount",
-      color: "from-pink-500/20 to-rose-500/20",
-      iconColor: "text-pink-400"
-    }
-  ];
+  const { data: projects = [] } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => base44.entities.Project.list('sort_order'),
+  });
 
   const impacts = [
     { value: "$127M", label: "Total Funding Secured" },
@@ -47,7 +19,7 @@ export default function Funding() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-7xl mx-auto px-6 py-20 sm:px-8">
+      <div className="max-w-7xl mx-auto px-6 pt-32 pb-20 sm:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,38 +56,153 @@ export default function Funding() {
           ))}
         </motion.div>
 
-        {/* Funding Types */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {fundingTypes.map((type, idx) => (
-            <motion.div
-              key={type.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
-              className="relative group"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${type.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        {/* 1. Venture Investment */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-bold text-white mb-6">Venture Investment</h2>
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="p-3 rounded-xl bg-white/[0.06] text-blue-400">
+                  <Building2 className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-1">
+                    Strategic Investment
+                  </h3>
+                  <div className="text-xs uppercase tracking-wider text-white/40">
+                    From $5M+
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-white/70 leading-relaxed">
+                Partner with us on large-scale infrastructure projects that generate both environmental and financial returns. Clear milestones, ROI projections, and measurable impact metrics.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 2. Donate */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-bold text-white mb-6">Donate</h2>
+          
+          {/* (a) E2Eden General */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold text-white mb-4">Support E2Eden</h3>
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className={`p-3 rounded-xl bg-white/[0.06] ${type.iconColor}`}>
-                    <type.icon className="w-6 h-6" />
+                  <div className="p-3 rounded-xl bg-white/[0.06] text-pink-400">
+                    <Heart className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-white mb-1">
-                      {type.title}
+                      General Fund
                     </h3>
                     <div className="text-xs uppercase tracking-wider text-white/40">
-                      From {type.min}
+                      Any amount
                     </div>
                   </div>
                 </div>
-                <p className="text-sm text-white/70 leading-relaxed">
-                  {type.description}
+                <p className="text-sm text-white/70 leading-relaxed mb-4">
+                  Make a direct impact through donations that fund research, training, and pilot programs in underserved regions.
                 </p>
+                <a href="mailto:donate@e2eden.org" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-medium transition-colors border border-pink-500/20">
+                  Donate to E2Eden
+                </a>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </div>
+
+          {/* (b) Projects */}
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-4">Support Specific Projects</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, idx) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
+                  className="group cursor-pointer"
+                >
+                  <div className="relative h-48 rounded-xl overflow-hidden mb-3">
+                    {project.hero_image ? (
+                      <img 
+                        src={project.hero_image}
+                        alt={project.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        style={{ objectPosition: project.hero_image_position || 'center center' }}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h4 className="text-white font-semibold text-lg leading-tight drop-shadow-lg">
+                        {project.name}
+                      </h4>
+                      <p className="text-white/70 text-xs mt-1">{project.location}</p>
+                    </div>
+                  </div>
+                  <div className="p-4 rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+                    <p className="text-sm text-white/70 leading-relaxed mb-3 line-clamp-2">
+                      {project.description}
+                    </p>
+                    <a 
+                      href={`mailto:donate@e2eden.org?subject=Donation for ${project.name}`}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-medium transition-colors border border-amber-500/20 text-sm"
+                    >
+                      Donate to Project
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 3. Grants */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-bold text-white mb-6">Grants</h2>
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="p-3 rounded-xl bg-white/[0.06] text-green-400">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-1">
+                    Community & Research Grants
+                  </h3>
+                  <div className="text-xs uppercase tracking-wider text-white/40">
+                    From $50K+
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-white/70 leading-relaxed">
+                Support grassroots projects that empower local communities through sustainable agriculture, renewable energy, and innovative water management solutions.
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Why Invest Section */}
         <motion.div
