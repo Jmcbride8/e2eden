@@ -19,8 +19,7 @@ export default function LeadModal({ lead, onClose }) {
     website: "",
     lead_type: "",
     notes: "",
-    next_follow_up: "",
-    estimated_value: ""
+    last_engaged: ""
   });
   const [isSaving, setIsSaving] = useState(false);
   const queryClient = useQueryClient();
@@ -42,11 +41,7 @@ export default function LeadModal({ lead, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSaving(true);
-    const dataToSave = { ...formData };
-    if (dataToSave.estimated_value) {
-      dataToSave.estimated_value = parseFloat(dataToSave.estimated_value);
-    }
-    await saveMutation.mutateAsync(dataToSave);
+    await saveMutation.mutateAsync(formData);
     setIsSaving(false);
   };
 
@@ -165,23 +160,12 @@ export default function LeadModal({ lead, onClose }) {
               </div>
 
               <div>
-                <Label className="text-white/80 mb-2">Next Follow-up</Label>
+                <Label className="text-white/80 mb-2">Last Engaged</Label>
                 <Input
                   type="date"
-                  value={formData.next_follow_up}
-                  onChange={(e) => handleChange("next_follow_up", e.target.value)}
+                  value={formData.last_engaged}
+                  onChange={(e) => handleChange("last_engaged", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
-                />
-              </div>
-
-              <div>
-                <Label className="text-white/80 mb-2">Estimated Value</Label>
-                <Input
-                  type="number"
-                  value={formData.estimated_value}
-                  onChange={(e) => handleChange("estimated_value", e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white"
-                  placeholder="0"
                 />
               </div>
             </div>

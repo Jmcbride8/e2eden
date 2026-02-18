@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, DollarSign, Edit, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -213,16 +213,10 @@ export default function CRM() {
                         </a>
                       </div>
                     )}
-                    {lead.next_follow_up && (
+                    {lead.last_engaged && (
                       <div className="flex items-center gap-2 text-sm text-white/60">
                         <Calendar className="w-4 h-4 text-white/40" />
-                        <span>Follow up: {new Date(lead.next_follow_up).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                    {lead.estimated_value && (
-                      <div className="flex items-center gap-2 text-sm text-emerald-400">
-                        <DollarSign className="w-4 h-4" />
-                        <span>${lead.estimated_value.toLocaleString()}</span>
+                        <span>Last engaged: {new Date(lead.last_engaged).toLocaleDateString()}</span>
                       </div>
                     )}
                   </CardContent>
