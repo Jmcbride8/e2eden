@@ -39,7 +39,9 @@ export default function Home() {
   };
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`}>
+    <div className={`relative w-full min-h-screen transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`}>
+      {/* Globe Section */}
+      <div className="relative w-full h-screen overflow-hidden">
       {/* Backdrop */}
       <div className={`absolute inset-0 transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`} />
 
@@ -212,6 +214,166 @@ export default function Home() {
 
       {/* Bottom gradient fade */}
       <div className={`absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] transition-colors duration-700 ${isDark ? 'from-black to-transparent' : 'from-blue-50 to-transparent'}`} />
+      </div>
+
+      {/* Story Content Section */}
+      <div className={`relative z-10 ${isDark ? 'bg-black' : 'bg-white'} transition-colors duration-700`}>
+        {/* Our Story */}
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black via-gray-900 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'}`}>
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Our Story
+              </h2>
+              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                E2Eden was born from a simple yet powerful vision: to revolutionize agriculture and make deserts bloom. 
+                Our journey began when our founders witnessed firsthand the devastating impact of water scarcity on communities 
+                and agricultural productivity.
+              </p>
+              <p className={`text-xl leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                We realized that nature had already solved this problem millions of years ago through evaporative cooling. 
+                By harnessing this natural process, we've developed technology that not only conserves water but transforms 
+                arid landscapes into productive agricultural zones.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Mission & Vision */}
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className={`p-8 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}
+              >
+                <h3 className="text-3xl font-bold mb-4 text-amber-400">Our Mission</h3>
+                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  To provide sustainable agricultural solutions that feed humanity while preserving our planet's precious 
+                  water resources. We're committed to making food security a reality for the next 7 billion people.
+                </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className={`p-8 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}
+              >
+                <h3 className="text-3xl font-bold mb-4 text-amber-400">Our Vision</h3>
+                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                  A world where water scarcity is no longer a barrier to agricultural productivity. Where deserts transform 
+                  into thriving ecosystems, and every community has access to sustainable food production.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Technology Impact */}
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-black' : 'bg-white'}`}>
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-16"
+            >
+              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                The Impact of Our Innovation
+              </h2>
+              <p className={`text-xl ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                Our evaporative cooling walls are transforming agriculture across the globe
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { number: "90%", label: "Water Savings", desc: "Compared to traditional irrigation methods" },
+                { number: "15°C", label: "Temperature Reduction", desc: "Creating optimal growing conditions" },
+                { number: "50%", label: "Humidity Increase", desc: "Preventing crop stress and wilting" }
+              ].map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.1 }}
+                  className={`p-8 rounded-2xl text-center ${isDark ? 'bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20' : 'bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200'}`}
+                >
+                  <div className="text-6xl font-bold text-amber-400 mb-2">{stat.number}</div>
+                  <div className={`text-xl font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.label}</div>
+                  <div className={`text-sm ${isDark ? 'text-white/60' : 'text-gray-600'}`}>{stat.desc}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Video/Image Placeholder */}
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black to-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className={`aspect-video rounded-2xl overflow-hidden ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}>
+                <img 
+                  src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200&h=675&fit=crop"
+                  alt="Agricultural Innovation"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className={`text-center mt-6 text-lg ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                Watch how our technology transforms barren land into productive farmland
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                Join Us in the Green Revolution
+              </h2>
+              <p className={`text-xl mb-10 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                Together, we can create a sustainable future for generations to come
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to={createPageUrl("Partnerships")}>
+                  <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-6 text-lg">
+                    Partner With Us
+                  </Button>
+                </Link>
+                <Link to={createPageUrl("Funding")}>
+                  <Button variant="outline" className={`px-8 py-6 text-lg ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
+                    Support Our Mission
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
