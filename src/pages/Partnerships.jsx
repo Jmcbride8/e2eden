@@ -27,21 +27,31 @@ const partnershipTypes = [
   },
   {
     icon: DollarSign,
-    title: "Investment Partners",
-    description: "Fund transformative projects that deliver both financial returns and measurable social impact.",
-    benefits: ["Equity participation", "Revenue sharing", "Impact reporting"],
+    title: "University Research Partnerships",
+    description: "Collaborate with leading universities on research and innovation to advance sustainable agriculture.",
+    benefits: ["Joint research initiatives", "Student programs", "Innovation labs"],
     color: "text-emerald-400",
     bg: "bg-emerald-500/10",
-    border: "border-emerald-500/20"
+    border: "border-emerald-500/20",
+    partners: [
+      { name: "MIT Sustainable Agriculture Lab", focus: "Climate Tech Research" },
+      { name: "UC Davis Agricultural Research", focus: "Crop Optimization" },
+      { name: "Oxford Environmental Science", focus: "Water Systems" }
+    ]
   },
   {
     icon: Users,
-    title: "Community Partners",
-    description: "Work with NGOs, governments, and local organizations to ensure projects serve communities effectively.",
-    benefits: ["Local expertise", "Community engagement", "Sustainable development"],
+    title: "Farmers",
+    description: "Work directly with farming communities to implement sustainable practices and improve yields.",
+    benefits: ["Direct implementation", "Community engagement", "Shared knowledge"],
     color: "text-purple-400",
     bg: "bg-purple-500/10",
-    border: "border-purple-500/20"
+    border: "border-purple-500/20",
+    partners: [
+      { name: "Imperial Valley Collective", focus: "Large-scale Operations" },
+      { name: "African Smallholder Network", focus: "Community Farming" },
+      { name: "Middle East Agricultural Alliance", focus: "Desert Farming" }
+    ]
   }
 ];
 
@@ -55,6 +65,17 @@ const whyPartner = [
 ];
 
 export default function Partnerships() {
+  const [showForm, setShowForm] = React.useState(false);
+  const [selectedPartner, setSelectedPartner] = React.useState(null);
+  const [formData, setFormData] = React.useState({ name: "", email: "", company: "", message: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Engagement request submitted for ${selectedPartner.name}!`);
+    setFormData({ name: "", email: "", company: "", message: "" });
+    setShowForm(false);
+  };
+
   return (
     <div className="min-h-screen bg-black p-6 sm:p-8 pt-24 sm:pt-28">
       <div className="max-w-6xl mx-auto">
@@ -95,7 +116,7 @@ export default function Partnerships() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-white mb-6">Partnership Opportunities</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">Partners</h2>
           <div className="grid gap-6 sm:grid-cols-2">
             {partnershipTypes.map((type, idx) => (
               <motion.div
@@ -117,13 +138,37 @@ export default function Partnerships() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-2">
-                      {type.benefits.map((benefit, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm text-white/70">
-                          <CheckCircle2 className={`w-4 h-4 ${type.color} flex-shrink-0`} />
-                          {benefit}
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        {type.benefits.map((benefit, i) => (
+                          <div key={i} className="flex items-center gap-2 text-sm text-white/70">
+                            <CheckCircle2 className={`w-4 h-4 ${type.color} flex-shrink-0`} />
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+                      {type.partners && (
+                        <div className="border-t border-white/10 pt-4">
+                          <h4 className="text-sm font-semibold text-white mb-3">Our {type.title}</h4>
+                          <div className="space-y-2 mb-4">
+                            {type.partners.map((partner, i) => (
+                              <div key={i} className="p-2 rounded bg-white/[0.03] border border-white/5">
+                                <p className="text-sm text-white font-medium">{partner.name}</p>
+                                <p className="text-xs text-white/50">{partner.focus}</p>
+                              </div>
+                            ))}
+                          </div>
+                          <Button 
+                            onClick={() => {
+                              setSelectedPartner(type);
+                              setShowForm(true);
+                            }}
+                            className={`w-full bg-white/10 hover:bg-white/20 text-white text-sm`}
+                          >
+                            Join Us
+                          </Button>
                         </div>
-                      ))}
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -196,6 +241,85 @@ export default function Partnerships() {
             </CardContent>
           </Card>
         </motion.div>
+
+        {/* Partnership Form Modal */}
+        {showForm && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setShowForm(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl p-6 max-w-md w-full"
+            >
+              <h3 className="text-xl font-bold text-white mb-4">Join {selectedPartner?.title}</h3>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="text-sm text-white/70 mb-1 block">Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-white/70 mb-1 block">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-white/70 mb-1 block">Company/Organization</label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30"
+                    placeholder="Your organization"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-white/70 mb-1 block">Message</label>
+                  <textarea
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 h-24 resize-none"
+                    placeholder="Tell us about your interest..."
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowForm(false)}
+                    className="flex-1 border-white/20 text-white hover:bg-white/10"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="flex-1 bg-amber-500 hover:bg-amber-600 text-white"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
