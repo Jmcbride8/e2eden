@@ -55,6 +55,7 @@ import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
 import Technology from './pages/Technology';
 import CRM from './pages/CRM';
+import Conferences from './pages/Conferences';
 import __Layout from './Layout.jsx';
 
 
@@ -67,6 +68,7 @@ export const PAGES = {
     "Roadmap": Roadmap,
     "Technology": Technology,
     "CRM": CRM,
+    "Conferences": Conferences,
 }
 
 export const pagesConfig = {
