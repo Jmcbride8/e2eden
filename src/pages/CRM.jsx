@@ -129,11 +129,11 @@ export default function CRM() {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-4 py-2 rounded-md bg-white/[0.04] border border-white/10 text-white text-sm"
+            className="px-4 py-2 rounded-md bg-white/[0.04] border border-white/10 text-white text-sm [&>option]:bg-gray-900 [&>option]:text-white"
           >
-            <option value="all">All Types</option>
+            <option value="all" className="bg-gray-900 text-white">All Types</option>
             {Object.keys(leadTypeConfig).map((type) => (
-              <option key={type} value={type}>{type}</option>
+              <option key={type} value={type} className="bg-gray-900 text-white">{type}</option>
             ))}
           </select>
         </div>
