@@ -69,6 +69,9 @@ export default function Home() {
               <Link to={createPageUrl("Funding")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
                 Funding
               </Link>
+              <Link to={createPageUrl("Partnerships")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
+                Partnerships
+              </Link>
             </nav>
             <Button
               variant="ghost"
