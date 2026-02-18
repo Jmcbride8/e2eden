@@ -138,7 +138,7 @@ export default function CRM() {
           </select>
         </div>
 
-        {/* Leads Grid */}
+        {/* Leads Table */}
         {isLoading ? (
           <div className="text-white/60 text-center py-12">Loading...</div>
         ) : filteredLeads.length === 0 ? (
@@ -148,81 +148,113 @@ export default function CRM() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredLeads.map((lead) => (
-              <motion.div
-                key={lead.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <Card className="bg-white/[0.04] border-white/10 backdrop-blur-sm hover:bg-white/[0.06] transition-colors h-full">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-white text-lg mb-2">{lead.name}</CardTitle>
+          <div className="bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-white/[0.04] border-b border-white/10">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Name</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Type</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Contact</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Email</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Website</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Last Engaged</th>
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-white/70 uppercase tracking-wider">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/10">
+                  {filteredLeads.map((lead) => (
+                    <motion.tr
+                      key={lead.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="hover:bg-white/[0.02] transition-colors"
+                    >
+                      <td className="px-4 py-4">
+                        <div className="text-white font-medium">{lead.name}</div>
+                        {lead.company && (
+                          <div className="text-sm text-white/50 mt-1">{lead.company}</div>
+                        )}
+                      </td>
+                      <td className="px-4 py-4">
                         {lead.lead_type && (
-                          <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border`}>
+                          <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border whitespace-nowrap`}>
                             {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
                           </Badge>
                         )}
-                      </div>
-                      <div className="flex gap-1">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                          onClick={() => handleEdit(lead)}
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
-                          onClick={() => handleDelete(lead.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    {lead.contact_person && (
-                      <div className="text-sm text-white/60">{lead.contact_person}</div>
-                    )}
-                    {lead.company && (
-                      <div className="text-sm text-white/50">{lead.company}</div>
-                    )}
-                    {lead.email && (
-                      <div className="flex items-center gap-2 text-sm text-white/60">
-                        <Mail className="w-4 h-4 text-white/40" />
-                        <span className="truncate">{lead.email}</span>
-                      </div>
-                    )}
-                    {lead.phone && (
-                      <div className="flex items-center gap-2 text-sm text-white/60">
-                        <Phone className="w-4 h-4 text-white/40" />
-                        <span>{lead.phone}</span>
-                      </div>
-                    )}
-                    {lead.website && (
-                      <div className="flex items-center gap-2 text-sm text-white/60">
-                        <Globe className="w-4 h-4 text-white/40" />
-                        <a href={lead.website} target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors truncate">
-                          {lead.website.replace(/^https?:\/\//, '')}
-                        </a>
-                      </div>
-                    )}
-                    {lead.last_engaged && (
-                      <div className="flex items-center gap-2 text-sm text-white/60">
-                        <Calendar className="w-4 h-4 text-white/40" />
-                        <span>Last engaged: {new Date(lead.last_engaged).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="text-sm text-white/70">
+                          {lead.contact_person || "-"}
+                        </div>
+                        {lead.phone && (
+                          <div className="flex items-center gap-1 text-xs text-white/50 mt-1">
+                            <Phone className="w-3 h-3" />
+                            {lead.phone}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-4">
+                        {lead.email ? (
+                          <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors">
+                            {lead.email}
+                          </a>
+                        ) : (
+                          <span className="text-sm text-white/40">-</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-4">
+                        {lead.website ? (
+                          <a 
+                            href={lead.website} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-1 text-sm text-white/70 hover:text-amber-400 transition-colors"
+                          >
+                            <Globe className="w-3 h-3" />
+                            <span className="max-w-[150px] truncate">
+                              {lead.website.replace(/^https?:\/\//, '')}
+                            </span>
+                          </a>
+                        ) : (
+                          <span className="text-sm text-white/40">-</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-4">
+                        {lead.last_engaged ? (
+                          <div className="flex items-center gap-1 text-sm text-white/70">
+                            <Calendar className="w-3 h-3" />
+                            {new Date(lead.last_engaged).toLocaleDateString()}
+                          </div>
+                        ) : (
+                          <span className="text-sm text-white/40">-</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-4">
+                        <div className="flex gap-1 justify-end">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                            onClick={() => handleEdit(lead)}
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
+                            onClick={() => handleDelete(lead.id)}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
