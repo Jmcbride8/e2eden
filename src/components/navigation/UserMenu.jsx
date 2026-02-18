@@ -56,9 +56,18 @@ export default function UserMenu() {
               {user && (
                 <div className="p-4 border-b border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
-                      <User className="w-5 h-5 text-white" />
-                    </div>
+                    {user.profile_picture ? (
+                      <img 
+                        src={user.profile_picture} 
+                        alt={user.full_name}
+                        className="w-10 h-10 rounded-full object-cover border-2 border-white/10"
+                        style={{ objectPosition: user.profile_picture_position || 'center center' }}
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+                        <User className="w-5 h-5 text-white" />
+                      </div>
+                    )}
                     <div>
                       <p className="text-sm font-semibold text-white">{user.full_name}</p>
                       <p className="text-xs text-white/40">{user.email}</p>
