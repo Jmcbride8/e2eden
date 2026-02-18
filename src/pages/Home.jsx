@@ -95,7 +95,7 @@ export default function Home() {
         <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight leading-tight transition-colors ${isDark ? 'text-white/90' : 'text-gray-900'}`}>
           Revolutionizing water,
           <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400">
             to feed humanity, and save Earth
           </span>
         </h2>
