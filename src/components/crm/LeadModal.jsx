@@ -144,17 +144,17 @@ export default function LeadModal({ lead, onClose }) {
                   <SelectTrigger className="bg-white/[0.04] border-white/10 text-white">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Customer">Customer</SelectItem>
-                    <SelectItem value="Partnership">Partnership</SelectItem>
-                    <SelectItem value="Investor">Investor</SelectItem>
-                    <SelectItem value="University">University</SelectItem>
-                    <SelectItem value="Government">Government</SelectItem>
-                    <SelectItem value="NGO/Foundation">NGO/Foundation</SelectItem>
-                    <SelectItem value="Media/Reporter">Media/Reporter</SelectItem>
-                    <SelectItem value="Supplier/Vendor">Supplier/Vendor</SelectItem>
-                    <SelectItem value="Community Leader">Community Leader</SelectItem>
-                    <SelectItem value="Consultant/Advisor">Consultant/Advisor</SelectItem>
+                  <SelectContent className="bg-gray-900 border-white/10">
+                    <SelectItem value="Customer" className="text-white focus:bg-white/10 focus:text-white">Customer</SelectItem>
+                    <SelectItem value="Partnership" className="text-white focus:bg-white/10 focus:text-white">Partnership</SelectItem>
+                    <SelectItem value="Investor" className="text-white focus:bg-white/10 focus:text-white">Investor</SelectItem>
+                    <SelectItem value="University" className="text-white focus:bg-white/10 focus:text-white">University</SelectItem>
+                    <SelectItem value="Government" className="text-white focus:bg-white/10 focus:text-white">Government</SelectItem>
+                    <SelectItem value="NGO/Foundation" className="text-white focus:bg-white/10 focus:text-white">NGO/Foundation</SelectItem>
+                    <SelectItem value="Media/Reporter" className="text-white focus:bg-white/10 focus:text-white">Media/Reporter</SelectItem>
+                    <SelectItem value="Supplier/Vendor" className="text-white focus:bg-white/10 focus:text-white">Supplier/Vendor</SelectItem>
+                    <SelectItem value="Community Leader" className="text-white focus:bg-white/10 focus:text-white">Community Leader</SelectItem>
+                    <SelectItem value="Consultant/Advisor" className="text-white focus:bg-white/10 focus:text-white">Consultant/Advisor</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
