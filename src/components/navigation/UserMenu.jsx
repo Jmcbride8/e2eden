@@ -8,9 +8,16 @@ import { base44 } from "@/api/base44Client";
 export default function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => setUser(null));
+    base44.auth.me().then(u => {
+      setUser(u);
+      setIsAuthenticated(true);
+    }).catch(() => {
+      setUser(null);
+      setIsAuthenticated(false);
+    });
   }, []);
 
   const handleLogout = async () => {
@@ -23,6 +30,21 @@ export default function UserMenu() {
     { icon: Calendar, label: "Conferences", path: createPageUrl("Conferences") },
     { icon: Settings, label: "Profile Settings", path: createPageUrl("Profile") },
   ];
+
+  const handleSignIn = () => {
+    base44.auth.redirectToLogin();
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <button
+        onClick={handleSignIn}
+        className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-medium transition-all shadow-lg shadow-amber-500/20"
+      >
+        Sign In
+      </button>
+    );
+  }
 
   return (
     <>
