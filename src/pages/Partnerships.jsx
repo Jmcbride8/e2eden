@@ -127,7 +127,7 @@ export default function Partnerships() {
           className="mb-16"
         >
           <h2 className="text-2xl font-bold text-white mb-6">Partners</h2>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6">
             {partnershipTypes.map((type, idx) => (
               <motion.div
                 key={idx}
@@ -160,9 +160,9 @@ export default function Partnerships() {
                       {type.partners && (
                         <div className="border-t border-white/10 pt-4">
                           <h4 className="text-sm font-semibold text-white mb-3">Our {type.title}</h4>
-                          <div className="grid grid-cols-1 gap-3 mb-4">
+                          <div className="flex gap-3 mb-4">
                             {type.partners.map((partner, i) => (
-                              <div key={i} className="rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                              <div key={i} className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
                                 <img src={partner.image} alt={partner.name} className="w-full h-24 object-cover" />
                                 <div className="p-2">
                                   <p className="text-sm text-white font-medium">{partner.name}</p>
