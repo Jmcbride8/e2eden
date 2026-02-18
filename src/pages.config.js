@@ -53,6 +53,7 @@ import Profile from './pages/Profile';
 import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
 import Technology from './pages/Technology';
+import Partnerships from './pages/Partnerships';
 import __Layout from './Layout.jsx';
 
 
@@ -63,6 +64,7 @@ export const PAGES = {
     "Projects": Projects,
     "Roadmap": Roadmap,
     "Technology": Technology,
+    "Partnerships": Partnerships,
 }
 
 export const pagesConfig = {
