@@ -58,7 +58,11 @@ export default function ProjectModal({ project, location, onClose }) {
     setUploading(true);
     try {
       const result = await base44.integrations.Core.UploadFile({ file });
-      await base44.entities.Project.update(project.id, { hero_image: result.file_url });
+      await base44.entities.Project.update(project.id, { 
+        hero_image: result.file_url,
+        hero_image_position: 'center center'
+      });
+      setImagePosition('center center');
       await queryClient.invalidateQueries({ queryKey: ['projects'] });
     } catch (error) {
       console.error("Upload failed:", error);
