@@ -12,6 +12,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { createPageUrl } from "../utils";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -197,32 +203,48 @@ export default function Conferences() {
                       </TableCell>
                       <TableCell>
                         {user && !isPast && (
-                          <div className="flex gap-1">
-                            <Button
-                              size="sm"
-                              onClick={() => attendanceMutation.mutate({ 
-                                conferenceId: conference.id, 
-                                status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
-                              })}
-                              className={userAttendance?.status === 'attending' 
-                                ? 'bg-emerald-500 hover:bg-emerald-600 text-white h-8 px-2 text-xs' 
-                                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
-                            >
-                              <Check className="w-3 h-3" />
-                            </Button>
-                            <Button
-                              size="sm"
-                              onClick={() => attendanceMutation.mutate({ 
-                                conferenceId: conference.id, 
-                                status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
-                              })}
-                              className={userAttendance?.status === 'maybe' 
-                                ? 'bg-amber-500 hover:bg-amber-600 text-white h-8 px-2 text-xs' 
-                                : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
-                            >
-                              <HelpCircle className="w-3 h-3" />
-                            </Button>
-                          </div>
+                          <TooltipProvider>
+                            <div className="flex gap-1">
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    onClick={() => attendanceMutation.mutate({ 
+                                      conferenceId: conference.id, 
+                                      status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
+                                    })}
+                                    className={userAttendance?.status === 'attending' 
+                                      ? 'bg-emerald-500 hover:bg-emerald-600 text-white h-8 px-2 text-xs' 
+                                      : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
+                                  >
+                                    <Check className="w-3 h-3" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>{userAttendance?.status === 'attending' ? 'Remove attendance' : 'Mark as attending'}</p>
+                                </TooltipContent>
+                              </Tooltip>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    size="sm"
+                                    onClick={() => attendanceMutation.mutate({ 
+                                      conferenceId: conference.id, 
+                                      status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
+                                    })}
+                                    className={userAttendance?.status === 'maybe' 
+                                      ? 'bg-amber-500 hover:bg-amber-600 text-white h-8 px-2 text-xs' 
+                                      : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
+                                  >
+                                    <HelpCircle className="w-3 h-3" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>{userAttendance?.status === 'maybe' ? 'Remove maybe' : 'Mark as maybe'}</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </div>
+                          </TooltipProvider>
                         )}
                       </TableCell>
                       {isAdmin && (
