@@ -13,12 +13,25 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isDark, setIsDark] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [selectedPhases, setSelectedPhases] = useState(["R&D", "Commercialization", "Transformation"]);
   const scrollRef = useRef(null);
 
-  const { data: projects = [] } = useQuery({
+  const { data: allProjects = [] } = useQuery({
     queryKey: ['projects'],
     queryFn: () => base44.entities.Project.list('sort_order'),
   });
+
+  const projects = allProjects.filter(project => 
+    selectedPhases.includes(project.phase)
+  );
+
+  const togglePhase = (phase) => {
+    setSelectedPhases(prev => 
+      prev.includes(phase) 
+        ? prev.filter(p => p !== phase)
+        : [...prev, phase]
+    );
+  };
 
   const handleSelectProject = useCallback((project) => {
     setSelectedProject(project);
@@ -105,14 +118,47 @@ export default function Home() {
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
         <div className="flex flex-wrap gap-3 mt-6">
-          <Button className={`px-6 py-3 text-sm font-semibold rounded-lg ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
-            Farms
+          <Button 
+            onClick={() => togglePhase("R&D")}
+            className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+              selectedPhases.includes("R&D")
+                ? isDark 
+                  ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' 
+                  : 'bg-amber-500/20 hover:bg-amber-500/30 text-gray-900 border border-amber-500'
+                : isDark
+                  ? 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'
+                  : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-600 border border-gray-300'
+            }`}
+          >
+            R&D
           </Button>
-          <Button className={`px-6 py-3 text-sm font-semibold rounded-lg ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
-            Tunnels
+          <Button 
+            onClick={() => togglePhase("Commercialization")}
+            className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+              selectedPhases.includes("Commercialization")
+                ? isDark 
+                  ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' 
+                  : 'bg-amber-500/20 hover:bg-amber-500/30 text-gray-900 border border-amber-500'
+                : isDark
+                  ? 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'
+                  : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-600 border border-gray-300'
+            }`}
+          >
+            Commercialization
           </Button>
-          <Button className={`px-6 py-3 text-sm font-semibold rounded-lg ${isDark ? 'bg-white/10 hover:bg-white/20 text-white border border-white/20' : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-900 border border-gray-300'} backdrop-blur-sm`}>
-            Seas
+          <Button 
+            onClick={() => togglePhase("Transformation")}
+            className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+              selectedPhases.includes("Transformation")
+                ? isDark 
+                  ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' 
+                  : 'bg-amber-500/20 hover:bg-amber-500/30 text-gray-900 border border-amber-500'
+                : isDark
+                  ? 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'
+                  : 'bg-gray-900/10 hover:bg-gray-900/20 text-gray-600 border border-gray-300'
+            }`}
+          >
+            Transformation
           </Button>
         </div>
       </motion.div>
