@@ -147,56 +147,53 @@ export default function Partnerships() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
               >
-                <Card className={`bg-white/[0.04] border ${type.border} backdrop-blur-sm h-full hover:bg-white/[0.06] transition-colors relative`}>
+                <div className="relative">
                   {isAdmin && (
                     <button
                       onClick={() => setEditingCategory(idx)}
-                      className="absolute top-4 right-4 p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+                      className="absolute top-0 right-0 p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
                     >
                       <Edit2 className="w-4 h-4" />
                     </button>
                   )}
-                  <CardHeader>
-                    <div className="flex items-start gap-4">
+                  <div className="mb-6">
+                    <div className="flex items-start gap-4 mb-6">
                       <div className={`p-3 rounded-xl ${type.bg} border ${type.border}`}>
                         <type.icon className={`w-6 h-6 ${type.color}`} />
                       </div>
-                      <div>
-                        <CardTitle className="text-white text-xl mb-2">{type.title}</CardTitle>
+                      <div className="flex-1">
+                        <h3 className="text-white text-xl font-bold mb-2">{type.title}</h3>
                         <p className="text-white/60 text-sm leading-relaxed">{type.description}</p>
                       </div>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {type.partners && (
-                        <div className="border-t border-white/10 pt-4">
-                          <h4 className="text-sm font-semibold text-white mb-3">Our {type.title}</h4>
-                          <div className="flex gap-3 mb-4">
-                            {type.partners.map((partner, i) => (
-                              <div key={i} className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
-                                <img src={partner.image} alt={partner.name} className="w-full h-24 object-cover" />
-                                <div className="p-2">
-                                  <p className="text-sm text-white font-medium">{partner.name}</p>
-                                  <p className="text-xs text-white/50">{partner.focus}</p>
-                                </div>
-                              </div>
-                            ))}
+                    <div>
+                      <h4 className="text-sm font-semibold text-white mb-3">Our {type.title}</h4>
+                      <div className="flex gap-3">
+                        {type.partners.map((partner, i) => (
+                          <div key={i} className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors">
+                            <img src={partner.image} alt={partner.name} className="w-full h-24 object-cover" />
+                            <div className="p-2">
+                              <p className="text-sm text-white font-medium">{partner.name}</p>
+                              <p className="text-xs text-white/50">{partner.focus}</p>
+                            </div>
                           </div>
-                          <Button 
-                            onClick={() => {
-                              setSelectedPartner(type);
-                              setShowForm(true);
-                            }}
-                            className={`w-full bg-white/10 hover:bg-white/20 text-white text-sm`}
-                          >
-                            Join Us
-                          </Button>
-                        </div>
-                      )}
+                        ))}
+                        <button 
+                          onClick={() => {
+                            setSelectedPartner(type);
+                            setShowForm(true);
+                          }}
+                          className="flex-1 rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors flex items-center justify-center"
+                        >
+                          <div className="text-center p-4">
+                            <Mail className="w-6 h-6 text-white/40 mx-auto mb-2" />
+                            <p className="text-sm font-medium text-white/60 hover:text-white">Join Us</p>
+                          </div>
+                        </button>
+                      </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
