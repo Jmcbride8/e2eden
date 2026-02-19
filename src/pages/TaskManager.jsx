@@ -23,7 +23,7 @@ export default function TaskManager() {
     description: "",
     assigned_to: "",
     assigned_company: "",
-    priority: "medium",
+    priority: "",
     due_date: "",
   });
 
@@ -54,7 +54,7 @@ export default function TaskManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       setShowForm(false);
-      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", priority: "medium", due_date: "" });
+      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", priority: "", due_date: "" });
     },
   });
 
@@ -111,9 +111,7 @@ export default function TaskManager() {
   };
 
   const priorityColors = {
-    low: "bg-blue-500/20 text-blue-300",
-    medium: "bg-yellow-500/20 text-yellow-300",
-    high: "bg-red-500/20 text-red-300",
+    important: "bg-red-500/20 text-red-300",
   };
 
   if (!currentUser) {
@@ -214,12 +212,11 @@ export default function TaskManager() {
                       onValueChange={(val) => setFormData({ ...formData, priority: val })}
                     >
                       <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                        <SelectValue />
+                        <SelectValue placeholder="None" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="low">Low</SelectItem>
-                        <SelectItem value="medium">Medium</SelectItem>
-                        <SelectItem value="high">High</SelectItem>
+                        <SelectItem value={null}>None</SelectItem>
+                        <SelectItem value="important">Important</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -322,9 +319,13 @@ export default function TaskManager() {
                         {task.assigned_to || "Unassigned"}
                       </TableCell>
                       <TableCell>
-                        <Badge className={priorityColors[task.priority]}>
-                          {task.priority}
-                        </Badge>
+                        {task.priority ? (
+                          <Badge className={priorityColors[task.priority]}>
+                            {task.priority}
+                          </Badge>
+                        ) : (
+                          <span className="text-white/40 text-sm">-</span>
+                        )}
                       </TableCell>
                       <TableCell className="text-white/70">
                         {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
@@ -377,9 +378,11 @@ export default function TaskManager() {
                       <Badge className="bg-purple-500/20 text-purple-300 text-xs">
                         {task.assigned_company}
                       </Badge>
-                      <Badge className={`${priorityColors[task.priority]} text-xs`}>
-                        {task.priority}
-                      </Badge>
+                      {task.priority && (
+                        <Badge className={`${priorityColors[task.priority]} text-xs`}>
+                          {task.priority}
+                        </Badge>
+                      )}
                     </div>
 
                     <div className="space-y-2 text-sm">
