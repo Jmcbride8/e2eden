@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, Users, MapPin, Wrench, Leaf, Upload, Move } from "lucide-react";
+import { X, Calendar, Users, MapPin, Wrench, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import ProjectCarousel from "./ProjectCarousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { base44 } from "@/api/base44Client";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -42,45 +42,11 @@ const tabs = [
 export default function ProjectModal({ project, location, onClose }) {
   const [activeTab, setActiveTab] = useState("backstory");
   const [user, setUser] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [positioning, setPositioning] = useState(false);
-  const [imagePosition, setImagePosition] = useState(project.hero_image_position || "center center");
   const queryClient = useQueryClient();
   
   useEffect(() => {
     base44.auth.me().then(setUser).catch(() => setUser(null));
   }, []);
-
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    setUploading(true);
-    try {
-      const result = await base44.integrations.Core.UploadFile({ file });
-      await base44.entities.Project.update(project.id, { 
-        hero_image: result.file_url,
-        hero_image_position: 'center center'
-      });
-      setImagePosition('center center');
-      await queryClient.invalidateQueries({ queryKey: ['projects'] });
-    } catch (error) {
-      console.error("Upload failed:", error);
-    } finally {
-      setUploading(false);
-      e.target.value = '';
-    }
-  };
-
-  const handlePositionChange = async (position) => {
-    setImagePosition(position);
-    try {
-      await base44.entities.Project.update(project.id, { hero_image_position: position });
-      await queryClient.invalidateQueries({ queryKey: ['projects'] });
-    } catch (error) {
-      console.error("Position update failed:", error);
-    }
-  };
   
   if (!project) return null;
 
@@ -129,98 +95,29 @@ export default function ProjectModal({ project, location, onClose }) {
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">{project.name}</h2>
               
-              {/* Hero Image */}
-              {project.hero_image ? (
-                <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3 group">
-                  <img 
-                    src={project.hero_image} 
-                    alt={project.name}
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: imagePosition }}
-                  />
-                  {isAdmin && !positioning && (
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                      <label className="cursor-pointer">
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageUpload}
-                          className="hidden"
-                          disabled={uploading}
-                        />
-                        {uploading ? (
-                          <div className="flex items-center gap-2 text-white px-4 py-2 bg-white/10 rounded-lg">
-                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span className="text-sm">Uploading...</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 text-white px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
-                            <Upload className="w-4 h-4" />
-                            <span className="text-sm">Change</span>
-                          </div>
-                        )}
-                      </label>
-                      <button
-                        onClick={() => setPositioning(true)}
-                        className="flex items-center gap-2 text-white px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
-                      >
-                        <Move className="w-4 h-4" />
-                        <span className="text-sm">Position</span>
-                      </button>
-                    </div>
-                  )}
-                  {isAdmin && positioning && (
-                    <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center gap-4 p-4">
-                      <div className="text-white text-sm mb-2">Adjust Image Position</div>
-                      <div className="grid grid-cols-3 gap-2">
-                        {['top left', 'top center', 'top right',
-                          'center left', 'center center', 'center right',
-                          'bottom left', 'bottom center', 'bottom right'].map((pos) => (
-                          <button
-                            key={pos}
-                            onClick={() => handlePositionChange(pos)}
-                            className={`px-3 py-2 rounded-lg text-xs transition-colors ${
-                              imagePosition === pos 
-                                ? 'bg-white text-black' 
-                                : 'bg-white/10 text-white hover:bg-white/20'
-                            }`}
-                          >
-                            {pos.split(' ').map(w => w[0].toUpperCase()).join('')}
-                          </button>
-                        ))}
-                      </div>
-                      <Button
-                        onClick={() => setPositioning(false)}
-                        variant="outline"
-                        size="sm"
-                        className="mt-2"
-                      >
-                        Done
-                      </Button>
-                    </div>
-                  )}
+              {/* Image Carousel */}
+              {project.images && project.images.length > 0 ? (
+                <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3">
+                  <Carousel className="w-full h-full">
+                    <CarouselContent className="h-full">
+                      {project.images.map((image, index) => (
+                        <CarouselItem key={index} className="h-64">
+                          <img 
+                            src={image}
+                            alt={`${project.name} - Image ${index + 1}`}
+                            className="w-full h-full object-cover rounded-xl"
+                          />
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    {project.images.length > 1 && (
+                      <>
+                        <CarouselPrevious className="left-4 bg-black/50 hover:bg-black/70 border-white/20 text-white" />
+                        <CarouselNext className="right-4 bg-black/50 hover:bg-black/70 border-white/20 text-white" />
+                      </>
+                    )}
+                  </Carousel>
                 </div>
-              ) : isAdmin ? (
-                <label className="w-full h-64 rounded-xl border-2 border-dashed border-white/20 hover:border-white/40 flex items-center justify-center cursor-pointer transition-colors bg-white/[0.03] hover:bg-white/[0.06] mb-3">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                    disabled={uploading}
-                  />
-                  {uploading ? (
-                    <div className="flex items-center gap-2 text-white/60">
-                      <div className="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin" />
-                      <span className="text-sm">Uploading...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2 text-white/60">
-                      <Upload className="w-5 h-5" />
-                      <span className="text-sm">Upload Hero Image</span>
-                    </div>
-                  )}
-                </label>
               ) : null}
               
               {location && (
