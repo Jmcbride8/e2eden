@@ -9,7 +9,8 @@ import { toast } from "sonner";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [positioning, setPositioning] = useState(false);
@@ -18,7 +19,8 @@ export default function Profile() {
   useEffect(() => {
     base44.auth.me().then((userData) => {
       setUser(userData);
-      setFullName(userData.full_name || "");
+      setFirstName(userData.first_name || "");
+      setLastName(userData.last_name || "");
       setImagePosition(userData.profile_picture_position || "center center");
     });
   }, []);
@@ -26,7 +28,7 @@ export default function Profile() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await base44.auth.updateMe({ full_name: fullName });
+      await base44.auth.updateMe({ first_name: firstName, last_name: lastName });
       toast.success("Profile updated successfully");
       const updated = await base44.auth.me();
       setUser(updated);
@@ -188,14 +190,27 @@ export default function Profile() {
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="fullName" className="text-white/70">Full Name</Label>
-              <Input
-                id="fullName"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="bg-white/[0.06] border-white/10 text-white"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName" className="text-white/70">First Name</Label>
+                <Input
+                  id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="bg-white/[0.06] border-white/10 text-white"
+                  placeholder="First name"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName" className="text-white/70">Last Name</Label>
+                <Input
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="bg-white/[0.06] border-white/10 text-white"
+                  placeholder="Last name"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
