@@ -283,8 +283,8 @@ export default function TaskManager() {
           </CardContent>
         </Card>
 
-        {/* Tasks Table */}
-        <Card className="bg-white/[0.04] border-white/10">
+        {/* Tasks Table - Desktop */}
+        <Card className="bg-white/[0.04] border-white/10 hidden sm:block">
           <CardHeader>
             <CardTitle className="text-white">Tasks</CardTitle>
           </CardHeader>
@@ -357,6 +357,76 @@ export default function TaskManager() {
             )}
           </CardContent>
         </Card>
+
+        {/* Tasks Cards - Mobile */}
+        <div className="sm:hidden space-y-4 mb-20">
+          {filteredTasks.map((task) => {
+            const StatusIcon = statusIcons[task.status];
+            return (
+              <Card key={task.id} className="bg-white/[0.04] border-white/10">
+                <CardContent className="pt-4">
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-white font-semibold text-lg mb-1">{task.title}</p>
+                      {task.description && (
+                        <p className="text-white/50 text-sm">{task.description}</p>
+                      )}
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-purple-500/20 text-purple-300 text-xs">
+                        {task.assigned_company}
+                      </Badge>
+                      <Badge className={`${priorityColors[task.priority]} text-xs`}>
+                        {task.priority}
+                      </Badge>
+                    </div>
+
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-white/50">Assigned to:</span>
+                        <span className="text-white/70">{task.assigned_to || "Unassigned"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-white/50">Due date:</span>
+                        <span className="text-white/70">
+                          {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <label className="text-xs text-white/50 mb-1 block">Status</label>
+                      <Select
+                        value={task.status}
+                        onValueChange={(val) => handleStatusChange(task, val)}
+                      >
+                        <SelectTrigger className="w-full bg-white/5 border-white/10">
+                          <div className="flex items-center gap-2">
+                            <StatusIcon className="w-4 h-4" />
+                            <span className="text-white">{task.status.replace('_', ' ')}</span>
+                          </div>
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="todo">To Do</SelectItem>
+                          <SelectItem value="in_progress">In Progress</SelectItem>
+                          <SelectItem value="completed">Completed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+          {filteredTasks.length === 0 && (
+            <Card className="bg-white/[0.04] border-white/10">
+              <CardContent className="py-12">
+                <p className="text-white/40 text-center">No tasks found</p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </div>
     </div>
   );
