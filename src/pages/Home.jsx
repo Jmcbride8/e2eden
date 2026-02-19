@@ -97,7 +97,7 @@ export default function Home() {
         <p className={`text-sm mt-2 leading-relaxed max-w-sm transition-colors ${isDark ? 'text-white/90' : 'text-gray-700'}`}>
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
-        <div className="flex flex-wrap gap-3 mt-3 mb-1 lg:mb-0">
+        <div className="flex flex-wrap gap-3 mt-3 mb-0 lg:mb-0">
           <Button 
             onClick={() => setSelectedPhase("R&D")}
             className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
@@ -172,7 +172,7 @@ export default function Home() {
 
       {/* Mobile Project List - Below Globe */}
       <div className="lg:hidden absolute bottom-0 left-0 right-0 z-20">
-        <div className="px-6 pb-4">
+        <div className="px-6 pb-2">
           <div className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {projects.map((project, idx) => (
               <motion.div
