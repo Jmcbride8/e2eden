@@ -270,9 +270,9 @@ export default function Home() {
       </div>
 
       {/* Story Content Section */}
-      <div className={`relative z-10 ${isDark ? 'bg-black' : 'bg-white'} transition-colors duration-700`}>
+      <div className="relative z-10 bg-black">
         {/* 1. Running Out of Water */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`}>
+        <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -280,15 +280,15 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-5xl font-bold mb-6 text-white">
                 We're Running Out of Water
               </h2>
-              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-8 text-white/70">
                 By 2050, the world will need to feed 10 billion people. But there's a crisis looming: we're running out 
                 of fresh water. Rivers are drying up, aquifers are depleting, and climate change is making water scarcity 
                 more severe every year.
               </p>
-              <p className={`text-xl leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed text-white/70">
                 Without water, there is no food. Without food, there is no future. The clock is ticking, and we need 
                 solutions now.
               </p>
@@ -396,7 +396,7 @@ export default function Home() {
         </section>
 
         {/* 4. Getting Started - Imperial Valley */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section className="py-24 px-6 sm:px-12 bg-gray-900">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -404,22 +404,22 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-5xl font-bold mb-6 text-white">
                 Getting Started: Imperial Valley, California
               </h2>
-              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-8 text-white/70">
                 We chose Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
                 one of the most productive agricultural regions in the world. If we can make it work here, we can make 
                 it work anywhere.
               </p>
-              <div className={`aspect-video rounded-2xl overflow-hidden mb-6 ${isDark ? 'bg-white/5 border border-white/10' : 'bg-gray-100 border border-gray-200'}`}>
+              <div className="aspect-video rounded-2xl overflow-hidden mb-6 bg-white/5 border border-white/10">
                 <img 
                   src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop"
                   alt="Imperial Valley Agriculture"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-lg leading-relaxed text-white/70">
                 Our first installations are already demonstrating dramatic water savings and improved crop yields. 
                 This is just the beginning of a global transformation.
               </p>
@@ -455,7 +455,7 @@ export default function Home() {
         </section>
 
         {/* 6. Change the World */}
-        <section className={`py-32 px-6 sm:px-12 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section className="py-32 px-6 sm:px-12 bg-gray-900">
           <div className="max-w-5xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -463,17 +463,17 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-6xl font-bold mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-6xl font-bold mb-8 text-white">
                 Together, We Can Change the World
               </h2>
-              <p className={`text-2xl leading-relaxed mb-6 ${isDark ? 'text-white/80' : 'text-gray-700'}`}>
+              <p className="text-2xl leading-relaxed mb-6 text-white/80">
                 Feed 10 billion people. Save our water. Make deserts bloom.
               </p>
-              <p className={`text-xl leading-relaxed mb-12 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-12 text-white/70">
                 This isn't just about technology—it's about survival. It's about creating abundance where there was 
                 scarcity. It's about ensuring that no child goes hungry because we ran out of water.
               </p>
-              <p className={`text-2xl font-bold text-amber-400 mb-12`}>
+              <p className="text-2xl font-bold text-amber-400 mb-12">
                 The next green revolution starts now. Join us.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -483,7 +483,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link to={createPageUrl("Funding")}>
-                  <Button variant="outline" className={`px-10 py-7 text-xl font-semibold ${isDark ? 'bg-transparent border-white/20 text-white hover:bg-white/10' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
+                  <Button variant="outline" className="px-10 py-7 text-xl font-semibold bg-transparent border-white/20 text-white hover:bg-white/10">
                     Support Our Mission
                   </Button>
                 </Link>
