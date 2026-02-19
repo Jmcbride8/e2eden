@@ -52,19 +52,7 @@ export default function Home() {
 
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8 pr-20 sm:pr-24">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img 
-              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/38ce93810_Brand_Icon_White.png"
-              alt="E2Eden"
-              className="w-10 h-10 object-contain"
-            />
-            <div>
-              <h1 className={`text-lg font-bold tracking-tight transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>E2Eden</h1>
-              <p className={`text-xs transition-colors ${isDark ? 'text-white/30' : 'text-gray-500'}`}>The Next Green Revolution</p>
-            </div>
-          </div>
-          
+        <div className="flex items-center justify-end">
           <div className="flex items-center gap-2">
             <nav className="hidden sm:flex items-center gap-1">
               <Link to={createPageUrl("Technology")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
