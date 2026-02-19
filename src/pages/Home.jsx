@@ -8,6 +8,7 @@ import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
+import MobileNav from "../components/navigation/MobileNav";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -526,6 +527,9 @@ export default function Home() {
           </div>
         </section>
       </div>
+
+      {/* Mobile Bottom Navigation */}
+      <MobileNav />
     </div>
   );
 }
