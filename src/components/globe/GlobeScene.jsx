@@ -184,14 +184,15 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       sprite.userData = { project };
       globeGroup.add(sprite);
 
-      // Add line from marker to label
+      // Add line from marker to bottom center of label
+      const lineEndPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.225);
       const lineMaterial = new THREE.LineBasicMaterial({ 
         color: 0xffffff, 
         transparent: true, 
         opacity: 0.6,
         linewidth: 2
       });
-      const linePoints = [pos, labelPos];
+      const linePoints = [pos, lineEndPos];
       const lineGeometry = new THREE.BufferGeometry().setFromPoints(linePoints);
       const line = new THREE.Line(lineGeometry, lineMaterial);
       globeGroup.add(line);
