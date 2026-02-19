@@ -97,7 +97,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="absolute top-24 sm:top-28 left-6 sm:left-8 z-10 max-w-md"
+        className="absolute top-24 sm:top-28 left-6 sm:left-8 right-6 sm:right-auto z-10 max-w-md"
       >
         <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight leading-tight transition-colors ${isDark ? 'text-white/90' : 'text-gray-900'}`}>
           Revolutionizing water,
@@ -182,12 +182,48 @@ export default function Home() {
         </Button>
       </motion.div>
 
-      {/* Project Cards - Right Side */}
+      {/* Mobile Project List - Below Globe */}
+      <div className="lg:hidden absolute bottom-0 left-0 right-0 z-20">
+        <div className="px-6 pb-6">
+          <div className="flex gap-3 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+            {projects.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
+                onClick={() => handleSelectProject(project)}
+                className="relative flex-shrink-0 w-48 h-32 rounded-xl overflow-hidden cursor-pointer group"
+              >
+                {project.hero_image ? (
+                  <img 
+                    src={project.hero_image}
+                    alt={project.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    style={{ objectPosition: project.hero_image_position || 'center center' }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <h3 className="text-white font-semibold text-sm leading-tight drop-shadow-lg line-clamp-2">
+                    {project.name}
+                  </h3>
+                  <p className="text-white/70 text-xs mt-0.5">{project.location}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Project Cards - Right Side - Hidden on Mobile */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute right-6 top-32 bottom-6 w-80 flex flex-col z-20"
+        className="hidden lg:flex absolute right-6 top-32 bottom-6 w-80 flex-col z-20"
       >
         {/* Up Arrow */}
         <Button
@@ -262,7 +298,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Bottom gradient fade */}
-      <div className={`absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] transition-colors duration-700 ${isDark ? 'from-black to-transparent' : 'from-blue-50 to-transparent'}`} />
+      <div className={`hidden lg:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] transition-colors duration-700 ${isDark ? 'from-black to-transparent' : 'from-blue-50 to-transparent'}`} />
       </div>
 
       {/* Story Content Section */}
