@@ -194,9 +194,9 @@ export default function Partnerships() {
                       </div>
                     </div>
                     <div>
-                      <div className="flex gap-3">
+                      <div className="grid grid-cols-4 gap-3">
                         {type.partners.map((partner, i) => (
-                          <div key={i} className="flex-1 aspect-square rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors flex flex-col">
+                          <div key={i} className="aspect-square rounded overflow-hidden bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors flex flex-col">
                             <img src={partner.image} alt={partner.name} className="w-full h-2/3 object-cover" />
                             <div className="p-2 flex flex-col justify-center flex-1">
                               <p className="text-sm text-white font-medium truncate">{partner.name}</p>
@@ -204,12 +204,15 @@ export default function Partnerships() {
                             </div>
                           </div>
                         ))}
+                        {Array.from({ length: Math.max(0, 3 - type.partners.length) }).map((_, i) => (
+                          <div key={`empty-${i}`} className="aspect-square rounded border-2 border-dashed border-white/10" />
+                        ))}
                         <button 
                           onClick={() => {
                             setSelectedPartner(type);
                             setShowForm(true);
                           }}
-                          className="flex-1 rounded overflow-hidden bg-white/10 border border-white/20 hover:border-white/40 transition-colors flex items-center justify-center"
+                          className="aspect-square rounded overflow-hidden bg-white/10 border border-white/20 hover:border-white/40 transition-colors flex items-center justify-center"
                         >
                           <div className="text-center p-4">
                             <Mail className="w-6 h-6 text-white mx-auto mb-2" />
