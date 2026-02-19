@@ -197,7 +197,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       const labelPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.35);
       sprite.position.copy(labelPos);
       sprite.scale.set(0.85, 0.35, 1);
-      sprite.userData = { project };
+      sprite.userData = { project, clickable: true };
       globeGroup.add(sprite);
 
       // Add line from marker to bottom center of label
@@ -253,7 +253,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       pulse.lookAt(new THREE.Vector3(0, 0, 0));
       globeGroup.add(pulse);
 
-      markerMeshes.current.push({ dot, ring, pulse, project });
+      markerMeshes.current.push({ dot, ring, pulse, sprite, project });
     });
 
     // Ambient particles
@@ -402,8 +402,8 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       const { camera, scene } = sceneRef.current;
       if (camera && scene) {
         raycaster.current.setFromCamera(mouse.current, camera);
-        const dots = markerMeshes.current.map(m => m.dot);
-        const intersects = raycaster.current.intersectObjects(dots);
+        const clickables = markerMeshes.current.flatMap(m => [m.dot, m.sprite]);
+        const intersects = raycaster.current.intersectObjects(clickables);
         if (intersects.length > 0) {
           const proj = intersects[0].object.userData.project;
           hoveredMarker.current = proj?.id || null;
@@ -424,8 +424,8 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
           const { camera } = sceneRef.current;
           if (camera) {
             raycaster.current.setFromCamera(mouse.current, camera);
-            const dots = markerMeshes.current.map(m => m.dot);
-            const intersects = raycaster.current.intersectObjects(dots);
+            const clickables = markerMeshes.current.flatMap(m => [m.dot, m.sprite]);
+            const intersects = raycaster.current.intersectObjects(clickables);
             if (intersects.length > 0) {
               const proj = intersects[0].object.userData.project;
               if (proj) onSelectProject(proj);
