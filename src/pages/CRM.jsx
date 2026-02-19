@@ -24,6 +24,16 @@ const leadTypeConfig = {
   "Consultant/Advisor": { color: "bg-violet-500/20 text-violet-300 border-violet-500/30", icon: "💡" }
 };
 
+const leadStatusConfig = {
+  "prospect": { color: "bg-gray-400", label: "Prospect" },
+  "engaged": { color: "bg-blue-500", label: "Engaged" },
+  "hot": { color: "bg-red-500", label: "Hot Lead" },
+  "cold": { color: "bg-cyan-500", label: "Cold Lead" },
+  "dead": { color: "bg-gray-700", label: "Dead Lead" }
+};
+
+const statusOrder = ["prospect", "engaged", "hot", "cold", "dead"];
+
 export default function CRM() {
   const [searchTerm, setSearchTerm] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -43,6 +53,21 @@ export default function CRM() {
       queryClient.invalidateQueries({ queryKey: ['leads'] });
     },
   });
+
+  const updateLeadMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.Lead.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['leads'] });
+    },
+  });
+
+  const cycleLeadStatus = (lead, e) => {
+    e.stopPropagation();
+    const currentStatus = lead.lead_status || "prospect";
+    const currentIndex = statusOrder.indexOf(currentStatus);
+    const nextStatus = statusOrder[(currentIndex + 1) % statusOrder.length];
+    updateLeadMutation.mutate({ id: lead.id, data: { lead_status: nextStatus } });
+  };
 
   const handleView = (lead) => {
     setEditingLead(lead);
