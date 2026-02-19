@@ -178,10 +178,17 @@ export default function CRM() {
                         key={lead.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="hover:bg-white/[0.02] transition-colors cursor-pointer"
+                        className="hover:bg-white/[0.02] transition-colors cursor-pointer relative"
                         onClick={() => handleView(lead)}
                       >
-                        <td className="px-4 py-4">
+                        <td className="absolute left-0 top-0 bottom-0 w-1 p-0 hover:w-2 transition-all">
+                          <button
+                            onClick={(e) => cycleLeadStatus(lead, e)}
+                            className={`w-full h-full ${leadStatusConfig[lead.lead_status || "prospect"]?.color} hover:opacity-80 transition-opacity`}
+                            title={leadStatusConfig[lead.lead_status || "prospect"]?.label}
+                          />
+                        </td>
+                        <td className="px-4 py-4 pl-6">
                           <div className="text-white font-medium">{lead.name}</div>
                           {lead.company && (
                             <div className="text-sm text-white/50 mt-1">{lead.company}</div>
@@ -264,9 +271,14 @@ export default function CRM() {
                   key={lead.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white/[0.04] border border-white/10 rounded-xl backdrop-blur-sm overflow-hidden"
+                  className="bg-white/[0.04] border border-white/10 rounded-xl backdrop-blur-sm overflow-hidden relative"
                 >
-                  <div className="p-4 cursor-pointer" onClick={() => handleView(lead)}>
+                  <button
+                    onClick={(e) => cycleLeadStatus(lead, e)}
+                    className={`absolute left-0 top-0 bottom-0 w-1 hover:w-2 ${leadStatusConfig[lead.lead_status || "prospect"]?.color} hover:opacity-80 transition-all`}
+                    title={leadStatusConfig[lead.lead_status || "prospect"]?.label}
+                  />
+                  <div className="p-4 pl-6 cursor-pointer" onClick={() => handleView(lead)}>
                     <div className="mb-3">
                       <h3 className="text-white font-medium text-lg">{lead.name}</h3>
                       {lead.company && (
