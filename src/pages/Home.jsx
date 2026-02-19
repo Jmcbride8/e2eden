@@ -518,7 +518,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <Link to={createPageUrl("Funding")}>
-                  <Button variant="outline" className={`px-10 py-7 text-xl font-semibold ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
+                  <Button variant="outline" className={`px-10 py-7 text-xl font-semibold ${isDark ? 'bg-transparent border-white/20 text-white hover:bg-white/10' : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-100'}`}>
                     Support Our Mission
                   </Button>
                 </Link>
