@@ -419,7 +419,7 @@ export default function Home() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-lg leading-relaxed text-white/70">
                 Our first installations are already demonstrating dramatic water savings and improved crop yields. 
                 This is just the beginning of a global transformation.
               </p>
@@ -487,7 +487,7 @@ export default function Home() {
                 This isn't just about technology—it's about survival. It's about creating abundance where there was 
                 scarcity. It's about ensuring that no child goes hungry because we ran out of water.
               </p>
-              <p className={`text-2xl font-bold text-amber-400 mb-12`}>
+              <p className="text-2xl font-bold text-amber-400 mb-12">
                 The next green revolution starts now. Join us.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
