@@ -98,7 +98,7 @@ export default function Home() {
           Revolutionizing water,
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400">
-            to feed humanity, and turning deserts green
+            to feed humanity, and turn deserts green
           </span>
         </h2>
         <p className="text-sm mt-2 leading-relaxed max-w-sm text-white/90">
