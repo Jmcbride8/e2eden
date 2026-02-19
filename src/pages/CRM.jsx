@@ -147,7 +147,7 @@ export default function CRM() {
           </select>
         </div>
 
-        {/* Leads Table */}
+        {/* Leads Table - Desktop */}
         {isLoading ? (
           <div className="text-white/60 text-center py-12">Loading...</div>
         ) : filteredLeads.length === 0 ? (
@@ -157,110 +157,200 @@ export default function CRM() {
             </CardContent>
           </Card>
         ) : (
-          <div className="bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-white/[0.04] border-b border-white/10">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Type</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Email</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Website</th>
-                    <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Last Engaged</th>
-                    <th className="px-4 py-3 text-right text-xs font-semibold text-white/70 uppercase tracking-wider">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10">
-                  {filteredLeads.map((lead) => (
-                    <motion.tr
-                      key={lead.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="hover:bg-white/[0.02] transition-colors"
-                    >
-                      <td className="px-4 py-4">
-                        <div className="text-white font-medium">{lead.name}</div>
-                        {lead.company && (
-                          <div className="text-sm text-white/50 mt-1">{lead.company}</div>
-                        )}
-                      </td>
-                      <td className="px-4 py-4">
-                        {lead.lead_type && (
-                          <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border whitespace-nowrap`}>
-                            {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
-                          </Badge>
-                        )}
-                      </td>
-                      <td className="px-4 py-4">
-                        {lead.email ? (
-                          <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors">
-                            {lead.email}
-                          </a>
-                        ) : (
-                          <span className="text-sm text-white/40">-</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-4">
-                        {lead.website ? (
-                          <a 
-                            href={lead.website} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="flex items-center gap-1 text-sm text-white/70 hover:text-amber-400 transition-colors"
-                          >
-                            <Globe className="w-3 h-3" />
-                            <span className="max-w-[150px] truncate">
-                              {lead.website.replace(/^https?:\/\//, '')}
-                            </span>
-                          </a>
-                        ) : (
-                          <span className="text-sm text-white/40">-</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-4">
-                        {lead.last_engaged ? (
-                          <div className="flex items-center gap-1 text-sm text-white/70">
-                            <Calendar className="w-3 h-3" />
-                            {new Date(lead.last_engaged).toLocaleDateString()}
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-white/[0.04] border-b border-white/10">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Name</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Type</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Email</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Website</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-white/70 uppercase tracking-wider">Last Engaged</th>
+                      <th className="px-4 py-3 text-right text-xs font-semibold text-white/70 uppercase tracking-wider">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/10">
+                    {filteredLeads.map((lead) => (
+                      <motion.tr
+                        key={lead.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="hover:bg-white/[0.02] transition-colors"
+                      >
+                        <td className="px-4 py-4">
+                          <div className="text-white font-medium">{lead.name}</div>
+                          {lead.company && (
+                            <div className="text-sm text-white/50 mt-1">{lead.company}</div>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          {lead.lead_type && (
+                            <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border whitespace-nowrap`}>
+                              {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
+                            </Badge>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          {lead.email ? (
+                            <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors">
+                              {lead.email}
+                            </a>
+                          ) : (
+                            <span className="text-sm text-white/40">-</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          {lead.website ? (
+                            <a 
+                              href={lead.website} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="flex items-center gap-1 text-sm text-white/70 hover:text-amber-400 transition-colors"
+                            >
+                              <Globe className="w-3 h-3" />
+                              <span className="max-w-[150px] truncate">
+                                {lead.website.replace(/^https?:\/\//, '')}
+                              </span>
+                            </a>
+                          ) : (
+                            <span className="text-sm text-white/40">-</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          {lead.last_engaged ? (
+                            <div className="flex items-center gap-1 text-sm text-white/70">
+                              <Calendar className="w-3 h-3" />
+                              {new Date(lead.last_engaged).toLocaleDateString()}
+                            </div>
+                          ) : (
+                            <span className="text-sm text-white/40">-</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-4">
+                          <div className="flex gap-1 justify-end">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                              onClick={() => handleView(lead)}
+                            >
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                              onClick={() => handleEdit(lead)}
+                            >
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
+                              onClick={() => handleDelete(lead.id)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
                           </div>
-                        ) : (
-                          <span className="text-sm text-white/40">-</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-4">
-                        <div className="flex gap-1 justify-end">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                            onClick={() => handleView(lead)}
-                          >
-                            <Eye className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                            onClick={() => handleEdit(lead)}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
-                            onClick={() => handleDelete(lead.id)}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    </motion.tr>
-                  ))}
-                </tbody>
-              </table>
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4">
+              {filteredLeads.map((lead) => (
+                <motion.div
+                  key={lead.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white/[0.04] border border-white/10 rounded-xl p-4 backdrop-blur-sm"
+                >
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex-1">
+                      <h3 className="text-white font-medium text-lg">{lead.name}</h3>
+                      {lead.company && (
+                        <p className="text-sm text-white/50 mt-1">{lead.company}</p>
+                      )}
+                    </div>
+                    <div className="flex gap-1 ml-2">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                        onClick={() => handleView(lead)}
+                      >
+                        <Eye className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                        onClick={() => handleEdit(lead)}
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
+                        onClick={() => handleDelete(lead.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {lead.lead_type && (
+                    <div className="mb-3">
+                      <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border`}>
+                        {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  <div className="space-y-2">
+                    {lead.email && (
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-white/40" />
+                        <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors truncate">
+                          {lead.email}
+                        </a>
+                      </div>
+                    )}
+                    {lead.website && (
+                      <div className="flex items-center gap-2">
+                        <Globe className="w-4 h-4 text-white/40" />
+                        <a 
+                          href={lead.website} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-sm text-white/70 hover:text-amber-400 transition-colors truncate"
+                        >
+                          {lead.website.replace(/^https?:\/\//, '')}
+                        </a>
+                      </div>
+                    )}
+                    {lead.last_engaged && (
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-white/40" />
+                        <span className="text-sm text-white/60">
+                          {new Date(lead.last_engaged).toLocaleDateString()}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 
