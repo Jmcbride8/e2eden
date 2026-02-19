@@ -280,10 +280,10 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-5xl font-bold mb-6 text-white">
                 We're Running Out of Water
               </h2>
-              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-8 text-white/70">
                 By 2050, the world will need to feed 10 billion people. But there's a crisis looming: we're running out 
                 of fresh water. Rivers are drying up, aquifers are depleting, and climate change is making water scarcity 
                 more severe every year.
@@ -305,10 +305,10 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-5xl font-bold mb-6 text-white">
                 The Problem: Agriculture Uses 85% of Our Water
               </h2>
-              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-8 text-white/70">
                 Agriculture consumes a staggering 85% of global freshwater resources. Traditional farming methods are 
                 incredibly inefficient—most water evaporates or runs off before crops can even use it.
               </p>
@@ -335,7 +335,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-5xl font-bold mb-6 text-white">
                 The Solution: Evaporative Cellulose Panels + Brines
               </h2>
               <p className="text-xl mb-12 text-white/70">
@@ -352,7 +352,7 @@ export default function Home() {
                 className="p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20"
               >
                 <h3 className="text-2xl font-bold mb-4 text-amber-400">Evaporative Cellulose Panels</h3>
-                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                <p className="text-lg leading-relaxed text-white/70">
                   Our patented cooling walls use natural evaporation to reduce temperatures by up to 15°C, increase 
                   humidity by 50%, and save 90% of water compared to traditional irrigation.
                 </p>
@@ -366,7 +366,7 @@ export default function Home() {
                 className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20"
               >
                 <h3 className="text-2xl font-bold mb-4 text-blue-400">Brine Utilization</h3>
-                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+                <p className="text-lg leading-relaxed text-white/70">
                   We turn waste into resource. By using brackish water and agricultural brines, we unlock water sources 
                   that were previously unusable, making deserts bloom where nothing could grow before.
                 </p>
@@ -404,10 +404,10 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              <h2 className="text-5xl font-bold mb-6 text-white">
                 Getting Started: Imperial Valley, California
               </h2>
-              <p className={`text-xl leading-relaxed mb-8 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-8 text-white/70">
                 We chose Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
                 one of the most productive agricultural regions in the world. If we can make it work here, we can make 
                 it work anywhere.
@@ -437,10 +437,10 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="text-center"
             >
-              <h2 className={`text-5xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                Built to Scale
+              <h2 className="text-5xl font-bold mb-6 text-white">
+              Built to Scale
               </h2>
-              <p className={`text-xl leading-relaxed mb-12 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-12 text-white/70">
                 From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
               </p>
               
@@ -483,7 +483,7 @@ export default function Home() {
               <p className="text-2xl leading-relaxed mb-6 text-white/80">
                 Feed 10 billion people. Save our water. Make deserts bloom.
               </p>
-              <p className={`text-xl leading-relaxed mb-12 ${isDark ? 'text-white/70' : 'text-gray-600'}`}>
+              <p className="text-xl leading-relaxed mb-12 text-white/70">
                 This isn't just about technology—it's about survival. It's about creating abundance where there was 
                 scarcity. It's about ensuring that no child goes hungry because we ran out of water.
               </p>
