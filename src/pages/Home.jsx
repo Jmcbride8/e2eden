@@ -171,7 +171,7 @@ export default function Home() {
       </motion.div>
 
       {/* Mobile Project List - Below Globe */}
-      <div className="lg:hidden absolute bottom-0 left-0 right-0 z-20">
+      <div className="lg:hidden absolute bottom-12 left-0 right-0 z-20">
         <div className="px-6 pb-2">
           <div className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {projects.map((project, idx) => (
