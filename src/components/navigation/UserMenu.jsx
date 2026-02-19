@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, User, Briefcase, Settings, LogOut, Users, Calendar } from "lucide-react";
+import { Menu, X, User, Briefcase, Settings, LogOut, Users, Calendar, Shield, ListChecks } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPageUrl } from "../../utils";
 import { base44 } from "@/api/base44Client";
@@ -28,6 +28,8 @@ export default function UserMenu() {
     { icon: Briefcase, label: "Projects", path: createPageUrl("Projects") },
     { icon: Users, label: "CRM", path: createPageUrl("CRM") },
     { icon: Calendar, label: "Conferences", path: createPageUrl("Conferences") },
+    { icon: ListChecks, label: "Task Manager", path: createPageUrl("TaskManager") },
+    ...(user?.role === 'admin' ? [{ icon: Shield, label: "User Management", path: createPageUrl("UserManagement") }] : []),
     { icon: Settings, label: "Profile Settings", path: createPageUrl("Profile") },
   ];
 
