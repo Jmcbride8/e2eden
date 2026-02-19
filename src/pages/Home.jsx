@@ -441,7 +441,21 @@ export default function Home() {
                 Built to Scale
               </h2>
               <p className="text-xl leading-relaxed mb-12 text-white/70">
-...
+                From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
+              </p>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                {[
+                  { region: "North America", projects: "Active", desc: "Imperial Valley, Salton Sea" },
+                  { region: "Africa", projects: "Expanding", desc: "Kenya, Tanzania" },
+                  { region: "Middle East", projects: "Planned", desc: "UAE, Saudi Arabia" }
+                ].map((location, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: idx * 0.1 }}
                     className="p-8 rounded-2xl bg-white/5 border border-white/10"
                   >
                     <h3 className="text-2xl font-bold mb-2 text-white">{location.region}</h3>
