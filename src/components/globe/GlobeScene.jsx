@@ -157,13 +157,18 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       canvas.width = 512;
-      canvas.height = 128;
+      canvas.height = 160;
       
       context.font = 'bold 48px Arial';
       context.fillStyle = 'white';
       context.textAlign = 'center';
       context.textBaseline = 'middle';
-      context.fillText(project.name, canvas.width / 2, canvas.height / 2);
+      context.fillText(project.name, canvas.width / 2, 50);
+      
+      // Add region below project name
+      context.font = '32px Arial';
+      context.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      context.fillText(project.region || '', canvas.width / 2, 100);
       
       const texture = new THREE.CanvasTexture(canvas);
       const spriteMaterial = new THREE.SpriteMaterial({ 
@@ -175,7 +180,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       
       const labelPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.35);
       sprite.position.copy(labelPos);
-      sprite.scale.set(0.8, 0.2, 1);
+      sprite.scale.set(0.8, 0.25, 1);
       sprite.userData = { project };
       globeGroup.add(sprite);
 
