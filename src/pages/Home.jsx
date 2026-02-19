@@ -292,7 +292,7 @@ export default function Home() {
       {/* Story Content Section */}
       <div className={`relative z-10 ${isDark ? 'bg-black' : 'bg-white'} transition-colors duration-700`}>
         {/* 1. Running Out of Water */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black via-gray-900 to-black' : 'bg-gradient-to-b from-white via-gray-50 to-white'}`}>
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -317,7 +317,7 @@ export default function Home() {
         </section>
 
         {/* 2. The Problem is Agriculture */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-black' : 'bg-white'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -416,7 +416,7 @@ export default function Home() {
         </section>
 
         {/* 4. Getting Started - Imperial Valley */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black to-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -448,7 +448,7 @@ export default function Home() {
         </section>
 
         {/* 5. Scale */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-gray-900 to-black' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-black' : 'bg-white'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
