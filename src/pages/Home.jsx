@@ -288,7 +288,7 @@ export default function Home() {
 
       {/* Story Content Section */}
       <div className="relative z-10 bg-black">
-        {/* 1. Running Out of Water */}
+        {/* 1. Water Shortages */}
         <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -296,20 +296,89 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              className="text-center mb-16"
             >
               <h2 className="text-5xl font-bold mb-6 text-white">
-                We're Running Out of Water
+                Water Shortages
               </h2>
-              <p className="text-xl leading-relaxed mb-8 text-white/70">
-                By 2050, the world will need to feed 10 billion people. But there's a crisis looming: we're running out 
-                of fresh water. Rivers are drying up, aquifers are depleting, and climate change is making water scarcity 
-                more severe every year.
-              </p>
-              <p className="text-xl leading-relaxed text-white/70">
-                Without water, there is no food. Without food, there is no future. The clock is ticking, and we need 
-                solutions now.
+              <p className="text-xl text-white/60 max-w-3xl mx-auto">
+                The global water crisis threatens food security, ecosystems, and human survival
               </p>
             </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Sub-section 1: Depleting Resources */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="group"
+              >
+                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
+                  <img 
+                    src="https://images.unsplash.com/photo-1515339760107-1952b7a08454?w=800&h=600&fit=crop"
+                    alt="Dried riverbed"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white">
+                  Depleting Resources
+                </h3>
+                <p className="text-white/70 leading-relaxed">
+                  Rivers are drying up and aquifers are depleting at alarming rates. By 2050, we'll need to feed 10 billion people with increasingly scarce freshwater resources.
+                </p>
+              </motion.div>
+
+              {/* Sub-section 2: Climate Impact */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="group"
+              >
+                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
+                  <img 
+                    src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop"
+                    alt="Drought-affected land"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white">
+                  Climate Impact
+                </h3>
+                <p className="text-white/70 leading-relaxed">
+                  Climate change is intensifying droughts and making water scarcity more severe every year. Traditional farming methods can no longer sustain our growing population.
+                </p>
+              </motion.div>
+
+              {/* Sub-section 3: Food Security Crisis */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="group"
+              >
+                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
+                  <img 
+                    src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop"
+                    alt="Agricultural land"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white">
+                  Food Security Crisis
+                </h3>
+                <p className="text-white/70 leading-relaxed">
+                  Without water, there is no food. Without food, there is no future. We need revolutionary solutions now to prevent a global catastrophe.
+                </p>
+              </motion.div>
+            </div>
           </div>
         </section>
 
