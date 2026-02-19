@@ -83,7 +83,7 @@ export default function Home() {
           Revolutionizing water,
           <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400">
-            to feed humanity, and save Earth
+            to feed humanity, and turning deserts green
           </span>
         </h2>
         <p className="text-sm mt-2 leading-relaxed max-w-sm text-white/90">
@@ -268,6 +268,50 @@ export default function Home() {
       {/* Bottom gradient fade */}
       <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] from-black to-transparent" />
       </div>
+
+      {/* Partnership Brands Section */}
+      <section className="relative z-10 py-16 px-6 sm:px-12 bg-black border-t border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-sm uppercase tracking-wider text-white/40 mb-8">Trusted by Leading Organizations</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center"
+          >
+            {[
+              { name: "Seawater Greenhouse", logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d53d21e9c_Seawater_Greenhouse_Logo_2024.png" },
+              { name: "Partner 2", logo: "https://via.placeholder.com/200x80/1a1a1a/666666?text=Partner+2" },
+              { name: "Partner 3", logo: "https://via.placeholder.com/200x80/1a1a1a/666666?text=Partner+3" },
+              { name: "Partner 4", logo: "https://via.placeholder.com/200x80/1a1a1a/666666?text=Partner+4" }
+            ].map((partner, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
+                className="flex items-center justify-center p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all"
+              >
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name}
+                  className="w-full h-12 object-contain opacity-60 hover:opacity-80 transition-opacity"
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* Story Content Section */}
       <div className="relative z-10 bg-black">
