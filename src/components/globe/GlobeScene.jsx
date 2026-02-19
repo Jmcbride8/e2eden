@@ -180,7 +180,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       currentY += 65;
       
       // 3. Add location below
-      context.font = '34px Arial';
+      context.font = 'bold 34px Arial';
       context.fillStyle = 'rgba(255, 255, 255, 0.7)';
       context.textAlign = 'center';
       context.textBaseline = 'top';
