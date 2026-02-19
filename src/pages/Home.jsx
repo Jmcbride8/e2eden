@@ -85,7 +85,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
-        className="absolute top-24 sm:top-28 left-6 sm:left-8 right-6 sm:right-auto z-10 max-w-md"
+        className="absolute top-20 sm:top-28 left-6 sm:left-8 right-6 sm:right-auto z-10 max-w-md"
       >
         <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight leading-tight transition-colors ${isDark ? 'text-white/90' : 'text-gray-900'}`}>
           Revolutionizing water,
@@ -94,10 +94,10 @@ export default function Home() {
             to feed humanity, and save Earth
           </span>
         </h2>
-        <p className={`text-sm mt-3 leading-relaxed max-w-sm transition-colors ${isDark ? 'text-white/90' : 'text-gray-700'}`}>
+        <p className={`text-sm mt-2 leading-relaxed max-w-sm transition-colors ${isDark ? 'text-white/90' : 'text-gray-700'}`}>
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
-        <div className="flex flex-wrap gap-3 mt-6 mb-1 lg:mb-0">
+        <div className="flex flex-wrap gap-3 mt-3 mb-1 lg:mb-0">
           <Button 
             onClick={() => setSelectedPhase("R&D")}
             className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
