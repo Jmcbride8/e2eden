@@ -39,7 +39,7 @@ export default function TaskManager() {
 
   const { data: allTasks = [] } = useQuery({
     queryKey: ['tasks'],
-    queryFn: () => base44.entities.Task.list('-created_date'),
+    queryFn: () => base44.entities.Task.list('due_date'),
     enabled: !!currentUser,
   });
 
