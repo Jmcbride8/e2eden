@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, Edit, Trash2, Eye } from "lucide-react";
+import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -178,7 +178,8 @@ export default function CRM() {
                         key={lead.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="hover:bg-white/[0.02] transition-colors"
+                        className="hover:bg-white/[0.02] transition-colors cursor-pointer"
+                        onClick={() => handleView(lead)}
                       >
                         <td className="px-4 py-4">
                           <div className="text-white font-medium">{lead.name}</div>
@@ -193,7 +194,7 @@ export default function CRM() {
                             </Badge>
                           )}
                         </td>
-                        <td className="px-4 py-4">
+                        <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
                           {lead.email ? (
                             <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors">
                               {lead.email}
@@ -202,7 +203,7 @@ export default function CRM() {
                             <span className="text-sm text-white/40">-</span>
                           )}
                         </td>
-                        <td className="px-4 py-4">
+                        <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
                           {lead.website ? (
                             <a 
                               href={lead.website} 
@@ -229,16 +230,8 @@ export default function CRM() {
                             <span className="text-sm text-white/40">-</span>
                           )}
                         </td>
-                        <td className="px-4 py-4">
+                        <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
                           <div className="flex gap-1 justify-end">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                              onClick={() => handleView(lead)}
-                            >
-                              <Eye className="w-4 h-4" />
-                            </Button>
                             <Button
                               variant="ghost"
                               size="icon"
@@ -271,81 +264,76 @@ export default function CRM() {
                   key={lead.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white/[0.04] border border-white/10 rounded-xl p-4 backdrop-blur-sm"
+                  className="bg-white/[0.04] border border-white/10 rounded-xl backdrop-blur-sm overflow-hidden"
                 >
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="flex-1">
+                  <div className="p-4 cursor-pointer" onClick={() => handleView(lead)}>
+                    <div className="mb-3">
                       <h3 className="text-white font-medium text-lg">{lead.name}</h3>
                       {lead.company && (
                         <p className="text-sm text-white/50 mt-1">{lead.company}</p>
                       )}
                     </div>
-                    <div className="flex gap-1 ml-2">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                        onClick={() => handleView(lead)}
-                      >
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                        onClick={() => handleEdit(lead)}
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
-                        onClick={() => handleDelete(lead.id)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
+                    
+                    {lead.lead_type && (
+                      <div className="mb-3">
+                        <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border`}>
+                          {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
+                        </Badge>
+                      </div>
+                    )}
+                    
+                    <div className="space-y-2">
+                      {lead.email && (
+                        <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                          <Mail className="w-4 h-4 text-white/40" />
+                          <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors truncate">
+                            {lead.email}
+                          </a>
+                        </div>
+                      )}
+                      {lead.website && (
+                        <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                          <Globe className="w-4 h-4 text-white/40" />
+                          <a 
+                            href={lead.website} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-sm text-white/70 hover:text-amber-400 transition-colors truncate"
+                          >
+                            {lead.website.replace(/^https?:\/\//, '')}
+                          </a>
+                        </div>
+                      )}
+                      {lead.last_engaged && (
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-white/40" />
+                          <span className="text-sm text-white/60">
+                            {new Date(lead.last_engaged).toLocaleDateString()}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                   
-                  {lead.lead_type && (
-                    <div className="mb-3">
-                      <Badge className={`${leadTypeConfig[lead.lead_type]?.color || "bg-gray-500/20 text-gray-300 border-gray-500/30"} text-xs border`}>
-                        {leadTypeConfig[lead.lead_type]?.icon} {lead.lead_type}
-                      </Badge>
-                    </div>
-                  )}
-                  
-                  <div className="space-y-2">
-                    {lead.email && (
-                      <div className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-white/40" />
-                        <a href={`mailto:${lead.email}`} className="text-sm text-white/70 hover:text-amber-400 transition-colors truncate">
-                          {lead.email}
-                        </a>
-                      </div>
-                    )}
-                    {lead.website && (
-                      <div className="flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-white/40" />
-                        <a 
-                          href={lead.website} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="text-sm text-white/70 hover:text-amber-400 transition-colors truncate"
-                        >
-                          {lead.website.replace(/^https?:\/\//, '')}
-                        </a>
-                      </div>
-                    )}
-                    {lead.last_engaged && (
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-white/40" />
-                        <span className="text-sm text-white/60">
-                          {new Date(lead.last_engaged).toLocaleDateString()}
-                        </span>
-                      </div>
-                    )}
+                  <div className="flex gap-2 p-3 bg-white/[0.02] border-t border-white/5">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-1 text-white/70 hover:text-white hover:bg-white/10"
+                      onClick={() => handleEdit(lead)}
+                    >
+                      <Edit className="w-4 h-4 mr-2" />
+                      Edit
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-1 text-white/70 hover:text-red-400 hover:bg-red-500/10"
+                      onClick={() => handleDelete(lead.id)}
+                    >
+                      <Trash2 className="w-4 h-4 mr-2" />
+                      Delete
+                    </Button>
                   </div>
                 </motion.div>
               ))}
