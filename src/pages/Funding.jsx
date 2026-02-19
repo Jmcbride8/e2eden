@@ -141,9 +141,9 @@ export default function Funding() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
-                  className="group cursor-pointer"
+                  className="relative group cursor-pointer rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
                 >
-                  <div className="relative h-48 rounded-xl overflow-hidden mb-3">
+                  <div className="relative h-48">
                     {project.hero_image ? (
                       <img 
                         src={project.hero_image}
@@ -162,7 +162,7 @@ export default function Funding() {
                       <p className="text-white/70 text-xs mt-1">{project.location}</p>
                     </div>
                   </div>
-                  <div className="p-4 rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+                  <div className="p-4">
                     <p className="text-sm text-white/70 leading-relaxed mb-3 line-clamp-2">
                       {project.description}
                     </p>
@@ -210,44 +210,7 @@ export default function Funding() {
           </div>
         </motion.div>
 
-        {/* Why Invest Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10"
-        >
-          <h2 className="text-3xl font-bold text-white mb-6">Why Invest in E2Eden?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Award className="w-5 h-5 text-amber-400" />
-                <h3 className="text-lg font-semibold text-white">Proven Track Record</h3>
-              </div>
-              <p className="text-sm text-white/70 leading-relaxed">
-                8+ years of successful project implementation across challenging environments worldwide.
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <TrendingUp className="w-5 h-5 text-green-400" />
-                <h3 className="text-lg font-semibold text-white">Measurable Impact</h3>
-              </div>
-              <p className="text-sm text-white/70 leading-relaxed">
-                Every project includes clear KPIs, regular reporting, and third-party verification of outcomes.
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <DollarSign className="w-5 h-5 text-blue-400" />
-                <h3 className="text-lg font-semibold text-white">Sustainable Returns</h3>
-              </div>
-              <p className="text-sm text-white/70 leading-relaxed">
-                Infrastructure projects designed for long-term viability with multiple revenue streams.
-              </p>
-            </div>
-          </div>
-        </motion.div>
+
 
         {/* CTA */}
         <motion.div
