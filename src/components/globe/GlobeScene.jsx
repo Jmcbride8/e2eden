@@ -159,23 +159,27 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       canvas.width = 512;
       canvas.height = 200;
       
+      // Add year above project name in yellow
+      let yOffset = 50;
+      if (project.year) {
+        context.font = '28px Arial';
+        context.fillStyle = '#fbbf24'; // amber-400
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText(project.year, canvas.width / 2, 35);
+        yOffset = 70;
+      }
+      
       context.font = 'bold 48px Arial';
       context.fillStyle = 'white';
       context.textAlign = 'center';
       context.textBaseline = 'middle';
-      context.fillText(project.name, canvas.width / 2, 50);
+      context.fillText(project.name, canvas.width / 2, yOffset);
       
       // Add location below project name
       context.font = '32px Arial';
       context.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      context.fillText(project.location || '', canvas.width / 2, 100);
-      
-      // Add year below location
-      if (project.year) {
-        context.font = '28px Arial';
-        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
-        context.fillText(project.year, canvas.width / 2, 140);
-      }
+      context.fillText(project.location || '', canvas.width / 2, yOffset + 50);
       
       const texture = new THREE.CanvasTexture(canvas);
       const spriteMaterial = new THREE.SpriteMaterial({ 
