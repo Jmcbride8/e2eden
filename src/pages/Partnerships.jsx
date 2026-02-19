@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createPageUrl } from "../utils";
 import { base44 } from "@/api/base44Client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const partnershipTypes = [
   {
@@ -80,8 +81,9 @@ export default function Partnerships() {
   const [selectedPartner, setSelectedPartner] = React.useState(null);
   const [formData, setFormData] = React.useState({ name: "", email: "", company: "", message: "" });
   const [editingCategory, setEditingCategory] = React.useState(null);
+  const [editFormData, setEditFormData] = React.useState(null);
   const [isAdmin, setIsAdmin] = React.useState(false);
-  const [categories, setCategories] = React.useState(partnershipTypes);
+  const queryClient = useQueryClient();
 
   React.useEffect(() => {
     const checkAdmin = async () => {
@@ -90,6 +92,26 @@ export default function Partnerships() {
     };
     checkAdmin();
   }, []);
+
+  const { data: dbCategories = [] } = useQuery({
+    queryKey: ['partnershipCategories'],
+    queryFn: () => base44.entities.PartnershipCategory.list('sort_order'),
+  });
+
+  const updateCategoryMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.PartnershipCategory.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['partnershipCategories'] });
+      setEditingCategory(null);
+      setEditFormData(null);
+    },
+  });
+
+  const iconMap = {
+    Globe, Lightbulb, Users, DollarSign
+  };
+
+  const categories = dbCategories.length > 0 ? dbCategories : partnershipTypes;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -149,7 +171,13 @@ export default function Partnerships() {
                 <div className="relative">
                   {isAdmin && (
                     <button
-                      onClick={() => setEditingCategory(idx)}
+                      onClick={() => {
+                        setEditingCategory(idx);
+                        setEditFormData({
+                          description: type.description,
+                          partners: JSON.parse(JSON.stringify(type.partners || []))
+                        });
+                      }}
                       className="absolute top-0 right-0 p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
                     >
                       <Edit2 className="w-4 h-4" />
@@ -158,7 +186,7 @@ export default function Partnerships() {
                   <div className="mb-6">
                     <div className="flex items-start gap-4 mb-6">
                       <div className={`p-3 rounded-xl ${type.bg} border ${type.border}`}>
-                        <type.icon className={`w-6 h-6 ${type.color}`} />
+                        {React.createElement(iconMap[type.icon] || type.icon || Globe, { className: `w-6 h-6 ${type.color}` })}
                       </div>
                       <div className="flex-1">
                         <h3 className="text-white text-xl font-bold mb-2">{type.title}</h3>
@@ -278,72 +306,103 @@ export default function Partnerships() {
               className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
               <h3 className="text-xl font-bold text-white mb-4">Edit {categories[editingCategory]?.title}</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="text-sm text-white/70 mb-2 block">Description</label>
-                  <textarea
-                    defaultValue={categories[editingCategory]?.description}
-                    className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 h-20 resize-none"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm text-white/70 mb-2 block">Partners</label>
-                  <div className="space-y-3">
-                    {categories[editingCategory]?.partners?.map((partner, i) => (
-                      <div key={i} className="p-3 rounded bg-white/5 border border-white/10 relative">
-                        <button
-                          onClick={() => {
-                            const newCategories = [...categories];
-                            newCategories[editingCategory].partners.splice(i, 1);
-                            setCategories(newCategories);
-                          }}
-                          className="absolute top-2 right-2 p-1 rounded bg-red-500/20 hover:bg-red-500/30 text-red-400 transition-colors"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                        <div className="flex items-start gap-3 pr-8">
-                          <img src={partner.image} alt={partner.name} className="w-16 h-16 rounded object-cover" />
-                          <div className="flex-1">
-                            <input
-                              type="text"
-                              defaultValue={partner.name}
-                              placeholder="Partner name"
-                              className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm mb-1"
-                            />
-                            <input
-                              type="text"
-                              defaultValue={partner.focus}
-                              placeholder="Focus area"
-                              className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm mb-1"
-                            />
-                            <input
-                              type="text"
-                              defaultValue={partner.image}
-                              placeholder="Image URL"
-                              className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm"
-                            />
+              {editFormData && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm text-white/70 mb-2 block">Description</label>
+                    <textarea
+                      value={editFormData.description}
+                      onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
+                      className="w-full px-3 py-2 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 h-20 resize-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-white/70 mb-2 block">Partners</label>
+                    <div className="space-y-3">
+                      {editFormData.partners?.map((partner, i) => (
+                        <div key={i} className="p-3 rounded bg-white/5 border border-white/10 relative">
+                          <button
+                            onClick={() => {
+                              const newPartners = [...editFormData.partners];
+                              newPartners.splice(i, 1);
+                              setEditFormData({ ...editFormData, partners: newPartners });
+                            }}
+                            className="absolute top-2 right-2 p-1 rounded bg-red-500/20 hover:bg-red-500/30 text-red-400 transition-colors"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                          <div className="flex items-start gap-3 pr-8">
+                            <img src={partner.image} alt={partner.name} className="w-16 h-16 rounded object-cover" />
+                            <div className="flex-1">
+                              <input
+                                type="text"
+                                value={partner.name}
+                                onChange={(e) => {
+                                  const newPartners = [...editFormData.partners];
+                                  newPartners[i].name = e.target.value;
+                                  setEditFormData({ ...editFormData, partners: newPartners });
+                                }}
+                                placeholder="Partner name"
+                                className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm mb-1"
+                              />
+                              <input
+                                type="text"
+                                value={partner.focus}
+                                onChange={(e) => {
+                                  const newPartners = [...editFormData.partners];
+                                  newPartners[i].focus = e.target.value;
+                                  setEditFormData({ ...editFormData, partners: newPartners });
+                                }}
+                                placeholder="Focus area"
+                                className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm mb-1"
+                              />
+                              <input
+                                type="text"
+                                value={partner.image}
+                                onChange={(e) => {
+                                  const newPartners = [...editFormData.partners];
+                                  newPartners[i].image = e.target.value;
+                                  setEditFormData({ ...editFormData, partners: newPartners });
+                                }}
+                                placeholder="Image URL"
+                                className="w-full px-2 py-1 rounded bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 text-sm"
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex gap-2 pt-4">
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        setEditingCategory(null);
+                        setEditFormData(null);
+                      }}
+                      className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        const category = categories[editingCategory];
+                        if (category.id) {
+                          updateCategoryMutation.mutate({
+                            id: category.id,
+                            data: editFormData
+                          });
+                        }
+                      }}
+                      className="flex-1 bg-amber-500 hover:bg-amber-600 text-white"
+                      disabled={updateCategoryMutation.isPending}
+                    >
+                      {updateCategoryMutation.isPending ? "Saving..." : "Save Changes"}
+                    </Button>
                   </div>
                 </div>
-                <div className="flex gap-2 pt-4">
-                  <Button
-                    type="button"
-                    onClick={() => setEditingCategory(null)}
-                    className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20"
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => setEditingCategory(null)}
-                    className="flex-1 bg-amber-500 hover:bg-amber-600 text-white"
-                  >
-                    Save Changes
-                  </Button>
-                </div>
-              </div>
+              )}
+            </div>
             </motion.div>
           </motion.div>
         )}
