@@ -97,7 +97,7 @@ export default function Home() {
         <p className={`text-sm mt-3 leading-relaxed max-w-sm transition-colors ${isDark ? 'text-white/90' : 'text-gray-700'}`}>
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
-        <div className="flex flex-wrap gap-3 mt-6">
+        <div className="flex flex-wrap gap-3 mt-6 mb-4 lg:mb-0">
           <Button 
             onClick={() => setSelectedPhase("R&D")}
             className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
@@ -172,8 +172,8 @@ export default function Home() {
 
       {/* Mobile Project List - Below Globe */}
       <div className="lg:hidden absolute bottom-0 left-0 right-0 z-20">
-        <div className="px-6 pb-6">
-          <div className="flex gap-3 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
+        <div className="px-6 pb-4">
+          <div className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
             {projects.map((project, idx) => (
               <motion.div
                 key={project.id}
@@ -181,7 +181,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
                 onClick={() => handleSelectProject(project)}
-                className="relative flex-shrink-0 w-48 h-32 rounded-xl overflow-hidden cursor-pointer group"
+                className="relative flex-shrink-0 w-36 h-24 rounded-lg overflow-hidden cursor-pointer group"
               >
                 {project.hero_image ? (
                   <img 
@@ -194,11 +194,11 @@ export default function Home() {
                   <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <h3 className="text-white font-semibold text-sm leading-tight drop-shadow-lg line-clamp-2">
+                <div className="absolute bottom-0 left-0 right-0 p-2">
+                  <h3 className="text-white font-semibold text-xs leading-tight drop-shadow-lg line-clamp-2">
                     {project.name}
                   </h3>
-                  <p className="text-white/70 text-xs mt-0.5">{project.location}</p>
+                  <p className="text-white/70 text-[10px] mt-0.5">{project.location}</p>
                 </div>
               </motion.div>
             ))}
