@@ -157,29 +157,34 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       canvas.width = 512;
-      canvas.height = 200;
+      canvas.height = 220;
       
-      // Add year above project name in yellow
-      let yOffset = 50;
+      let currentY = 30;
+      
+      // 1. Add year at top in yellow
       if (project.year) {
-        context.font = '28px Arial';
+        context.font = '30px Arial';
         context.fillStyle = '#fbbf24'; // amber-400
         context.textAlign = 'center';
-        context.textBaseline = 'middle';
-        context.fillText(project.year, canvas.width / 2, 35);
-        yOffset = 70;
+        context.textBaseline = 'top';
+        context.fillText(project.year, canvas.width / 2, currentY);
+        currentY += 45;
       }
       
-      context.font = 'bold 48px Arial';
+      // 2. Add project name (bold, prominent)
+      context.font = 'bold 52px Arial';
       context.fillStyle = 'white';
       context.textAlign = 'center';
-      context.textBaseline = 'middle';
-      context.fillText(project.name, canvas.width / 2, yOffset);
+      context.textBaseline = 'top';
+      context.fillText(project.name, canvas.width / 2, currentY);
+      currentY += 65;
       
-      // Add location below project name
-      context.font = '32px Arial';
+      // 3. Add location below
+      context.font = '34px Arial';
       context.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      context.fillText(project.location || '', canvas.width / 2, yOffset + 50);
+      context.textAlign = 'center';
+      context.textBaseline = 'top';
+      context.fillText(project.location || '', canvas.width / 2, currentY);
       
       const texture = new THREE.CanvasTexture(canvas);
       const spriteMaterial = new THREE.SpriteMaterial({ 
@@ -191,7 +196,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       
       const labelPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.35);
       sprite.position.copy(labelPos);
-      sprite.scale.set(0.8, 0.3, 1);
+      sprite.scale.set(0.85, 0.35, 1);
       sprite.userData = { project };
       globeGroup.add(sprite);
 
