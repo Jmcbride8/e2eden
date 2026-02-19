@@ -157,7 +157,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       const canvas = document.createElement('canvas');
       const context = canvas.getContext('2d');
       canvas.width = 512;
-      canvas.height = 160;
+      canvas.height = 200;
       
       context.font = 'bold 48px Arial';
       context.fillStyle = 'white';
@@ -170,6 +170,13 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       context.fillStyle = 'rgba(255, 255, 255, 0.7)';
       context.fillText(project.location || '', canvas.width / 2, 100);
       
+      // Add year below location
+      if (project.year) {
+        context.font = '28px Arial';
+        context.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        context.fillText(project.year, canvas.width / 2, 140);
+      }
+      
       const texture = new THREE.CanvasTexture(canvas);
       const spriteMaterial = new THREE.SpriteMaterial({ 
         map: texture,
@@ -180,12 +187,12 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       
       const labelPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.35);
       sprite.position.copy(labelPos);
-      sprite.scale.set(0.8, 0.25, 1);
+      sprite.scale.set(0.8, 0.3, 1);
       sprite.userData = { project };
       globeGroup.add(sprite);
 
       // Add line from marker to bottom center of label
-      const lineEndPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.225);
+      const lineEndPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.2);
       const lineMaterial = new THREE.LineBasicMaterial({ 
         color: 0xffffff, 
         transparent: true, 
