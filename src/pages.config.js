@@ -55,9 +55,9 @@ import Partnerships from './pages/Partnerships';
 import Profile from './pages/Profile';
 import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
+import TaskManager from './pages/TaskManager';
 import Technology from './pages/Technology';
 import UserManagement from './pages/UserManagement';
-import TaskManager from './pages/TaskManager';
 import __Layout from './Layout.jsx';
 
 
@@ -70,9 +70,9 @@ export const PAGES = {
     "Profile": Profile,
     "Projects": Projects,
     "Roadmap": Roadmap,
+    "TaskManager": TaskManager,
     "Technology": Technology,
     "UserManagement": UserManagement,
-    "TaskManager": TaskManager,
 }
 
 export const pagesConfig = {

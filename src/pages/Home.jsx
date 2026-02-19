@@ -292,7 +292,7 @@ export default function Home() {
       {/* Story Content Section */}
       <div className={`relative z-10 ${isDark ? 'bg-black' : 'bg-white'} transition-colors duration-700`}>
         {/* 1. Running Out of Water */}
-        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section className={`py-24 px-6 sm:px-12 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`}>
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
