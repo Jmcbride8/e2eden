@@ -212,7 +212,7 @@ export default function Home() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="hidden lg:flex absolute right-6 top-32 bottom-6 w-80 flex-col z-20"
+        className="hidden lg:flex absolute right-6 top-24 bottom-6 w-80 flex-col z-20"
       >
         {/* Up Arrow */}
         <Button
