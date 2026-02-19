@@ -402,7 +402,6 @@ export default function Partnerships() {
                   </div>
                 </div>
               )}
-            </div>
             </motion.div>
           </motion.div>
         )}
