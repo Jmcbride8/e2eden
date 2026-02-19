@@ -284,76 +284,7 @@ export default function Home() {
       <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] from-black to-transparent" />
       </div>
 
-      {/* Partnership Brands Section */}
-      <section className="relative z-10 py-16 px-6 sm:px-12 bg-black border-t border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <p className="text-sm uppercase tracking-wider text-white/40 mb-8">Trusted by Leading Organizations</p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center"
-          >
-            {partnerBrands.map((brand, idx) => (
-              <motion.div
-                key={brand.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
-                className="relative flex flex-col items-center justify-center p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all"
-              >
-                <img 
-                  src={brand.logo_url} 
-                  alt={brand.name}
-                  className="w-full h-12 object-contain opacity-60 hover:opacity-80 transition-opacity"
-                />
-                {isAdmin && (
-                  <label className="mt-3 cursor-pointer">
-                    <input
-                      type="file"
-                      accept="image/png,image/jpeg,image/jpg"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) handleLogoUpload(brand.id, file);
-                      }}
-                      disabled={uploadingBrand === brand.id}
-                    />
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      className="text-xs bg-white/5 hover:bg-white/10 text-white border-white/20"
-                      disabled={uploadingBrand === brand.id}
-                      asChild
-                    >
-                      <span>
-                        {uploadingBrand === brand.id ? (
-                          "Uploading..."
-                        ) : (
-                          <>
-                            <Upload className="w-3 h-3 mr-1" />
-                            Upload
-                          </>
-                        )}
-                      </span>
-                    </Button>
-                  </label>
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+
 
       {/* Story Content Section */}
       <div className="relative z-10 bg-black">
