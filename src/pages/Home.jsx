@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronUp, ChevronDown, Pause, Play } from "lucide-react";
+import { ChevronUp, ChevronDown, Pause, Play, Upload } from "lucide-react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import ProjectModal from "../components/globe/ProjectModal";
@@ -14,12 +14,47 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState("R&D");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [uploadingBrand, setUploadingBrand] = useState(null);
   const scrollRef = useRef(null);
+  const queryClient = useQueryClient();
 
   const { data: allProjects = [] } = useQuery({
     queryKey: ['projects'],
     queryFn: () => base44.entities.Project.list('sort_order'),
   });
+
+  const { data: partnerBrands = [] } = useQuery({
+    queryKey: ['partnerBrands'],
+    queryFn: () => base44.entities.PartnerBrand.list('sort_order'),
+  });
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const user = await base44.auth.me();
+      setIsAdmin(user?.role === 'admin');
+    };
+    checkAdmin();
+  }, []);
+
+  const updateBrandMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.PartnerBrand.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['partnerBrands'] });
+      setUploadingBrand(null);
+    },
+  });
+
+  const handleLogoUpload = async (brandId, file) => {
+    setUploadingBrand(brandId);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      updateBrandMutation.mutate({ id: brandId, data: { logo_url: file_url } });
+    } catch (error) {
+      console.error('Upload failed:', error);
+      setUploadingBrand(null);
+    }
+  };
 
   const projects = allProjects.filter(project => 
     project.phase === selectedPhase
@@ -288,25 +323,39 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center"
           >
-            {[
-              { name: "Seawater Greenhouse", logo: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d53d21e9c_Seawater_Greenhouse_Logo_2024.png" },
-              { name: "Partner 2", logo: "https://via.placeholder.com/200x80/1a1a1a/666666?text=Partner+2" },
-              { name: "Partner 3", logo: "https://via.placeholder.com/200x80/1a1a1a/666666?text=Partner+3" },
-              { name: "Partner 4", logo: "https://via.placeholder.com/200x80/1a1a1a/666666?text=Partner+4" }
-            ].map((partner, idx) => (
+            {partnerBrands.map((brand, idx) => (
               <motion.div
-                key={idx}
+                key={brand.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
-                className="flex items-center justify-center p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all"
+                className="relative flex items-center justify-center p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all group"
               >
                 <img 
-                  src={partner.logo} 
-                  alt={partner.name}
+                  src={brand.logo_url} 
+                  alt={brand.name}
                   className="w-full h-12 object-contain opacity-60 hover:opacity-80 transition-opacity"
                 />
+                {isAdmin && (
+                  <label className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/jpg"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleLogoUpload(brand.id, file);
+                      }}
+                      disabled={uploadingBrand === brand.id}
+                    />
+                    {uploadingBrand === brand.id ? (
+                      <span className="text-white text-sm">Uploading...</span>
+                    ) : (
+                      <Upload className="w-6 h-6 text-white" />
+                    )}
+                  </label>
+                )}
               </motion.div>
             ))}
           </motion.div>
