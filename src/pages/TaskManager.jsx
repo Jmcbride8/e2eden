@@ -234,10 +234,10 @@ export default function TaskManager() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button type="button" variant="outline" onClick={() => setShowForm(false)} className="flex-1 border-white/20 text-white hover:bg-white/10">
+                  <Button type="button" onClick={() => setShowForm(false)} className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20">
                     Cancel
                   </Button>
-                  <Button type="submit" className="flex-1 bg-amber-500 hover:bg-amber-600">
+                  <Button type="submit" className="flex-1 bg-amber-500 hover:bg-amber-600 text-white">
                     Create Task
                   </Button>
                 </div>

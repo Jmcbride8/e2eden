@@ -164,20 +164,19 @@ export default function UserManagement() {
                           <Button
                             size="sm"
                             onClick={() => handleSaveCompany(user.id)}
-                            className="bg-green-500 hover:bg-green-600"
+                            className="bg-green-500 hover:bg-green-600 text-white"
                           >
                             <Save className="w-3 h-3 mr-1" />
                             Save
                           </Button>
                           <Button
                             size="sm"
-                            variant="outline"
                             onClick={() => {
                               const newEditing = { ...editingCompanies };
                               delete newEditing[user.id];
                               setEditingCompanies(newEditing);
                             }}
-                            className="border-white/20 text-white hover:bg-white/10"
+                            className="bg-white/10 hover:bg-white/20 text-white border border-white/20"
                           >
                             Cancel
                           </Button>
@@ -185,9 +184,8 @@ export default function UserManagement() {
                       ) : (
                         <Button
                           size="sm"
-                          variant="outline"
                           onClick={() => handleCompanyChange(user.id, user.company || "E2Eden")}
-                          className="border-white/20 text-white hover:bg-white/10"
+                          className="bg-white/10 hover:bg-white/20 text-white border border-white/20"
                         >
                           Edit
                         </Button>
