@@ -8,7 +8,7 @@ import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
-import MobileNav from "../components/navigation/MobileNav";
+
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -85,27 +85,7 @@ export default function Home() {
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8 pr-20 sm:pr-24">
-        <div className="flex items-center justify-end">
-          <div className="flex items-center gap-2">
-            <nav className="hidden sm:flex items-center gap-1">
-              <Link to={createPageUrl("Technology")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
-                Technology
-              </Link>
-              <Link to={createPageUrl("Roadmap")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
-                Roadmap
-              </Link>
-              <Link to={createPageUrl("Funding")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
-                Funding
-              </Link>
-              <Link to={createPageUrl("Partnerships")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
-                Partnerships
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </div>
+
 
       {/* Subtitle */}
       <motion.div
@@ -612,9 +592,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-
-      {/* Mobile Bottom Navigation */}
-      <MobileNav />
     </div>
   );
 }
