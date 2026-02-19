@@ -489,7 +489,7 @@ export default function Home() {
         </section>
 
         {/* 6. Change the World */}
-        <section className={`py-32 px-6 sm:px-12 ${isDark ? 'bg-gradient-to-b from-black via-amber-950/20 to-black' : 'bg-gradient-to-b from-white via-amber-50 to-white'}`}>
+        <section className={`py-32 px-6 sm:px-12 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
           <div className="max-w-5xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
