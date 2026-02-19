@@ -137,144 +137,272 @@ export default function Conferences() {
             <p className="text-white/40">No conferences scheduled yet</p>
           </div>
         ) : (
-          <div className="bg-white/[0.04] border border-white/10 backdrop-blur-sm rounded-lg overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="border-white/10 hover:bg-white/[0.02]">
-                  <TableHead className="text-white/80 font-semibold">Conference</TableHead>
-                  <TableHead className="text-white/80 font-semibold">Dates</TableHead>
-                  <TableHead className="text-white/80 font-semibold">Location</TableHead>
-                  <TableHead className="text-white/80 font-semibold">Cost</TableHead>
-                  <TableHead className="text-white/80 font-semibold">Attendance</TableHead>
-                  <TableHead className="text-white/80 font-semibold">Actions</TableHead>
-                  {isAdmin && <TableHead className="text-white/80 font-semibold">Admin</TableHead>}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {conferences.map((conference) => {
-                  const userAttendance = getUserAttendance(conference.id);
-                  const counts = getAttendanceCounts(conference.id);
-                  const isPast = new Date(conference.start_date) < new Date();
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white/[0.04] border border-white/10 backdrop-blur-sm rounded-lg overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-white/10 hover:bg-white/[0.02]">
+                    <TableHead className="text-white/80 font-semibold">Conference</TableHead>
+                    <TableHead className="text-white/80 font-semibold">Dates</TableHead>
+                    <TableHead className="text-white/80 font-semibold">Location</TableHead>
+                    <TableHead className="text-white/80 font-semibold">Cost</TableHead>
+                    <TableHead className="text-white/80 font-semibold">Attendance</TableHead>
+                    <TableHead className="text-white/80 font-semibold">Actions</TableHead>
+                    {isAdmin && <TableHead className="text-white/80 font-semibold">Admin</TableHead>}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {conferences.map((conference) => {
+                    const userAttendance = getUserAttendance(conference.id);
+                    const counts = getAttendanceCounts(conference.id);
+                    const isPast = new Date(conference.start_date) < new Date();
 
-                  return (
-                    <TableRow key={conference.id} className={`border-white/10 hover:bg-white/[0.02] ${isPast ? 'opacity-60' : ''}`}>
-                      <TableCell className="font-medium">
-                        <div>
-                          <div className="text-white mb-1">{conference.name}</div>
-                          {conference.link && (
-                            <a 
-                              href={conference.link} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1"
-                            >
-                              <ExternalLink className="w-3 h-3" />
-                              Event Link
-                            </a>
+                    return (
+                      <TableRow key={conference.id} className={`border-white/10 hover:bg-white/[0.02] ${isPast ? 'opacity-60' : ''}`}>
+                        <TableCell className="font-medium">
+                          <div>
+                            <div className="text-white mb-1">{conference.name}</div>
+                            {conference.link && (
+                              <a 
+                                href={conference.link} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                              >
+                                <ExternalLink className="w-3 h-3" />
+                                Event Link
+                              </a>
+                            )}
+                            {conference.description && (
+                              <p className="text-xs text-white/50 mt-1 max-w-xs">{conference.description}</p>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-white/70">
+                          <div className="text-sm">
+                            {format(new Date(conference.start_date), 'MMM d, yyyy')}
+                            {conference.end_date && conference.end_date !== conference.start_date && (
+                              <div className="text-xs text-white/50">to {format(new Date(conference.end_date), 'MMM d, yyyy')}</div>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-white/70 text-sm">{conference.location}</TableCell>
+                        <TableCell className="text-white/70 text-sm">
+                          {conference.cost === 0 ? 'Free' : `$${conference.cost}`}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-3 text-xs text-white/60">
+                            <span className="flex items-center gap-1">
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              {counts.attending}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <HelpCircle className="w-3 h-3 text-amber-400" />
+                              {counts.maybe}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          {user && !isPast && (
+                            <TooltipProvider>
+                              <div className="flex gap-1">
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      size="sm"
+                                      onClick={() => attendanceMutation.mutate({ 
+                                        conferenceId: conference.id, 
+                                        status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
+                                      })}
+                                      className={userAttendance?.status === 'attending' 
+                                        ? 'bg-emerald-500 hover:bg-emerald-600 text-white h-8 px-2 text-xs' 
+                                        : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
+                                    >
+                                      <Check className="w-3 h-3" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>{userAttendance?.status === 'attending' ? 'Remove attendance' : 'Mark as attending'}</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      size="sm"
+                                      onClick={() => attendanceMutation.mutate({ 
+                                        conferenceId: conference.id, 
+                                        status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
+                                      })}
+                                      className={userAttendance?.status === 'maybe' 
+                                        ? 'bg-amber-500 hover:bg-amber-600 text-white h-8 px-2 text-xs' 
+                                        : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
+                                    >
+                                      <HelpCircle className="w-3 h-3" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>{userAttendance?.status === 'maybe' ? 'Remove maybe' : 'Mark as maybe'}</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </div>
+                            </TooltipProvider>
                           )}
-                          {conference.description && (
-                            <p className="text-xs text-white/50 mt-1 max-w-xs">{conference.description}</p>
-                          )}
+                        </TableCell>
+                        {isAdmin && (
+                          <TableCell>
+                            <div className="flex gap-1">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                                onClick={() => handleEdit(conference)}
+                              >
+                                <Edit className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
+                                onClick={() => handleDelete(conference.id)}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        )}
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4">
+              {conferences.map((conference) => {
+                const userAttendance = getUserAttendance(conference.id);
+                const counts = getAttendanceCounts(conference.id);
+                const isPast = new Date(conference.start_date) < new Date();
+
+                return (
+                  <motion.div
+                    key={conference.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`bg-white/[0.04] border border-white/10 rounded-xl backdrop-blur-sm overflow-hidden ${isPast ? 'opacity-60' : ''}`}
+                  >
+                    <div className="p-4">
+                      <h3 className="text-white font-semibold text-lg mb-2">{conference.name}</h3>
+                      
+                      {conference.link && (
+                        <a 
+                          href={conference.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 mb-3"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          Event Link
+                        </a>
+                      )}
+                      
+                      {conference.description && (
+                        <p className="text-sm text-white/60 mb-3">{conference.description}</p>
+                      )}
+                      
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center gap-2 text-sm text-white/70">
+                          <Calendar className="w-4 h-4 text-white/40" />
+                          <span>
+                            {format(new Date(conference.start_date), 'MMM d, yyyy')}
+                            {conference.end_date && conference.end_date !== conference.start_date && (
+                              <span className="text-white/50"> - {format(new Date(conference.end_date), 'MMM d, yyyy')}</span>
+                            )}
+                          </span>
                         </div>
-                      </TableCell>
-                      <TableCell className="text-white/70">
-                        <div className="text-sm">
-                          {format(new Date(conference.start_date), 'MMM d, yyyy')}
-                          {conference.end_date && conference.end_date !== conference.start_date && (
-                            <div className="text-xs text-white/50">to {format(new Date(conference.end_date), 'MMM d, yyyy')}</div>
-                          )}
+                        
+                        <div className="flex items-center gap-2 text-sm text-white/70">
+                          <MapPin className="w-4 h-4 text-white/40" />
+                          <span>{conference.location}</span>
                         </div>
-                      </TableCell>
-                      <TableCell className="text-white/70 text-sm">{conference.location}</TableCell>
-                      <TableCell className="text-white/70 text-sm">
-                        {conference.cost === 0 ? 'Free' : `$${conference.cost}`}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex gap-3 text-xs text-white/60">
+                        
+                        <div className="flex items-center gap-2 text-sm text-white/70">
+                          <DollarSign className="w-4 h-4 text-white/40" />
+                          <span>{conference.cost === 0 ? 'Free' : `$${conference.cost}`}</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-4 text-xs text-white/60">
                           <span className="flex items-center gap-1">
                             <Check className="w-3 h-3 text-emerald-400" />
-                            {counts.attending}
+                            {counts.attending} attending
                           </span>
                           <span className="flex items-center gap-1">
                             <HelpCircle className="w-3 h-3 text-amber-400" />
-                            {counts.maybe}
+                            {counts.maybe} maybe
                           </span>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        {user && !isPast && (
-                          <TooltipProvider>
-                            <div className="flex gap-1">
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    size="sm"
-                                    onClick={() => attendanceMutation.mutate({ 
-                                      conferenceId: conference.id, 
-                                      status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
-                                    })}
-                                    className={userAttendance?.status === 'attending' 
-                                      ? 'bg-emerald-500 hover:bg-emerald-600 text-white h-8 px-2 text-xs' 
-                                      : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
-                                  >
-                                    <Check className="w-3 h-3" />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p>{userAttendance?.status === 'attending' ? 'Remove attendance' : 'Mark as attending'}</p>
-                                </TooltipContent>
-                              </Tooltip>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    size="sm"
-                                    onClick={() => attendanceMutation.mutate({ 
-                                      conferenceId: conference.id, 
-                                      status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
-                                    })}
-                                    className={userAttendance?.status === 'maybe' 
-                                      ? 'bg-amber-500 hover:bg-amber-600 text-white h-8 px-2 text-xs' 
-                                      : 'bg-white/5 border border-white/10 text-white hover:bg-white/10 h-8 px-2 text-xs'}
-                                  >
-                                    <HelpCircle className="w-3 h-3" />
-                                  </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p>{userAttendance?.status === 'maybe' ? 'Remove maybe' : 'Mark as maybe'}</p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </div>
-                          </TooltipProvider>
-                        )}
-                      </TableCell>
-                      {isAdmin && (
-                        <TableCell>
-                          <div className="flex gap-1">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
-                              onClick={() => handleEdit(conference)}
-                            >
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8 text-white/40 hover:text-red-400 hover:bg-red-500/10"
-                              onClick={() => handleDelete(conference.id)}
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
+                      </div>
+                      
+                      {user && !isPast && (
+                        <div className="flex gap-2 pb-3">
+                          <Button
+                            size="sm"
+                            onClick={() => attendanceMutation.mutate({ 
+                              conferenceId: conference.id, 
+                              status: userAttendance?.status === 'attending' ? 'not_attending' : 'attending' 
+                            })}
+                            className={userAttendance?.status === 'attending' 
+                              ? 'flex-1 bg-emerald-500 hover:bg-emerald-600 text-white' 
+                              : 'flex-1 bg-white/5 border border-white/10 text-white hover:bg-white/10'}
+                          >
+                            <Check className="w-4 h-4 mr-2" />
+                            {userAttendance?.status === 'attending' ? 'Attending' : 'Attend'}
+                          </Button>
+                          <Button
+                            size="sm"
+                            onClick={() => attendanceMutation.mutate({ 
+                              conferenceId: conference.id, 
+                              status: userAttendance?.status === 'maybe' ? 'not_attending' : 'maybe' 
+                            })}
+                            className={userAttendance?.status === 'maybe' 
+                              ? 'flex-1 bg-amber-500 hover:bg-amber-600 text-white' 
+                              : 'flex-1 bg-white/5 border border-white/10 text-white hover:bg-white/10'}
+                          >
+                            <HelpCircle className="w-4 h-4 mr-2" />
+                            {userAttendance?.status === 'maybe' ? 'Maybe' : 'Maybe'}
+                          </Button>
+                        </div>
                       )}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </div>
+                    </div>
+                    
+                    {isAdmin && (
+                      <div className="flex gap-2 p-3 bg-white/[0.02] border-t border-white/5">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="flex-1 text-white/70 hover:text-white hover:bg-white/10"
+                          onClick={() => handleEdit(conference)}
+                        >
+                          <Edit className="w-4 h-4 mr-2" />
+                          Edit
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="flex-1 text-white/70 hover:text-red-400 hover:bg-red-500/10"
+                          onClick={() => handleDelete(conference.id)}
+                        >
+                          <Trash2 className="w-4 h-4 mr-2" />
+                          Delete
+                        </Button>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+          </>
         )}
       </div>
 
