@@ -330,7 +330,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
-                className="relative flex items-center justify-center p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all group"
+                className="relative flex flex-col items-center justify-center p-6 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] hover:border-white/10 transition-all"
               >
                 <img 
                   src={brand.logo_url} 
@@ -338,7 +338,7 @@ export default function Home() {
                   className="w-full h-12 object-contain opacity-60 hover:opacity-80 transition-opacity"
                 />
                 {isAdmin && (
-                  <label className="absolute inset-0 flex items-center justify-center bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                  <label className="mt-3 cursor-pointer">
                     <input
                       type="file"
                       accept="image/png,image/jpeg,image/jpg"
@@ -349,11 +349,24 @@ export default function Home() {
                       }}
                       disabled={uploadingBrand === brand.id}
                     />
-                    {uploadingBrand === brand.id ? (
-                      <span className="text-white text-sm">Uploading...</span>
-                    ) : (
-                      <Upload className="w-6 h-6 text-white" />
-                    )}
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="text-xs bg-white/5 hover:bg-white/10 text-white border-white/20"
+                      disabled={uploadingBrand === brand.id}
+                      asChild
+                    >
+                      <span>
+                        {uploadingBrand === brand.id ? (
+                          "Uploading..."
+                        ) : (
+                          <>
+                            <Upload className="w-3 h-3 mr-1" />
+                            Upload
+                          </>
+                        )}
+                      </span>
+                    </Button>
                   </label>
                 )}
               </motion.div>
