@@ -163,12 +163,12 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       
       // 1. Add year at top in yellow
       if (project.year) {
-        context.font = '30px Arial';
+        context.font = 'bold 36px Arial';
         context.fillStyle = '#fbbf24'; // amber-400
         context.textAlign = 'center';
         context.textBaseline = 'top';
         context.fillText(project.year, canvas.width / 2, currentY);
-        currentY += 45;
+        currentY += 48;
       }
       
       // 2. Add project name (bold, prominent)
