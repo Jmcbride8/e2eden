@@ -50,6 +50,7 @@
 import CRM from './pages/CRM';
 import Conferences from './pages/Conferences';
 import Funding from './pages/Funding';
+import Home from './pages/Home';
 import Partnerships from './pages/Partnerships';
 import Profile from './pages/Profile';
 import Projects from './pages/Projects';
@@ -57,7 +58,6 @@ import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
 import Technology from './pages/Technology';
 import UserManagement from './pages/UserManagement';
-import Home from './pages/Home';
 import __Layout from './Layout.jsx';
 
 
@@ -65,6 +65,7 @@ export const PAGES = {
     "CRM": CRM,
     "Conferences": Conferences,
     "Funding": Funding,
+    "Home": Home,
     "Partnerships": Partnerships,
     "Profile": Profile,
     "Projects": Projects,
@@ -72,7 +73,6 @@ export const PAGES = {
     "TaskManager": TaskManager,
     "Technology": Technology,
     "UserManagement": UserManagement,
-    "Home": Home,
 }
 
 export const pagesConfig = {
