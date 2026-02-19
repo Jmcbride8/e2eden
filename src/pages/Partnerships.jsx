@@ -228,46 +228,7 @@ export default function Partnerships() {
           </div>
         </motion.div>
 
-        {/* Why Partner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
-        >
-          <Card className="bg-gradient-to-br from-white/[0.08] to-white/[0.02] border-white/10 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-white text-2xl">Why Partner with E2Eden?</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {whyPartner.map((reason, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                    <span className="text-white/70">{reason}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
 
-        {/* Current Partners */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mb-16"
-        >
-          <h2 className="text-2xl font-bold text-white mb-6">Our Partners</h2>
-          <Card className="bg-white/[0.04] border-white/10 backdrop-blur-sm">
-            <CardContent className="py-12">
-              <p className="text-white/40 text-center text-sm">
-                Partner logos and testimonials coming soon
-              </p>
-            </CardContent>
-          </Card>
-        </motion.div>
 
         {/* Call to Action */}
         <motion.div
