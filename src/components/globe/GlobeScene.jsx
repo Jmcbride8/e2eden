@@ -165,10 +165,10 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       context.textBaseline = 'middle';
       context.fillText(project.name, canvas.width / 2, 50);
       
-      // Add region below project name
+      // Add location below project name
       context.font = '32px Arial';
       context.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      context.fillText(project.region || '', canvas.width / 2, 100);
+      context.fillText(project.location || '', canvas.width / 2, 100);
       
       const texture = new THREE.CanvasTexture(canvas);
       const spriteMaterial = new THREE.SpriteMaterial({ 
