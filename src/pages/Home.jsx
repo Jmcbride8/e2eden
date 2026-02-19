@@ -45,27 +45,27 @@ export default function Home() {
   };
 
   return (
-    <div className={`relative w-full min-h-screen transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`}>
+    <div className={`relative w-full min-h-screen transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gray-100'}`}>
       {/* Globe Section */}
       <div className="relative w-full h-screen overflow-hidden">
       {/* Backdrop */}
-      <div className={`absolute inset-0 transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50'}`} />
+      <div className={`absolute inset-0 transition-colors duration-700 ${isDark ? 'bg-black' : 'bg-gray-100'}`} />
 
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 z-10 p-6 sm:p-8 pr-20 sm:pr-24">
         <div className="flex items-center justify-end">
           <div className="flex items-center gap-2">
             <nav className="hidden sm:flex items-center gap-1">
-              <Link to={createPageUrl("Technology")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
+              <Link to={createPageUrl("Technology")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'bg-white/80 text-gray-900 hover:bg-white shadow-sm'}`}>
                 Technology
               </Link>
-              <Link to={createPageUrl("Roadmap")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
+              <Link to={createPageUrl("Roadmap")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'bg-white/80 text-gray-900 hover:bg-white shadow-sm'}`}>
                 Roadmap
               </Link>
-              <Link to={createPageUrl("Funding")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
+              <Link to={createPageUrl("Funding")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'bg-white/80 text-gray-900 hover:bg-white shadow-sm'}`}>
                 Funding
               </Link>
-              <Link to={createPageUrl("Partnerships")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-200/50'}`}>
+              <Link to={createPageUrl("Partnerships")} className={`px-4 py-2 text-sm rounded-lg transition-all ${isDark ? 'text-white/70 hover:text-white hover:bg-white/10' : 'bg-white/80 text-gray-900 hover:bg-white shadow-sm'}`}>
                 Partnerships
               </Link>
             </nav>
@@ -73,7 +73,7 @@ export default function Home() {
               variant="ghost"
               size="icon"
               onClick={() => setIsDark(!isDark)}
-              className={`rounded-full transition-colors ${isDark ? 'text-amber-400 hover:bg-white/10' : 'text-blue-600 hover:bg-gray-200/50'}`}
+              className={`rounded-full transition-colors ${isDark ? 'text-amber-400 hover:bg-white/10' : 'bg-white/80 text-blue-600 hover:bg-white shadow-sm'}`}
             >
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </Button>
@@ -287,7 +287,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Bottom gradient fade */}
-      <div className={`hidden lg:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] transition-colors duration-700 ${isDark ? 'from-black to-transparent' : 'from-blue-50 to-transparent'}`} />
+      <div className={`hidden lg:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] transition-colors duration-700 ${isDark ? 'from-black to-transparent' : 'from-gray-100 to-transparent'}`} />
       </div>
 
       {/* Story Content Section */}
