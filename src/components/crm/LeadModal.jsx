@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { base44 } from "@/api/base44Client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export default function LeadModal({ lead, onClose }) {
+export default function LeadModal({ lead, isViewMode = false, onClose }) {
   const [formData, setFormData] = useState(lead || {
     name: "",
     contact_person: "",
@@ -75,7 +75,7 @@ export default function LeadModal({ lead, onClose }) {
           </Button>
 
           <h2 className="text-2xl font-bold text-white mb-6">
-            {lead ? "Edit Lead" : "Add New Lead"}
+            {isViewMode ? "View Lead" : lead ? "Edit Lead" : "Add New Lead"}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -87,6 +87,7 @@ export default function LeadModal({ lead, onClose }) {
                   onChange={(e) => handleChange("name", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
                   required
+                  readOnly={isViewMode}
                 />
               </div>
 
@@ -96,6 +97,7 @@ export default function LeadModal({ lead, onClose }) {
                   value={formData.contact_person}
                   onChange={(e) => handleChange("contact_person", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
+                  readOnly={isViewMode}
                 />
               </div>
 
@@ -106,6 +108,7 @@ export default function LeadModal({ lead, onClose }) {
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
+                  readOnly={isViewMode}
                 />
               </div>
 
@@ -115,6 +118,7 @@ export default function LeadModal({ lead, onClose }) {
                   value={formData.phone}
                   onChange={(e) => handleChange("phone", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
+                  readOnly={isViewMode}
                 />
               </div>
 
@@ -124,6 +128,7 @@ export default function LeadModal({ lead, onClose }) {
                   value={formData.company}
                   onChange={(e) => handleChange("company", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
+                  readOnly={isViewMode}
                 />
               </div>
 
@@ -135,12 +140,13 @@ export default function LeadModal({ lead, onClose }) {
                   onChange={(e) => handleChange("website", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
                   placeholder="https://..."
+                  readOnly={isViewMode}
                 />
               </div>
 
               <div>
                 <Label className="text-white/80 mb-2">Lead Type</Label>
-                <Select value={formData.lead_type} onValueChange={(value) => handleChange("lead_type", value)}>
+                <Select value={formData.lead_type} onValueChange={(value) => handleChange("lead_type", value)} disabled={isViewMode}>
                   <SelectTrigger className="bg-white/[0.04] border-white/10 text-white">
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
@@ -166,6 +172,7 @@ export default function LeadModal({ lead, onClose }) {
                   value={formData.last_engaged}
                   onChange={(e) => handleChange("last_engaged", e.target.value)}
                   className="bg-white/[0.04] border-white/10 text-white"
+                  readOnly={isViewMode}
                 />
               </div>
             </div>
@@ -177,25 +184,38 @@ export default function LeadModal({ lead, onClose }) {
                 onChange={(e) => handleChange("notes", e.target.value)}
                 className="bg-white/[0.04] border-white/10 text-white min-h-[100px]"
                 placeholder="Add any additional information..."
+                readOnly={isViewMode}
               />
             </div>
 
             <div className="flex justify-end gap-3 pt-4">
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={onClose}
-                className="text-white/70 hover:text-white hover:bg-white/10"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                disabled={isSaving}
-                className="bg-amber-500 hover:bg-amber-600 text-white"
-              >
-                {isSaving ? "Saving..." : lead ? "Update Lead" : "Create Lead"}
-              </Button>
+              {isViewMode ? (
+                <Button
+                  type="button"
+                  onClick={onClose}
+                  className="bg-amber-500 hover:bg-amber-600 text-white"
+                >
+                  Close
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={onClose}
+                    className="text-white/70 hover:text-white hover:bg-white/10"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={isSaving}
+                    className="bg-amber-500 hover:bg-amber-600 text-white"
+                  >
+                    {isSaving ? "Saving..." : lead ? "Update Lead" : "Create Lead"}
+                  </Button>
+                </>
+              )}
             </div>
           </form>
         </motion.div>

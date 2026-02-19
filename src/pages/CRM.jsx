@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, Edit, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, Search, Phone, Mail, Globe, Calendar, Edit, Trash2, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +29,7 @@ export default function CRM() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [showModal, setShowModal] = useState(false);
   const [editingLead, setEditingLead] = useState(null);
+  const [isViewMode, setIsViewMode] = useState(false);
   const queryClient = useQueryClient();
 
   const { data: leads = [], isLoading } = useQuery({
@@ -43,8 +44,15 @@ export default function CRM() {
     },
   });
 
+  const handleView = (lead) => {
+    setEditingLead(lead);
+    setIsViewMode(true);
+    setShowModal(true);
+  };
+
   const handleEdit = (lead) => {
     setEditingLead(lead);
+    setIsViewMode(false);
     setShowModal(true);
   };
 
@@ -57,6 +65,7 @@ export default function CRM() {
   const handleCloseModal = () => {
     setShowModal(false);
     setEditingLead(null);
+    setIsViewMode(false);
   };
 
   const filteredLeads = leads.filter(lead => {
@@ -224,6 +233,14 @@ export default function CRM() {
                             variant="ghost"
                             size="icon"
                             className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
+                            onClick={() => handleView(lead)}
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10"
                             onClick={() => handleEdit(lead)}
                           >
                             <Edit className="w-4 h-4" />
@@ -250,6 +267,7 @@ export default function CRM() {
       {showModal && (
         <LeadModal
           lead={editingLead}
+          isViewMode={isViewMode}
           onClose={handleCloseModal}
         />
       )}
