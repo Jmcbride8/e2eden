@@ -102,31 +102,44 @@ export default function Funding() {
           {/* (a) E2Eden General */}
           <div className="mb-8">
             <h3 className="text-xl font-semibold text-white mb-4">Support E2Eden</h3>
-            <div className="relative group">
+            <div className="relative group overflow-hidden rounded-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 rounded-xl bg-white/[0.06] text-pink-400">
-                    <Heart className="w-6 h-6" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-1">
-                      General Fund
-                    </h3>
-                    <div className="text-xs uppercase tracking-wider text-white/40">
-                      Any amount
+              <div className="relative grid md:grid-cols-2 gap-0 bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden">
+                {/* Image Side */}
+                <div className="relative h-64 md:h-auto">
+                  <img 
+                    src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&h=600&fit=crop"
+                    alt="Sustainable agriculture"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/60 md:to-black/80" />
+                </div>
+                
+                {/* Content Side */}
+                <div className="p-8">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 rounded-xl bg-white/[0.06] text-pink-400">
+                      <Heart className="w-6 h-6" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-white mb-1">
+                        General Fund
+                      </h3>
+                      <div className="text-xs uppercase tracking-wider text-white/40">
+                        Any amount
+                      </div>
                     </div>
                   </div>
+                  <p className="text-sm text-white/70 leading-relaxed mb-4">
+                    Make a direct impact through donations that fund research, training, and pilot programs in underserved regions.
+                  </p>
+                  <button
+                    onClick={() => setDonationModal({ isOpen: true, projectName: null })}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-medium transition-colors border border-pink-500/20"
+                  >
+                    Donate to E2Eden
+                  </button>
                 </div>
-                <p className="text-sm text-white/70 leading-relaxed mb-4">
-                  Make a direct impact through donations that fund research, training, and pilot programs in underserved regions.
-                </p>
-                <button
-                  onClick={() => setDonationModal({ isOpen: true, projectName: null })}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-medium transition-colors border border-pink-500/20"
-                >
-                  Donate to E2Eden
-                </button>
               </div>
             </div>
           </div>
