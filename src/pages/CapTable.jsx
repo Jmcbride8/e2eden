@@ -125,17 +125,6 @@ export default function CapTable() {
               </CardHeader>
               <CardContent>
                 <Pie3D data={pieChartData} colors={COLORS} />
-                <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {investorsWithCalculatedOwnership.map((investor, index) => (
-                    <div key={investor.id} className="flex items-center gap-2">
-                      <div 
-                        className="w-3 h-3 rounded-full" 
-                        style={{ backgroundColor: COLORS[index % COLORS.length] }}
-                      />
-                      <span className="text-sm text-white/70">{investor.name}: {investor.ownership_percentage}%</span>
-                    </div>
-                  ))}
-                </div>
               </CardContent>
             </Card>
           </motion.div>
