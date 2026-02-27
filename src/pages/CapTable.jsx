@@ -120,10 +120,7 @@ export default function CapTable() {
             className="mb-4"
           >
             <Card className="bg-white/[0.04] border-0">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-white">Ownership Distribution</CardTitle>
-              </CardHeader>
-              <CardContent className="pb-4">
+              <CardContent className="pt-6 pb-4">
                 <Pie3D data={pieChartData} colors={COLORS} />
               </CardContent>
             </Card>
