@@ -1,108 +1,120 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import React from 'react';
 
 export default function Pie3D({ data, colors }) {
-  const containerRef = useRef(null);
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+  let currentAngle = 0;
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  const slices = data.map((item, index) => {
+    const percentage = (item.value / total) * 100;
+    const sliceAngle = (item.value / total) * 360;
+    const color = colors[index % colors.length];
+    
+    const startAngle = currentAngle;
+    const endAngle = currentAngle + sliceAngle;
+    currentAngle = endAngle;
 
-    // Scene setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
-
-    const width = containerRef.current.clientWidth;
-    const height = containerRef.current.clientHeight;
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.set(0, 0.8, 2);
-    camera.lookAt(0, 0, 0);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    containerRef.current.appendChild(renderer.domElement);
-
-    // Create 3D pie chart slices
-    const total = data.reduce((sum, item) => sum + item.value, 0);
-    let currentAngle = -Math.PI / 2;
-    const cylinderHeight = 0.6;
-    const radius = 1.8;
-    const segments = 64;
-
-    data.forEach((item, index) => {
-      const sliceAngle = (item.value / total) * Math.PI * 2;
-      const color = new THREE.Color(colors[index % colors.length]);
-      const midAngle = currentAngle + sliceAngle / 2;
-
-      // Create cylinder slice geometry
-      const geometry = new THREE.CylinderGeometry(radius, radius, cylinderHeight, segments, 1, false, currentAngle, sliceAngle);
-      
-      // Create three materials: top, side, bottom
-      const materials = [
-        new THREE.MeshPhongMaterial({
-          color: color,
-          emissive: new THREE.Color().copy(color).multiplyScalar(0.3),
-          shininess: 100
-        }),
-        new THREE.MeshPhongMaterial({
-          color: new THREE.Color().copy(color).multiplyScalar(0.7),
-          emissive: new THREE.Color().copy(color).multiplyScalar(0.1),
-          shininess: 80
-        }),
-        new THREE.MeshPhongMaterial({
-          color: new THREE.Color().copy(color).multiplyScalar(0.5),
-          shininess: 60
-        })
-      ];
-
-      const mesh = new THREE.Mesh(geometry, materials);
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      scene.add(mesh);
-
-      currentAngle += sliceAngle;
-    });
-
-    // Lighting setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 8, 5);
-    directionalLight.castShadow = true;
-    directionalLight.shadow.mapSize.width = 2048;
-    directionalLight.shadow.mapSize.height = 2048;
-    scene.add(directionalLight);
-
-    const pointLight = new THREE.PointLight(0xfbbf24, 0.6);
-    pointLight.position.set(-4, 6, 4);
-    scene.add(pointLight);
-
-    // Render once (no animation)
-    renderer.render(scene, camera);
-
-    // Handle resize
-    const handleResize = () => {
-      if (containerRef.current) {
-        const newWidth = containerRef.current.clientWidth;
-        const newHeight = containerRef.current.clientHeight;
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(newWidth, newHeight);
-        renderer.render(scene, camera);
-      }
+    return {
+      id: index,
+      percentage,
+      sliceAngle,
+      startAngle,
+      endAngle,
+      color,
+      name: item.name
     };
+  });
 
-    window.addEventListener('resize', handleResize);
+  const radius = 120;
+  const centerX = 150;
+  const centerY = 150;
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      if (containerRef.current && renderer.domElement.parentNode === containerRef.current) {
-        containerRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
-  }, [data, colors]);
+  const createPath = (slice) => {
+    const startRad = (slice.startAngle * Math.PI) / 180;
+    const endRad = (slice.endAngle * Math.PI) / 180;
 
-  return <div ref={containerRef} style={{ width: '100%', height: '400px' }} />;
+    const x1 = centerX + radius * Math.cos(startRad);
+    const y1 = centerY + radius * Math.sin(startRad);
+    const x2 = centerX + radius * Math.cos(endRad);
+    const y2 = centerY + radius * Math.sin(endRad);
+
+    const largeArc = slice.sliceAngle > 180 ? 1 : 0;
+
+    return `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <svg width="100%" height="300" viewBox="0 0 300 300" className="max-w-2xl">
+        {/* 3D Effect - Bottom shadow */}
+        <defs>
+          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="2" dy="4" stdDeviation="3" floodOpacity="0.3" />
+          </filter>
+        </defs>
+
+        {/* Render slices with 3D effect */}
+        {slices.map((slice) => (
+          <g key={slice.id} filter="url(#shadow)">
+            {/* Top surface */}
+            <path
+              d={createPath(slice)}
+              fill={slice.color}
+              stroke="rgba(0,0,0,0.1)"
+              strokeWidth="0.5"
+              className="hover:opacity-80 transition-opacity cursor-pointer"
+            />
+            
+            {/* Bottom edge for 3D effect */}
+            <path
+              d={createPath(slice)}
+              fill={
+                `color-mix(in srgb, ${slice.color} 60%, black)`
+              }
+              opacity="0.6"
+              transform={`translate(0, 8)`}
+              className="pointer-events-none"
+            />
+          </g>
+        ))}
+
+        {/* Side edges for 3D effect */}
+        {slices.map((slice) => {
+          const startRad = (slice.startAngle * Math.PI) / 180;
+          const x1 = centerX + radius * Math.cos(startRad);
+          const y1 = centerY + radius * Math.sin(startRad);
+
+          return (
+            <line
+              key={`edge-${slice.id}`}
+              x1={x1}
+              y1={y1}
+              x2={x1}
+              y2={y1 + 8}
+              stroke="rgba(0,0,0,0.2)"
+              strokeWidth="0.5"
+              className="pointer-events-none"
+            />
+          );
+        })}
+
+        {/* Center circle for 3D depth */}
+        <circle cx={centerX} cy={centerY} r="20" fill="rgba(0,0,0,0.1)" className="pointer-events-none" />
+      </svg>
+
+      {/* Legend */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full px-4">
+        {slices.map((slice) => (
+          <div key={slice.id} className="flex items-center gap-3">
+            <div
+              className="w-4 h-4 rounded-full flex-shrink-0"
+              style={{ backgroundColor: slice.color }}
+            />
+            <span className="text-sm text-white/70">
+              {slice.name || `Slice ${slice.id + 1}`}: {slice.percentage.toFixed(2)}%
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
