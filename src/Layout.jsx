@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from './utils';
 import UserMenu from './components/navigation/UserMenu';
 import MobileNav from './components/navigation/MobileNav';
+import TaskCounter from './components/navigation/TaskCounter';
 
 export default function Layout({ children, currentPageName }) {
   return (
@@ -35,6 +36,7 @@ export default function Layout({ children, currentPageName }) {
             Partnerships
           </Link>
         </nav>
+        <TaskCounter />
         <UserMenu />
       </div>
       {children}
