@@ -3,9 +3,6 @@ import * as THREE from 'three';
 
 export default function Pie3D({ data, colors }) {
   const containerRef = useRef(null);
-  const sceneRef = useRef(null);
-  const cameraRef = useRef(null);
-  const rendererRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -13,88 +10,86 @@ export default function Pie3D({ data, colors }) {
     // Scene setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x000000);
-    sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      containerRef.current.clientWidth / containerRef.current.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 3;
-    cameraRef.current = camera;
+    const width = containerRef.current.clientWidth;
+    const height = containerRef.current.clientHeight;
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.set(0, 0.8, 2);
+    camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
     containerRef.current.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
 
-    // Create 3D pie chart
+    // Create 3D pie chart slices
     const total = data.reduce((sum, item) => sum + item.value, 0);
     let currentAngle = -Math.PI / 2;
-    const height = 0.8;
-    const radius = 1.5;
+    const cylinderHeight = 0.6;
+    const radius = 1.8;
+    const segments = 64;
 
     data.forEach((item, index) => {
       const sliceAngle = (item.value / total) * Math.PI * 2;
       const color = new THREE.Color(colors[index % colors.length]);
+      const midAngle = currentAngle + sliceAngle / 2;
 
-      // Create cone shape for each slice
-      const geometry = new THREE.ConeGeometry(radius, height, 32, 1, true);
+      // Create cylinder slice geometry
+      const geometry = new THREE.CylinderGeometry(radius, radius, cylinderHeight, segments, 1, false, currentAngle, sliceAngle);
       
-      // Rotate and position the geometry
-      const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({
-        color: color,
-        emissive: color,
-        emissiveIntensity: 0.3,
-        shininess: 100,
-        wireframe: false
-      }));
+      // Create three materials: top, side, bottom
+      const materials = [
+        new THREE.MeshPhongMaterial({
+          color: color,
+          emissive: new THREE.Color().copy(color).multiplyScalar(0.3),
+          shininess: 100
+        }),
+        new THREE.MeshPhongMaterial({
+          color: new THREE.Color().copy(color).multiplyScalar(0.7),
+          emissive: new THREE.Color().copy(color).multiplyScalar(0.1),
+          shininess: 80
+        }),
+        new THREE.MeshPhongMaterial({
+          color: new THREE.Color().copy(color).multiplyScalar(0.5),
+          shininess: 60
+        })
+      ];
 
-      mesh.rotation.z = currentAngle + sliceAngle / 2;
-      mesh.position.z = 0;
+      const mesh = new THREE.Mesh(geometry, materials);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       scene.add(mesh);
 
       currentAngle += sliceAngle;
     });
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Lighting setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(5, 5, 5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 8, 5);
+    directionalLight.castShadow = true;
+    directionalLight.shadow.mapSize.width = 2048;
+    directionalLight.shadow.mapSize.height = 2048;
     scene.add(directionalLight);
 
-    const pointLight = new THREE.PointLight(0xfbbf24, 0.5);
-    pointLight.position.set(-5, 5, 5);
+    const pointLight = new THREE.PointLight(0xfbbf24, 0.6);
+    pointLight.position.set(-4, 6, 4);
     scene.add(pointLight);
 
-    // Animation
-    let animationId;
-    const animate = () => {
-      animationId = requestAnimationFrame(animate);
-      
-      scene.children.forEach((child) => {
-        if (child instanceof THREE.Mesh) {
-          child.rotation.x += 0.002;
-          child.rotation.y += 0.003;
-        }
-      });
-
-      renderer.render(scene, camera);
-    };
-    animate();
+    // Render once (no animation)
+    renderer.render(scene, camera);
 
     // Handle resize
     const handleResize = () => {
       if (containerRef.current) {
-        const width = containerRef.current.clientWidth;
-        const height = containerRef.current.clientHeight;
-        camera.aspect = width / height;
+        const newWidth = containerRef.current.clientWidth;
+        const newHeight = containerRef.current.clientHeight;
+        camera.aspect = newWidth / newHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
+        renderer.setSize(newWidth, newHeight);
+        renderer.render(scene, camera);
       }
     };
 
@@ -102,7 +97,6 @@ export default function Pie3D({ data, colors }) {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationId);
       if (containerRef.current && renderer.domElement.parentNode === containerRef.current) {
         containerRef.current.removeChild(renderer.domElement);
       }
