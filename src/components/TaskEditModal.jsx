@@ -91,7 +91,7 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
               </Select>
             </div>
             <div>
-              <label className="text-sm text-white/70 mb-1 block">Assign To User</label>
+              <label className="text-sm text-white/70 mb-1 block">Owner</label>
               <Select
                 value={formData.assigned_to}
                 onValueChange={(val) => setFormData({ ...formData, assigned_to: val })}
