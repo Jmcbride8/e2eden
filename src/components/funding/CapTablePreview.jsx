@@ -31,15 +31,7 @@ export default function CapTablePreview() {
 
   return (
     <div className="mt-8 p-6 rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/10">
-      <div className="flex items-center justify-between mb-6">
-        <h4 className="text-lg font-semibold text-white">Ownership Structure</h4>
-        <Link to={createPageUrl("CapTable")}>
-          <Button className="bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 text-sm">
-            <TrendingUp className="w-4 h-4 mr-2" />
-            View Cap Table
-          </Button>
-        </Link>
-      </div>
+
       <ResponsiveContainer width="100%" height={280}>
         <PieChart>
           <Pie

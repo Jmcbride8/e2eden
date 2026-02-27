@@ -93,7 +93,6 @@ export default function Funding() {
                 <TrendingUp className="w-4 h-4" />
                 View Cap Table & Invest
               </Link>
-              <CapTablePreview />
             </div>
           </div>
         </motion.div>
