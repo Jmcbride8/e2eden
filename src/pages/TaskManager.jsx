@@ -321,9 +321,34 @@ export default function TaskManager() {
               </TableHeader>
               <TableBody>
                 {filteredTasks.map((task) => {
-                  const StatusIcon = statusIcons[task.status];
-                  return (
+                   const StatusIcon = statusIcons[task.status];
+                   return (
                     <TableRow key={task.id} className="border-white/10">
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10">
+                              <MoreVertical className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="start" className="bg-white/[0.04] border-white/10">
+                            <DropdownMenuItem 
+                              onClick={() => handleEditTask(task)}
+                              className="text-white/70 hover:text-white hover:bg-white/10 cursor-pointer flex items-center gap-2"
+                            >
+                              <Edit2 className="w-4 h-4" />
+                              Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem 
+                              onClick={() => handleDeleteTask(task.id)}
+                              className="text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer flex items-center gap-2"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                              Delete
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
                       <TableCell>
                         <div>
                           <p className="text-white font-medium">{task.title}</p>
