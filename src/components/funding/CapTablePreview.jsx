@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TrendingUp } from "lucide-react";
