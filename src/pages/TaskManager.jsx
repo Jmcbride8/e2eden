@@ -310,6 +310,7 @@ export default function TaskManager() {
             <Table>
               <TableHeader>
                 <TableRow className="border-white/10">
+                  <TableHead className="text-white/70 w-12"></TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70">Company</TableHead>
                   <TableHead className="text-white/70">Assigned To</TableHead>
