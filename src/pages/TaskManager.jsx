@@ -336,90 +336,92 @@ export default function TaskManager() {
                 {filteredTasks.map((task) => {
                    const StatusIcon = statusIcons[task.status];
                    return (
-                    <TableRow key={task.id} className="border-white/10">
-                      <TableCell className="px-1 border-r border-white/10" onClick={(e) => e.stopPropagation()}>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10">
-                              <MoreVertical className="w-4 h-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="start" className="bg-gray-900 border-white/20">
-                            <DropdownMenuItem 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleEditTask(task);
-                              }}
-                              className="text-white/70 hover:text-white hover:bg-white/10 cursor-pointer flex items-center gap-2"
-                            >
-                              <Edit2 className="w-4 h-4" />
-                              Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuItem 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleDeleteTask(task.id);
-                              }}
-                              className="text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer flex items-center gap-2"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                              Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                      <TableCell>
-                        <div>
-                          <p className="text-white font-medium">{task.title}</p>
-                          {task.description && (
-                            <p className="text-white/50 text-sm">{task.description}</p>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Badge className="bg-purple-500/20 text-purple-300">
-                          {task.assigned_company}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-white/70 text-right">
-                        {task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}
-                      </TableCell>
-                      <TableCell className="text-white/70 text-right">
-                        {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <Select
-                          value={task.status}
-                          onValueChange={(val) => handleStatusChange(task, val)}
-                        >
-                          <SelectTrigger className="w-40 bg-white/5 border-white/10">
-                            <div className="flex items-center gap-2">
-                              <StatusIcon className="w-4 h-4" />
-                              <span className="text-white">{task.status.replace('_', ' ')}</span>
-                            </div>
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="todo">To Do</SelectItem>
-                            <SelectItem value="in_progress">In Progress</SelectItem>
-                            <SelectItem value="completed">Completed</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </TableCell>
-                      </TableRow>
-                      <TableRow key={`${task.id}-updates`} className="border-white/10 bg-white/[0.01]">
-                      <TableCell colSpan="6" className="py-3 pl-8">
-                        <TaskUpdateList
-                          taskId={task.id}
-                          updates={allUpdates}
-                          onAddUpdate={(data) => createUpdateMutation.mutate(data)}
-                          onEditUpdate={(id, data) => updateUpdateMutation.mutate({ id, data })}
-                          onDeleteUpdate={(id) => deleteUpdateMutation.mutate(id)}
-                          currentUserEmail={currentUser?.email}
-                        />
-                      </TableCell>
-                      </TableRow>
-                      );
-                      })}
+                     <React.Fragment key={task.id}>
+                       <TableRow className="border-white/10">
+                         <TableCell className="px-1 border-r border-white/10" onClick={(e) => e.stopPropagation()}>
+                           <DropdownMenu>
+                             <DropdownMenuTrigger asChild>
+                               <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10">
+                                 <MoreVertical className="w-4 h-4" />
+                               </Button>
+                             </DropdownMenuTrigger>
+                             <DropdownMenuContent align="start" className="bg-gray-900 border-white/20">
+                               <DropdownMenuItem 
+                                 onClick={(e) => {
+                                   e.stopPropagation();
+                                   handleEditTask(task);
+                                 }}
+                                 className="text-white/70 hover:text-white hover:bg-white/10 cursor-pointer flex items-center gap-2"
+                               >
+                                 <Edit2 className="w-4 h-4" />
+                                 Edit
+                               </DropdownMenuItem>
+                               <DropdownMenuItem 
+                                 onClick={(e) => {
+                                   e.stopPropagation();
+                                   handleDeleteTask(task.id);
+                                 }}
+                                 className="text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer flex items-center gap-2"
+                               >
+                                 <Trash2 className="w-4 h-4" />
+                                 Delete
+                               </DropdownMenuItem>
+                             </DropdownMenuContent>
+                           </DropdownMenu>
+                         </TableCell>
+                         <TableCell>
+                           <div>
+                             <p className="text-white font-medium">{task.title}</p>
+                             {task.description && (
+                               <p className="text-white/50 text-sm">{task.description}</p>
+                             )}
+                           </div>
+                         </TableCell>
+                         <TableCell className="text-right">
+                           <Badge className="bg-purple-500/20 text-purple-300">
+                             {task.assigned_company}
+                           </Badge>
+                         </TableCell>
+                         <TableCell className="text-white/70 text-right">
+                           {task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}
+                         </TableCell>
+                         <TableCell className="text-white/70 text-right">
+                           {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
+                         </TableCell>
+                         <TableCell className="text-right">
+                           <Select
+                             value={task.status}
+                             onValueChange={(val) => handleStatusChange(task, val)}
+                           >
+                             <SelectTrigger className="w-40 bg-white/5 border-white/10">
+                               <div className="flex items-center gap-2">
+                                 <StatusIcon className="w-4 h-4" />
+                                 <span className="text-white">{task.status.replace('_', ' ')}</span>
+                               </div>
+                             </SelectTrigger>
+                             <SelectContent>
+                               <SelectItem value="todo">To Do</SelectItem>
+                               <SelectItem value="in_progress">In Progress</SelectItem>
+                               <SelectItem value="completed">Completed</SelectItem>
+                             </SelectContent>
+                           </Select>
+                         </TableCell>
+                       </TableRow>
+                       <TableRow className="border-white/10 bg-white/[0.01]">
+                         <TableCell colSpan="6" className="py-3 pl-8">
+                           <TaskUpdateList
+                             taskId={task.id}
+                             updates={allUpdates}
+                             onAddUpdate={(data) => createUpdateMutation.mutate(data)}
+                             onEditUpdate={(id, data) => updateUpdateMutation.mutate({ id, data })}
+                             onDeleteUpdate={(id) => deleteUpdateMutation.mutate(id)}
+                             currentUserEmail={currentUser?.email}
+                           />
+                         </TableCell>
+                       </TableRow>
+                     </React.Fragment>
+                   );
+                })}
                       </TableBody>
                       </Table>
             {filteredTasks.length === 0 && (
