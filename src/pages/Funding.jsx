@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { DollarSign, TrendingUp, Award, Heart, Building2, FileText } from "lucide-react";
+import { TrendingUp, Heart, Building2, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -15,13 +15,6 @@ export default function Funding() {
     queryKey: ['projects'],
     queryFn: () => base44.entities.Project.list('sort_order'),
   });
-
-  const impacts = [
-    { value: "$127M", label: "Total Funding Secured" },
-    { value: "43", label: "Active Projects" },
-    { value: "250K+", label: "Lives Impacted" },
-    { value: "18", label: "Partner Organizations" }
-  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -40,26 +33,6 @@ export default function Funding() {
             Join us in creating sustainable solutions that benefit both people and planet.
             Every investment drives measurable environmental and social impact.
           </p>
-        </motion.div>
-
-        {/* Impact Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-        >
-          {impacts.map((stat, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 text-center"
-            >
-              <div className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 mb-2">
-                {stat.value}
-              </div>
-              <div className="text-sm text-white/60">{stat.label}</div>
-            </div>
-          ))}
         </motion.div>
 
         {/* 1. Venture Investment */}
