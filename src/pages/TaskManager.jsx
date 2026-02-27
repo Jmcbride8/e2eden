@@ -429,9 +429,10 @@ export default function TaskManager() {
                                onToggleExpand={() => {}}
                                users={users}
                              />
-                         </TableCell>
-                       </TableRow>
-                     </React.Fragment>
+                           </TableCell>
+                         </TableRow>
+                         )}
+                         </React.Fragment>
                    );
                 })}
                       </TableBody>
