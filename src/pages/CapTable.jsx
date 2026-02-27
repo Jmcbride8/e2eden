@@ -16,8 +16,19 @@ const COLORS = ['#fbbf24', '#60a5fa', '#34d399', '#f87171', '#a78bfa', '#fb923c'
 
 export default function CapTable() {
   const [showInvestmentForm, setShowInvestmentForm] = useState(false);
+  const [selectedSeedRound, setSelectedSeedRound] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const queryClient = useQueryClient();
+
+  const SEED_ROUNDS = [
+    { id: 'seed-1', name: 'Seed 1', ownership: 2 },
+    { id: 'seed-2', name: 'Seed 2', ownership: 2 },
+    { id: 'seed-3', name: 'Seed 3', ownership: 2 },
+    { id: 'seed-4', name: 'Seed 4', ownership: 2 },
+    { id: 'seed-5', name: 'Seed 5', ownership: 2 }
+  ];
+  const VALUATION = 5000000;
+  const FOUNDER_OWNERSHIP = 90; // After removing 10%
 
   React.useEffect(() => {
     const checkAdmin = async () => {
@@ -50,16 +61,26 @@ export default function CapTable() {
   const approvedInvestors = investors.filter(inv => inv.status === 'approved');
   const totalInvestment = approvedInvestors.reduce((sum, inv) => sum + (inv.investment_amount || 0), 0);
 
-  // Recalculate ownership percentages
+  // Recalculate ownership percentages based on valuation
   const investorsWithCalculatedOwnership = approvedInvestors.map(inv => ({
     ...inv,
-    ownership_percentage: totalInvestment > 0 ? ((inv.investment_amount / totalInvestment) * 100).toFixed(2) : 0
+    ownership_percentage: ((inv.investment_amount / VALUATION) * 100).toFixed(2)
   }));
 
-  const pieChartData = investorsWithCalculatedOwnership.map(inv => ({
-    name: inv.name,
-    value: parseFloat(inv.ownership_percentage)
-  }));
+  // Create pie chart data including founder and seeds
+  const allChartData = [
+    { name: 'Founder', value: FOUNDER_OWNERSHIP },
+    ...investorsWithCalculatedOwnership.map(inv => ({
+      name: inv.name,
+      value: parseFloat(inv.ownership_percentage)
+    })),
+    ...SEED_ROUNDS.map(seed => ({
+      name: seed.name,
+      value: seed.ownership
+    }))
+  ];
+
+  const pieChartData = allChartData.filter(item => item.value > 0);
 
   const handleApprove = (investor) => {
     const ownership = totalInvestment > 0 
@@ -137,8 +158,8 @@ export default function CapTable() {
           <Card className="bg-white/[0.04] border-white/10">
             <CardContent className="pt-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-amber-400">${totalInvestment.toLocaleString()}</div>
-                <div className="text-sm text-white/60 mt-2">Current Valuation</div>
+                <div className="text-3xl font-bold text-amber-400">${(VALUATION / 1000000).toFixed(1)}M</div>
+                <div className="text-sm text-white/60 mt-2">Pre-Money Valuation</div>
               </div>
             </CardContent>
           </Card>
@@ -186,16 +207,57 @@ export default function CapTable() {
                       <TableHead className="text-white/70 text-right">Ownership %</TableHead>
                       <TableHead className="text-white/70">Date</TableHead>
                       <TableHead className="text-white/70">Status</TableHead>
+                      <TableHead className="text-white/70">Action</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {investors.length === 0 ? (
-                      <TableRow>
-                        <TableCell colSpan={6} className="text-center py-8 text-white/40">
-                          No investors yet
+                    {/* Founder Row */}
+                    <TableRow className="border-white/10 bg-white/[0.02]">
+                      <TableCell className="text-white font-semibold">Founder</TableCell>
+                      <TableCell className="text-white/70">-</TableCell>
+                      <TableCell className="text-right text-white/70">-</TableCell>
+                      <TableCell className="text-right text-white/70">{FOUNDER_OWNERSHIP}%</TableCell>
+                      <TableCell className="text-white/70">-</TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <Check className="w-4 h-4 text-green-400" />
+                          <span className="text-sm text-green-400">Founder</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>-</TableCell>
+                    </TableRow>
+
+                    {/* Seed Rounds */}
+                    {SEED_ROUNDS.map((seed, idx) => (
+                      <TableRow key={seed.id} className="border-white/10">
+                        <TableCell className="text-white">{seed.name}</TableCell>
+                        <TableCell className="text-white/70">-</TableCell>
+                        <TableCell className="text-right text-white/70">${(VALUATION * seed.ownership / 100).toLocaleString()}</TableCell>
+                        <TableCell className="text-right text-white/70">{seed.ownership}%</TableCell>
+                        <TableCell className="text-white/70">-</TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-amber-400" />
+                            <span className="text-sm text-amber-400">Available</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            size="sm"
+                            onClick={() => {
+                              setSelectedSeedRound(seed);
+                              setShowInvestmentForm(true);
+                            }}
+                            className="bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 text-xs"
+                          >
+                            Invest
+                          </Button>
                         </TableCell>
                       </TableRow>
-                    ) : (
+                    ))}
+
+                    {/* Investor Rows */}
+                    {investors.length === 0 ? null : (
                       investors.map((investor) => {
                         const config = statusConfig[investor.status];
                         const Icon = config.icon;
@@ -214,6 +276,7 @@ export default function CapTable() {
                                 <span className={`text-sm capitalize ${config.color}`}>{investor.status}</span>
                               </div>
                             </TableCell>
+                            <TableCell>-</TableCell>
                           </TableRow>
                         );
                       })
@@ -229,7 +292,11 @@ export default function CapTable() {
       {/* Investment Form Modal */}
       <InvestmentForm
         isOpen={showInvestmentForm}
-        onClose={() => setShowInvestmentForm(false)}
+        onClose={() => {
+          setShowInvestmentForm(false);
+          setSelectedSeedRound(null);
+        }}
+        seedRound={selectedSeedRound}
       />
     </div>
   );
