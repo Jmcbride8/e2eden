@@ -192,10 +192,27 @@ export default function TaskManager() {
 
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-white">Task Manager</h1>
-          <Button onClick={() => setShowForm(!showForm)} className="bg-amber-500 hover:bg-amber-600">
-            <Plus className="w-4 h-4 mr-2" />
-            New Task
-          </Button>
+          <div className="flex gap-2">
+            <div className="flex bg-white/10 rounded-lg p-1">
+              <button
+                onClick={() => setViewMode("table")}
+                className={`px-4 py-2 rounded transition-all ${viewMode === "table" ? "bg-amber-500 text-white" : "text-white/70 hover:text-white"}`}
+              >
+                Table
+              </button>
+              <button
+                onClick={() => setViewMode("gantt")}
+                className={`px-4 py-2 rounded transition-all flex items-center gap-2 ${viewMode === "gantt" ? "bg-amber-500 text-white" : "text-white/70 hover:text-white"}`}
+              >
+                <BarChart3 className="w-4 h-4" />
+                Gantt
+              </button>
+            </div>
+            <Button onClick={() => setShowForm(!showForm)} className="bg-amber-500 hover:bg-amber-600">
+              <Plus className="w-4 h-4 mr-2" />
+              New Task
+            </Button>
+          </div>
         </div>
 
         {/* Task Form */}
@@ -264,15 +281,26 @@ export default function TaskManager() {
                     </Select>
                   </div>
                 </div>
-                <div>
-                  <label className="text-sm text-white/70 mb-1 block">Due Date</label>
-                  <Input
-                    type="date"
-                    value={formData.due_date}
-                    onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                    className="bg-white/5 border-white/10 text-white"
-                  />
-                </div>
+                <div className="grid grid-cols-2 gap-4">
+                   <div>
+                     <label className="text-sm text-white/70 mb-1 block">Start Date</label>
+                     <Input
+                       type="date"
+                       value={formData.start_date}
+                       onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
+                       className="bg-white/5 border-white/10 text-white"
+                     />
+                   </div>
+                   <div>
+                     <label className="text-sm text-white/70 mb-1 block">Due Date</label>
+                     <Input
+                       type="date"
+                       value={formData.due_date}
+                       onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
+                       className="bg-white/5 border-white/10 text-white"
+                     />
+                   </div>
+                 </div>
                 <div className="flex gap-2">
                   <Button type="button" onClick={() => setShowForm(false)} className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20">
                     Cancel
@@ -287,41 +315,57 @@ export default function TaskManager() {
         )}
 
         {/* Filters */}
-        <Card className="bg-white/[0.04] border-white/10 mb-8">
-          <CardContent className="pt-6">
-            <div className="flex gap-4">
-              <div className="flex-1">
-                <label className="text-sm text-white/70 mb-1 block">Filter by Company</label>
-                <Select value={filterCompany} onValueChange={setFilterCompany}>
-                  <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Companies</SelectItem>
-                    <SelectItem value="E2Eden">E2Eden</SelectItem>
-                    <SelectItem value="Seawater Greenhouse">Seawater Greenhouse</SelectItem>
-                    <SelectItem value="Partner">Partner</SelectItem>
-                    <SelectItem value="Other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex-1">
-                <label className="text-sm text-white/70 mb-1 block">Filter by Status</label>
-                <Select value={filterStatus} onValueChange={setFilterStatus}>
-                  <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Statuses</SelectItem>
-                    <SelectItem value="todo">To Do</SelectItem>
-                    <SelectItem value="in_progress">In Progress</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+         <Card className="bg-white/[0.04] border-white/10 mb-8">
+           <CardContent className="pt-6">
+             <div className="flex gap-4">
+               <div className="flex-1">
+                 <label className="text-sm text-white/70 mb-1 block">Filter by Company</label>
+                 <Select value={filterCompany} onValueChange={setFilterCompany}>
+                   <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                     <SelectValue />
+                   </SelectTrigger>
+                   <SelectContent>
+                     <SelectItem value="all">All Companies</SelectItem>
+                     <SelectItem value="E2Eden">E2Eden</SelectItem>
+                     <SelectItem value="Seawater Greenhouse">Seawater Greenhouse</SelectItem>
+                     <SelectItem value="Partner">Partner</SelectItem>
+                     <SelectItem value="Other">Other</SelectItem>
+                   </SelectContent>
+                 </Select>
+               </div>
+               <div className="flex-1">
+                 <label className="text-sm text-white/70 mb-1 block">Filter by Owner</label>
+                 <Select value={filterOwner} onValueChange={setFilterOwner}>
+                   <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                     <SelectValue />
+                   </SelectTrigger>
+                   <SelectContent>
+                     <SelectItem value={null}>All Owners</SelectItem>
+                     {users.map(user => (
+                       <SelectItem key={user.id} value={user.email}>
+                         {user.full_name}
+                       </SelectItem>
+                     ))}
+                   </SelectContent>
+                 </Select>
+               </div>
+               <div className="flex-1">
+                 <label className="text-sm text-white/70 mb-1 block">Filter by Status</label>
+                 <Select value={filterStatus} onValueChange={setFilterStatus}>
+                   <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                     <SelectValue />
+                   </SelectTrigger>
+                   <SelectContent>
+                     <SelectItem value="all">All Statuses</SelectItem>
+                     <SelectItem value="todo">To Do</SelectItem>
+                     <SelectItem value="in_progress">In Progress</SelectItem>
+                     <SelectItem value="completed">Completed</SelectItem>
+                   </SelectContent>
+                 </Select>
+               </div>
+             </div>
+           </CardContent>
+         </Card>
 
         {/* Tasks Table - Desktop */}
         <Card className="bg-white/[0.04] border-white/10 hidden sm:block">
