@@ -26,7 +26,6 @@ export default function TaskManager() {
     description: "",
     assigned_to: "",
     assigned_company: "",
-    priority: "",
     due_date: "",
   });
 
@@ -57,7 +56,7 @@ export default function TaskManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       setShowForm(false);
-      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", priority: "", due_date: "" });
+      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", due_date: "" });
     },
   });
 
@@ -131,9 +130,7 @@ export default function TaskManager() {
     completed: "bg-green-500/20 text-green-300",
   };
 
-  const priorityColors = {
-    important: "bg-red-500/20 text-red-300",
-  };
+
 
   if (!currentUser) {
     return <div className="min-h-screen bg-black flex items-center justify-center">
@@ -225,31 +222,14 @@ export default function TaskManager() {
                     </Select>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm text-white/70 mb-1 block">Priority</label>
-                    <Select
-                      value={formData.priority}
-                      onValueChange={(val) => setFormData({ ...formData, priority: val })}
-                    >
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                        <SelectValue placeholder="None" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value={null}>None</SelectItem>
-                        <SelectItem value="important">Important</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="text-sm text-white/70 mb-1 block">Due Date</label>
-                    <Input
-                      type="date"
-                      value={formData.due_date}
-                      onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white"
-                    />
-                  </div>
+                <div>
+                  <label className="text-sm text-white/70 mb-1 block">Due Date</label>
+                  <Input
+                    type="date"
+                    value={formData.due_date}
+                    onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
+                    className="bg-white/5 border-white/10 text-white"
+                  />
                 </div>
                 <div className="flex gap-2">
                   <Button type="button" onClick={() => setShowForm(false)} className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20">
