@@ -11,29 +11,21 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2, ChevronDown, BarChart3 } from "lucide-react";
 import TaskEditModal from "../components/TaskEditModal";
+import TaskCreateModal from "../components/TaskCreateModal";
 import TaskUpdateList from "../components/TaskUpdateList";
 import TaskGanttChart from "../components/TaskGanttChart";
-import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { format, subDays } from "date-fns";
 
 export default function TaskManager() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [showCreateForm, setShowCreateForm] = useState(false);
   const [filterCompany, setFilterCompany] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
   const [filterOwner, setFilterOwner] = useState("");
   const [editingTask, setEditingTask] = useState(null);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [viewMode, setViewMode] = useState("table");
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    assigned_to: "",
-    assigned_company: "",
-    start_date: "",
-    due_date: "",
-  });
 
   const queryClient = useQueryClient();
 
@@ -62,15 +54,6 @@ export default function TaskManager() {
     queryKey: ['taskUpdates'],
     queryFn: () => base44.entities.TaskUpdate.list('-created_date'),
     enabled: !!currentUser,
-  });
-
-  const createTaskMutation = useMutation({
-    mutationFn: (data) => base44.entities.Task.create(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-      setShowForm(false);
-      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", start_date: "", due_date: "" });
-    },
   });
 
   const updateTaskMutation = useMutation({
@@ -108,11 +91,6 @@ export default function TaskManager() {
       queryClient.invalidateQueries({ queryKey: ['taskUpdates'] });
     },
   });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createTaskMutation.mutate(formData);
-  };
 
   const handleStatusChange = (task, newStatus) => {
     updateTaskMutation.mutate({ id: task.id, data: { status: newStatus } });
@@ -202,104 +180,7 @@ export default function TaskManager() {
           </div>
         </div>
 
-        {/* Task Form */}
-        {showForm && (
-          <Card className="bg-white/[0.04] border-white/10 mb-8">
-            <CardHeader>
-              <CardTitle className="text-white">Create New Task</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="text-sm text-white/70 mb-1 block">Title</label>
-                  <Input
-                    required
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="bg-white/5 border-white/10 text-white placeholder-white/40"
-                    placeholder="Task title"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm text-white/70 mb-1 block">Description</label>
-                  <Textarea
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="bg-white/5 border-white/10 text-white placeholder-white/40 h-24"
-                    placeholder="Task description"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm text-white/70 mb-1 block">Assigned Company</label>
-                    <Select
-                      required
-                      value={formData.assigned_company}
-                      onValueChange={(val) => setFormData({ ...formData, assigned_company: val })}
-                    >
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                        <SelectValue placeholder="Select company" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="E2Eden">E2Eden</SelectItem>
-                        <SelectItem value="Seawater Greenhouse">Seawater Greenhouse</SelectItem>
-                        <SelectItem value="Partner">Partner</SelectItem>
-                        <SelectItem value="Other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="text-sm text-white/70 mb-1 block">Owner (Optional)</label>
-                    <Select
-                      value={formData.assigned_to}
-                      onValueChange={(val) => setFormData({ ...formData, assigned_to: val })}
-                    >
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                        <SelectValue placeholder="Select user" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value={null}>None</SelectItem>
-                        {users.map(user => (
-                          <SelectItem key={user.id} value={user.email}>
-                            {user.full_name} ({user.company || "No company"})
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                   <div>
-                     <label className="text-sm text-white/70 mb-1 block">Start Date</label>
-                     <Input
-                       type="date"
-                       value={formData.start_date}
-                       onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
-                       className="bg-white/5 border-white/10 text-white"
-                     />
-                   </div>
-                   <div>
-                     <label className="text-sm text-white/70 mb-1 block">Due Date</label>
-                     <Input
-                       type="date"
-                       value={formData.due_date}
-                       onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                       className="bg-white/5 border-white/10 text-white"
-                     />
-                   </div>
-                 </div>
-                <div className="flex gap-2">
-                  <Button type="button" onClick={() => setShowForm(false)} className="flex-1 bg-white/10 hover:bg-white/20 text-white border border-white/20">
-                    Cancel
-                  </Button>
-                  <Button type="submit" className="flex-1 bg-amber-500 hover:bg-amber-600 text-white">
-                    Create Task
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        )}
+
 
         {/* Filters */}
          <Card className="bg-white/[0.04] border-white/10 mb-8">
@@ -371,7 +252,7 @@ export default function TaskManager() {
          <Card className="bg-white/[0.04] border-white/10 hidden sm:block">
            <CardHeader className="flex flex-row justify-between items-center">
              <CardTitle className="text-white">Tasks</CardTitle>
-             <Button onClick={() => setShowForm(!showForm)} className="bg-amber-500 hover:bg-amber-600">
+             <Button onClick={() => setShowCreateForm(true)} className="bg-amber-500 hover:bg-amber-600">
                <Plus className="w-4 h-4 mr-2" />
                New Task
              </Button>
@@ -571,13 +452,20 @@ export default function TaskManager() {
             </div>
             )}
 
+            {/* Create Modal */}
+             <TaskCreateModal
+               isOpen={showCreateForm}
+               onClose={() => setShowCreateForm(false)}
+               users={users}
+             />
+
             {/* Edit Modal */}
-        <TaskEditModal
-          isOpen={!!editingTask}
-          onClose={() => setEditingTask(null)}
-          task={editingTask}
-          users={users}
-        />
+             <TaskEditModal
+               isOpen={!!editingTask}
+               onClose={() => setEditingTask(null)}
+               task={editingTask}
+               users={users}
+             />
       </div>
     </div>
   );
