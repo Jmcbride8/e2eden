@@ -477,6 +477,14 @@ export default function TaskManager() {
             </Card>
           )}
         </div>
+
+        {/* Edit Modal */}
+        <TaskEditModal
+          isOpen={!!editingTask}
+          onClose={() => setEditingTask(null)}
+          task={editingTask}
+          users={users}
+        />
       </div>
     </div>
   );
