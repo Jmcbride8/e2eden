@@ -1,6 +1,8 @@
-import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function Pie3D({ data, colors }) {
+  const grayScaleColors = ['#808080', '#696969', '#585858', '#474747', '#363636', '#c0c0c0', '#a9a9a9', '#999999'];
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <PieChart>
@@ -15,7 +17,7 @@ export default function Pie3D({ data, colors }) {
           dataKey="value"
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+            <Cell key={`cell-${index}`} fill={grayScaleColors[index % grayScaleColors.length]} />
           ))}
         </Pie>
         <Tooltip 
