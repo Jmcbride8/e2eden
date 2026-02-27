@@ -7,8 +7,8 @@ import { ArrowLeft, TrendingUp, Check, Clock, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
 import InvestmentForm from "../components/cap-table/InvestmentForm";
+import Pie3D from "../components/cap-table/Pie3D";
 import { createPageUrl } from "../utils";
 import { format } from "date-fns";
 
@@ -124,30 +124,18 @@ export default function CapTable() {
                 <CardTitle className="text-white">Ownership Distribution</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={400}>
-                  <PieChart>
-                    <Pie
-                      data={pieChartData}
-                      cx="50%"
-                      cy="45%"
-                      labelLine={false}
-                      label={({ name, value }) => `${name}: ${value}%`}
-                      outerRadius={130}
-                      fill="#8884d8"
-                      dataKey="value"
-                      paddingAngle={2}
-                    >
-                      {pieChartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      formatter={(value) => `${value.toFixed(2)}%`}
-                      contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '8px', color: '#fff' }}
-                    />
-                    <Legend wrapperStyle={{ color: 'rgba(255, 255, 255, 0.7)', paddingTop: '20px' }} />
-                  </PieChart>
-                </ResponsiveContainer>
+                <Pie3D data={pieChartData} colors={COLORS} />
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {investorsWithCalculatedOwnership.map((investor, index) => (
+                    <div key={investor.id} className="flex items-center gap-2">
+                      <div 
+                        className="w-3 h-3 rounded-full" 
+                        style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                      />
+                      <span className="text-sm text-white/70">{investor.name}: {investor.ownership_percentage}%</span>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </motion.div>
