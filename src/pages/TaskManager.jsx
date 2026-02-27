@@ -296,7 +296,7 @@ export default function TaskManager() {
             <Table>
               <TableHeader>
                 <TableRow className="border-white/10">
-                  <TableHead className="text-white/70 pl-0 pr-0 border-r border-white/10 w-12"></TableHead>
+                  <TableHead className="text-white/70 px-1 border-r border-white/10"></TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70">Company</TableHead>
                   <TableHead className="text-white/70">Assigned To</TableHead>
@@ -309,7 +309,7 @@ export default function TaskManager() {
                    const StatusIcon = statusIcons[task.status];
                    return (
                     <TableRow key={task.id} className="border-white/10 cursor-pointer hover:bg-white/[0.02]" onClick={() => handleEditTask(task)}>
-                      <TableCell className="pl-0 pr-0 border-r border-white/10 w-12" onClick={(e) => e.stopPropagation()}>
+                      <TableCell className="px-1 border-r border-white/10" onClick={(e) => e.stopPropagation()}>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10">
