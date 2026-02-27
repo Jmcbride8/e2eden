@@ -186,13 +186,12 @@ export default function CapTable() {
                       <TableHead className="text-white/70 text-right">Ownership %</TableHead>
                       <TableHead className="text-white/70">Date</TableHead>
                       <TableHead className="text-white/70">Status</TableHead>
-                      {isAdmin && <TableHead className="text-white/70">Actions</TableHead>}
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {investors.length === 0 ? (
                       <TableRow>
-                        <TableCell colSpan={isAdmin ? 7 : 6} className="text-center py-8 text-white/40">
+                        <TableCell colSpan={6} className="text-center py-8 text-white/40">
                           No investors yet
                         </TableCell>
                       </TableRow>
@@ -215,28 +214,6 @@ export default function CapTable() {
                                 <span className={`text-sm capitalize ${config.color}`}>{investor.status}</span>
                               </div>
                             </TableCell>
-                            {isAdmin && (
-                              <TableCell className="text-white/70">
-                                {investor.status === 'pending' && (
-                                  <div className="flex gap-2">
-                                    <Button
-                                      size="sm"
-                                      onClick={() => handleApprove(investor)}
-                                      className="bg-green-500/20 hover:bg-green-500/30 text-green-300 text-xs"
-                                    >
-                                      Approve
-                                    </Button>
-                                    <Button
-                                      size="sm"
-                                      onClick={() => handleReject(investor)}
-                                      className="bg-red-500/20 hover:bg-red-500/30 text-red-300 text-xs"
-                                    >
-                                      Reject
-                                    </Button>
-                                  </div>
-                                )}
-                              </TableCell>
-                            )}
                           </TableRow>
                         );
                       })
