@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2 } from "lucide-react";
+import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2, ChevronDown } from "lucide-react";
 import TaskEditModal from "../components/TaskEditModal";
 import TaskUpdateList from "../components/TaskUpdateList";
 import { Link } from "react-router-dom";
@@ -22,6 +22,7 @@ export default function TaskManager() {
   const [filterCompany, setFilterCompany] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
   const [editingTask, setEditingTask] = useState(null);
+  const [expandedTaskId, setExpandedTaskId] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -388,7 +389,7 @@ export default function TaskManager() {
                          <TableCell className="text-white/70 text-right">
                            {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
                          </TableCell>
-                         <TableCell className="text-right">
+                         <TableCell className="text-right flex items-center justify-end gap-3">
                            <Select
                              value={task.status}
                              onValueChange={(val) => handleStatusChange(task, val)}
@@ -405,18 +406,29 @@ export default function TaskManager() {
                                <SelectItem value="completed">Completed</SelectItem>
                              </SelectContent>
                            </Select>
+                           <button
+                             onClick={() => setExpandedTaskId(expandedTaskId === task.id ? null : task.id)}
+                             className="flex items-center gap-1 text-white/50 hover:text-white transition-colors"
+                           >
+                             <ChevronDown className={`w-4 h-4 transition-transform ${expandedTaskId === task.id ? 'rotate-180' : ''}`} />
+                             <span className="text-xs whitespace-nowrap">{allUpdates.filter(u => u.task_id === task.id).length}</span>
+                           </button>
                          </TableCell>
-                       </TableRow>
-                       <TableRow className="border-white/10 bg-white/[0.01]">
-                         <TableCell colSpan="6" className="py-3 pl-8">
-                           <TaskUpdateList
-                             taskId={task.id}
-                             updates={allUpdates}
-                             onAddUpdate={(data) => createUpdateMutation.mutate(data)}
-                             onEditUpdate={(id, data) => updateUpdateMutation.mutate({ id, data })}
-                             onDeleteUpdate={(id) => deleteUpdateMutation.mutate(id)}
-                             currentUserEmail={currentUser?.email}
-                           />
+                         </TableRow>
+                         {expandedTaskId === task.id && (
+                         <TableRow className="border-white/10 bg-white/[0.01]">
+                           <TableCell colSpan="6" className="py-3 pl-8">
+                             <TaskUpdateList
+                               taskId={task.id}
+                               updates={allUpdates}
+                               onAddUpdate={(data) => createUpdateMutation.mutate(data)}
+                               onEditUpdate={(id, data) => updateUpdateMutation.mutate({ id, data })}
+                               onDeleteUpdate={(id) => deleteUpdateMutation.mutate(id)}
+                               currentUserEmail={currentUser?.email}
+                               isExpanded={true}
+                               onToggleExpand={() => {}}
+                               users={users}
+                             />
                          </TableCell>
                        </TableRow>
                      </React.Fragment>
