@@ -13,7 +13,6 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
     description: "",
     assigned_to: "",
     assigned_company: "",
-    priority: "",
     due_date: "",
     status: "",
   });
@@ -27,7 +26,6 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
         description: task.description || "",
         assigned_to: task.assigned_to || "",
         assigned_company: task.assigned_company || "",
-        priority: task.priority || "",
         due_date: task.due_date || "",
         status: task.status || "todo",
       });
@@ -49,7 +47,7 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white/[0.04] border-white/10 max-w-lg">
+      <DialogContent className="bg-gray-900 border-white/20 max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-white">Edit Task</DialogTitle>
         </DialogHeader>
@@ -112,31 +110,14 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
               </Select>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm text-white/70 mb-1 block">Priority</label>
-              <Select
-                value={formData.priority}
-                onValueChange={(val) => setFormData({ ...formData, priority: val })}
-              >
-                <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                  <SelectValue placeholder="None" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value={null}>None</SelectItem>
-                  <SelectItem value="important">Important</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="text-sm text-white/70 mb-1 block">Due Date</label>
-              <Input
-                type="date"
-                value={formData.due_date}
-                onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                className="bg-white/5 border-white/10 text-white"
-              />
-            </div>
+          <div>
+            <label className="text-sm text-white/70 mb-1 block">Due Date</label>
+            <Input
+              type="date"
+              value={formData.due_date}
+              onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
+              className="bg-white/5 border-white/10 text-white"
+            />
           </div>
           <div>
             <label className="text-sm text-white/70 mb-1 block">Status</label>
