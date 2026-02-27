@@ -13,6 +13,7 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
     description: "",
     assigned_to: "",
     assigned_company: "",
+    start_date: "",
     due_date: "",
     status: "",
   });
@@ -26,6 +27,7 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
         description: task.description || "",
         assigned_to: task.assigned_to || "",
         assigned_company: task.assigned_company || "",
+        start_date: task.start_date || "",
         due_date: task.due_date || "",
         status: task.status || "todo",
       });
@@ -110,14 +112,25 @@ export default function TaskEditModal({ isOpen, onClose, task, users }) {
               </Select>
             </div>
           </div>
-          <div>
-            <label className="text-sm text-white/70 mb-1 block">Due Date</label>
-            <Input
-              type="date"
-              value={formData.due_date}
-              onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-              className="bg-white/5 border-white/10 text-white"
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="text-sm text-white/70 mb-1 block">Start Date</label>
+              <Input
+                type="date"
+                value={formData.start_date}
+                onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
+                className="bg-white/5 border-white/10 text-white"
+              />
+            </div>
+            <div>
+              <label className="text-sm text-white/70 mb-1 block">Due Date</label>
+              <Input
+                type="date"
+                value={formData.due_date}
+                onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
+                className="bg-white/5 border-white/10 text-white"
+              />
+            </div>
           </div>
           <div>
             <label className="text-sm text-white/70 mb-1 block">Status</label>

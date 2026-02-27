@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2, ChevronDown, BarChart3 } from "lucide-react";
+import { Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2, ChevronDown, BarChart3 } from "lucide-react";
 import TaskEditModal from "../components/TaskEditModal";
 import TaskUpdateList from "../components/TaskUpdateList";
 import TaskGanttChart from "../components/TaskGanttChart";
@@ -183,14 +183,7 @@ export default function TaskManager() {
   return (
     <div className="min-h-screen bg-black p-6 sm:p-8 pt-24 sm:pt-28">
       <div className="max-w-7xl mx-auto">
-        <Link to={createPageUrl("Home")}>
-          <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/[0.08] mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </Button>
-        </Link>
-
-        <div className="flex justify-between items-center mb-8">
+         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-white">Task Manager</h1>
           <div className="flex bg-white/10 rounded-lg p-1">
             <button
