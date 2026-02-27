@@ -43,7 +43,7 @@ export default function TaskManager() {
 
   const { data: allTasks = [] } = useQuery({
     queryKey: ['tasks'],
-    queryFn: () => base44.entities.Task.list('-created_date'),
+    queryFn: () => base44.entities.Task.list('due_date'),
     enabled: !!currentUser,
   });
 
@@ -326,14 +326,12 @@ export default function TaskManager() {
               <TableHeader>
                 <TableRow className="border-white/10">
                   <TableHead className="text-white/70 px-1 border-r border-white/10"></TableHead>
+                  <TableHead className="text-white/70 text-right">Due Date</TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70 text-right">Company</TableHead>
                   <TableHead className="text-white/70 text-right">Owner</TableHead>
-                  <TableHead className="text-white/70 text-right">Due Date</TableHead>
-                  <TableHead className="text-white/70 text-right flex items-center justify-end gap-3">
-                    <span>Status</span>
-                    <span className="text-xs w-6"></span>
-                  </TableHead>
+                  <TableHead className="text-white/70 text-right">Status</TableHead>
+                  <TableHead className="text-white/70 px-1 border-l border-white/10"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -373,6 +371,9 @@ export default function TaskManager() {
                              </DropdownMenuContent>
                            </DropdownMenu>
                          </TableCell>
+                         <TableCell className="text-white/70 text-right">
+                           {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
+                         </TableCell>
                          <TableCell>
                            <div>
                              <p className="text-white font-medium">{task.title}</p>
@@ -389,10 +390,7 @@ export default function TaskManager() {
                          <TableCell className="text-white/70 text-right">
                            {task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}
                          </TableCell>
-                         <TableCell className="text-white/70 text-right">
-                           {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
-                         </TableCell>
-                         <TableCell className="text-right flex items-center justify-end gap-3">
+                         <TableCell className="text-right">
                            <Select
                              value={task.status}
                              onValueChange={(val) => handleStatusChange(task, val)}
@@ -409,6 +407,8 @@ export default function TaskManager() {
                                <SelectItem value="completed">Completed</SelectItem>
                              </SelectContent>
                            </Select>
+                         </TableCell>
+                         <TableCell className="px-1 border-l border-white/10" onClick={(e) => e.stopPropagation()}>
                            <button
                              onClick={() => setExpandedTaskId(expandedTaskId === task.id ? null : task.id)}
                              className="flex items-center gap-1 text-white/50 hover:text-white transition-colors"
@@ -420,7 +420,7 @@ export default function TaskManager() {
                          </TableRow>
                          {expandedTaskId === task.id && (
                          <TableRow className="border-white/10 bg-white/[0.01]">
-                           <TableCell colSpan="6" className="py-3 pl-8">
+                           <TableCell colSpan="7" className="py-3 pl-8">
                              <TaskUpdateList
                                taskId={task.id}
                                updates={allUpdates}
