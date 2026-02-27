@@ -20,6 +20,7 @@ export default function TaskManager() {
   const [showForm, setShowForm] = useState(false);
   const [filterCompany, setFilterCompany] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [editingTask, setEditingTask] = useState(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
