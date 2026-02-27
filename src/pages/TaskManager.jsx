@@ -65,6 +65,14 @@ export default function TaskManager() {
     mutationFn: ({ id, data }) => base44.entities.Task.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
+      setEditingTask(null);
+    },
+  });
+
+  const deleteTaskMutation = useMutation({
+    mutationFn: (id) => base44.entities.Task.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
     },
   });
 
@@ -75,6 +83,16 @@ export default function TaskManager() {
 
   const handleStatusChange = (task, newStatus) => {
     updateTaskMutation.mutate({ id: task.id, data: { status: newStatus } });
+  };
+
+  const handleEditTask = (task) => {
+    setEditingTask(task);
+  };
+
+  const handleDeleteTask = (taskId) => {
+    if (confirm('Are you sure you want to delete this task?')) {
+      deleteTaskMutation.mutate(taskId);
+    }
   };
 
   // Filter tasks based on user permissions
