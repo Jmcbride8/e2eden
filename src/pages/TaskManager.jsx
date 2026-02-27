@@ -303,14 +303,14 @@ export default function TaskManager() {
                    const StatusIcon = statusIcons[task.status];
                    return (
                     <TableRow key={task.id} className="border-white/10">
-                      <TableCell>
+                      <TableCell className="pr-0">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10">
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 border-r border-white/20">
                               <MoreVertical className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="start" className="bg-white/[0.04] border-white/10">
+                          <DropdownMenuContent align="start" className="bg-gray-900 border-white/20">
                             <DropdownMenuItem 
                               onClick={() => handleEditTask(task)}
                               className="text-white/70 hover:text-white hover:bg-white/10 cursor-pointer flex items-center gap-2"
