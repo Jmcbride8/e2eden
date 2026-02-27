@@ -59,22 +59,22 @@ export default function Roadmap() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-5xl mx-auto px-6 py-20 sm:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 tracking-tight">
-            Our Roadmap
-          </h1>
-          <p className="text-xl text-white/70 max-w-3xl">
-            A strategic vision for sustainable development spanning from foundational
-            projects to global transformation initiatives.
-          </p>
-        </motion.div>
+      <div className="max-w-6xl mx-auto px-6 py-20 sm:px-8">
+         {/* Header */}
+         <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.6 }}
+           className="text-center mb-16"
+         >
+           <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 tracking-tight">
+             Our Roadmap
+           </h1>
+           <p className="text-xl text-white/70 max-w-3xl mx-auto">
+             A strategic vision for sustainable development spanning from foundational
+             projects to global transformation initiatives.
+           </p>
+         </motion.div>
 
         {/* Timeline */}
         <div className="relative">

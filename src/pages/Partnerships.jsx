@@ -1,10 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Handshake, Globe, Lightbulb, Users, DollarSign, CheckCircle2, Mail, Edit2, X } from "lucide-react";
+import { Handshake, Globe, Lightbulb, Users, DollarSign, CheckCircle2, Mail, Edit2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { createPageUrl } from "../utils";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -121,37 +119,23 @@ export default function Partnerships() {
   };
 
   return (
-    <div className="min-h-screen bg-black p-6 sm:p-8 pt-24 sm:pt-28">
-      <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
-        <Link to={createPageUrl("Home")}>
-          <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/[0.08] mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
-          </Button>
-        </Link>
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20">
-              <Handshake className="w-8 h-8 text-amber-400" />
-            </div>
-            <div>
-              <h1 className="text-4xl sm:text-5xl font-bold text-white">Partnerships</h1>
-              <p className="text-white/40 mt-1">Building the future together</p>
-            </div>
-          </div>
-          <p className="text-lg text-white/60 max-w-3xl leading-relaxed">
-            We believe in the power of collaboration. Partner with E2Eden to create sustainable solutions 
-            that transform communities and restore ecosystems across the globe.
-          </p>
-        </motion.div>
+    <div className="min-h-screen bg-black">
+      <div className="max-w-6xl mx-auto px-6 py-20 sm:px-8">
+         {/* Header */}
+         <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.6 }}
+           className="text-center mb-16"
+         >
+           <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 tracking-tight">
+             Partnerships
+           </h1>
+           <p className="text-xl text-white/70 max-w-3xl mx-auto">
+             We believe in the power of collaboration. Partner with E2Eden to create sustainable solutions 
+             that transform communities and restore ecosystems across the globe.
+           </p>
+         </motion.div>
 
         {/* Partnership Types */}
         <motion.div
