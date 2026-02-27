@@ -21,11 +21,11 @@ export default function CapTable() {
   const queryClient = useQueryClient();
 
   const SEED_ROUNDS = [
-    { id: 'seed-1', name: 'Seed 1', ownership: 2 },
-    { id: 'seed-2', name: 'Seed 2', ownership: 2 },
+    { id: 'seed-1', name: 'Seed 1', ownership: 0.5 },
+    { id: 'seed-2', name: 'Seed 2', ownership: 1 },
     { id: 'seed-3', name: 'Seed 3', ownership: 2 },
-    { id: 'seed-4', name: 'Seed 4', ownership: 2 },
-    { id: 'seed-5', name: 'Seed 5', ownership: 2 }
+    { id: 'seed-4', name: 'Seed 4', ownership: 3 },
+    { id: 'seed-5', name: 'Seed 5', ownership: 3.5 }
   ];
   const VALUATION = 5000000;
   const FOUNDER_OWNERSHIP = 90; // After removing 10%
