@@ -294,7 +294,6 @@ export default function TaskManager() {
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70">Company</TableHead>
                   <TableHead className="text-white/70">Assigned To</TableHead>
-                  <TableHead className="text-white/70">Priority</TableHead>
                   <TableHead className="text-white/70">Due Date</TableHead>
                   <TableHead className="text-white/70">Status</TableHead>
                 </TableRow>
@@ -344,15 +343,6 @@ export default function TaskManager() {
                       </TableCell>
                       <TableCell className="text-white/70">
                         {task.assigned_to || "Unassigned"}
-                      </TableCell>
-                      <TableCell>
-                        {task.priority ? (
-                          <Badge className={priorityColors[task.priority]}>
-                            {task.priority}
-                          </Badge>
-                        ) : (
-                          <span className="text-white/40 text-sm">-</span>
-                        )}
                       </TableCell>
                       <TableCell className="text-white/70">
                         {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
