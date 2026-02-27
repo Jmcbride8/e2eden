@@ -302,8 +302,8 @@ export default function TaskManager() {
                 {filteredTasks.map((task) => {
                    const StatusIcon = statusIcons[task.status];
                    return (
-                    <TableRow key={task.id} className="border-white/10">
-                      <TableCell className="pr-0">
+                    <TableRow key={task.id} className="border-white/10 cursor-pointer hover:bg-white/[0.02]" onClick={() => handleEditTask(task)}>
+                      <TableCell className="pr-0" onClick={(e) => e.stopPropagation()}>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 border-r border-white/20">
@@ -312,14 +312,20 @@ export default function TaskManager() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="start" className="bg-gray-900 border-white/20">
                             <DropdownMenuItem 
-                              onClick={() => handleEditTask(task)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleEditTask(task);
+                              }}
                               className="text-white/70 hover:text-white hover:bg-white/10 cursor-pointer flex items-center gap-2"
                             >
                               <Edit2 className="w-4 h-4" />
                               Edit
                             </DropdownMenuItem>
                             <DropdownMenuItem 
-                              onClick={() => handleDeleteTask(task.id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteTask(task.id);
+                              }}
                               className="text-red-400 hover:text-red-300 hover:bg-red-500/10 cursor-pointer flex items-center gap-2"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -392,15 +398,10 @@ export default function TaskManager() {
                     </div>
                     
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-purple-500/20 text-purple-300 text-xs">
-                        {task.assigned_company}
-                      </Badge>
-                      {task.priority && (
-                        <Badge className={`${priorityColors[task.priority]} text-xs`}>
-                          {task.priority}
-                        </Badge>
-                      )}
-                    </div>
+                       <Badge className="bg-purple-500/20 text-purple-300 text-xs">
+                         {task.assigned_company}
+                       </Badge>
+                     </div>
 
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
