@@ -367,8 +367,21 @@ export default function TaskManager() {
            </CardContent>
          </Card>
 
+        {/* Gantt Chart View */}
+         {viewMode === "gantt" && (
+           <Card className="bg-white/[0.04] border-white/10">
+             <CardHeader>
+               <CardTitle className="text-white">Task Timeline</CardTitle>
+             </CardHeader>
+             <CardContent>
+               <TaskGanttChart tasks={filteredTasks} getUserName={getUserName} statusColors={statusColors} />
+             </CardContent>
+           </Card>
+         )}
+
         {/* Tasks Table - Desktop */}
-        <Card className="bg-white/[0.04] border-white/10 hidden sm:block">
+         {viewMode === "table" && (
+         <Card className="bg-white/[0.04] border-white/10 hidden sm:block">
           <CardHeader>
             <CardTitle className="text-white">Tasks</CardTitle>
           </CardHeader>
@@ -494,10 +507,12 @@ export default function TaskManager() {
             {filteredTasks.length === 0 && (
               <p className="text-white/40 text-center py-8">No tasks found</p>
             )}
-          </CardContent>
-        </Card>
+            </CardContent>
+            </Card>
+            )}
 
-        {/* Tasks Cards - Mobile */}
+            {/* Tasks Cards - Mobile */}
+            {viewMode === "table" && (
         <div className="sm:hidden space-y-4 mb-20">
           {filteredTasks.map((task) => {
             const StatusIcon = statusIcons[task.status];
@@ -561,10 +576,11 @@ export default function TaskManager() {
                 <p className="text-white/40 text-center">No tasks found</p>
               </CardContent>
             </Card>
-          )}
-        </div>
+            )}
+            </div>
+            )}
 
-        {/* Edit Modal */}
+            {/* Edit Modal */}
         <TaskEditModal
           isOpen={!!editingTask}
           onClose={() => setEditingTask(null)}
