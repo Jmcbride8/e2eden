@@ -46,7 +46,7 @@ export default function InvestmentForm({ isOpen, onClose }) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-gray-900 border-white/20 max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-white">Submit Investment</DialogTitle>
+          <DialogTitle className="text-white">Propose Investment</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

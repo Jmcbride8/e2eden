@@ -129,19 +129,23 @@ export default function CapTable() {
                     <Pie
                       data={pieChartData}
                       cx="50%"
-                      cy="50%"
+                      cy="45%"
                       labelLine={false}
                       label={({ name, value }) => `${name}: ${value}%`}
-                      outerRadius={120}
+                      outerRadius={130}
                       fill="#8884d8"
                       dataKey="value"
+                      paddingAngle={2}
                     >
                       {pieChartData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value) => `${value.toFixed(2)}%`} />
-                    <Legend wrapperStyle={{ color: 'rgba(255, 255, 255, 0.7)' }} />
+                    <Tooltip 
+                      formatter={(value) => `${value.toFixed(2)}%`}
+                      contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '8px', color: '#fff' }}
+                    />
+                    <Legend wrapperStyle={{ color: 'rgba(255, 255, 255, 0.7)', paddingTop: '20px' }} />
                   </PieChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -194,7 +198,7 @@ export default function CapTable() {
               <CardTitle className="text-white">Investors</CardTitle>
               <Button onClick={() => setShowInvestmentForm(true)} className="bg-amber-500 hover:bg-amber-600">
                 <TrendingUp className="w-4 h-4 mr-2" />
-                New Investment
+                Propose Investment
               </Button>
             </CardHeader>
             <CardContent>

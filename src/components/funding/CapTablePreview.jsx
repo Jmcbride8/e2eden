@@ -40,7 +40,7 @@ export default function CapTablePreview() {
           </Button>
         </Link>
       </div>
-      <ResponsiveContainer width="100%" height={250}>
+      <ResponsiveContainer width="100%" height={280}>
         <PieChart>
           <Pie
             data={pieChartData}
@@ -48,14 +48,20 @@ export default function CapTablePreview() {
             cy="50%"
             labelLine={false}
             label={({ name, value }) => `${name}: ${value}%`}
-            outerRadius={80}
+            outerRadius={95}
+            innerRadius={0}
             fill="#8884d8"
             dataKey="value"
+            paddingAngle={2}
           >
             {pieChartData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
+          <Tooltip 
+            formatter={(value) => `${value.toFixed(2)}%`}
+            contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '8px', color: '#fff' }}
+          />
         </PieChart>
       </ResponsiveContainer>
     </div>

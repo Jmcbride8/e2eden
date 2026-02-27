@@ -48,6 +48,7 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import CRM from './pages/CRM';
+import CapTable from './pages/CapTable';
 import Conferences from './pages/Conferences';
 import Funding from './pages/Funding';
 import Home from './pages/Home';
@@ -58,12 +59,12 @@ import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
 import Technology from './pages/Technology';
 import UserManagement from './pages/UserManagement';
-import CapTable from './pages/CapTable';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "CRM": CRM,
+    "CapTable": CapTable,
     "Conferences": Conferences,
     "Funding": Funding,
     "Home": Home,
@@ -74,7 +75,6 @@ export const PAGES = {
     "TaskManager": TaskManager,
     "Technology": Technology,
     "UserManagement": UserManagement,
-    "CapTable": CapTable,
 }
 
 export const pagesConfig = {
