@@ -192,26 +192,20 @@ export default function TaskManager() {
 
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-white">Task Manager</h1>
-          <div className="flex gap-2">
-            <div className="flex bg-white/10 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode("table")}
-                className={`px-4 py-2 rounded transition-all ${viewMode === "table" ? "bg-amber-500 text-white" : "text-white/70 hover:text-white"}`}
-              >
-                Table
-              </button>
-              <button
-                onClick={() => setViewMode("gantt")}
-                className={`px-4 py-2 rounded transition-all flex items-center gap-2 ${viewMode === "gantt" ? "bg-amber-500 text-white" : "text-white/70 hover:text-white"}`}
-              >
-                <BarChart3 className="w-4 h-4" />
-                Gantt
-              </button>
-            </div>
-            <Button onClick={() => setShowForm(!showForm)} className="bg-amber-500 hover:bg-amber-600">
-              <Plus className="w-4 h-4 mr-2" />
-              New Task
-            </Button>
+          <div className="flex bg-white/10 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode("table")}
+              className={`px-4 py-2 rounded transition-all ${viewMode === "table" ? "bg-amber-500 text-white" : "text-white/70 hover:text-white"}`}
+            >
+              Table
+            </button>
+            <button
+              onClick={() => setViewMode("gantt")}
+              className={`px-4 py-2 rounded transition-all flex items-center gap-2 ${viewMode === "gantt" ? "bg-amber-500 text-white" : "text-white/70 hover:text-white"}`}
+            >
+              <BarChart3 className="w-4 h-4" />
+              Gantt
+            </button>
           </div>
         </div>
 
@@ -382,9 +376,13 @@ export default function TaskManager() {
         {/* Tasks Table - Desktop */}
          {viewMode === "table" && (
          <Card className="bg-white/[0.04] border-white/10 hidden sm:block">
-          <CardHeader>
-            <CardTitle className="text-white">Tasks</CardTitle>
-          </CardHeader>
+           <CardHeader className="flex flex-row justify-between items-center">
+             <CardTitle className="text-white">Tasks</CardTitle>
+             <Button onClick={() => setShowForm(!showForm)} className="bg-amber-500 hover:bg-amber-600">
+               <Plus className="w-4 h-4 mr-2" />
+               New Task
+             </Button>
+           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
