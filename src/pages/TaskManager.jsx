@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2 } from "lucide-react";
 import TaskEditModal from "../components/TaskEditModal";
+import TaskUpdateList from "../components/TaskUpdateList";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { format } from "date-fns";
@@ -51,6 +52,12 @@ export default function TaskManager() {
     enabled: !!currentUser,
   });
 
+  const { data: allUpdates = [] } = useQuery({
+    queryKey: ['taskUpdates'],
+    queryFn: () => base44.entities.TaskUpdate.list('-created_date'),
+    enabled: !!currentUser,
+  });
+
   const createTaskMutation = useMutation({
     mutationFn: (data) => base44.entities.Task.create(data),
     onSuccess: () => {
@@ -72,6 +79,27 @@ export default function TaskManager() {
     mutationFn: (id) => base44.entities.Task.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+
+  const createUpdateMutation = useMutation({
+    mutationFn: (data) => base44.entities.TaskUpdate.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['taskUpdates'] });
+    },
+  });
+
+  const updateUpdateMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.TaskUpdate.update(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['taskUpdates'] });
+    },
+  });
+
+  const deleteUpdateMutation = useMutation({
+    mutationFn: (id) => base44.entities.TaskUpdate.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['taskUpdates'] });
     },
   });
 
@@ -308,7 +336,7 @@ export default function TaskManager() {
                 {filteredTasks.map((task) => {
                    const StatusIcon = statusIcons[task.status];
                    return (
-                    <TableRow key={task.id} className="border-white/10 cursor-pointer hover:bg-white/[0.02]" onClick={() => handleEditTask(task)}>
+                    <TableRow key={task.id} className="border-white/10">
                       <TableCell className="px-1 border-r border-white/10" onClick={(e) => e.stopPropagation()}>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -377,11 +405,23 @@ export default function TaskManager() {
                           </SelectContent>
                         </Select>
                       </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
+                      </TableRow>
+                      <TableRow key={`${task.id}-updates`} className="border-white/10 bg-white/[0.01]">
+                      <TableCell colSpan="6" className="py-3 pl-8">
+                        <TaskUpdateList
+                          taskId={task.id}
+                          updates={allUpdates}
+                          onAddUpdate={(data) => createUpdateMutation.mutate(data)}
+                          onEditUpdate={(id, data) => updateUpdateMutation.mutate({ id, data })}
+                          onDeleteUpdate={(id) => deleteUpdateMutation.mutate(id)}
+                          currentUserEmail={currentUser?.email}
+                        />
+                      </TableCell>
+                      </TableRow>
+                      );
+                      })}
+                      </TableBody>
+                      </Table>
             {filteredTasks.length === 0 && (
               <p className="text-white/40 text-center py-8">No tasks found</p>
             )}
