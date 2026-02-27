@@ -330,7 +330,10 @@ export default function TaskManager() {
                   <TableHead className="text-white/70 text-right">Company</TableHead>
                   <TableHead className="text-white/70 text-right">Owner</TableHead>
                   <TableHead className="text-white/70 text-right">Due Date</TableHead>
-                  <TableHead className="text-white/70 text-right">Status</TableHead>
+                  <TableHead className="text-white/70 text-right flex items-center justify-end gap-3">
+                    <span>Status</span>
+                    <span className="text-xs w-6"></span>
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
