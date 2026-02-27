@@ -117,13 +117,13 @@ export default function CapTable() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-16"
+            className="mb-4"
           >
-            <Card className="bg-white/[0.04] border-white/10">
-              <CardHeader>
+            <Card className="bg-white/[0.04] border-0">
+              <CardHeader className="pb-2">
                 <CardTitle className="text-white">Ownership Distribution</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pb-4">
                 <Pie3D data={pieChartData} colors={COLORS} />
               </CardContent>
             </Card>
@@ -135,13 +135,13 @@ export default function CapTable() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid md:grid-cols-3 gap-6 mb-16"
+          className="grid md:grid-cols-3 gap-4 mb-4"
         >
           <Card className="bg-white/[0.04] border-white/10">
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-amber-400">${totalInvestment.toLocaleString()}</div>
-                <div className="text-sm text-white/60 mt-2">Total Approved Investment</div>
+                <div className="text-sm text-white/60 mt-2">Current Valuation</div>
               </div>
             </CardContent>
           </Card>
@@ -168,7 +168,7 @@ export default function CapTable() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-16"
+          className="mb-4"
         >
           <Card className="bg-white/[0.04] border-white/10">
             <CardHeader className="flex flex-row justify-between items-center">
