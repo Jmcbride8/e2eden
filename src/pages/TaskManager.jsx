@@ -8,7 +8,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2 } from "lucide-react";
+import TaskEditModal from "../components/TaskEditModal";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { format } from "date-fns";
