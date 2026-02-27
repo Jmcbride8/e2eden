@@ -4,6 +4,7 @@ import { DollarSign, TrendingUp, Award, Heart, Building2, FileText } from "lucid
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import DonationModal from "../components/funding/DonationModal";
+import CapTablePreview from "../components/funding/CapTablePreview";
 
 export default function Funding() {
   const [donationModal, setDonationModal] = useState({ isOpen: false, projectName: null });
@@ -86,6 +87,7 @@ export default function Funding() {
               <p className="text-sm text-white/70 leading-relaxed">
                 Partner with us on large-scale infrastructure projects that generate both environmental and financial returns. Clear milestones, ROI projections, and measurable impact metrics.
               </p>
+              <CapTablePreview />
             </div>
           </div>
         </motion.div>
