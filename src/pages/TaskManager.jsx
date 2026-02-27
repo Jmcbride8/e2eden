@@ -9,25 +9,29 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2, ChevronDown } from "lucide-react";
+import { ArrowLeft, Plus, CheckCircle2, Clock, AlertCircle, MoreVertical, Edit2, Trash2, ChevronDown, BarChart3 } from "lucide-react";
 import TaskEditModal from "../components/TaskEditModal";
 import TaskUpdateList from "../components/TaskUpdateList";
+import TaskGanttChart from "../components/TaskGanttChart";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
-import { format } from "date-fns";
+import { format, subDays } from "date-fns";
 
 export default function TaskManager() {
   const [currentUser, setCurrentUser] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [filterCompany, setFilterCompany] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [filterOwner, setFilterOwner] = useState("");
   const [editingTask, setEditingTask] = useState(null);
   const [expandedTaskId, setExpandedTaskId] = useState(null);
+  const [viewMode, setViewMode] = useState("table");
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     assigned_to: "",
     assigned_company: "",
+    start_date: "",
     due_date: "",
   });
 
@@ -37,6 +41,7 @@ export default function TaskManager() {
     const loadUser = async () => {
       const user = await base44.auth.me();
       setCurrentUser(user);
+      setFilterOwner(user?.email || "");
     };
     loadUser();
   }, []);
@@ -64,7 +69,7 @@ export default function TaskManager() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       setShowForm(false);
-      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", due_date: "" });
+      setFormData({ title: "", description: "", assigned_to: "", assigned_company: "", start_date: "", due_date: "" });
     },
   });
 
@@ -129,7 +134,8 @@ export default function TaskManager() {
     if (currentUser?.role === 'admin') {
       const companyMatch = filterCompany === "all" || task.assigned_company === filterCompany;
       const statusMatch = filterStatus === "all" || task.status === filterStatus;
-      return companyMatch && statusMatch;
+      const ownerMatch = filterOwner === "" || task.assigned_to === filterOwner;
+      return companyMatch && statusMatch && ownerMatch;
     }
     
     // Regular users only see tasks where:
@@ -143,8 +149,9 @@ export default function TaskManager() {
     const hasAccess = isCreator || isAssignedToMe || isMyCompany;
     const companyMatch = filterCompany === "all" || task.assigned_company === filterCompany;
     const statusMatch = filterStatus === "all" || task.status === filterStatus;
+    const ownerMatch = filterOwner === "" || task.assigned_to === filterOwner;
     
-    return hasAccess && companyMatch && statusMatch;
+    return hasAccess && companyMatch && statusMatch && ownerMatch;
   });
 
   const statusIcons = {
