@@ -130,7 +130,13 @@ export default function TaskManager() {
     completed: "bg-green-500/20 text-green-300",
   };
 
-
+  const getUserName = (email) => {
+    const user = users.find(u => u.email === email);
+    if (user && user.full_name) {
+      return user.full_name;
+    }
+    return email;
+  };
 
   if (!currentUser) {
     return <div className="min-h-screen bg-black flex items-center justify-center">
@@ -290,8 +296,7 @@ export default function TaskManager() {
             <Table>
               <TableHeader>
                 <TableRow className="border-white/10">
-                  <TableHead className="text-white/70 w-12"></TableHead>
-                  <TableHead className="text-white/70 pl-0 pr-0 border-r border-white/10"></TableHead>
+                  <TableHead className="text-white/70 pl-0 pr-0 border-r border-white/10 w-12"></TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70">Company</TableHead>
                   <TableHead className="text-white/70">Assigned To</TableHead>
