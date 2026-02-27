@@ -291,6 +291,7 @@ export default function TaskManager() {
               <TableHeader>
                 <TableRow className="border-white/10">
                   <TableHead className="text-white/70 w-12"></TableHead>
+                  <TableHead className="text-white/70 pl-0 pr-0 border-r border-white/10"></TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70">Company</TableHead>
                   <TableHead className="text-white/70">Assigned To</TableHead>
@@ -303,10 +304,10 @@ export default function TaskManager() {
                    const StatusIcon = statusIcons[task.status];
                    return (
                     <TableRow key={task.id} className="border-white/10 cursor-pointer hover:bg-white/[0.02]" onClick={() => handleEditTask(task)}>
-                      <TableCell className="pr-0" onClick={(e) => e.stopPropagation()}>
+                      <TableCell className="pl-0 pr-0 border-r border-white/10 w-12" onClick={(e) => e.stopPropagation()}>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10 border-r border-white/20">
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-white/70 hover:text-white hover:bg-white/10">
                               <MoreVertical className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
@@ -348,7 +349,7 @@ export default function TaskManager() {
                         </Badge>
                       </TableCell>
                       <TableCell className="text-white/70">
-                        {task.assigned_to || "Unassigned"}
+                        {task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}
                       </TableCell>
                       <TableCell className="text-white/70">
                         {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
@@ -405,9 +406,9 @@ export default function TaskManager() {
 
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-white/50">Assigned to:</span>
-                        <span className="text-white/70">{task.assigned_to || "Unassigned"}</span>
-                      </div>
+                         <span className="text-white/50">Assigned to:</span>
+                         <span className="text-white/70">{task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}</span>
+                       </div>
                       <div className="flex justify-between">
                         <span className="text-white/50">Due date:</span>
                         <span className="text-white/70">
