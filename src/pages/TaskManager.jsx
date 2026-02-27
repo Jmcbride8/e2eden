@@ -209,7 +209,7 @@ export default function TaskManager() {
                     </Select>
                   </div>
                   <div>
-                    <label className="text-sm text-white/70 mb-1 block">Assign To User (Optional)</label>
+                    <label className="text-sm text-white/70 mb-1 block">Owner (Optional)</label>
                     <Select
                       value={formData.assigned_to}
                       onValueChange={(val) => setFormData({ ...formData, assigned_to: val })}
@@ -299,7 +299,7 @@ export default function TaskManager() {
                   <TableHead className="text-white/70 px-1 border-r border-white/10"></TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
                   <TableHead className="text-white/70">Company</TableHead>
-                  <TableHead className="text-white/70">Assigned To</TableHead>
+                  <TableHead className="text-white/70">Owner</TableHead>
                   <TableHead className="text-white/70">Due Date</TableHead>
                   <TableHead className="text-white/70">Status</TableHead>
                 </TableRow>
@@ -411,7 +411,7 @@ export default function TaskManager() {
 
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                         <span className="text-white/50">Assigned to:</span>
+                         <span className="text-white/50">Owner:</span>
                          <span className="text-white/70">{task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}</span>
                        </div>
                       <div className="flex justify-between">
