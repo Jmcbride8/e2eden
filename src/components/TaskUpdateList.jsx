@@ -4,8 +4,7 @@ import { ChevronDown, Edit2, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TaskUpdateForm from './TaskUpdateForm';
 
-export default function TaskUpdateList({ taskId, updates, onAddUpdate, onEditUpdate, onDeleteUpdate, currentUserEmail }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+export default function TaskUpdateList({ taskId, updates, onAddUpdate, onEditUpdate, onDeleteUpdate, currentUserEmail, isExpanded, onToggleExpand, users }) {
   const [isAddingUpdate, setIsAddingUpdate] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editFormData, setEditFormData] = useState(null);
@@ -23,23 +22,20 @@ export default function TaskUpdateList({ taskId, updates, onAddUpdate, onEditUpd
     setEditFormData(null);
   };
 
-  return (
-    <div className="mt-2">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center gap-2 text-white/70 hover:text-white text-sm transition-colors"
-      >
-        <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-        <span>{taskUpdates.length} Update{taskUpdates.length !== 1 ? 's' : ''}</span>
-      </button>
+  const getUserName = (email) => {
+    const user = users.find(u => u.email === email);
+    return user?.full_name || email;
+  };
 
-      {isExpanded && (
-        <div className="mt-3 space-y-2 pl-6 border-l border-white/10">
+  return (
+    <div className="w-full">{isExpanded && (
+
+      <div className="space-y-2">
           {taskUpdates.length === 0 ? (
             <p className="text-white/40 text-sm py-2">No updates yet</p>
           ) : (
             taskUpdates.map(update => (
-              <div key={update.id} className="bg-white/[0.02] border border-white/10 rounded p-3">
+              <div key={update.id} className="bg-white/[0.05] border border-white/15 rounded p-3">
                 {editingId === update.id ? (
                   <div className="space-y-2">
                     <input
@@ -73,9 +69,14 @@ export default function TaskUpdateList({ taskId, updates, onAddUpdate, onEditUpd
                 ) : (
                   <>
                     <div className="flex justify-between items-start mb-2">
-                      <span className="text-white/50 text-xs">
-                        {format(new Date(update.update_date), 'MMM dd, yyyy')}
-                      </span>
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-white/70 text-xs font-medium">
+                          {getUserName(update.created_by)}
+                        </span>
+                        <span className="text-white/50 text-xs">
+                          {format(new Date(update.update_date), 'MMM dd, yyyy')}
+                        </span>
+                      </div>
                       {update.created_by === currentUserEmail && (
                         <div className="flex gap-1">
                           <Button
