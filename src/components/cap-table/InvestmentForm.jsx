@@ -5,11 +5,11 @@ import { Input } from "@/components/ui/input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 
-export default function InvestmentForm({ isOpen, onClose }) {
+export default function InvestmentForm({ isOpen, onClose, seedRound }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    investment_amount: "",
+    investment_amount: seedRound ? (5000000 * seedRound.ownership / 100) : "",
     investment_date: new Date().toISOString().split('T')[0],
   });
 
@@ -46,7 +46,7 @@ export default function InvestmentForm({ isOpen, onClose }) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-gray-900 border-white/20 max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-white">Propose Investment</DialogTitle>
+          <DialogTitle className="text-white">{seedRound ? `Invest in ${seedRound.name}` : 'Propose Investment'}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -81,7 +81,13 @@ export default function InvestmentForm({ isOpen, onClose }) {
               onChange={(e) => setFormData({ ...formData, investment_amount: e.target.value })}
               className="bg-white/5 border-white/10 text-white placeholder-white/40"
               placeholder="Enter amount"
+              disabled={!!seedRound}
             />
+            {seedRound && (
+              <div className="text-xs text-white/50 mt-1">
+                {seedRound.name} allocation: ${(5000000 * seedRound.ownership / 100).toLocaleString()} (2% of $5M)
+              </div>
+            )}
           </div>
           <div>
             <label className="text-sm text-white/70 mb-1 block">Investment Date</label>
