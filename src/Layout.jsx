@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from './utils';
 import UserMenu from './components/navigation/UserMenu';
 import MobileNav from './components/navigation/MobileNav';
-import TaskCounter from './components/navigation/TaskCounter';
+import TaskCounter from './components/navigation/TaskCounter.jsx';
 
 export default function Layout({ children, currentPageName }) {
   return (
