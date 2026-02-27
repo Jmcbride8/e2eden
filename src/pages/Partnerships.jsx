@@ -120,7 +120,7 @@ export default function Partnerships() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-6xl mx-auto px-6 py-20 sm:px-8">
+      <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 sm:px-8 sm:pt-28">
          {/* Header */}
          <motion.div
            initial={{ opacity: 0, y: 20 }}
