@@ -13,7 +13,6 @@ export default function Pie3D({ data, colors }) {
           outerRadius={120}
           fill="#8884d8"
           dataKey="value"
-          paddingAngle={3}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
@@ -27,7 +26,6 @@ export default function Pie3D({ data, colors }) {
           }}
           contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '8px', color: '#fff' }}
         />
-        <Legend wrapperStyle={{ color: 'rgba(255, 255, 255, 0.7)', paddingTop: '20px' }} />
       </PieChart>
     </ResponsiveContainer>
   );
