@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { DollarSign, TrendingUp, Award, Heart, Building2, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "../utils";
 import DonationModal from "../components/funding/DonationModal";
 import CapTablePreview from "../components/funding/CapTablePreview";
 
@@ -84,9 +86,13 @@ export default function Funding() {
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-white/70 leading-relaxed">
+              <p className="text-sm text-white/70 leading-relaxed mb-4">
                 Partner with us on large-scale infrastructure projects that generate both environmental and financial returns. Clear milestones, ROI projections, and measurable impact metrics.
               </p>
+              <Link to={createPageUrl("CapTable")} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 font-medium transition-colors border border-blue-500/20">
+                <TrendingUp className="w-4 h-4" />
+                View Cap Table & Invest
+              </Link>
               <CapTablePreview />
             </div>
           </div>
