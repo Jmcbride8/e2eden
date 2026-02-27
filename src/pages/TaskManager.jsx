@@ -298,10 +298,10 @@ export default function TaskManager() {
                 <TableRow className="border-white/10">
                   <TableHead className="text-white/70 px-1 border-r border-white/10"></TableHead>
                   <TableHead className="text-white/70">Task</TableHead>
-                  <TableHead className="text-white/70">Company</TableHead>
-                  <TableHead className="text-white/70">Owner</TableHead>
-                  <TableHead className="text-white/70">Due Date</TableHead>
-                  <TableHead className="text-white/70">Status</TableHead>
+                  <TableHead className="text-white/70 text-right">Company</TableHead>
+                  <TableHead className="text-white/70 text-right">Owner</TableHead>
+                  <TableHead className="text-white/70 text-right">Due Date</TableHead>
+                  <TableHead className="text-white/70 text-right">Status</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -348,18 +348,18 @@ export default function TaskManager() {
                           )}
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="text-right">
                         <Badge className="bg-purple-500/20 text-purple-300">
                           {task.assigned_company}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-white/70">
+                      <TableCell className="text-white/70 text-right">
                         {task.assigned_to ? getUserName(task.assigned_to) : "Unassigned"}
                       </TableCell>
-                      <TableCell className="text-white/70">
+                      <TableCell className="text-white/70 text-right">
                         {task.due_date ? format(new Date(task.due_date), "MMM dd, yyyy") : "-"}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="text-right">
                         <Select
                           value={task.status}
                           onValueChange={(val) => handleStatusChange(task, val)}
