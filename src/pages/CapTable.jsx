@@ -295,6 +295,13 @@ export default function CapTable() {
         </motion.div>
       </div>
 
+      {/* Investor Edit Modal (admin only) */}
+      <InvestorEditModal
+        investor={editingInvestor}
+        isOpen={!!editingInvestor}
+        onClose={() => setEditingInvestor(null)}
+      />
+
       {/* Investment Form Modal */}
       <InvestmentForm
         isOpen={showInvestmentForm}
