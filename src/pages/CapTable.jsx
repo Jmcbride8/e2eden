@@ -264,7 +264,11 @@ export default function CapTable() {
                         const config = statusConfig[investor.status];
                         const Icon = config.icon;
                         return (
-                          <TableRow key={investor.id} className="border-white/10">
+                          <TableRow
+                            key={investor.id}
+                            className={`border-white/10 ${isAdmin ? 'cursor-pointer hover:bg-white/[0.04]' : ''} transition-colors`}
+                            onClick={() => isAdmin && setEditingInvestor(investor)}
+                          >
                             <TableCell className="text-white">{investor.name}</TableCell>
                             <TableCell className="text-white/70">{investor.email}</TableCell>
                             <TableCell className="text-right text-white/70">${investor.investment_amount.toLocaleString()}</TableCell>
@@ -278,7 +282,7 @@ export default function CapTable() {
                                 <span className={`text-sm capitalize ${config.color}`}>{investor.status}</span>
                               </div>
                             </TableCell>
-                            <TableCell>-</TableCell>
+                            <TableCell className="text-white/30 text-xs">{isAdmin ? 'click to edit' : '-'}</TableCell>
                           </TableRow>
                         );
                       })
