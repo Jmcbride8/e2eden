@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import InvestmentForm from "../components/cap-table/InvestmentForm";
+import InvestorEditModal from "../components/cap-table/InvestorEditModal";
 import Pie3D from "../components/cap-table/Pie3D";
 import { createPageUrl } from "../utils";
 import { format } from "date-fns";
