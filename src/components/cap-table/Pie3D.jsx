@@ -26,7 +26,9 @@ export default function Pie3D({ data, colors }) {
             const percentage = ((value / total) * 100).toFixed(2);
             return `${percentage}%`;
           }}
-          contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '8px', color: '#fff' }}
+          contentStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.9)', border: '1px solid rgba(255, 255, 255, 0.2)', borderRadius: '8px', color: '#ffffff' }}
+          itemStyle={{ color: '#ffffff' }}
+          labelStyle={{ color: '#ffffff' }}
         />
       </PieChart>
     </ResponsiveContainer>
