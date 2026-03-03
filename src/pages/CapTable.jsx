@@ -18,6 +18,7 @@ const COLORS = ['#fbbf24', '#60a5fa', '#34d399', '#f87171', '#a78bfa', '#fb923c'
 export default function CapTable() {
   const [showInvestmentForm, setShowInvestmentForm] = useState(false);
   const [selectedSeedRound, setSelectedSeedRound] = useState(null);
+  const [editingInvestor, setEditingInvestor] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const queryClient = useQueryClient();
 
