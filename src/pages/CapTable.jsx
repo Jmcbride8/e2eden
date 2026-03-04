@@ -69,10 +69,9 @@ export default function CapTable() {
     ownership_percentage: ((inv.investment_amount / VALUATION) * 100).toFixed(2)
   }));
 
-  // Create pie chart data including founder and seeds
+  // Create pie chart data including seeds
   const allChartData = [
-    { name: 'Founder', value: FOUNDER_OWNERSHIP },
-    ...investorsWithCalculatedOwnership.map(inv => ({
+    ...investorsWithCalculatedOwnership.filter(inv => inv.name !== 'Amy Cunha').map(inv => ({
       name: inv.name,
       value: parseFloat(inv.ownership_percentage)
     })),
