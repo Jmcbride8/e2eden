@@ -213,22 +213,6 @@ export default function CapTable() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {/* Founder Row */}
-                    <TableRow className="border-white/10 bg-white/[0.02]">
-                      <TableCell className="text-white font-semibold">Founder</TableCell>
-                      <TableCell className="text-white/70">-</TableCell>
-                      <TableCell className="text-right text-white/70">-</TableCell>
-                      <TableCell className="text-right text-white/70">{FOUNDER_OWNERSHIP}%</TableCell>
-                      <TableCell className="text-white/70">-</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Check className="w-4 h-4 text-green-400" />
-                          <span className="text-sm text-green-400">Founder</span>
-                        </div>
-                      </TableCell>
-                      <TableCell>-</TableCell>
-                    </TableRow>
-
                     {/* Seed Rounds */}
                     {SEED_ROUNDS.map((seed, idx) => (
                       <TableRow key={seed.id} className="border-white/10">
