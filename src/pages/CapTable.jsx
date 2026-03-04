@@ -243,7 +243,7 @@ export default function CapTable() {
 
                     {/* Investor Rows */}
                     {investors.length === 0 ? null : (
-                      investors.map((investor) => {
+                      investors.filter(inv => inv.name !== 'Amy Cunha').map((investor) => {
                         const config = statusConfig[investor.status] || statusConfig.pending;
                         const Icon = config.icon;
                         return (
