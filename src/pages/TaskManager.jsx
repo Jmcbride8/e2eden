@@ -33,7 +33,7 @@ export default function TaskManager() {
     const loadUser = async () => {
       const user = await base44.auth.me();
       setCurrentUser(user);
-      setFilterOwner(user?.email || "");
+      // Don't pre-filter by owner — show all accessible tasks by default
     };
     loadUser();
   }, []);
