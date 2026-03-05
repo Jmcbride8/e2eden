@@ -561,24 +561,32 @@ export default function Home() {
                 From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
               </p>
               
-              <div className="grid md:grid-cols-3 gap-8">
-                {[
-                { region: "North America", projects: "Active", desc: "Imperial Valley, Salton Sea" },
-                { region: "Africa", projects: "Expanding", desc: "Kenya, Tanzania" },
-                { region: "Middle East", projects: "Planned", desc: "UAE, Saudi Arabia" }].
-                map((location, idx) =>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {allProjects.filter(p => p.phase === "Transformation").sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)).map((project, idx) =>
                 <motion.div
-                  key={idx}
+                  key={project.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: idx * 0.1 }}
-                  className="p-8 rounded-2xl bg-white/5 border border-white/10">
+                  onClick={() => handleSelectProject(project)}
+                  className="relative rounded-2xl overflow-hidden cursor-pointer group h-64">
 
-                    <h3 className="text-2xl font-bold mb-2 text-white">{location.region}</h3>
-                    <div className="text-amber-400 font-semibold mb-2">{location.projects}</div>
-                    <p className="text-sm text-white/60">{location.desc}</p>
-                  </motion.div>
+                  {project.hero_image ?
+                    <img
+                      src={project.hero_image}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectPosition: project.hero_image_position || 'center center' }} /> :
+                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+                  }
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-left">
+                    <h3 className="text-white font-bold text-lg leading-tight">{project.name}</h3>
+                    <p className="text-amber-400 text-sm mt-1">{project.location}</p>
+                    <p className="text-white/60 text-xs mt-1 line-clamp-2">{project.description}</p>
+                  </div>
+                </motion.div>
                 )}
               </div>
             </motion.div>
