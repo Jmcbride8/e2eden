@@ -419,7 +419,7 @@ export default function Home() {
         </section>
 
         {/* 2. The Problem is Agriculture */}
-        <RootCauseSection isAdmin={isAdmin} />
+        <RootCauseSection isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
 
         {/* 3. The Solution */}
         <section className="py-24 px-6 sm:px-12 bg-black">
