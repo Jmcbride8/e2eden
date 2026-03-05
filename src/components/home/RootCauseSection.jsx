@@ -27,7 +27,7 @@ const PIE_DATA = [
   { name: "Industrial & Commercial", value: 7, color: "#34d399" },
 ];
 
-const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, name, value }) => {
+const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
   const RADIAN = Math.PI / 180;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -41,17 +41,7 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, name, value }
 
 export default function RootCauseSection({ isAdmin }) {
   const [imageUrls, setImageUrls] = useState({});
-  const [uploading, setUploading] = useState(null);
-  const [editMode, setEditMode] = useState(false);
-
-  const getUrl = (img) => imageUrls[img.key] || img.default;
-
-  const handleUpload = async (imgKey, file) => {
-    setUploading(imgKey);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setImageUrls((prev) => ({ ...prev, [imgKey]: file_url }));
-    setUploading(null);
-  };
+  const setImg = (key, url) => setImageUrls((prev) => ({ ...prev, [key]: url }));
 
   return (
     <section className="py-24 px-6 sm:px-12 bg-black">
@@ -69,24 +59,9 @@ export default function RootCauseSection({ isAdmin }) {
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          <div className="flex items-start justify-between mb-6 gap-4 flex-wrap">
-            <h2 className="text-5xl font-bold text-white">
-              The Problem: Agriculture Uses 85% of Our Water
-            </h2>
-            {isAdmin && (
-              <button
-                onClick={() => setEditMode((v) => !v)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
-                  editMode
-                    ? "bg-amber-500/20 border-amber-500/50 text-amber-300"
-                    : "bg-white/5 border-white/10 text-white/50 hover:text-white/80"
-                }`}
-              >
-                <Pencil className="w-4 h-4" />
-                {editMode ? "Done Editing" : "Edit Images"}
-              </button>
-            )}
-          </div>
+          <h2 className="text-5xl font-bold text-white mb-6">
+            The Problem: Agriculture Uses 85% of Our Water
+          </h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
             Agriculture consumes a staggering 85% of global freshwater resources. Traditional farming methods are
@@ -98,35 +73,18 @@ export default function RootCauseSection({ isAdmin }) {
             {DEFAULT_IMAGES.map((img) => (
               <div key={img.key} className="relative rounded-2xl overflow-hidden group">
                 <div className="aspect-[4/3] relative">
-                  <img
-                    src={getUrl(img)}
+                  <AdminImageUpload
+                    src={imageUrls[img.key] || img.default}
                     alt={img.caption}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setImg(img.key, url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <p className="absolute bottom-3 left-3 right-3 text-white/80 text-xs leading-snug">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <p className="absolute bottom-3 left-3 right-3 text-white/80 text-xs leading-snug pointer-events-none">
                     {img.caption}
                   </p>
-
-                  {/* Upload overlay when in edit mode */}
-                  {editMode && (
-                    <label className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 cursor-pointer z-10">
-                      {uploading === img.key ? (
-                        <div className="text-white/70 text-sm animate-pulse">Uploading...</div>
-                      ) : (
-                        <>
-                          <Upload className="w-8 h-8 text-amber-400 mb-2" />
-                          <span className="text-white text-sm font-medium">Replace Image</span>
-                        </>
-                      )}
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => e.target.files[0] && handleUpload(img.key, e.target.files[0])}
-                      />
-                    </label>
-                  )}
                 </div>
               </div>
             ))}
