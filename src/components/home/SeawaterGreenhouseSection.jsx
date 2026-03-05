@@ -137,6 +137,13 @@ export default function SeawaterGreenhouseSection() {
                   <h3 className="text-white font-bold text-lg mb-1">{project.name}</h3>
                   <p className="text-white/40 text-xs mb-2">{project.location}{project.country ? `, ${project.country}` : ''}</p>
                   <p className="text-white/60 text-sm leading-relaxed">{project.description}</p>
+                  <div className="mt-4 pt-4 border-t border-white/10">
+                    <img
+                      src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e98f8b829_image.png"
+                      alt="Seawater Greenhouse"
+                      className="h-6 object-contain opacity-60"
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}
