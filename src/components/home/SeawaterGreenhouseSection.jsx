@@ -12,7 +12,9 @@ export default function SeawaterGreenhouseSection() {
     queryFn: () => base44.entities.Project.list('sort_order'),
   });
 
-  const projects = allProjects.filter(p => p.company === "Seawater Greenhouse");
+  const projects = allProjects
+    .filter(p => p.company === "Seawater Greenhouse")
+    .sort((a, b) => (a.year || 0) - (b.year || 0));
 
   const scroll = (dir) => {
     if (scrollRef.current) {
