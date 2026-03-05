@@ -587,6 +587,11 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px flex-1 bg-white/10" />
+                <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Join the Mission</span>
+                <div className="h-px flex-1 bg-white/10" />
+              </div>
               <h2 className="text-6xl font-bold mb-8 text-white">
                 Together, We Can Change the World
               </h2>
