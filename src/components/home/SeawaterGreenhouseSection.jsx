@@ -94,9 +94,9 @@ export default function SeawaterGreenhouseSection() {
             className="flex gap-5 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden"
             style={{ scrollbarWidth: "none" }}
           >
-            {PAST_PROJECTS.map((project, idx) => (
+            {projects.map((project, idx) => (
               <motion.div
-                key={idx}
+                key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -105,25 +105,35 @@ export default function SeawaterGreenhouseSection() {
               >
                 {/* Image */}
                 <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  {project.hero_image ? (
+                    <img
+                      src={project.hero_image}
+                      alt={project.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      style={{ objectPosition: project.hero_image_position || 'center center' }}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-white/5" />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-2 py-1 rounded-md text-xs font-semibold bg-amber-500/30 text-amber-300 border border-amber-500/30">
-                      {project.tag}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-3 right-3 text-white/50 text-xs font-mono">
-                    {project.year}
-                  </div>
+                  {project.phase && (
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2 py-1 rounded-md text-xs font-semibold bg-amber-500/30 text-amber-300 border border-amber-500/30">
+                        {project.phase}
+                      </span>
+                    </div>
+                  )}
+                  {project.year && (
+                    <div className="absolute bottom-3 right-3 text-white/50 text-xs font-mono">
+                      {project.year}
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="text-white font-bold text-lg mb-2">{project.name}</h3>
+                  <h3 className="text-white font-bold text-lg mb-1">{project.name}</h3>
+                  <p className="text-white/40 text-xs mb-2">{project.location}{project.country ? `, ${project.country}` : ''}</p>
                   <p className="text-white/60 text-sm leading-relaxed">{project.description}</p>
                 </div>
               </motion.div>
