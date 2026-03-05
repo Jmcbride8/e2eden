@@ -586,7 +586,7 @@ export default function Home() {
         </section>
 
         {/* 6. Change the World */}
-        <section className="py-32 px-6 sm:px-12 bg-gray-900">
+        <section className="py-32 px-6 sm:px-12 bg-black">
           <div className="max-w-5xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
