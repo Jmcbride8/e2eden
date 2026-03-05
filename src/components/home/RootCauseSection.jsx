@@ -12,7 +12,7 @@ const DEFAULT_IMAGES = [
 {
   key: "root_cause_img_2",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "Desert farms apply 6 to 10 feet of water per acre every year — not because farmers love wasting it, but because plants in extreme heat suffer heat stress and must transpire constantly just to survive. Drip irrigation can't solve this; the water isn't being wasted in delivery, it's being consumed by the plant's cooling system. Most of it never becomes food."
+  caption: "Desert farms apply 6 to 10 feet of water per acre every year — not because farmers love wasting it, but because plants in extreme heat suffer heat stress and must transpire constantly just to survive. Drip irrigation can't solve this; the water isn't being wasted in delivery, it's being consumed by the plant's cooling system. and lost to the sky."
 },
 {
   key: "root_cause_img_3",
