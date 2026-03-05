@@ -500,7 +500,7 @@ export default function Home() {
         <SeawaterGreenhouseSection />
 
         {/* 4. Getting Started - Imperial Valley */}
-        <section className="py-24 px-6 sm:px-12 bg-gray-900">
+        <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
