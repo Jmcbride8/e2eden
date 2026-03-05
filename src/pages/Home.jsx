@@ -475,19 +475,17 @@ export default function Home() {
                 isAdmin={isAdmin}
                 onUploaded={(url) => setHomeImg("innovation_hero", url)}
                 className="w-full rounded-2xl overflow-hidden"
-                imgClassName="w-full h-96 object-cover rounded-2xl" />
+                imgClassName="w-full h-[32rem] object-cover rounded-2xl" />
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="grid md:grid-cols-2 gap-12 mb-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20">
-
-                <h3 className="text-2xl font-bold mb-4 text-amber-400">Evaporative Cellulose Panels</h3>
-                <p className="text-lg leading-relaxed text-white/70">
+                transition={{ duration: 0.8 }}>
+                <h3 className="text-2xl font-bold mb-4 text-white">Evaporative Cellulose Panels</h3>
+                <p className="text-lg leading-relaxed text-white/60">
                   Our patented cooling walls use natural evaporation to reduce temperatures by up to 15°C, increase 
                   humidity by 50%, and save 90% of water compared to traditional irrigation.
                 </p>
@@ -497,11 +495,9 @@ export default function Home() {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
-
-                <h3 className="text-2xl font-bold mb-4 text-blue-400">Brine Utilization</h3>
-                <p className="text-lg leading-relaxed text-white/70">
+                transition={{ duration: 0.8 }}>
+                <h3 className="text-2xl font-bold mb-4 text-white">Brine Utilization</h3>
+                <p className="text-lg leading-relaxed text-white/60">
                   We turn waste into resource. By using brackish water and agricultural brines, we unlock water sources 
                   that were previously unusable, making deserts bloom where nothing could grow before.
                 </p>
@@ -509,21 +505,24 @@ export default function Home() {
             </div>
 
             {/* Why It Works */}
-            <div className="grid md:grid-cols-3 gap-6 mt-12">
+            <div className="grid md:grid-cols-3 gap-10 mt-12">
               {[
                 {
+                  key: "wind_slow",
                   title: "Slows the Wind",
-                  img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/41eb3c992_generated_image.png",
+                  defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/41eb3c992_generated_image.png",
                   body: "As hot desert air hits the porous cellulose panels, the structure creates a physical barrier that dramatically reduces wind velocity. Slower-moving air spends more time in contact with the wet media, maximizing the transfer of heat and moisture — the foundation of everything else that follows."
                 },
                 {
+                  key: "wind_cool",
                   title: "Cools the Wind",
-                  img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
+                  defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
                   body: "When liquid water evaporates, it absorbs latent heat from the surrounding air — the same principle that makes sweating cool your body. Our panels are continuously wetted with saline or brackish water, causing incoming hot air to lose 10–15°C of temperature as the water molecules transition from liquid to vapor."
                 },
                 {
+                  key: "wind_humid",
                   title: "Humidifies the Wind",
-                  img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
+                  defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
                   body: "The evaporating water doesn't disappear — it saturates the air passing through the panels, raising relative humidity by up to 50%. This moisture-rich microclimate reduces plant transpiration stress, slows soil evaporation, and allows crops to thrive in arid conditions with a fraction of the irrigation water normally required."
                 }
               ].map((card, idx) =>
@@ -532,13 +531,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="rounded-2xl overflow-hidden bg-white/5 border border-white/10">
-                <img src={card.img} alt={card.title} className="w-full h-44 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 text-white">{card.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed">{card.body}</p>
-                </div>
+                transition={{ duration: 0.8, delay: idx * 0.1 }}>
+                <AdminImageUpload
+                  src={getHomeImg(card.key, card.defaultImg)}
+                  alt={card.title}
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg(card.key, url)}
+                  className="w-full rounded-xl overflow-hidden mb-5"
+                  imgClassName="w-full h-52 object-cover rounded-xl" />
+                <h3 className="text-xl font-bold mb-3 text-white">{card.title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{card.body}</p>
               </motion.div>
               )}
             </div>
