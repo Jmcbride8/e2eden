@@ -39,9 +39,9 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
   );
 };
 
-export default function RootCauseSection({ isAdmin }) {
-  const [imageUrls, setImageUrls] = useState({});
-  const setImg = (key, url) => setImageUrls((prev) => ({ ...prev, [key]: url }));
+export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
+  const getImg = (key, fallback) => getHomeImg ? getHomeImg(key, fallback) : fallback;
+  const setImg = (key, url) => setHomeImg ? setHomeImg(key, url) : null;
 
   return (
     <section className="py-24 px-6 sm:px-12 bg-black">
