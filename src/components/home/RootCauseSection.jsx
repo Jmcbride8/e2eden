@@ -12,7 +12,7 @@ const DEFAULT_IMAGES = [
 {
   key: "root_cause_img_2",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "A farm in the desert uses ten times the water of one on the coast — not to grow crops, but just to keep them alive. In extreme heat, plants sweat constantly to cool themselves. Most of what's irrigated never feeds anyone. It just evaporates into the sky."
+  caption: "Desert farms apply 6 to 10 feet of water to their fields every single year. The illustration shows what that looks like — a column of water taller than a man, spread across every acre of farmland. Almost none of it feeds the crop. It evaporates into the sky, lost forever, before the plant ever drinks it."
 },
 {
   key: "root_cause_img_3",
