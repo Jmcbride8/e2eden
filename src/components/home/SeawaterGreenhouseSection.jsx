@@ -1,47 +1,18 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-
-const PAST_PROJECTS = [
-  {
-    name: "Tenerife, Spain",
-    year: "1992",
-    description: "The original pilot project that proved the concept — a small seawater greenhouse on the Canary Islands, demonstrating that seawater could cool and humidify to grow crops in a hot, arid climate.",
-    image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&h=600&fit=crop",
-    tag: "Pilot",
-  },
-  {
-    name: "Al Ain, Abu Dhabi",
-    year: "2000",
-    description: "A large-scale commercial greenhouse in one of the world's hottest regions, proving viability at production scale in the UAE desert.",
-    image: "https://images.unsplash.com/photo-1528702748617-c64d49f918af?w=800&h=600&fit=crop",
-    tag: "Commercial",
-  },
-  {
-    name: "Muscat, Oman",
-    year: "2004",
-    description: "Built in collaboration with Sultan Qaboos University, this project advanced research and demonstrated year-round crop production using only seawater and solar energy.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-    tag: "Research",
-  },
-  {
-    name: "Port Augusta, Australia",
-    year: "2010",
-    description: "A landmark greenhouse in South Australia growing tomatoes at scale using seawater from the Spencer Gulf, supplying major retailers and showcasing global commercial potential.",
-    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=600&fit=crop",
-    tag: "Commercial",
-  },
-  {
-    name: "Somaliland, Africa",
-    year: "2018",
-    description: "Seawater Greenhouse's first Horn of Africa installation — a one-hectare solar-powered pilot farm near Berbera growing vegetables in one of the world's most challenging climates.",
-    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&h=600&fit=crop",
-    tag: "Humanitarian",
-  },
-];
+import { base44 } from "@/api/base44Client";
+import { useQuery } from "@tanstack/react-query";
 
 export default function SeawaterGreenhouseSection() {
   const scrollRef = useRef(null);
+
+  const { data: allProjects = [] } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => base44.entities.Project.list('sort_order'),
+  });
+
+  const projects = allProjects.filter(p => p.company === "Seawater Greenhouse");
 
   const scroll = (dir) => {
     if (scrollRef.current) {
