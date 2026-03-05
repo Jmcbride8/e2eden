@@ -7,6 +7,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import SeawaterGreenhouseSection from "../components/home/SeawaterGreenhouseSection";
+import RootCauseSection from "../components/home/RootCauseSection";
 import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
 
