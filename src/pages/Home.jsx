@@ -19,6 +19,8 @@ export default function Home() {
   const [selectedPhase, setSelectedPhase] = useState("R&D");
   const [isAdmin, setIsAdmin] = useState(false);
   const [uploadingBrand, setUploadingBrand] = useState(null);
+  const [homeImages, setHomeImages] = useState({});
+  const setHomeImg = (key, url) => setHomeImages(prev => ({ ...prev, [key]: url }));
   const scrollRef = useRef(null);
   const queryClient = useQueryClient();
 
