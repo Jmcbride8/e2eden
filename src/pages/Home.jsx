@@ -508,26 +508,6 @@ export default function Home() {
               </motion.div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-              { number: "90%", label: "Water Savings" },
-              { number: "15°C", label: "Temperature Reduction" },
-              { number: "50%", label: "Humidity Increase" }].
-              map((stat, idx) =>
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
-
-                  <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
-                  <div className="text-lg font-semibold text-white">{stat.label}</div>
-                </motion.div>
-              )}
-            </div>
-
             {/* Why It Works */}
             <div className="grid md:grid-cols-3 gap-6 mt-12">
               {[
