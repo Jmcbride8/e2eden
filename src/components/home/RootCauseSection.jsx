@@ -4,28 +4,28 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recha
 import AdminImageUpload from "./AdminImageUpload";
 
 const DEFAULT_IMAGES = [
-  {
-    key: "root_cause_img_1",
-    default: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop",
-    caption: "Flood irrigation wastes up to 60% of water through evaporation and runoff",
-  },
-  {
-    key: "root_cause_img_2",
-    default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-    caption: "Conventional row crops across millions of acres rely on inefficient water delivery",
-  },
-  {
-    key: "root_cause_img_3",
-    default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-    caption: "Over-extraction of aquifers is causing land subsidence and permanent water loss",
-  },
-];
+{
+  key: "root_cause_img_1",
+  default: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop",
+  caption: "Flood irrigation wastes up to 60% of water through evaporation and runoff"
+},
+{
+  key: "root_cause_img_2",
+  default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
+  caption: "Conventional row crops across millions of acres rely on inefficient water delivery"
+},
+{
+  key: "root_cause_img_3",
+  default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
+  caption: "Over-extraction of aquifers is causing land subsidence and permanent water loss"
+}];
+
 
 const PIE_DATA = [
-  { name: "Agriculture", value: 85, color: "#f59e0b" },
-  { name: "Municipal / Residential", value: 8, color: "#60a5fa" },
-  { name: "Industrial & Commercial", value: 7, color: "#34d399" },
-];
+{ name: "Agriculture", value: 85, color: "#f59e0b" },
+{ name: "Municipal / Residential", value: 8, color: "#60a5fa" },
+{ name: "Industrial & Commercial", value: 7, color: "#34d399" }];
+
 
 const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
   const RADIAN = Math.PI / 180;
@@ -35,8 +35,8 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
   return (
     <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" fontSize={13} fontWeight="bold">
       {value}%
-    </text>
-  );
+    </text>);
+
 };
 
 export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
@@ -50,8 +50,8 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
+          transition={{ duration: 0.8 }}>
+
           {/* Section header */}
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px flex-1 bg-white/10" />
@@ -59,8 +59,8 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          <h2 className="text-5xl font-bold text-white mb-6">
-            The Problem: Agriculture Uses 85% of Our Water
+          <h2 className="text-5xl font-bold text-white mb-6">Agriculture Uses 85% of Our Water
+
           </h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
@@ -70,24 +70,24 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
 
           {/* Image Grid */}
           <div className="grid md:grid-cols-3 gap-5 mb-12">
-            {DEFAULT_IMAGES.map((img) => (
-              <div key={img.key} className="relative rounded-2xl overflow-hidden group">
+            {DEFAULT_IMAGES.map((img) =>
+            <div key={img.key} className="relative rounded-2xl overflow-hidden group">
                 <div className="aspect-[4/3] relative">
                   <AdminImageUpload
-                    src={getImg(img.key, img.default)}
-                    alt={img.caption}
-                    isAdmin={isAdmin}
-                    onUploaded={(url) => setImg(img.key, url)}
-                    className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  src={getImg(img.key, img.default)}
+                  alt={img.caption}
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setImg(img.key, url)}
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
                   <p className="absolute bottom-3 left-3 right-3 text-white/80 text-xs leading-snug pointer-events-none">
                     {img.caption}
                   </p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
 
           {/* Stat + Pie Chart layout */}
@@ -102,13 +102,13 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                 Yet billions go hungry. We can't keep farming this way.
               </p>
               <div className="mt-6 space-y-2">
-                {PIE_DATA.map((d) => (
-                  <div key={d.name} className="flex items-center gap-3">
+                {PIE_DATA.map((d) =>
+                <div key={d.name} className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
                     <span className="text-white/70 text-sm">{d.name}</span>
                     <span className="ml-auto text-white font-semibold text-sm">{d.value}%</span>
                   </div>
-                ))}
+                )}
               </div>
             </div>
 
@@ -126,11 +126,11 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                     outerRadius={110}
                     dataKey="value"
                     labelLine={false}
-                    label={CustomLabel}
-                  >
-                    {PIE_DATA.map((entry, idx) => (
-                      <Cell key={idx} fill={entry.color} />
-                    ))}
+                    label={CustomLabel}>
+
+                    {PIE_DATA.map((entry, idx) =>
+                    <Cell key={idx} fill={entry.color} />
+                    )}
                   </Pie>
                   <Tooltip
                     formatter={(value, name) => [`${value}%`, name]}
@@ -138,20 +138,20 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                       backgroundColor: "rgba(0,0,0,0.85)",
                       border: "1px solid rgba(255,255,255,0.15)",
                       borderRadius: "8px",
-                      color: "#fff",
+                      color: "#fff"
                     }}
                     itemStyle={{ color: "#fff" }}
-                    labelStyle={{ color: "#fff" }}
-                  />
+                    labelStyle={{ color: "#fff" }} />
+
                   <Legend
-                    formatter={(value) => <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 13 }}>{value}</span>}
-                  />
+                    formatter={(value) => <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 13 }}>{value}</span>} />
+
                 </PieChart>
               </ResponsiveContainer>
             </div>
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
