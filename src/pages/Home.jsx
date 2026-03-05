@@ -500,10 +500,13 @@ export default function Home() {
                 it work anywhere.
               </p>
               <div className="aspect-video rounded-2xl overflow-hidden mb-6 bg-white/5 border border-white/10">
-                <img 
-                  src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop"
+                <AdminImageUpload
+                  src={homeImages["imperial_valley"] || "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop"}
                   alt="Imperial Valley Agriculture"
-                  className="w-full h-full object-cover"
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg("imperial_valley", url)}
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover"
                 />
               </div>
               <p className="text-lg leading-relaxed text-white/70">
