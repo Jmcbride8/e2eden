@@ -24,13 +24,13 @@ export default function Home() {
 
   const { data: homeContentRecords = [] } = useQuery({
     queryKey: ['homeContent'],
-    queryFn: () => base44.entities.HomeContent.list(),
+    queryFn: () => base44.entities.HomeContent.list()
   });
 
   // Build a map of key -> { id, image_url }
   const homeContentMap = React.useMemo(() => {
     const map = {};
-    homeContentRecords.forEach(r => { map[r.key] = r; });
+    homeContentRecords.forEach((r) => {map[r.key] = r;});
     return map;
   }, [homeContentRecords]);
 
@@ -48,12 +48,12 @@ export default function Home() {
 
   const { data: allProjects = [] } = useQuery({
     queryKey: ['projects'],
-    queryFn: () => base44.entities.Project.list('sort_order'),
+    queryFn: () => base44.entities.Project.list('sort_order')
   });
 
   const { data: partnerBrands = [] } = useQuery({
     queryKey: ['partnerBrands'],
-    queryFn: () => base44.entities.PartnerBrand.list('sort_order'),
+    queryFn: () => base44.entities.PartnerBrand.list('sort_order')
   });
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function Home() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['partnerBrands'] });
       setUploadingBrand(null);
-    },
+    }
   });
 
   const handleLogoUpload = async (brandId, file) => {
@@ -83,8 +83,8 @@ export default function Home() {
     }
   };
 
-  const projects = allProjects.filter(project => 
-    project.phase === selectedPhase
+  const projects = allProjects.filter((project) =>
+  project.phase === selectedPhase
   );
 
   const handleSelectProject = useCallback((project) => {
@@ -116,11 +116,11 @@ export default function Home() {
 
       {/* Subtitle */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="absolute top-20 sm:top-28 left-6 sm:left-8 right-6 sm:right-auto z-10 max-w-md"
-      >
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="absolute top-20 sm:top-28 left-6 sm:left-8 right-6 sm:right-auto z-10 max-w-md">
+
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white/90">
           Revolutionizing water,
           <br />
@@ -132,34 +132,34 @@ export default function Home() {
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
         <div className="flex flex-wrap gap-3 mt-3 mb-0 lg:mb-0">
-          <Button 
-            onClick={() => setSelectedPhase("R&D")}
-            className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "R&D"
-                ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50'
-                : 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'
-            }`}
-          >
+          <Button
+              onClick={() => setSelectedPhase("R&D")}
+              className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+              selectedPhase === "R&D" ?
+              'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
+              'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
+              }>
+
             R&D
           </Button>
-          <Button 
-            onClick={() => setSelectedPhase("Commercialization")}
-            className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "Commercialization"
-                ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50'
-                : 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'
-            }`}
-          >
+          <Button
+              onClick={() => setSelectedPhase("Commercialization")}
+              className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+              selectedPhase === "Commercialization" ?
+              'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
+              'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
+              }>
+
             Commercialization
           </Button>
-          <Button 
-            onClick={() => setSelectedPhase("Transformation")}
-            className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "Transformation"
-                ? 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50'
-                : 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'
-            }`}
-          >
+          <Button
+              onClick={() => setSelectedPhase("Transformation")}
+              className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+              selectedPhase === "Transformation" ?
+              'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
+              'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
+              }>
+
             Transformation
           </Button>
         </div>
@@ -168,26 +168,26 @@ export default function Home() {
       {/* Globe */}
       <div className="absolute inset-0">
         <GlobeScene
-          projects={projects}
-          selectedProject={selectedProject}
-          onSelectProject={handleSelectProject}
-          isPaused={isPaused}
-        />
+            projects={projects}
+            selectedProject={selectedProject}
+            onSelectProject={handleSelectProject}
+            isPaused={isPaused} />
+
       </div>
 
       {/* Pause Button */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-      >
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+
         <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsPaused(!isPaused)}
-          className="rounded-full transition-colors bg-white/10 hover:bg-white/20 text-white"
-        >
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsPaused(!isPaused)}
+            className="rounded-full transition-colors bg-white/10 hover:bg-white/20 text-white">
+
           {isPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
         </Button>
       </motion.div>
@@ -196,25 +196,25 @@ export default function Home() {
       <div className="lg:hidden absolute bottom-36 left-0 right-0 z-20">
         <div className="px-6 pb-2">
           <div className="flex gap-2 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
-            {projects.map((project, idx) => (
+            {projects.map((project, idx) =>
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
                 onClick={() => handleSelectProject(project)}
-                className="relative flex-shrink-0 w-36 h-24 rounded-lg overflow-hidden cursor-pointer group"
-              >
-                {project.hero_image ? (
-                  <img 
-                    src={project.hero_image}
-                    alt={project.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    style={{ objectPosition: project.hero_image_position || 'center center' }}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
-                )}
+                className="relative flex-shrink-0 w-36 h-24 rounded-lg overflow-hidden cursor-pointer group">
+
+                {project.hero_image ?
+                <img
+                  src={project.hero_image}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  style={{ objectPosition: project.hero_image_position || 'center center' }} /> :
+
+
+                <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+                }
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-2">
                   <h3 className="text-white font-semibold text-xs leading-tight drop-shadow-lg line-clamp-2">
@@ -223,56 +223,56 @@ export default function Home() {
                   <p className="text-white/70 text-[10px] mt-0.5">{project.location}</p>
                 </div>
               </motion.div>
-            ))}
+              )}
           </div>
         </div>
       </div>
 
       {/* Project Cards - Right Side - Hidden on Mobile */}
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="hidden lg:flex absolute right-6 top-24 bottom-6 w-80 flex-col z-20"
-      >
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="hidden lg:flex absolute right-6 top-24 bottom-6 w-80 flex-col z-20">
+
         {/* Up Arrow */}
         <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => scrollProjects('up')}
-          className="mb-2 rounded-full self-center transition-colors bg-white/10 hover:bg-white/20 text-white"
-        >
+            variant="ghost"
+            size="icon"
+            onClick={() => scrollProjects('up')}
+            className="mb-2 rounded-full self-center transition-colors bg-white/10 hover:bg-white/20 text-white">
+
           <ChevronUp className="w-5 h-5" />
         </Button>
 
         {/* Scrollable Container */}
         <div
-          ref={scrollRef}
-          className="flex-1 overflow-y-auto space-y-3 pr-2 [&::-webkit-scrollbar]:hidden"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
-        >
-        {projects.map((project, idx) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
-            onClick={() => handleSelectProject(project)}
-            className="relative h-40 rounded-xl overflow-hidden cursor-pointer group"
-          >
-            {project.hero_image ? (
-              <img 
+            ref={scrollRef}
+            className="flex-1 overflow-y-auto space-y-3 pr-2 [&::-webkit-scrollbar]:hidden"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}>
+
+        {projects.map((project, idx) =>
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
+              onClick={() => handleSelectProject(project)}
+              className="relative h-40 rounded-xl overflow-hidden cursor-pointer group">
+
+            {project.hero_image ?
+              <img
                 src={project.hero_image}
                 alt={project.name}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                style={{ objectPosition: project.hero_image_position || 'center center' }}
-              />
-            ) : (
+                style={{ objectPosition: project.hero_image_position || 'center center' }} /> :
+
+
               <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
-            )}
+              }
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -282,29 +282,29 @@ export default function Home() {
               <p className="text-white/70 text-xs mt-1">{project.location}</p>
             </div>
           </motion.div>
-        ))}
+            )}
         </div>
 
         {/* Down Arrow */}
         <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => scrollProjects('down')}
-          className="mt-2 rounded-full self-center transition-colors bg-white/10 hover:bg-white/20 text-white"
-        >
+            variant="ghost"
+            size="icon"
+            onClick={() => scrollProjects('down')}
+            className="mt-2 rounded-full self-center transition-colors bg-white/10 hover:bg-white/20 text-white">
+
           <ChevronDown className="w-5 h-5" />
         </Button>
       </motion.div>
 
       {/* Project Modal */}
       <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal 
-            project={selectedProject} 
+        {selectedProject &&
+          <ProjectModal
+            project={selectedProject}
             location={selectedProject.location}
-            onClose={handleClose} 
-          />
-        )}
+            onClose={handleClose} />
+
+          }
       </AnimatePresence>
 
       {/* Bottom gradient fade */}
@@ -323,8 +323,8 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
+              className="text-center mb-16">
+
               <h2 className="text-5xl font-bold mb-6 text-white">
                 Water Shortages
               </h2>
@@ -340,8 +340,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="group"
-              >
+                className="group">
+
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
                   <AdminImageUpload
                     src={getHomeImg("shortage_1", "https://images.unsplash.com/photo-1515339760107-1952b7a08454?w=800&h=600&fit=crop")}
@@ -349,8 +349,8 @@ export default function Home() {
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("shortage_1", url)}
                     className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">
@@ -367,8 +367,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="group"
-              >
+                className="group">
+
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
                   <AdminImageUpload
                     src={getHomeImg("shortage_2", "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop")}
@@ -376,8 +376,8 @@ export default function Home() {
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("shortage_2", url)}
                     className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">
@@ -394,8 +394,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="group"
-              >
+                className="group">
+
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
                   <AdminImageUpload
                     src={getHomeImg("shortage_3", "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop")}
@@ -403,8 +403,8 @@ export default function Home() {
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("shortage_3", url)}
                     className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">
@@ -429,15 +429,15 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
+              className="text-center mb-16">
+
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-px flex-1 bg-white/10" />
                 <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Our Innovation</span>
                 <div className="h-px flex-1 bg-white/10" />
               </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">
-                The Solution: Evaporative Cellulose Panels + Brines
+              <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls
+
               </h2>
               <p className="text-xl mb-12 text-white/70">
                 We've developed revolutionary technology that mimics nature's own cooling system
@@ -450,8 +450,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20"
-              >
+                className="p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20">
+
                 <h3 className="text-2xl font-bold mb-4 text-amber-400">Evaporative Cellulose Panels</h3>
                 <p className="text-lg leading-relaxed text-white/70">
                   Our patented cooling walls use natural evaporation to reduce temperatures by up to 15°C, increase 
@@ -464,8 +464,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20"
-              >
+                className="p-8 rounded-2xl bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20">
+
                 <h3 className="text-2xl font-bold mb-4 text-blue-400">Brine Utilization</h3>
                 <p className="text-lg leading-relaxed text-white/70">
                   We turn waste into resource. By using brackish water and agricultural brines, we unlock water sources 
@@ -476,22 +476,22 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { number: "90%", label: "Water Savings" },
-                { number: "15°C", label: "Temperature Reduction" },
-                { number: "50%", label: "Humidity Increase" }
-              ].map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: idx * 0.1 }}
-                  className="p-6 rounded-xl text-center bg-white/5 border border-white/10"
-                >
+              { number: "90%", label: "Water Savings" },
+              { number: "15°C", label: "Temperature Reduction" },
+              { number: "50%", label: "Humidity Increase" }].
+              map((stat, idx) =>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
+
                   <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
                   <div className="text-lg font-semibold text-white">{stat.label}</div>
                 </motion.div>
-              ))}
+              )}
             </div>
           </div>
         </section>
@@ -506,15 +506,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+              transition={{ duration: 0.8 }}>
+
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-px flex-1 bg-white/10" />
                 <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Where We Begin</span>
                 <div className="h-px flex-1 bg-white/10" />
               </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">
-                Getting Started: Imperial Valley, California
+              <h2 className="text-5xl font-bold mb-6 text-white">Imperial Valley, California
+
               </h2>
               <p className="text-xl leading-relaxed mb-8 text-white/70">
                 We chose Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
@@ -528,8 +528,8 @@ export default function Home() {
                   isAdmin={isAdmin}
                   onUploaded={(url) => setHomeImg("imperial_valley", url)}
                   className="w-full h-full"
-                  imgClassName="w-full h-full object-cover"
-                />
+                  imgClassName="w-full h-full object-cover" />
+
               </div>
               <p className="text-lg leading-relaxed text-white/70">
                 Our first installations are already demonstrating dramatic water savings and improved crop yields. 
@@ -547,15 +547,15 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center"
-            >
+              className="text-center">
+
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-px flex-1 bg-white/10" />
                 <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Global Vision</span>
                 <div className="h-px flex-1 bg-white/10" />
               </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">
-                Built to Scale
+              <h2 className="text-5xl font-bold mb-6 text-white">Green the World, Feed the World
+
               </h2>
               <p className="text-xl leading-relaxed mb-12 text-white/70">
                 From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
@@ -563,23 +563,23 @@ export default function Home() {
               
               <div className="grid md:grid-cols-3 gap-8">
                 {[
-                  { region: "North America", projects: "Active", desc: "Imperial Valley, Salton Sea" },
-                  { region: "Africa", projects: "Expanding", desc: "Kenya, Tanzania" },
-                  { region: "Middle East", projects: "Planned", desc: "UAE, Saudi Arabia" }
-                ].map((location, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: idx * 0.1 }}
-                    className="p-8 rounded-2xl bg-white/5 border border-white/10"
-                  >
+                { region: "North America", projects: "Active", desc: "Imperial Valley, Salton Sea" },
+                { region: "Africa", projects: "Expanding", desc: "Kenya, Tanzania" },
+                { region: "Middle East", projects: "Planned", desc: "UAE, Saudi Arabia" }].
+                map((location, idx) =>
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.1 }}
+                  className="p-8 rounded-2xl bg-white/5 border border-white/10">
+
                     <h3 className="text-2xl font-bold mb-2 text-white">{location.region}</h3>
                     <div className="text-amber-400 font-semibold mb-2">{location.projects}</div>
                     <p className="text-sm text-white/60">{location.desc}</p>
                   </motion.div>
-                ))}
+                )}
               </div>
             </motion.div>
           </div>
@@ -592,8 +592,8 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+              transition={{ duration: 0.8 }}>
+
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-px flex-1 bg-white/10" />
                 <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Join the Mission</span>
@@ -628,6 +628,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-    </div>
-  );
+    </div>);
+
 }
