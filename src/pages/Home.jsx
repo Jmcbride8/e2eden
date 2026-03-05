@@ -429,19 +429,53 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16">
+              className="text-center mb-10">
 
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-px flex-1 bg-white/10" />
                 <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Our Innovation</span>
                 <div className="h-px flex-1 bg-white/10" />
               </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls
-
-              </h2>
-              <p className="text-xl mb-12 text-white/70">
+              <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls</h2>
+              <p className="text-xl mb-0 text-white/70">
                 We've developed revolutionary technology that mimics nature's own cooling system
               </p>
+            </motion.div>
+
+            {/* KPI Stats */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {[
+              { number: "90%", label: "Water Savings" },
+              { number: "15°C", label: "Temperature Reduction" },
+              { number: "50%", label: "Humidity Increase" }].
+              map((stat, idx) =>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
+                  <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
+                  <div className="text-lg font-semibold text-white">{stat.label}</div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Hero Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-12">
+              <AdminImageUpload
+                src={getHomeImg("innovation_hero", "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=1400&h=700&fit=crop")}
+                alt="Saltwater Cooling Walls"
+                isAdmin={isAdmin}
+                onUploaded={(url) => setHomeImg("innovation_hero", url)}
+                className="w-full rounded-2xl overflow-hidden"
+                imgClassName="w-full h-96 object-cover rounded-2xl" />
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
