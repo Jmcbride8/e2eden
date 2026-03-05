@@ -371,7 +371,7 @@ export default function Home() {
               >
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
                   <AdminImageUpload
-                    src={homeImages["shortage_2"] || "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop"}
+                    src={getHomeImg("shortage_2", "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop")}
                     alt="Drought-affected land"
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("shortage_2", url)}
