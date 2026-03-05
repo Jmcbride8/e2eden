@@ -523,7 +523,7 @@ export default function Home() {
                   isAdmin={isAdmin}
                   onUploaded={(url) => setHomeImg(card.key, url)}
                   className="w-full rounded-xl overflow-hidden mb-5"
-                  imgClassName="w-full h-52 object-cover rounded-xl" />
+                  imgClassName="w-full h-60 object-cover rounded-xl" />
                 <h3 className="text-xl font-bold mb-3 text-white">{card.title}</h3>
                 <p className="text-white/60 text-sm leading-relaxed">{card.body}</p>
               </motion.div>
