@@ -385,38 +385,7 @@ export default function Home() {
         </section>
 
         {/* 2. The Problem is Agriculture */}
-        <section className="py-24 px-6 sm:px-12 bg-black">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-px flex-1 bg-white/10" />
-                <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Root Cause</span>
-                <div className="h-px flex-1 bg-white/10" />
-              </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">
-                The Problem: Agriculture Uses 85% of Our Water
-              </h2>
-              <p className="text-xl leading-relaxed mb-8 text-white/70">
-                Agriculture consumes a staggering 85% of global freshwater resources. Traditional farming methods are 
-                incredibly inefficient—most water evaporates or runs off before crops can even use it.
-              </p>
-              <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-                <div className="text-7xl font-bold text-amber-400 mb-4">85%</div>
-                <p className="text-2xl font-semibold mb-2 text-white">
-                  Of global freshwater goes to agriculture
-                </p>
-                <p className="text-lg text-white/60">
-                  Yet billions go hungry. We can't keep farming this way.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <RootCauseSection isAdmin={isAdmin} />
 
         {/* 3. The Solution */}
         <section className="py-24 px-6 sm:px-12 bg-black">
