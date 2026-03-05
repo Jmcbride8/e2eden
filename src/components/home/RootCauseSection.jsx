@@ -7,17 +7,17 @@ const DEFAULT_IMAGES = [
 {
   key: "root_cause_img_1",
   default: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop",
-  caption: "Flood irrigation wastes up to 60% of water through evaporation and runoff"
+  caption: "Farmers pay a fraction of what cities do for water — sometimes less than 1% of the urban rate. When water is nearly free, there is no financial pressure to use it wisely. The incentive to conserve simply doesn't exist."
 },
 {
   key: "root_cause_img_2",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "Conventional row crops across millions of acres rely on inefficient water delivery"
+  caption: "A farm in the desert uses ten times the water of one on the coast — not to grow crops, but just to keep them alive. In extreme heat, plants sweat constantly to cool themselves. Most of what's irrigated never feeds anyone. It just evaporates into the sky."
 },
 {
   key: "root_cause_img_3",
   default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-  caption: "Over-extraction of aquifers is causing land subsidence and permanent water loss"
+  caption: "Cities, for all their size and density, consume a relatively small fraction of the world's freshwater. Every water-saving initiative aimed at households and industry combined cannot match the impact of fixing how we farm. That is where the real battle will be won or lost."
 }];
 
 
