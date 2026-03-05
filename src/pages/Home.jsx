@@ -326,94 +326,79 @@ export default function Home() {
               className="text-center mb-16">
 
               <h2 className="text-5xl font-bold mb-6 text-white">
-                Water Shortages
+                A Story Written in Water
               </h2>
               <p className="text-xl text-white/60 max-w-3xl mx-auto">
-                The global water crisis threatens food security, ecosystems, and human survival
+                Humanity's greatest triumphs were built on water. Now, the bill is due.
               </p>
             </motion.div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Sub-section 1: Depleting Resources */}
+              {[
+                {
+                  key: "shortage_1",
+                  defaultImg: "https://images.unsplash.com/photo-1515339760107-1952b7a08454?w=800&h=600&fit=crop",
+                  alt: "Tamed rivers",
+                  title: "We Tamed Mighty Rivers",
+                  body: "We dammed the Colorado, the Nile, the Yangtze. We redirected the forces of nature itself — bending rivers to our will to power cities and quench a growing world's thirst."
+                },
+                {
+                  key: "shortage_2",
+                  defaultImg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+                  alt: "Water brought to desert",
+                  title: "We Brought Water to the Desert",
+                  body: "Canals stretching hundreds of miles. Aqueducts defying gravity. We moved water where nature never intended it to go — and turned wasteland into farmland."
+                },
+                {
+                  key: "shortage_3",
+                  defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
+                  alt: "Desert farms feeding millions",
+                  title: "We Fed Millions from Desert Sand",
+                  body: "Imperial Valley. The Negev. The Arabian Peninsula. Deserts bloomed. Harvests exploded. Supermarkets filled. We fed a civilization from land that was once considered dead."
+                },
+                {
+                  key: "shortage_4",
+                  defaultImg: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=600&fit=crop",
+                  alt: "Cities in the desert",
+                  title: "We Built Cities Where Nothing Could Live",
+                  body: "Las Vegas. Phoenix. Dubai. Cairo. Great civilizations rose in the harshest places on Earth — monuments to human ingenuity, all of it standing on a foundation of borrowed water."
+                },
+                {
+                  key: "shortage_5",
+                  defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                  alt: "Hoover Dam and drained Colorado River",
+                  title: "Now the Colorado Runs Dry",
+                  body: "Hoover Dam's waterline has fallen over 180 feet. The Colorado River no longer reaches the sea. Lake Mead is a ghost of itself. We spent centuries of stored water in decades."
+                },
+                {
+                  key: "shortage_6",
+                  defaultImg: "https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&h=600&fit=crop",
+                  alt: "Water wars",
+                  title: "The Water Wars Have Begun",
+                  body: "States sue states. Nations threaten nations. Farmers vs. cities. Present vs. future. The fights over what's left are already here — and they will only get fiercer."
+                }
+              ].map((card, idx) =>
               <motion.div
+                key={card.key}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 }}
+                transition={{ duration: 0.8, delay: (idx % 3) * 0.1 }}
                 className="group">
-
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
                   <AdminImageUpload
-                    src={getHomeImg("shortage_1", "https://images.unsplash.com/photo-1515339760107-1952b7a08454?w=800&h=600&fit=crop")}
-                    alt="Dried riverbed"
+                    src={getHomeImg(card.key, card.defaultImg)}
+                    alt={card.alt}
                     isAdmin={isAdmin}
-                    onUploaded={(url) => setHomeImg("shortage_1", url)}
+                    onUploaded={(url) => setHomeImg(card.key, url)}
                     className="w-full h-full"
                     imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-white">
-                  Depleting Resources
-                </h3>
-                <p className="text-white/70 leading-relaxed">
-                  Rivers are drying up and aquifers are depleting at alarming rates. By 2050, we'll need to feed 10 billion people with increasingly scarce freshwater resources.
-                </p>
+                <h3 className="text-2xl font-bold mb-3 text-white">{card.title}</h3>
+                <p className="text-white/60 leading-relaxed">{card.body}</p>
               </motion.div>
-
-              {/* Sub-section 2: Climate Impact */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="group">
-
-                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
-                  <AdminImageUpload
-                    src={getHomeImg("shortage_2", "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&h=600&fit=crop")}
-                    alt="Drought-affected land"
-                    isAdmin={isAdmin}
-                    onUploaded={(url) => setHomeImg("shortage_2", url)}
-                    className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-white">
-                  Climate Impact
-                </h3>
-                <p className="text-white/70 leading-relaxed">
-                  Climate change is intensifying droughts and making water scarcity more severe every year. Traditional farming methods can no longer sustain our growing population.
-                </p>
-              </motion.div>
-
-              {/* Sub-section 3: Food Security Crisis */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="group">
-
-                <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
-                  <AdminImageUpload
-                    src={getHomeImg("shortage_3", "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop")}
-                    alt="Agricultural land"
-                    isAdmin={isAdmin}
-                    onUploaded={(url) => setHomeImg("shortage_3", url)}
-                    className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                </div>
-                <h3 className="text-2xl font-bold mb-3 text-white">
-                  Food Security Crisis
-                </h3>
-                <p className="text-white/70 leading-relaxed">
-                  Without water, there is no food. Without food, there is no future. We need revolutionary solutions now to prevent a global catastrophe.
-                </p>
-              </motion.div>
+              )}
             </div>
           </div>
         </section>
