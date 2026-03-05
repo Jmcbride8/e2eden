@@ -8,6 +8,7 @@ import { createPageUrl } from "../utils";
 import GlobeScene from "../components/globe/GlobeScene";
 import SeawaterGreenhouseSection from "../components/home/SeawaterGreenhouseSection";
 import RootCauseSection from "../components/home/RootCauseSection";
+import AdminImageUpload from "../components/home/AdminImageUpload";
 import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
 
