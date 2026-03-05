@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
-import { Upload, Pencil } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import AdminImageUpload from "./AdminImageUpload";
 
 const DEFAULT_IMAGES = [
   {
