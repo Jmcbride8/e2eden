@@ -139,6 +139,7 @@ export default function Projects() {
                   {isAdmin && <th className="w-12"></th>}
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Image</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Project</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Company</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Type</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Location</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Year</th>
@@ -187,6 +188,15 @@ export default function Projects() {
                                 <td className="px-6 py-4">
                                   <div className="text-sm font-medium text-white">{project.name}</div>
                                   <div className="text-xs text-white/40 mt-1 line-clamp-1">{project.description}</div>
+                                </td>
+                                <td className="px-6 py-4">
+                                  <span className={`text-xs font-medium px-2 py-1 rounded-md ${
+                                    project.company === 'Seawater Greenhouse'
+                                      ? 'bg-blue-500/10 text-blue-400'
+                                      : 'bg-amber-500/10 text-amber-400'
+                                  }`}>
+                                    {project.company || 'E2Eden'}
+                                  </span>
                                 </td>
                                 <td className="px-6 py-4">
                                   <div className="flex flex-wrap gap-1">
