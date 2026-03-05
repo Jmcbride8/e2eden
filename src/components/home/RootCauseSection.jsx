@@ -71,8 +71,8 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           {/* Image Grid */}
           <div className="grid md:grid-cols-3 gap-5 mb-12">
             {DEFAULT_IMAGES.map((img) =>
-            <div key={img.key} className="relative rounded-2xl overflow-hidden group">
-                <div className="aspect-[4/3] relative">
+            <div key={img.key} className="group">
+                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden">
                   <AdminImageUpload
                   src={getImg(img.key, img.default)}
                   alt={img.caption}
@@ -80,12 +80,10 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                   onUploaded={(url) => setImg(img.key, url)}
                   className="w-full h-full"
                   imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
-                  <p className="absolute bottom-3 left-3 right-3 text-white/80 text-xs leading-snug pointer-events-none">
-                    {img.caption}
-                  </p>
                 </div>
+                <p className="mt-3 text-white/70 text-sm leading-snug">
+                  {img.caption}
+                </p>
               </div>
             )}
           </div>
