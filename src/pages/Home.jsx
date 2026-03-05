@@ -392,6 +392,11 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px flex-1 bg-white/10" />
+                <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Root Cause</span>
+                <div className="h-px flex-1 bg-white/10" />
+              </div>
               <h2 className="text-5xl font-bold mb-6 text-white">
                 The Problem: Agriculture Uses 85% of Our Water
               </h2>
