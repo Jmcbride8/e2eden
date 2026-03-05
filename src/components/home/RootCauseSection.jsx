@@ -74,7 +74,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
               <div key={img.key} className="relative rounded-2xl overflow-hidden group">
                 <div className="aspect-[4/3] relative">
                   <AdminImageUpload
-                    src={imageUrls[img.key] || img.default}
+                    src={getImg(img.key, img.default)}
                     alt={img.caption}
                     isAdmin={isAdmin}
                     onUploaded={(url) => setImg(img.key, url)}
