@@ -523,7 +523,7 @@ export default function Home() {
               </p>
               <div className="aspect-video rounded-2xl overflow-hidden mb-6 bg-white/5 border border-white/10">
                 <AdminImageUpload
-                  src={homeImages["imperial_valley"] || "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop"}
+                  src={getHomeImg("imperial_valley", "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop")}
                   alt="Imperial Valley Agriculture"
                   isAdmin={isAdmin}
                   onUploaded={(url) => setHomeImg("imperial_valley", url)}
