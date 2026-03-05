@@ -375,12 +375,15 @@ export default function Home() {
                 className="group"
               >
                 <div className="relative h-64 rounded-2xl overflow-hidden mb-4">
-                  <img 
-                    src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop"
+                  <AdminImageUpload
+                    src={homeImages["shortage_3"] || "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop"}
                     alt="Agricultural land"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setHomeImg("shortage_3", url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">
                   Food Security Crisis
