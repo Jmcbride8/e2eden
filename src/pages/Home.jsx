@@ -19,10 +19,32 @@ export default function Home() {
   const [selectedPhase, setSelectedPhase] = useState("R&D");
   const [isAdmin, setIsAdmin] = useState(false);
   const [uploadingBrand, setUploadingBrand] = useState(null);
-  const [homeImages, setHomeImages] = useState({});
-  const setHomeImg = (key, url) => setHomeImages(prev => ({ ...prev, [key]: url }));
   const scrollRef = useRef(null);
   const queryClient = useQueryClient();
+
+  const { data: homeContentRecords = [] } = useQuery({
+    queryKey: ['homeContent'],
+    queryFn: () => base44.entities.HomeContent.list(),
+  });
+
+  // Build a map of key -> { id, image_url }
+  const homeContentMap = React.useMemo(() => {
+    const map = {};
+    homeContentRecords.forEach(r => { map[r.key] = r; });
+    return map;
+  }, [homeContentRecords]);
+
+  const getHomeImg = (key, fallback) => homeContentMap[key]?.image_url || fallback;
+
+  const setHomeImg = async (key, url) => {
+    const existing = homeContentMap[key];
+    if (existing) {
+      await base44.entities.HomeContent.update(existing.id, { image_url: url });
+    } else {
+      await base44.entities.HomeContent.create({ key, image_url: url });
+    }
+    queryClient.invalidateQueries({ queryKey: ['homeContent'] });
+  };
 
   const { data: allProjects = [] } = useQuery({
     queryKey: ['projects'],
