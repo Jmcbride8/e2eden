@@ -21,8 +21,8 @@ const DEFAULT_IMAGES = [
   title: "Desalination is 10x too costly",
   default: "https://images.unsplash.com/photo-1548783300-b4f9d05cdd67?w=800&h=600&fit=crop",
   caption: "Desalination costs $20,000 per acre-foot. Alfalfa sells for $4,000 per acre. The math doesn't work."
-},
-];
+}];
+
 
 
 const PIE_DATA = [
@@ -82,7 +82,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                   className="w-full h-full"
                   imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-3">{img.title}</h3>
+                <h3 className="text-2xl font-bold mb-3 text-white">{img.title}</h3>
                 <p className="text-white/60 text-sm leading-relaxed">
                   {img.caption}
                 </p>
@@ -103,10 +103,10 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
               </p>
               <div className="space-y-3">
                 {[
-                  { name: "Alfalfa", pct: "42%", color: "#f59e0b" },
-                  { name: "Cotton", pct: "18%", color: "#60a5fa" },
-                  { name: "Vegetables & Melons", pct: "15%", color: "#34d399" },
-                ].map((crop) =>
+                { name: "Alfalfa", pct: "42%", color: "#f59e0b" },
+                { name: "Cotton", pct: "18%", color: "#60a5fa" },
+                { name: "Vegetables & Melons", pct: "15%", color: "#34d399" }].
+                map((crop) =>
                 <div key={crop.name}>
                   <div className="flex justify-between text-sm mb-1">
                     <span className="text-white/70">{crop.name}</span>
