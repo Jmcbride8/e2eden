@@ -334,10 +334,10 @@ export default function Technology() {
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Portrait */}
-            <div className="flex flex-col items-center md:items-start">
-              <div className="w-64 h-64 rounded-2xl overflow-hidden border border-white/10 mb-6">
+          <div className="flex flex-col md:flex-row gap-10 items-start">
+            {/* Portrait + identity */}
+            <div className="flex-shrink-0 flex flex-col items-center md:items-start">
+              <div className="w-[308px] h-[308px] rounded-2xl overflow-hidden border border-white/10 mb-5">
                 <img
                   src="https://greenhouse.agency/wp-content/uploads/charlie-paton-copy.jpg"
                   alt="Charlie Paton"
@@ -346,24 +346,24 @@ export default function Technology() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-1">Charlie Paton</h3>
               <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-4">Founder & Director, Seawater Greenhouse Ltd</p>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">Royal Designer for Industry</span>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">30+ Years of Innovation</span>
               </div>
             </div>
 
             {/* Bio */}
-            <div>
-              <blockquote className="text-2xl font-light text-white/80 italic leading-relaxed mb-8 border-l-2 border-amber-400 pl-6">
+            <div className="flex-1 min-w-0">
+              <blockquote className="text-xl font-light text-white/80 italic leading-relaxed mb-7 border-l-2 border-amber-400 pl-6">
                 "Solving problems is fun and interesting. Light and photosynthesis fascinate me, and I enjoy creating the right environment for things to grow."
               </blockquote>
-              <p className="text-white/70 leading-relaxed mb-5">
+              <p className="text-white/70 leading-relaxed mb-4">
                 Charlie Paton is a British designer, inventor, and the visionary behind Seawater Greenhouse technology. Trained at the Central School of Art and Design in London, he spent years as a lighting and special effects designer before a bus ride through Morocco sparked an idea that would change the course of desert agriculture.
               </p>
-              <p className="text-white/70 leading-relaxed mb-5">
+              <p className="text-white/70 leading-relaxed mb-4">
                 In the early 1990s, Paton began developing a greenhouse that could use two of the world's most abundant resources — sunshine and seawater — to create a cool, humid growing environment in the harshest climates on earth. By mimicking the natural hydrological cycle, his system produces freshwater from seawater, cools the air through evaporation, and enables year-round crop production in places where conventional farming is impossible.
               </p>
-              <p className="text-white/70 leading-relaxed mb-5">
+              <p className="text-white/70 leading-relaxed mb-4">
                 Over three decades, he and his team deployed this technology across three continents — from Abu Dhabi to Somaliland to Australia — proving the concept at scale. His work in Australia alone produced greenhouses spanning 20 hectares, yielding 15,000 tonnes of tomatoes annually.
               </p>
               <p className="text-white/70 leading-relaxed">
