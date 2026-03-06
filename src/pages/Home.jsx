@@ -691,87 +691,8 @@ export default function Home() {
         <section className="pb-16 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-6">
-              {/* Card 1 - Fertilizer fed 6 billion */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="rounded-2xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-xl">🌾</div>
-                    <span className="text-blue-400 text-xs font-semibold uppercase tracking-widest">The Last Revolution</span>
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
-                    Synthetic Fertilizer Fed<br/>
-                    <span className="text-blue-400">6 Billion People</span>
-                  </h3>
-                  <p className="text-white/60 leading-relaxed mb-8">
-                    In the 1900s, the Haber-Bosch process unlocked nitrogen from the air and turned it into fertilizer. By giving plants <strong className="text-white">food</strong>, we doubled and then tripled crop yields — fueling a population explosion that reshaped human civilization. Half of all humans alive today owe their existence to synthetic nitrogen.
-                  </p>
-                </div>
-                {/* Timeline bar */}
-                <div>
-                  <div className="flex justify-between text-xs text-white/40 mb-2">
-                    <span>1900</span>
-                    <span>1950</span>
-                    <span>2000</span>
-                  </div>
-                  <div className="relative h-3 bg-white/10 rounded-full overflow-hidden">
-                    <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full" style={{ width: '100%' }} />
-                  </div>
-                  <div className="flex justify-between mt-3">
-                    <div className="text-center">
-                      <div className="text-xl font-bold text-white">1.6B</div>
-                      <div className="text-xs text-white/40">World population 1900</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-400">8B+</div>
-                      <div className="text-xs text-white/40">World population today</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Card 2 - Water can feed the next 6 billion */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.15 }}
-                className="rounded-2xl border border-amber-500/30 bg-amber-500/5 p-8 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-xl">💧</div>
-                    <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">The Next Revolution</span>
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
-                    Saltwater Cooling Could Feed<br/>
-                    <span className="text-amber-400">the Next 6 Billion</span>
-                  </h3>
-                  <p className="text-white/60 leading-relaxed mb-8">
-                    Today's crisis isn't about nutrients — it's about <strong className="text-white">water</strong>. Crops in punishing desert heat spend up to 90% of their water just staying cool, not growing food. By giving plants <strong className="text-white">water efficiency</strong> through evaporative cooling walls, we unlock billions of acres of arid land that were previously unproductive — without touching freshwater supplies.
-                  </p>
-                </div>
-                {/* Comparison stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { label: "Water Saved Per Acre", value: "90%", sub: "vs. conventional farming" },
-                    { label: "Arid Land Unlockable", value: "2B+", sub: "acres globally" },
-                    { label: "Temp Reduction", value: "27°F", sub: "inside cooling zone" },
-                    { label: "Crop Yield Change", value: "+50%", sub: "in extreme heat" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="bg-amber-500/10 rounded-xl p-3 text-center">
-                      <div className="text-2xl font-bold text-amber-400">{stat.value}</div>
-                      <div className="text-xs text-white font-medium mt-0.5">{stat.label}</div>
-                      <div className="text-xs text-white/40 mt-0.5">{stat.sub}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+              <FertilizerChart />
+              <SaltwaterChart />
             </div>
           </div>
         </section>
