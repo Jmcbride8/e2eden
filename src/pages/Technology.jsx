@@ -316,8 +316,61 @@ export default function Technology() {
             isAdmin={isAdmin}
             onUploaded={(url) => setHomeImg("innovation_hero", url)}
             className="w-full rounded-2xl overflow-hidden"
-            imgClassName="w-full object-cover rounded-2xl" style={{ height: '33.6rem' }}
+            imgClassName="w-full h-[33.6rem] object-cover rounded-2xl"
           />
+        </motion.div>
+
+        {/* The Mind Behind It All - Charlie Paton */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-24"
+        >
+          <div className="flex items-center gap-4 mb-12">
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Mind Behind It All</span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Portrait */}
+            <div className="flex flex-col items-center md:items-start">
+              <div className="w-64 h-64 rounded-2xl overflow-hidden border border-white/10 mb-6">
+                <img
+                  src="https://greenhouse.agency/wp-content/uploads/charlie-paton-copy.jpg"
+                  alt="Charlie Paton"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-1">Charlie Paton</h3>
+              <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-4">Founder & Director, Seawater Greenhouse Ltd</p>
+              <div className="flex gap-3">
+                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">Royal Designer for Industry</span>
+                <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">30+ Years of Innovation</span>
+              </div>
+            </div>
+
+            {/* Bio */}
+            <div>
+              <blockquote className="text-2xl font-light text-white/80 italic leading-relaxed mb-8 border-l-2 border-amber-400 pl-6">
+                "Solving problems is fun and interesting. Light and photosynthesis fascinate me, and I enjoy creating the right environment for things to grow."
+              </blockquote>
+              <p className="text-white/70 leading-relaxed mb-5">
+                Charlie Paton is a British designer, inventor, and the visionary behind Seawater Greenhouse technology. Trained at the Central School of Art and Design in London, he spent years as a lighting and special effects designer before a bus ride through Morocco sparked an idea that would change the course of desert agriculture.
+              </p>
+              <p className="text-white/70 leading-relaxed mb-5">
+                In the early 1990s, Paton began developing a greenhouse that could use two of the world's most abundant resources — sunshine and seawater — to create a cool, humid growing environment in the harshest climates on earth. By mimicking the natural hydrological cycle, his system produces freshwater from seawater, cools the air through evaporation, and enables year-round crop production in places where conventional farming is impossible.
+              </p>
+              <p className="text-white/70 leading-relaxed mb-5">
+                Over three decades, he and his team deployed this technology across three continents — from Abu Dhabi to Somaliland to Australia — proving the concept at scale. His work in Australia alone produced greenhouses spanning 20 hectares, yielding 15,000 tonnes of tomatoes annually.
+              </p>
+              <p className="text-white/70 leading-relaxed">
+                In 2012, Charlie was elected a Royal Designer for Industry by the Royal Society for the Encouragement of Arts. E2Eden is proud to stand on his shoulders as we bring this proven technology to the United States and to the world's most vulnerable farming communities.
+              </p>
+            </div>
+          </div>
         </motion.div>
 
         {/* Proven Track Record */}
