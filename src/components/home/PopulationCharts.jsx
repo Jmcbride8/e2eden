@@ -37,7 +37,7 @@ export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: 0.15 }}
-      className="rounded-2xl border border-amber-500/30 bg-white/5 p-6 sm:p-8"
+      className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8"
     >
       <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">
         Abundant water could feed<br />
