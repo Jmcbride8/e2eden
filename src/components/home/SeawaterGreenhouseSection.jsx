@@ -53,7 +53,7 @@ export default function SeawaterGreenhouseSection() {
               >
                 Seawater Greenhouse Ltd <ExternalLink className="w-4 h-4" />
               </a>
-              . This technology has already transformed deserts across four continents.
+              . This technology has already transformed deserts across three continents.
             </p>
             <p className="text-xl text-white/70 leading-relaxed">
               We are not starting from scratch — we are adapting what works for the United States market and scaling it to a level never attempted before. These greenhouses have been built. They grow food. Now we bring them home.
@@ -64,7 +64,7 @@ export default function SeawaterGreenhouseSection() {
           <div className="grid grid-cols-3 gap-6 mt-10">
             {[
               { number: "30+", label: "Years of R&D" },
-              { number: "5", label: "Continents Deployed" },
+              { number: "3", label: "Continents Deployed" },
               { number: "1st", label: "Time in the USA" },
             ].map((stat, idx) => (
               <div key={idx} className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
