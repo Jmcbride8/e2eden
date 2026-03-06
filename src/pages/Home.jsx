@@ -330,7 +330,7 @@ export default function Home() {
                 The Next Giant Leap for Mankind
               </h2>
               <p className="text-xl text-white/60 max-w-3xl mx-auto">
-                We moved industry to space to preserve Earth. Now we unlock Earth's abundance—turning deserts into gardens and securing water as the foundation for feeding 10 billion people.
+                Unlocking Earth's abundance—turning deserts into gardens and securing water as the foundation for feeding 10 billion people.
               </p>
             </motion.div>
 
