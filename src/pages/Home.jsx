@@ -494,7 +494,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="mb-12 max-w-3xl mx-auto text-center">
               <p className="text-xl leading-relaxed text-white/70">
-                Imagine standing in front of a wall of wet mesh on a scorching day — you instantly feel cooler and the air feels moist. That's the core idea. Our panels use that same principle at farm scale: salty or brackish water — water too dirty to drink or irrigate with — flows through porous walls, cools the air by up to 15°C, and raises humidity enough that crops no longer need to fight the heat to survive. Less stress on the plant means dramatically less water needed in the field.
+                Why it works
               </p>
             </motion.div>
 
