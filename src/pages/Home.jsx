@@ -447,7 +447,7 @@ export default function Home() {
               </div>
               <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls</h2>
               <p className="text-xl mb-0 text-white/70">
-                We've developed revolutionary technology that mimics nature's own cooling system
+                We substitute saltwater for fresh — cooling farms with the briny, unusable water hiding beneath our feet, so the clean water stays where it belongs.
               </p>
             </motion.div>
 
