@@ -303,13 +303,16 @@ export default function TheInnovations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="relative rounded-2xl overflow-hidden border border-white/10 h-64 flex items-center justify-center"
-                style={{
-                  backgroundImage: "url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop')",
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
+                className="relative rounded-2xl overflow-hidden h-64 flex items-center justify-center group"
               >
+                <AdminImageUpload
+                  src={getHomeImg("dessal_water_cost", "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop")}
+                  alt="Desalinated Water"
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg("dessal_water_cost", url)}
+                  className="absolute inset-0"
+                  imgClassName="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
                 <div className="relative z-10 text-center">
                   <div className="text-2xl font-bold text-white mb-2">Desalinated Water Cost</div>
@@ -322,13 +325,16 @@ export default function TheInnovations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="relative rounded-2xl overflow-hidden border border-white/10 h-64 flex items-center justify-center"
-                style={{
-                  backgroundImage: "url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop')",
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
+                className="relative rounded-2xl overflow-hidden h-64 flex items-center justify-center group"
               >
+                <AdminImageUpload
+                  src={getHomeImg("crop_value_alfalfa", "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop")}
+                  alt="Alfalfa Crop"
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg("crop_value_alfalfa", url)}
+                  className="absolute inset-0"
+                  imgClassName="w-full h-full object-cover"
+                />
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
                 <div className="relative z-10 text-center">
                   <div className="text-2xl font-bold text-white mb-2">Crop Value (Alfalfa)</div>
