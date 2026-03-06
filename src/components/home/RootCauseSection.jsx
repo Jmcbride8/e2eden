@@ -6,18 +6,21 @@ import AdminImageUpload from "./AdminImageUpload";
 const DEFAULT_IMAGES = [
 {
   key: "root_cause_img_3",
+  title: "We farm in deserts",
   default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-  caption: "Every water-saving campaign combined — shorter showers, low-flow toilets, industrial conservation — barely registers. Fix farming, and you fix the crisis."
+  caption: "Every water-saving campaign combined barely registers. Fix farming, fix the crisis."
 },
 {
   key: "root_cause_img_2",
+  title: "Water evaporates away",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "In extreme heat, plants must transpire constantly just to stay alive — not to grow food, but to cool themselves. That water doesn't hydrate the crop. It evaporates into the sky."
+  caption: "In desert heat, crops must sweat constantly just to survive. That water evaporates into the sky, not into food."
 },
 {
   key: "root_cause_img_desalination",
+  title: "Desalination is 10x too costly",
   default: "https://images.unsplash.com/photo-1548783300-b4f9d05cdd67?w=800&h=600&fit=crop",
-  caption: "Desalination sounds like a fix — until you do the math. It costs $20,000 in desalinated water to grow one acre of alfalfa. That acre sells for $4,000. The numbers don't work."
+  caption: "Desalination costs $20,000 per acre-foot. Alfalfa sells for $4,000 per acre. The math doesn't work."
 },
 ];
 
@@ -65,14 +68,14 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           </h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
-            Agriculture consumes 85% of freshwater — and in the US Southwest, that number climbs even higher. Farmers aren't careless. In punishing desert heat, crops must sweat constantly just to survive. That water doesn't become food — it vanishes into the sky. Until now, there was no way out.
+            Agriculture consumes 85% of freshwater. In the desert Southwest, crops must sweat constantly just to survive the heat. That water evaporates — it doesn't become food. Until now, there was no way out.
           </p>
 
           {/* Image Grid */}
           <div className="grid md:grid-cols-3 gap-5 mb-8">
             {DEFAULT_IMAGES.map((img) =>
             <div key={img.key} className="group">
-                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden">
+                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden mb-3">
                   <AdminImageUpload
                   src={getImg(img.key, img.default)}
                   alt={img.caption}
@@ -81,7 +84,8 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                   className="w-full h-full"
                   imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <p className="mt-3 text-white/70 text-sm leading-snug">
+                <h3 className="text-lg font-bold text-white mb-2">{img.title}</h3>
+                <p className="text-white/70 text-sm leading-snug">
                   {img.caption}
                 </p>
               </div>
