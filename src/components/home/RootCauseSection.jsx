@@ -69,7 +69,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           </p>
 
           {/* Image Grid */}
-          <div className="grid md:grid-cols-3 gap-5 mb-0 grid-rows-2">
+          <div className="grid md:grid-cols-3 gap-5 mb-8">
             {DEFAULT_IMAGES.map((img) =>
             <div key={img.key} className="group">
                 <div className="aspect-[4/3] relative rounded-2xl overflow-hidden">
