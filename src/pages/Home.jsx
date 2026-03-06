@@ -651,10 +651,16 @@ export default function Home() {
               <h2 className="text-5xl font-bold mb-6 text-white">Green the World, Feed the World
 
               </h2>
-              <p className="text-xl leading-relaxed mb-12 text-white/70">
+              <p className="text-xl leading-relaxed mb-8 text-white/70">
                 From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
               </p>
-              
+
+              {/* Fertilizer vs Water insight cards */}
+              <div className="grid md:grid-cols-2 gap-6 mb-12">
+                <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+                <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+              </div>
+
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {allProjects.filter(p => p.phase === "Transformation").sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)).map((project, idx) =>
                 <motion.div
