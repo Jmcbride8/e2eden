@@ -687,16 +687,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Fertilizer vs Water insight cards */}
-        <section className="pb-16 px-6 sm:px-12 bg-black">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
-              <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
-              <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
-            </div>
-          </div>
-        </section>
-
         {/* 6. Change the World */}
         <section className="py-32 px-6 sm:px-12 bg-black">
           <div className="max-w-5xl mx-auto text-center">
