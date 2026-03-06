@@ -307,7 +307,7 @@ export default function TheInnovations() {
               >
                 <div className="absolute inset-0 z-0">
                   <AdminImageUpload
-                    src={getHomeImg("dessal_water_cost", "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop")}
+                    src={getHomeImg("dessal_water_cost", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/4c0e1db71_water.jpg")}
                     alt="Desalinated Water"
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("dessal_water_cost", url)}
@@ -333,7 +333,7 @@ export default function TheInnovations() {
               >
                 <div className="absolute inset-0 z-0">
                   <AdminImageUpload
-                    src={getHomeImg("crop_value_alfalfa", "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop")}
+                    src={getHomeImg("crop_value_alfalfa", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/8b2b8e0f0_Alfalfa.jpg")}
                     alt="Alfalfa Crop"
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("crop_value_alfalfa", url)}
