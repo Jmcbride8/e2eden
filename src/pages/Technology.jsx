@@ -100,7 +100,7 @@ export default function Technology() {
             style={{ aspectRatio: '16/9' }}
           >
             <AdminImageUpload
-              src={getHomeImg("tech_video_thumb", "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=1400&h=788&fit=crop")}
+              src={getHomeImg("tech_video_thumb", "https://img.youtube.com/vi/LqPZoQMv6vQ/maxresdefault.jpg")}
               alt="Technology Video Thumbnail"
               isAdmin={isAdmin}
               onUploaded={(url) => setHomeImg("tech_video_thumb", url)}
