@@ -376,6 +376,27 @@ export default function Home() {
                   alt: "Water wars",
                   title: "The Water Wars Have Begun",
                   body: "States sue states. Nations threaten nations. Farmers vs. cities. Present vs. future. The fights over what's left are already here — and they will only get fiercer."
+                },
+                {
+                  key: "shortage_7",
+                  defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop",
+                  alt: "Fallowed farmland",
+                  title: "Cities Buy the Farms",
+                  body: "When cities can't build more supply, they buy it. Water districts and Wall Street investors purchase farmland and fallow it — permanently taking land out of production. Farmers are offered a check and told to walk away from everything their family built."
+                },
+                {
+                  key: "shortage_8",
+                  defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                  alt: "Rural town decay",
+                  title: "Then the Towns Die",
+                  body: "When the farms go, so does everything else. The feed stores, the equipment dealers, the packing sheds, the restaurants. As one farmer put it: \"City folk need to understand — we don't grow food because we like it as a hobby. We are your food supply.\" Without farming, rural communities collapse into poverty."
+                },
+                {
+                  key: "shortage_9",
+                  defaultImg: "https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=800&h=600&fit=crop",
+                  alt: "Salton Sea environmental collapse",
+                  title: "And the Land Turns to Dust",
+                  body: "Removing water doesn't just end farming — it ends ecosystems. The Salton Sea and Owens Lake are cautionary tales: once water was diverted to cities, exposed lakebeds became toxic dust bowls, triggering public health crises and environmental collapse that haunt those regions to this day."
                 }
               ].map((card, idx) =>
               <motion.div
