@@ -89,7 +89,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           </div>
 
           {/* Stat + Pie Chart layout */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center mt-8">
             {/* Big stat */}
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10 h-full flex flex-col justify-center">
               <div className="text-8xl font-bold text-amber-400 mb-4">85%</div>
