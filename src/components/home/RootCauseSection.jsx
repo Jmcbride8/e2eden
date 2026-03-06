@@ -83,7 +83,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                   imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white">{img.title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">
+                <p className="text-white/60 leading-relaxed">
                   {img.caption}
                 </p>
               </div>
