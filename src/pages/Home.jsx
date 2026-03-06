@@ -561,17 +561,41 @@ export default function Home() {
                 one of the most productive agricultural regions in the world. If we can make it work here, we can make 
                 it work anywhere.
               </p>
-              <div className="aspect-video rounded-2xl overflow-hidden mb-6 bg-white/5 border border-white/10">
-                <AdminImageUpload
-                  src={getHomeImg("imperial_valley", "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop")}
-                  alt="Imperial Valley Agriculture"
-                  isAdmin={isAdmin}
-                  onUploaded={(url) => setHomeImg("imperial_valley", url)}
-                  className="w-full h-full"
-                  imgClassName="w-full h-full object-cover" />
-
+              <div className="grid md:grid-cols-2 gap-6 items-stretch">
+                {/* Main image */}
+                <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 h-full min-h-[400px]">
+                  <AdminImageUpload
+                    src={getHomeImg("imperial_valley", "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&h=675&fit=crop")}
+                    alt="Imperial Valley Agriculture"
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setHomeImg("imperial_valley", url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover" />
+                </div>
+                {/* Three stacked image cards */}
+                <div className="flex flex-col gap-4">
+                  {[
+                    { key: "iv_what_it_is", title: "What It Is", defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=400&fit=crop" },
+                    { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=800&h=400&fit=crop" },
+                    { key: "iv_what_we_can_make_it", title: "What We Can Make It", defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=400&fit=crop" },
+                  ].map((card) => (
+                    <div key={card.key} className="relative flex-1 rounded-xl overflow-hidden group min-h-[110px]">
+                      <AdminImageUpload
+                        src={getHomeImg(card.key, card.defaultImg)}
+                        alt={card.title}
+                        isAdmin={isAdmin}
+                        onUploaded={(url) => setHomeImg(card.key, url)}
+                        className="w-full h-full"
+                        imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-0 left-0 right-0 p-3">
+                        <h4 className="text-white font-bold text-base">{card.title}</h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <p className="text-lg leading-relaxed text-white/70">
+              <p className="text-lg leading-relaxed text-white/70 mt-6">
                 Our first installations are already demonstrating dramatic water savings and improved crop yields. 
                 This is just the beginning of a global transformation.
               </p>
