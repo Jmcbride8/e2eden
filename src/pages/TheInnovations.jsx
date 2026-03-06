@@ -234,48 +234,60 @@ export default function TheInnovations() {
 
           {/* The Scale Problem */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-8">Agriculture Uses 85% of Our Water</h2>
-            <div className="grid md:grid-cols-2 gap-12 items-start">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <p className="text-white/70 text-lg leading-relaxed">
-                  The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
-                </p>
-              </motion.div>
-              <div className="space-y-4">
-                {[
-                   { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=300&h=250&fit=crop" },
-                   { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=300&h=250&fit=crop" },
-                   { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=300&h=250&fit=crop" },
-                 ].map((item, idx) => (
-                   <motion.div
-                     key={idx}
-                     initial={{ opacity: 0, y: 20 }}
-                     whileInView={{ opacity: 1, y: 0 }}
-                     viewport={{ once: true }}
-                     transition={{ duration: 0.6, delay: idx * 0.1 }}
-                     className="rounded-xl bg-white/5 border border-white/10 overflow-hidden flex gap-4"
-                   >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-12"
+            >
+              <h2 className="text-4xl font-bold text-white mb-4">Agriculture Uses 85% of Our Water</h2>
+              <p className="text-white/70 text-lg leading-relaxed max-w-2xl">
+                The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
+              </p>
+            </motion.div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                 { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" },
+                 { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=400&h=300&fit=crop" },
+                 { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=400&h=300&fit=crop" },
+               ].map((item, idx) => (
+                 <motion.div
+                   key={idx}
+                   initial={{ opacity: 0, y: 20 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   viewport={{ once: true }}
+                   transition={{ duration: 0.6, delay: idx * 0.1 }}
+                   className="group rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300"
+                 >
+                   <div className="relative h-52 overflow-hidden">
                      <AdminImageUpload
                        src={getHomeImg(item.key, item.defaultImage)}
                        alt={item.crop}
                        isAdmin={isAdmin}
                        onUploaded={(url) => setHomeImg(item.key, url)}
-                       className="w-24 h-24 flex-shrink-0"
-                       imgClassName="w-full h-full object-cover"
+                       className="w-full h-full"
+                       imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                      />
-                    <div className="flex-1 p-4 flex flex-col justify-center">
-                      <p className="text-white font-semibold mb-1">{item.crop}</p>
-                      <p className="text-amber-400 text-sm font-bold mb-1">{item.pct} of AG water</p>
-                      <p className="text-white/50 text-xs">{item.water}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                     <div className="absolute bottom-0 left-0 right-0 p-6">
+                       <p className="text-white font-bold text-2xl mb-1">{item.crop}</p>
+                       <p className="text-amber-400 font-bold text-3xl">{item.pct}</p>
+                       <p className="text-white/70 text-sm mt-2">of Agricultural Water</p>
+                     </div>
+                   </div>
+                   <div className="p-6 bg-white/[0.04]">
+                     <div className="flex justify-between items-center mb-3">
+                       <span className="text-white/60 text-sm">Area</span>
+                       <span className="text-white font-semibold">{item.acres}</span>
+                     </div>
+                     <div className="flex justify-between items-center">
+                       <span className="text-white/60 text-sm">Annual Use</span>
+                       <span className="text-white font-semibold">{item.water}</span>
+                     </div>
+                   </div>
+                 </motion.div>
+               ))}
             </div>
           </div>
 
