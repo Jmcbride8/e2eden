@@ -487,31 +487,16 @@ export default function Home() {
                 imgClassName="w-full h-[32rem] object-cover rounded-2xl" />
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-12 mb-12">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}>
-                <h3 className="text-2xl font-bold mb-4 text-white">Evaporative Cellulose Panels</h3>
-                <p className="text-lg leading-relaxed text-white/60">
-                  Our patented cooling walls use natural evaporation to reduce temperatures by up to 15°C, increase 
-                  humidity by 50%, and save 90% of water compared to traditional irrigation.
-                </p>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}>
-                <h3 className="text-2xl font-bold mb-4 text-white">Brine Utilization</h3>
-                <p className="text-lg leading-relaxed text-white/60">
-                  We turn waste into resource. By using brackish water and agricultural brines, we unlock water sources 
-                  that were previously unusable, making deserts bloom where nothing could grow before.
-                </p>
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-12 max-w-3xl mx-auto text-center">
+              <p className="text-xl leading-relaxed text-white/70">
+                Imagine standing in front of a wall of wet mesh on a scorching day — you instantly feel cooler and the air feels moist. That's the core idea. Our panels use that same principle at farm scale: salty or brackish water — water too dirty to drink or irrigate with — flows through porous walls, cools the air by up to 15°C, and raises humidity enough that crops no longer need to fight the heat to survive. Less stress on the plant means dramatically less water needed in the field.
+              </p>
+            </motion.div>
 
             {/* Why It Works */}
             <div className="grid md:grid-cols-3 gap-10 mt-12">
