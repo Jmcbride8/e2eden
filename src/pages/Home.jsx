@@ -11,6 +11,7 @@ import RootCauseSection from "../components/home/RootCauseSection";
 import AdminImageUpload from "../components/home/AdminImageUpload";
 import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
+import { FertilizerChart, SaltwaterChart } from "../components/home/PopulationCharts";
 
 
 export default function Home() {
