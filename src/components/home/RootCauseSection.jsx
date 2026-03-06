@@ -5,9 +5,9 @@ import AdminImageUpload from "./AdminImageUpload";
 
 const DEFAULT_IMAGES = [
 {
-  key: "root_cause_img_1",
-  default: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&h=600&fit=crop",
-  caption: "Farmers pay a fraction of what cities do for water — sometimes less than 1% of the urban rate. When water is nearly free, there is no financial pressure to use it wisely. The incentive to conserve simply doesn't exist."
+  key: "root_cause_img_3",
+  default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
+  caption: "Cities, for all their size and density, consume a relatively small fraction of the world's freshwater. Every water-saving initiative aimed at households and industry combined cannot match the impact of fixing how we farm. That is where the real battle will be won or lost."
 },
 {
   key: "root_cause_img_2",
@@ -15,9 +15,9 @@ const DEFAULT_IMAGES = [
   caption: "Desert farms apply 6 to 10 feet of water per acre every year — not because farmers love wasting it, but because plants in extreme heat suffer heat stress and must transpire constantly just to survive. Drip irrigation can't solve this; the water isn't being wasted in delivery, it's being consumed by the plant's cooling system, and lost to the sky."
 },
 {
-  key: "root_cause_img_3",
-  default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-  caption: "Cities, for all their size and density, consume a relatively small fraction of the world's freshwater. Every water-saving initiative aimed at households and industry combined cannot match the impact of fixing how we farm. That is where the real battle will be won or lost."
+  key: "root_cause_img_desalination",
+  default: "https://images.unsplash.com/photo-1548783300-b4f9d05cdd67?w=800&h=600&fit=crop",
+  caption: "Desalination is far too expensive for farming. It costs roughly $20,000 worth of desalinated water to grow a single acre of alfalfa — the region's main crop — which sells for only $4,000. No farmer can survive that math."
 },
 ];
 
