@@ -316,6 +316,31 @@ export default function Home() {
 
       {/* Story Content Section */}
       <div className="relative z-10 bg-black">
+        {/* 0. Water - The Next Great Leap */}
+        <section className="py-24 px-6 sm:px-12 bg-black">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12">
+
+              <h2 className="text-5xl font-bold mb-6 text-white">
+                Water—The Next Great Leap
+              </h2>
+              <p className="text-xl text-white/60 max-w-3xl mx-auto">
+                Humanity's greatest achievements came from mastering water. Today, we face a choice: adapt, or watch civilization constrain itself.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+              <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+            </div>
+          </div>
+        </section>
+
         {/* 1. Water Shortages */}
         <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
