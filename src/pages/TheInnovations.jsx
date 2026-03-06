@@ -20,7 +20,7 @@ export default function TheInnovations() {
 
   const homeContentMap = React.useMemo(() => {
     const map = {};
-    homeContentRecords.forEach((r) => { map[r.key] = r; });
+    homeContentRecords.forEach((r) => {map[r.key] = r;});
     return map;
   }, [homeContentRecords]);
 
@@ -37,35 +37,35 @@ export default function TheInnovations() {
   };
 
   React.useEffect(() => {
-    base44.auth.me().then(user => setIsAdmin(user?.role === 'admin'));
+    base44.auth.me().then((user) => setIsAdmin(user?.role === 'admin'));
   }, []);
 
   const mechanisms = [
-    {
-      key: "wind_slow",
-      icon: Wind,
-      title: "Slows the Wind",
-      color: "text-sky-400",
-      defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/41eb3c992_generated_image.png",
-      body: "Hot desert wind strips the layer of moisture above the fields. Our cooling walls act as a windbreak, protecting this critical moisture layer and reducing the drying effect on crops."
-    },
-    {
-      key: "wind_cool",
-      icon: Thermometer,
-      title: "Cools the Wind",
-      color: "text-cyan-400",
-      defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
-      body: "As saltwater evaporates through the panels, it steals heat from the air. That cooled air is denser — it sinks, smothering the field in a cool, protective blanket that drops temperatures by up to 27°F."
-    },
-    {
-      key: "wind_humid",
-      icon: Droplets,
-      title: "Humidifies the Wind",
-      color: "text-emerald-400",
-      defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
-      body: "The moisture doesn't vanish — it stays. Humid air clings to the field, slowing evaporation from soil and plant alike. Crops stop fighting the heat and start putting their energy into growth."
-    },
-  ];
+  {
+    key: "wind_slow",
+    icon: Wind,
+    title: "Slows the Wind",
+    color: "text-sky-400",
+    defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/41eb3c992_generated_image.png",
+    body: "Hot desert wind strips the layer of moisture above the fields. Our cooling walls act as a windbreak, protecting this critical moisture layer and reducing the drying effect on crops."
+  },
+  {
+    key: "wind_cool",
+    icon: Thermometer,
+    title: "Cools the Wind",
+    color: "text-cyan-400",
+    defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
+    body: "As saltwater evaporates through the panels, it steals heat from the air. That cooled air is denser — it sinks, smothering the field in a cool, protective blanket that drops temperatures by up to 27°F."
+  },
+  {
+    key: "wind_humid",
+    icon: Droplets,
+    title: "Humidifies the Wind",
+    color: "text-emerald-400",
+    defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
+    body: "The moisture doesn't vanish — it stays. Humid air clings to the field, slowing evaporation from soil and plant alike. Crops stop fighting the heat and start putting their energy into growth."
+  }];
+
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -76,8 +76,8 @@ export default function TheInnovations() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+          className="text-center mb-16">
+
           <div className="flex items-center gap-4 mb-6 justify-center">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Technology Innovation</span>
@@ -94,21 +94,21 @@ export default function TheInnovations() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-20"
-        >
+          className="mb-20">
+
           <div
             className="relative rounded-2xl overflow-hidden cursor-pointer group"
             onClick={() => setVideoOpen(true)}
-            style={{ aspectRatio: '16/9' }}
-          >
+            style={{ aspectRatio: '16/9' }}>
+
             <AdminImageUpload
               src={getHomeImg("tech_video_thumb", "https://img.youtube.com/vi/LqPZoQMv6vQ/maxresdefault.jpg")}
               alt="Technology Video Thumbnail"
               isAdmin={isAdmin}
               onUploaded={(url) => setHomeImg("tech_video_thumb", url)}
               className="w-full h-full"
-              imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
+              imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
@@ -123,54 +123,54 @@ export default function TheInnovations() {
         </motion.div>
 
         {/* Video Modal */}
-        {videoOpen && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-6"
-            onClick={() => setVideoOpen(false)}
-          >
+        {videoOpen &&
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-6"
+          onClick={() => setVideoOpen(false)}>
+
             <div
-              className="relative w-full max-w-4xl rounded-2xl overflow-hidden"
-              onClick={e => e.stopPropagation()}
-            >
+            className="relative w-full max-w-4xl rounded-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}>
+
               <button
-                onClick={() => setVideoOpen(false)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-              >
+              onClick={() => setVideoOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
+
                 <X className="w-5 h-5 text-white" />
               </button>
               <div style={{ aspectRatio: '16/9' }}>
                 <iframe
-                  src="https://www.youtube.com/embed/LqPZoQMv6vQ"
-                  title="How Saltwater Cooling Walls Work"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
+                src="https://www.youtube.com/embed/LqPZoQMv6vQ"
+                title="How Saltwater Cooling Walls Work"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full" />
+
               </div>
             </div>
           </div>
-        )}
+        }
 
         {/* KPI Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-20">
           {[
-            { number: "90%", label: "Water Savings", sub: "vs. conventional irrigation" },
-            { number: "27°F", label: "Temperature Reduction", sub: "ambient cooling effect" },
-            { number: "50%", label: "Humidity Increase", sub: "optimal growing conditions" },
-          ].map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className="p-8 rounded-xl text-center bg-white/5 border border-white/10"
-            >
+          { number: "90%", label: "Water Savings", sub: "vs. conventional irrigation" },
+          { number: "27°F", label: "Temperature Reduction", sub: "ambient cooling effect" },
+          { number: "50%", label: "Humidity Increase", sub: "optimal growing conditions" }].
+          map((stat, idx) =>
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: idx * 0.1 }}
+            className="p-8 rounded-xl text-center bg-white/5 border border-white/10">
+
               <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
               <div className="text-lg font-semibold text-white mb-1">{stat.label}</div>
               <div className="text-sm text-white/40">{stat.sub}</div>
             </motion.div>
-          ))}
+          )}
         </div>
 
         {/* One Wall. Three Ways. */}
@@ -179,8 +179,8 @@ export default function TheInnovations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
+          className="text-center mb-12">
+
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">How It Works</span>
@@ -193,29 +193,29 @@ export default function TheInnovations() {
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-10 mb-24">
-          {mechanisms.map((m, idx) => (
-            <motion.div
-              key={m.key}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.1 }}
-            >
+          {mechanisms.map((m, idx) =>
+          <motion.div
+            key={m.key}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: idx * 0.1 }}>
+
               <AdminImageUpload
-                src={getHomeImg(m.key, m.defaultImg)}
-                alt={m.title}
-                isAdmin={isAdmin}
-                onUploaded={(url) => setHomeImg(m.key, url)}
-                className="w-full rounded-xl overflow-hidden mb-5"
-                imgClassName="w-full h-60 object-cover rounded-xl"
-              />
+              src={getHomeImg(m.key, m.defaultImg)}
+              alt={m.title}
+              isAdmin={isAdmin}
+              onUploaded={(url) => setHomeImg(m.key, url)}
+              className="w-full rounded-xl overflow-hidden mb-5"
+              imgClassName="w-full h-60 object-cover rounded-xl" />
+
               <div className={`flex items-center gap-2 mb-3`}>
                 <m.icon className={`w-5 h-5 ${m.color}`} />
                 <h3 className={`text-xl font-bold ${m.color}`}>{m.title}</h3>
               </div>
               <p className="text-white/60 text-sm leading-relaxed">{m.body}</p>
             </motion.div>
-          ))}
+          )}
         </div>
 
         {/* Why Traditional Desalination Won't Work */}
@@ -224,8 +224,8 @@ export default function TheInnovations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
+          className="mb-24">
+
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Why Desalination Won't Work</span>
@@ -239,8 +239,8 @@ export default function TheInnovations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mb-12"
-            >
+              className="mb-12">
+
               <h2 className="text-4xl font-bold text-white mb-4">Agriculture Uses 85% of Our Water</h2>
               <p className="text-white/70 text-lg leading-relaxed max-w-2xl">
                 The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
@@ -248,28 +248,28 @@ export default function TheInnovations() {
             </motion.div>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                 { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" },
-                 { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=400&h=300&fit=crop" },
-                 { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=400&h=300&fit=crop" },
-               ].map((item, idx) => (
-                 <motion.div
-                   key={idx}
-                   initial={{ opacity: 0, y: 20 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 0.6, delay: idx * 0.1 }}
-                   className="group rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300"
-                 >
+              { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" },
+              { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=400&h=300&fit=crop" },
+              { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=400&h=300&fit=crop" }].
+              map((item, idx) =>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="group rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300">
+
                    <div className="relative h-52 overflow-hidden">
                      <div className="absolute inset-0 z-0">
                        <AdminImageUpload
-                         src={getHomeImg(item.key, item.defaultImage)}
-                         alt={item.crop}
-                         isAdmin={isAdmin}
-                         onUploaded={(url) => setHomeImg(item.key, url)}
-                         className="w-full h-full"
-                         imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                       />
+                      src={getHomeImg(item.key, item.defaultImage)}
+                      alt={item.crop}
+                      isAdmin={isAdmin}
+                      onUploaded={(url) => setHomeImg(item.key, url)}
+                      className="w-full h-full"
+                      imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
                      </div>
                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent backdrop-blur-sm z-10" />
                      <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
@@ -289,7 +289,7 @@ export default function TheInnovations() {
                      </div>
                    </div>
                  </motion.div>
-               ))}
+              )}
             </div>
           </div>
 
@@ -305,8 +305,8 @@ export default function TheInnovations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="relative rounded-2xl overflow-hidden h-64 group"
-              >
+                className="relative rounded-2xl overflow-hidden h-64 group">
+
                 <div className="absolute inset-0 z-0">
                   <AdminImageUpload
                     src={getHomeImg("dessal_water_cost", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/4c0e1db71_water.jpg")}
@@ -314,8 +314,8 @@ export default function TheInnovations() {
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("dessal_water_cost", url)}
                     className="w-full h-full"
-                    imgClassName="w-full h-full object-cover"
-                  />
+                    imgClassName="w-full h-full object-cover" />
+
                 </div>
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10" />
                 <div className="absolute inset-0 z-20 flex items-center justify-center">
@@ -331,8 +331,8 @@ export default function TheInnovations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="relative rounded-2xl overflow-hidden h-64 group"
-              >
+                className="relative rounded-2xl overflow-hidden h-64 group">
+
                 <div className="absolute inset-0 z-0">
                   <AdminImageUpload
                     src={getHomeImg("crop_value_alfalfa", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/8b2b8e0f0_Alfalfa.jpg")}
@@ -340,8 +340,8 @@ export default function TheInnovations() {
                     isAdmin={isAdmin}
                     onUploaded={(url) => setHomeImg("crop_value_alfalfa", url)}
                     className="w-full h-full"
-                    imgClassName="w-full h-full object-cover"
-                  />
+                    imgClassName="w-full h-full object-cover" />
+
                 </div>
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10" />
                 <div className="absolute inset-0 z-20 flex items-center justify-center">
@@ -369,51 +369,51 @@ export default function TheInnovations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-sm"
-            >
+              className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-sm">
+
               <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={[
-                  { year: "1970s", desal: 9700, iidfarmers: 25, farmers: 25 },
-                  { year: "1980s", desal: 8500, iidfarmers: 25, farmers: 25 },
-                  { year: "1990s", desal: 6000, iidfarmers: 20, farmers: 20 },
-                  { year: "2000s", desal: 4500, iidfarmers: 20, farmers: 20 },
-                  { year: "2010s", desal: 2500, iidfarmers: 20, farmers: 20 },
-                  { year: "2020", desal: 2329, iidfarmers: 20, farmers: 20 },
-                  { year: "2024", desal: 3400, iidfarmers: 25, farmers: 25 },
-                ]} margin={{ top: 30, right: 30, left: 30, bottom: 30 }}>
+                { year: "1970s", desal: 9700, iidfarmers: 25, farmers: 25 },
+                { year: "1980s", desal: 8500, iidfarmers: 25, farmers: 25 },
+                { year: "1990s", desal: 6000, iidfarmers: 20, farmers: 20 },
+                { year: "2000s", desal: 4500, iidfarmers: 20, farmers: 20 },
+                { year: "2010s", desal: 2500, iidfarmers: 20, farmers: 20 },
+                { year: "2020", desal: 2329, iidfarmers: 20, farmers: 20 },
+                { year: "2024", desal: 3400, iidfarmers: 25, farmers: 25 }]
+                } margin={{ top: 30, right: 30, left: 30, bottom: 30 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.08)" vertical={false} />
                   <XAxis dataKey="year" stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px", fontWeight: 500 }} />
-                  <YAxis stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px" }} tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} />
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: "rgba(0,0,0,0.9)", 
+                  <YAxis stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px" }} tickFormatter={(val) => `$${(val / 1000).toFixed(0)}k`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "rgba(0,0,0,0.9)",
                       border: "1px solid rgba(59, 130, 246, 0.3)",
                       borderRadius: "12px",
                       padding: "12px"
                     }}
                     formatter={(value) => `$${value.toLocaleString()}/acre-ft`}
                     labelStyle={{ color: "#ffffff" }}
-                    cursor={{ stroke: "rgba(59, 130, 246, 0.2)", strokeWidth: 2 }}
-                  />
-                  <Line 
-                    type="natural" 
-                    dataKey="desal" 
-                    stroke="#3b82f6" 
+                    cursor={{ stroke: "rgba(59, 130, 246, 0.2)", strokeWidth: 2 }} />
+
+                  <Line
+                    type="natural"
+                    dataKey="desal"
+                    stroke="#3b82f6"
                     dot={false}
                     strokeWidth={3}
                     isAnimationActive={true}
-                    name="Desalination Cost"
-                  />
-                  <Line 
-                    type="linear" 
-                    dataKey="iidfarmers" 
-                    stroke="#60a5fa" 
+                    name="Desalination Cost" />
+
+                  <Line
+                    type="linear"
+                    dataKey="iidfarmers"
+                    stroke="#60a5fa"
                     dot={false}
                     strokeWidth={2}
                     strokeDasharray="5 5"
                     isAnimationActive={true}
-                    name="What IID Farmers Pay"
-                  />
+                    name="What IID Farmers Pay" />
+
                 </LineChart>
               </ResponsiveContainer>
               <div className="mt-8 grid md:grid-cols-3 gap-4">
@@ -444,45 +444,45 @@ export default function TheInnovations() {
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                {
-                  title: "Drip Irrigation",
-                  problem: "Requires dense micro-tubing that blocks heavy equipment and prevents mechanized planting/harvesting.",
-                  unsuitable: "Fundamentally incompatible with large-scale field crop operations",
-                  key: "tech_drip",
-                  defaultImage: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
-                },
-                {
-                  title: "Greenhouses",
-                  problem: "Structures block sunlight, prevent machinery access, and cost $100K+ per acre to install.",
-                  unsuitable: "Designed for high-value crops, not low-margin commodity farming",
-                  key: "tech_greenhouses",
-                  defaultImage: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
-                },
-                {
-                  title: "Precision Agriculture",
-                  problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
-                  unsuitable: "Addresses efficiency, not the fundamental physics of water loss",
-                  key: "tech_precision",
-                  defaultImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
-                },
-              ].map((tech, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden flex flex-col"
-                >
+              {
+                title: "Drip Irrigation",
+                problem: "Requires dense micro-tubing that blocks heavy equipment and prevents mechanized planting/harvesting.",
+                unsuitable: "Fundamentally incompatible with large-scale field crop operations",
+                key: "tech_drip",
+                defaultImage: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
+              },
+              {
+                title: "Greenhouses",
+                problem: "Structures block sunlight, prevent machinery access, and cost $100K+ per acre to install.",
+                unsuitable: "Designed for high-value crops, not low-margin commodity farming",
+                key: "tech_greenhouses",
+                defaultImage: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
+              },
+              {
+                title: "Precision Agriculture",
+                problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
+                unsuitable: "Addresses efficiency, not the fundamental physics of water loss",
+                key: "tech_precision",
+                defaultImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+              }].
+              map((tech, idx) =>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden flex flex-col">
+
                   <div className="h-40 overflow-hidden">
                     <AdminImageUpload
-                      src={getHomeImg(tech.key, tech.defaultImage)}
-                      alt={tech.title}
-                      isAdmin={isAdmin}
-                      onUploaded={(url) => setHomeImg(tech.key, url)}
-                      className="w-full h-full"
-                      imgClassName="w-full h-full object-cover"
-                    />
+                    src={getHomeImg(tech.key, tech.defaultImage)}
+                    alt={tech.title}
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setHomeImg(tech.key, url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover" />
+
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-white mb-3">{tech.title}</h3>
@@ -490,7 +490,7 @@ export default function TheInnovations() {
                     <p className="text-red-400/80 text-xs font-semibold">{tech.unsuitable}</p>
                   </div>
                 </motion.div>
-              ))}
+              )}
             </div>
           </div>
         </motion.div>
@@ -501,8 +501,8 @@ export default function TheInnovations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
+          className="mb-24">
+
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Saltwater Advantage</span>
@@ -510,24 +510,24 @@ export default function TheInnovations() {
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {[
-              { title: "What we use", icon: "💧", body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." },
-              { title: "What we replace", icon: "🌊", body: "Freshwater irrigation — the most precious resource on earth. By eliminating the need for fresh water in the cooling process and dramatically reducing crop transpiration, we cut total farm water demand by up to 90%." },
-              { title: "The physics", icon: "🔬", body: "Evaporative cooling is the same principle as sweating. As water evaporates, it absorbs heat. Our panels maximize the surface area for evaporation, creating the most efficient natural cooling system possible at agricultural scale." },
-              { title: "The scale", icon: "🌍", body: "The technology works at any scale — from a single farm to an entire region. Each wall protects a strip of land downwind. Walls can be arranged in arrays to protect hundreds of acres, creating a new form of climate infrastructure for food production." },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="p-8 rounded-2xl bg-white/5 border border-white/10"
-              >
+            { title: "What we use", icon: "💧", body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." },
+            { title: "What we replace", icon: "🌊", body: "Freshwater irrigation — the most precious resource on earth. By eliminating the need for fresh water in the cooling process and dramatically reducing crop transpiration, we cut total farm water demand by up to 90%." },
+            { title: "The physics", icon: "🔬", body: "Evaporative cooling is the same principle as sweating. As water evaporates, it absorbs heat. Our panels maximize the surface area for evaporation, creating the most efficient natural cooling system possible at agricultural scale." },
+            { title: "The scale", icon: "🌍", body: "The technology works at any scale — from a single farm to an entire region. Each wall protects a strip of land downwind. Walls can be arranged in arrays to protect hundreds of acres, creating a new form of climate infrastructure for food production." }].
+            map((item, idx) =>
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="p-8 rounded-2xl bg-white/5 border border-white/10">
+
                 <div className="text-3xl mb-4">{item.icon}</div>
                 <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                 <p className="text-white/60 leading-relaxed">{item.body}</p>
               </motion.div>
-            ))}
+            )}
           </div>
         </motion.div>
 
@@ -537,16 +537,16 @@ export default function TheInnovations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
+          className="mb-24">
+
           <AdminImageUpload
             src={getHomeImg("innovation_hero", "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=1400&h=700&fit=crop")}
             alt="Saltwater Cooling Walls in action"
             isAdmin={isAdmin}
             onUploaded={(url) => setHomeImg("innovation_hero", url)}
             className="w-full rounded-2xl overflow-hidden"
-            imgClassName="w-full h-[40.32rem] object-cover rounded-2xl"
-          />
+            imgClassName="w-full h-[40.32rem] object-cover rounded-2xl" />
+
         </motion.div>
 
         {/* Our Strategic Approach */}
@@ -555,64 +555,64 @@ export default function TheInnovations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
+          className="mb-24">
+
           <div className="flex items-center gap-4 mb-12">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Business Model Innovation</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
           
-          <h3 className="text-center text-white text-3xl font-bold mb-12">Make Money to Make a Difference</h3>
+          <h3 className="text-5xl font-bold text-white mb-6\n">Make Money to Make a Difference</h3>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              {
-                key: "approach_covers",
-                title: "Removing the Covers",
-                subtitle: "Open-Air Cooling Walls",
-                body: "The USA grows mechanized field crops that require heavy equipment and large spaces. Traditional greenhouse covers would block machinery and reduce efficiency. Our open-air saltwater cooling walls provide the climate benefits without the infrastructure constraints — designed for American agriculture.",
-                defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop"
-              },
-              {
-                key: "approach_brines",
-                title: "Underground Brines",
-                subtitle: "Abundant, Useless Water",
-                body: "3/4th of Arizona's underground water is brines — mineral-rich saltwater that can't be used for drinking or irrigation. California, Nevada, and the Southwest have millions of acres underlain with these reserves. We've flipped the equation: instead of expensive freshwater desalination, we use abundant brines as a free resource for cooling.",
-                defaultImg: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop"
-              },
-              {
-                key: "approach_profit",
-                title: "Built for Profit",
-                subtitle: "Water as Revenue",
-                body: "We don't measure success by crops grown — we measure it by water saved and sold. The real business model isn't agriculture; it's water markets. By creating a verified, bankable water savings asset, we enable farmers to monetize conservation. Massive profit drives scale.",
-                defaultImg: "https://images.unsplash.com/photo-1460925895917-afdab36c3a3f?w=600&h=400&fit=crop"
-              },
-              {
-                key: "approach_capital",
-                title: "Capital Markets Access",
-                subtitle: "Silicon Valley Velocity",
-                body: "California's venture capital ecosystem enables us to access capital at speed and scale. We're not constrained by ag-industry timelines or traditional farm finance. We move like a tech company — rapidly deploying capital, iterating at scale, and capturing markets before competition emerges.",
-                defaultImg: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
-              }
-            ].map((card, idx) => (
-              <motion.div
-                key={card.key}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300 group flex flex-col"
-              >
+            {
+              key: "approach_covers",
+              title: "Removing the Covers",
+              subtitle: "Open-Air Cooling Walls",
+              body: "The USA grows mechanized field crops that require heavy equipment and large spaces. Traditional greenhouse covers would block machinery and reduce efficiency. Our open-air saltwater cooling walls provide the climate benefits without the infrastructure constraints — designed for American agriculture.",
+              defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop"
+            },
+            {
+              key: "approach_brines",
+              title: "Underground Brines",
+              subtitle: "Abundant, Useless Water",
+              body: "3/4th of Arizona's underground water is brines — mineral-rich saltwater that can't be used for drinking or irrigation. California, Nevada, and the Southwest have millions of acres underlain with these reserves. We've flipped the equation: instead of expensive freshwater desalination, we use abundant brines as a free resource for cooling.",
+              defaultImg: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop"
+            },
+            {
+              key: "approach_profit",
+              title: "Built for Profit",
+              subtitle: "Water as Revenue",
+              body: "We don't measure success by crops grown — we measure it by water saved and sold. The real business model isn't agriculture; it's water markets. By creating a verified, bankable water savings asset, we enable farmers to monetize conservation. Massive profit drives scale.",
+              defaultImg: "https://images.unsplash.com/photo-1460925895917-afdab36c3a3f?w=600&h=400&fit=crop"
+            },
+            {
+              key: "approach_capital",
+              title: "Capital Markets Access",
+              subtitle: "Silicon Valley Velocity",
+              body: "California's venture capital ecosystem enables us to access capital at speed and scale. We're not constrained by ag-industry timelines or traditional farm finance. We move like a tech company — rapidly deploying capital, iterating at scale, and capturing markets before competition emerges.",
+              defaultImg: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
+            }].
+            map((card, idx) =>
+            <motion.div
+              key={card.key}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: idx * 0.1 }}
+              className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300 group flex flex-col">
+
                 <div className="relative h-48 overflow-hidden">
                   <AdminImageUpload
-                    src={getHomeImg(card.key, card.defaultImg)}
-                    alt={card.title}
-                    isAdmin={isAdmin}
-                    onUploaded={(url) => setHomeImg(card.key, url)}
-                    className="w-full h-full"
-                    imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  src={getHomeImg(card.key, card.defaultImg)}
+                  alt={card.title}
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg(card.key, url)}
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
                 </div>
                 <div className="flex-1 p-6 flex flex-col">
@@ -623,7 +623,7 @@ export default function TheInnovations() {
                   <p className="text-white/70 leading-relaxed flex-1">{card.body}</p>
                 </div>
               </motion.div>
-            ))}
+            )}
           </div>
         </motion.div>
 
@@ -635,8 +635,8 @@ export default function TheInnovations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
+          className="mb-24">
+
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Honoring The Mind Behind It All</span>
@@ -653,14 +653,14 @@ export default function TheInnovations() {
                   isAdmin={isAdmin}
                   onUploaded={(url) => setHomeImg("charlie_paton_portrait", url)}
                   className="w-full h-full"
-                  imgClassName="w-full h-full object-cover"
-                />
+                  imgClassName="w-full h-full object-cover" />
+
               </div>
               <img
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/fba830cbc_seawater_greenhouse_logo_white.png"
                 alt="Seawater Greenhouse"
-                className="h-6 object-contain opacity-70 mb-3"
-              />
+                className="h-6 object-contain opacity-70 mb-3" />
+
               <h3 className="text-2xl font-bold text-white mb-1">Charlie Paton</h3>
               <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Founder & Director, Seawater Greenhouse Ltd</p>
               <div className="flex flex-wrap gap-2">
@@ -688,6 +688,6 @@ export default function TheInnovations() {
         </motion.div>
 
       </div>
-    </div>
-  );
+    </div>);
+
 }
