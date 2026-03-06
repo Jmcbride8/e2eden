@@ -455,44 +455,8 @@ export default function Technology() {
           </div>
         </motion.div>
 
-        {/* Proven Track Record */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="p-10 rounded-2xl bg-white/5 border border-white/10 text-center"
-        >
-          <div className="flex items-center gap-4 mb-8 justify-center">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Built on Decades of Proof</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
-          <img
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/fba830cbc_seawater_greenhouse_logo_white.png"
-            alt="Seawater Greenhouse"
-            className="h-8 object-contain opacity-70 mx-auto mb-6"
-          />
-          <p className="text-white/70 text-xl leading-relaxed max-w-3xl mx-auto mb-8">
-            E2Eden is built on over 30 years of proven science and real-world deployments by our partner{" "}
-            <a href="https://www.seawatergreenhouse.com" target="_blank" rel="noopener noreferrer" className="text-amber-400 underline underline-offset-4 hover:text-amber-300">
-              Seawater Greenhouse Ltd
-            </a>
-            . This technology has already transformed deserts across three continents. We are not starting from scratch — we are scaling what works.
-          </p>
-          <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
-            {[
-              { number: "30+", label: "Years of R&D" },
-              { number: "3", label: "Continents Deployed" },
-              { number: "1st", label: "Time in the USA" },
-            ].map((stat, idx) => (
-              <div key={idx} className="p-6 rounded-xl bg-white/5 border border-white/10">
-                <div className="text-4xl font-bold text-amber-400 mb-1">{stat.number}</div>
-                <div className="text-sm text-white/60">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+        {/* Seawater Greenhouse Legacy - Moved from Home */}
+        <SeawaterGreenhouseSection />
 
       </div>
     </div>
