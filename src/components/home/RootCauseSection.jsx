@@ -94,18 +94,26 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10 h-full flex flex-col justify-center">
               <div className="text-8xl font-bold text-amber-400 mb-4">85%</div>
               <p className="text-2xl font-semibold mb-3 text-white">
-                Of global freshwater goes to agriculture
+                Of US Southwest freshwater goes to agriculture
               </p>
-              <p className="text-lg text-white/60">
-                Yet billions go hungry. We can't keep farming this way.
+              <p className="text-lg text-white/60 mb-6">
+                Top crops driving that demand:
               </p>
-              <div className="mt-6 space-y-2">
-                {PIE_DATA.map((d) =>
-                <div key={d.name} className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
-                    <span className="text-white/70 text-sm">{d.name}</span>
-                    <span className="ml-auto text-white font-semibold text-sm">{d.value}%</span>
+              <div className="space-y-3">
+                {[
+                  { name: "Alfalfa", pct: "42%", color: "#f59e0b" },
+                  { name: "Cotton", pct: "18%", color: "#60a5fa" },
+                  { name: "Vegetables & Melons", pct: "15%", color: "#34d399" },
+                ].map((crop) =>
+                <div key={crop.name}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-white/70">{crop.name}</span>
+                    <span className="text-white font-semibold">{crop.pct}</span>
                   </div>
+                  <div className="h-1.5 rounded-full bg-white/10">
+                    <div className="h-1.5 rounded-full" style={{ width: crop.pct, backgroundColor: crop.color }} />
+                  </div>
+                </div>
                 )}
               </div>
             </div>
