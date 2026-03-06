@@ -561,7 +561,7 @@ export default function Home() {
                 one of the most productive agricultural regions in the world. If we can make it work here, we can make 
                 it work anywhere.
               </p>
-              <div className="grid md:grid-cols-2 gap-6 items-stretch">
+              <div className="grid gap-6 items-stretch" style={{ gridTemplateColumns: '70% 1fr' }}>
                 {/* Main image */}
                 <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 h-full min-h-[400px]">
                   <AdminImageUpload
