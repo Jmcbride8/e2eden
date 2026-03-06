@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import AdminImageUpload from "../components/home/AdminImageUpload";
 import { useQueryClient } from "@tanstack/react-query";
 import SeawaterGreenhouseSection from "../components/home/SeawaterGreenhouseSection";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function TheInnovations() {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -307,24 +308,28 @@ export default function TheInnovations() {
               transition={{ duration: 0.6 }}
               className="p-8 rounded-2xl bg-white/5 border border-white/10"
             >
-              <div className="text-center mb-6">
-                <p className="text-white/60 text-sm mb-4">Cost Trajectory (Decades of Data)</p>
-              </div>
-              <div className="space-y-4">
-                {[
-                  { year: "1990s", cost: "$25,000", status: "Very Expensive" },
-                  { year: "2000s", cost: "$22,000", status: "Expensive" },
-                  { year: "2010s", cost: "$20,000", status: "Still Expensive" },
-                  { year: "2020s", cost: "$18,000", status: "Barely Moving" },
-                  { year: "Needed Cost", cost: "$4,000", status: "Impossible Gap" },
-                ].map((row, idx) => (
-                  <div key={idx} className="flex justify-between items-center pb-3 border-b border-white/5 last:border-b-0">
-                    <span className="text-white/70 font-medium">{row.year}</span>
-                    <span className={idx === 4 ? "text-red-400 font-bold" : "text-amber-400 font-semibold"}>{row.cost}</span>
-                    <span className="text-white/50 text-sm">{row.status}</span>
-                  </div>
-                ))}
-              </div>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={[
+                  { year: "1990", cost: 25000 },
+                  { year: "2000", cost: 22000 },
+                  { year: "2010", cost: 20000 },
+                  { year: "2020", cost: 18000 },
+                  { year: "2025", cost: 17500 },
+                  { year: "2030", cost: 17000 },
+                ]} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis dataKey="year" stroke="#ffffff80" />
+                  <YAxis stroke="#ffffff80" label={{ value: 'Cost per Acre-Foot ($)', angle: -90, position: 'insideLeft' }} />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "8px" }}
+                    formatter={(value) => `$${value.toLocaleString()}`}
+                  />
+                  <Line type="monotone" dataKey="cost" stroke="#f59e0b" dot={{ fill: '#f59e0b', r: 4 }} strokeWidth={3} />
+                </LineChart>
+              </ResponsiveContainer>
+              <p className="text-white/60 text-sm text-center mt-6">
+                <span className="text-red-400 font-semibold">Desalination: Stuck at $17K-18K</span> | <span className="text-green-400 font-semibold">Needed for Viability: $4K</span>
+              </p>
             </motion.div>
           </div>
 
@@ -339,17 +344,20 @@ export default function TheInnovations() {
                 {
                   title: "Drip Irrigation",
                   problem: "Requires dense micro-tubing that blocks heavy equipment and prevents mechanized planting/harvesting.",
-                  unsuitable: "Fundamentally incompatible with large-scale field crop operations"
+                  unsuitable: "Fundamentally incompatible with large-scale field crop operations",
+                  image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
                 },
                 {
                   title: "Greenhouses",
                   problem: "Structures block sunlight, prevent machinery access, and cost $100K+ per acre to install.",
-                  unsuitable: "Designed for high-value crops, not low-margin commodity farming"
+                  unsuitable: "Designed for high-value crops, not low-margin commodity farming",
+                  image: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
                 },
                 {
                   title: "Precision Agriculture",
                   problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
-                  unsuitable: "Addresses efficiency, not the fundamental physics of water loss"
+                  unsuitable: "Addresses efficiency, not the fundamental physics of water loss",
+                  image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
                 },
               ].map((tech, idx) => (
                 <motion.div
@@ -358,11 +366,16 @@ export default function TheInnovations() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/5 border border-white/10"
+                  className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden flex flex-col"
                 >
-                  <h3 className="text-xl font-bold text-white mb-3">{tech.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed mb-3">{tech.problem}</p>
-                  <p className="text-red-400/80 text-xs font-semibold">{tech.unsuitable}</p>
+                  <div className="h-40 overflow-hidden">
+                    <img src={tech.image} alt={tech.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-white mb-3">{tech.title}</h3>
+                    <p className="text-white/60 text-sm leading-relaxed mb-3">{tech.problem}</p>
+                    <p className="text-red-400/80 text-xs font-semibold">{tech.unsuitable}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
