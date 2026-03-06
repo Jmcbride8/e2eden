@@ -136,8 +136,14 @@ export default function Technology() {
               >
                 <X className="w-5 h-5 text-white" />
               </button>
-              <div style={{ aspectRatio: '16/9' }} className="bg-black flex items-center justify-center">
-                <p className="text-white/40 text-center px-8">Add your video URL in the code to embed here.<br /><span className="text-sm text-white/30">Replace this placeholder with an iframe or video element.</span></p>
+              <div style={{ aspectRatio: '16/9' }}>
+                <iframe
+                  src="https://www.youtube.com/embed/LqPZoQMv6vQ"
+                  title="How Saltwater Cooling Walls Work"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
               </div>
             </div>
           </div>
