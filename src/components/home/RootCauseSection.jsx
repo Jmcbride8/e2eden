@@ -121,7 +121,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
             {/* Pie Chart */}
             <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
               <h3 className="text-center text-white/70 text-sm uppercase tracking-widest mb-4">
-                Global Freshwater Usage Breakdown
+                US Southwest Freshwater Usage Breakdown
               </h3>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart>
