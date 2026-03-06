@@ -324,12 +324,13 @@ export default function TheInnovations() {
             >
               <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={[
-                  { year: "1960s", cost: 35000, period: "Early days" },
-                  { year: "1980s", cost: 32000, period: "Technology emerging" },
-                  { year: "2000s", cost: 22000, period: "Some improvements" },
-                  { year: "2010s", cost: 20000, period: "Hit the wall" },
-                  { year: "2020s", cost: 18000, period: "Stalled" },
-                  { year: "Today", cost: 17500, period: "Stuck" },
+                  { year: "1970s", cost: 9700, period: "Early RO era" },
+                  { year: "1980s", cost: 8500, period: "Tech improving" },
+                  { year: "1990s", cost: 6000, period: "Membrane advances" },
+                  { year: "2000s", cost: 4500, period: "Economies of scale" },
+                  { year: "2010s", cost: 2500, period: "Optimization peak" },
+                  { year: "2020", cost: 2329, period: "Efficient plants" },
+                  { year: "2024", cost: 3400, period: "Carlsbad standard" },
                 ]} margin={{ top: 30, right: 30, left: 30, bottom: 30 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.08)" vertical={false} />
                   <XAxis dataKey="year" stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px", fontWeight: 500 }} />
@@ -357,19 +358,19 @@ export default function TheInnovations() {
               </ResponsiveContainer>
               <div className="mt-8 grid md:grid-cols-3 gap-4">
                 <div className="text-center">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Desalination Today</p>
-                  <p className="text-2xl font-bold text-amber-400">$17,500</p>
-                  <p className="text-white/40 text-xs mt-1">per acre-foot</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Current Standard (Carlsbad)</p>
+                  <p className="text-2xl font-bold text-amber-400">$3,400</p>
+                  <p className="text-white/40 text-xs mt-1">per acre-foot (2024)</p>
                 </div>
                 <div className="text-center border-l border-r border-white/10">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Cost Reduction (60 yrs)</p>
-                  <p className="text-2xl font-bold text-white">50%</p>
-                  <p className="text-white/40 text-xs mt-1">still 4x too expensive</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Cost Reduction (50 yrs)</p>
+                  <p className="text-2xl font-bold text-white">65%</p>
+                  <p className="text-white/40 text-xs mt-1">from 1970s peak</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Needed for Viability</p>
-                  <p className="text-2xl font-bold text-red-400">$4,000</p>
-                  <p className="text-white/40 text-xs mt-1">impossible gap</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Agriculture Viability Threshold</p>
+                  <p className="text-2xl font-bold text-red-400">$1,000</p>
+                  <p className="text-white/40 text-xs mt-1">still 3x too expensive</p>
                 </div>
               </div>
             </motion.div>
