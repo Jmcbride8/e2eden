@@ -490,7 +490,11 @@ export default function Home() {
 
 
             {/* Why It Works */}
-            <div className="grid md:grid-cols-3 gap-10 mt-12">
+            <div className="text-center mt-12 mb-10">
+              <h3 className="text-3xl font-bold text-white mb-3">One wall. Three ways it fights water loss.</h3>
+              <p className="text-white/60 text-lg max-w-2xl mx-auto">Plants lose water to wind, heat, and dry air. These saltwater cooling walls attack all three — simultaneously.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-10">
               {[
                 {
                   key: "wind_slow",
