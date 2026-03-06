@@ -334,14 +334,120 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 items-end">
               <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
               <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
             </div>
           </div>
         </section>
 
-        {/* 1. Water Shortages */}
+        {/* 1. The Solution */}
+        <section className="py-24 px-6 sm:px-12 bg-black">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-10">
+
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px flex-1 bg-white/10" />
+                <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Breakthrough Innovation</span>
+                <div className="h-px flex-1 bg-white/10" />
+              </div>
+              <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls</h2>
+              <p className="text-xl mb-0 text-white/70">
+                We substitute saltwater for fresh — cooling farms with the briny, unusable water hiding beneath our feet, unleashing abundance.
+              </p>
+            </motion.div>
+
+            {/* KPI Stats */}
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {[
+              { number: "90%", label: "Water Savings" },
+              { number: "27°F", label: "Temperature Reduction" },
+              { number: "50%", label: "Humidity Increase" }].
+              map((stat, idx) =>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
+                  <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
+                  <div className="text-lg font-semibold text-white">{stat.label}</div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Hero Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-12">
+              <AdminImageUpload
+                src={getHomeImg("innovation_hero", "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=1400&h=700&fit=crop")}
+                alt="Saltwater Cooling Walls"
+                isAdmin={isAdmin}
+                onUploaded={(url) => setHomeImg("innovation_hero", url)}
+                className="w-full rounded-2xl overflow-hidden"
+                imgClassName="w-full h-[44.2rem] object-cover rounded-2xl" />
+            </motion.div>
+
+
+
+            {/* Why It Works */}
+            <div className="text-center mt-12 mb-10">
+              <h3 className="text-3xl font-bold text-white mb-3">One wall. Three ways it fights water loss.</h3>
+              <p className="text-white/60 text-lg max-w-2xl mx-auto">Plants lose water to wind, heat, and dry air. These saltwater cooling walls attack all three — simultaneously.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-10">
+              {[
+                {
+                  key: "wind_slow",
+                  title: "Slows the Wind",
+                  defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/41eb3c992_generated_image.png",
+                  body: "Hot desert wind strips the layer of moisture above the fields. Slowing the wind protects this layer."
+                },
+                {
+                  key: "wind_cool",
+                  title: "Cools the Wind",
+                  defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
+                  body: "As salty water evaporates through the panels, it steals heat from the air. That cooled air is denser — it sinks, smothering the field in a cool, protective layer."
+                },
+                {
+                  key: "wind_humid",
+                  title: "Humidifies the Wind",
+                  defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
+                  body: "The moisture doesn't vanish — it stays. Humid air clings to the field, slowing evaporation from soil and plant alike. Crops stop fighting the heat and start putting their energy into growth."
+                }
+              ].map((card, idx) =>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}>
+                <AdminImageUpload
+                  src={getHomeImg(card.key, card.defaultImg)}
+                  alt={card.title}
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg(card.key, url)}
+                  className="w-full rounded-xl overflow-hidden mb-5"
+                  imgClassName="w-full h-60 object-cover rounded-xl" />
+                <h3 className="text-xl font-bold mb-3 text-white">{card.title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">{card.body}</p>
+              </motion.div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* 2. Water Shortages */}
         <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -453,7 +559,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 2. The Problem is Agriculture */}
+        {/* 3. The Problem is Agriculture */}
         <RootCauseSection isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
 
 
