@@ -423,7 +423,7 @@ export default function Home() {
                   key: "shortage_9",
                   defaultImg: "https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=800&h=600&fit=crop",
                   alt: "Salton Sea environmental collapse",
-                  title: "And the Land Turns to Dust",
+                  title: "As The Land Turns To Dust",
                   body: "The Salton Sea and Owens Lake show the cost: exposed lakebeds become toxic wastelands, leaving public health crises and environmental collapse."
                 }
               ].map((card, idx) =>
