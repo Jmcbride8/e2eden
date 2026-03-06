@@ -79,7 +79,7 @@ export default function TheInnovations() {
         >
           <div className="flex items-center gap-4 mb-6 justify-center">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Breakthrough Innovation</span>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Technology Innovation</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
           <h1 className="text-5xl sm:text-6xl font-bold mb-6">Saltwater Cooling Walls</h1>
@@ -328,7 +328,7 @@ export default function TheInnovations() {
         >
           <div className="flex items-center gap-4 mb-12">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Our Strategic Approach</span>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Business Model Innovation</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
           
@@ -398,7 +398,20 @@ export default function TheInnovations() {
           </div>
         </motion.div>
 
-        {/* Seawater Greenhouse Legacy - Moved from Home */}
+        {/* Don't Reinvent the Wheel - Seawater Greenhouse Legacy */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-24"
+        >
+          <div className="flex items-center gap-4 mb-10">
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Don't Reinvent the Wheel</span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+        </motion.div>
         <SeawaterGreenhouseSection />
 
         {/* The Mind Behind It All - Charlie Paton */}
