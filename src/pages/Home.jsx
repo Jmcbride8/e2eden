@@ -726,7 +726,7 @@ export default function Home() {
                 <div className="h-px flex-1 bg-white/10" />
               </div>
               <h2 className="text-6xl font-bold mb-8 text-white">
-                Together, We Can Change the World
+                Together, We Can Change THIS World
               </h2>
               <p className="text-2xl leading-relaxed mb-6 text-white/80">
                 Feed 10 billion people. Save our water. Make deserts bloom.
