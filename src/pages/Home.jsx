@@ -455,7 +455,7 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-6 mb-12">
               {[
               { number: "90%", label: "Water Savings" },
-              { number: "15°C", label: "Temperature Reduction" },
+              { number: "27°F", label: "Temperature Reduction" },
               { number: "50%", label: "Humidity Increase" }].
               map((stat, idx) =>
               <motion.div
