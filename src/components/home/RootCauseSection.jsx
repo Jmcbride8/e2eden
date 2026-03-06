@@ -56,7 +56,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           {/* Section header */}
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Root Cause</span>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Where the Water Is</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
