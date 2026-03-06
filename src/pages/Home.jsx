@@ -327,10 +327,10 @@ export default function Home() {
               className="text-center mb-12">
 
               <h2 className="text-5xl font-bold mb-6 text-white">
-                Water—The Next Great Leap
+                The Next Giant Leap for Mankind
               </h2>
               <p className="text-xl text-white/60 max-w-3xl mx-auto">
-                Humanity's greatest achievements came from mastering water. Today, we face a choice: adapt, or watch civilization constrain itself.
+                We moved industry to space to preserve Earth. Now we unlock Earth's abundance—turning deserts into gardens and securing water as the foundation for feeding 10 billion people.
               </p>
             </motion.div>
 
