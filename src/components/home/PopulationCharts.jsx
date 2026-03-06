@@ -37,11 +37,11 @@ export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: 0.15 }}
-      className="rounded-2xl border border-amber-500/30 bg-white p-6 sm:p-8"
+      className="rounded-2xl border border-amber-500/30 bg-white/5 p-6 sm:p-8"
     >
-      <h3 className="text-2xl sm:text-3xl font-bold text-black mb-6">
+      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">
         Saltwater Farms could feed<br />
-        <span className="text-sky-500">the next 6 billion</span>
+        <span className="text-sky-400">the next 6 billion</span>
       </h3>
       <AdminImageUpload
         src={getHomeImg("saltwater_chart", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/60e566c7d_Water_population.png")}
