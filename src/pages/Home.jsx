@@ -537,8 +537,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3b. Seawater Greenhouse Legacy */}
-        <SeawaterGreenhouseSection />
+
 
         {/* 4. Getting Started - Imperial Valley */}
         <section className="py-24 px-6 sm:px-12 bg-black">
