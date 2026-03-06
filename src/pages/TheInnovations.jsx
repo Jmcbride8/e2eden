@@ -248,21 +248,26 @@ export default function TheInnovations() {
               </motion.div>
               <div className="space-y-4">
                 {[
-                  { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=300&h=250&fit=crop" },
-                  { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", image: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=300&h=250&fit=crop" },
-                  { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", image: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=300&h=250&fit=crop" },
-                ].map((item, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className="rounded-xl bg-white/5 border border-white/10 overflow-hidden flex gap-4"
-                  >
-                    <div className="w-24 h-24 flex-shrink-0">
-                      <img src={item.image} alt={item.crop} className="w-full h-full object-cover" />
-                    </div>
+                   { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=300&h=250&fit=crop" },
+                   { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=300&h=250&fit=crop" },
+                   { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=300&h=250&fit=crop" },
+                 ].map((item, idx) => (
+                   <motion.div
+                     key={idx}
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     viewport={{ once: true }}
+                     transition={{ duration: 0.6, delay: idx * 0.1 }}
+                     className="rounded-xl bg-white/5 border border-white/10 overflow-hidden flex gap-4"
+                   >
+                     <AdminImageUpload
+                       src={getHomeImg(item.key, item.defaultImage)}
+                       alt={item.crop}
+                       isAdmin={isAdmin}
+                       onUploaded={(url) => setHomeImg(item.key, url)}
+                       className="w-24 h-24 flex-shrink-0"
+                       imgClassName="w-full h-full object-cover"
+                     />
                     <div className="flex-1 p-4 flex flex-col justify-center">
                       <p className="text-white font-semibold mb-1">{item.crop}</p>
                       <p className="text-amber-400 text-sm font-bold mb-1">{item.pct} of AG water</p>
@@ -415,19 +420,22 @@ export default function TheInnovations() {
                   title: "Drip Irrigation",
                   problem: "Requires dense micro-tubing that blocks heavy equipment and prevents mechanized planting/harvesting.",
                   unsuitable: "Fundamentally incompatible with large-scale field crop operations",
-                  image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
+                  key: "tech_drip",
+                  defaultImage: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
                 },
                 {
                   title: "Greenhouses",
                   problem: "Structures block sunlight, prevent machinery access, and cost $100K+ per acre to install.",
                   unsuitable: "Designed for high-value crops, not low-margin commodity farming",
-                  image: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
+                  key: "tech_greenhouses",
+                  defaultImage: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
                 },
                 {
                   title: "Precision Agriculture",
                   problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
                   unsuitable: "Addresses efficiency, not the fundamental physics of water loss",
-                  image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
+                  key: "tech_precision",
+                  defaultImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
                 },
               ].map((tech, idx) => (
                 <motion.div
@@ -439,7 +447,14 @@ export default function TheInnovations() {
                   className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden flex flex-col"
                 >
                   <div className="h-40 overflow-hidden">
-                    <img src={tech.image} alt={tech.title} className="w-full h-full object-cover" />
+                    <AdminImageUpload
+                      src={getHomeImg(tech.key, tech.defaultImage)}
+                      alt={tech.title}
+                      isAdmin={isAdmin}
+                      onUploaded={(url) => setHomeImg(tech.key, url)}
+                      className="w-full h-full"
+                      imgClassName="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-white mb-3">{tech.title}</h3>
@@ -606,10 +621,13 @@ export default function TheInnovations() {
             {/* Portrait + identity */}
             <div className="flex-shrink-0 flex flex-col items-center md:items-start">
               <div className="w-[308px] h-[308px] rounded-2xl overflow-hidden border border-white/10 mb-4">
-                <img
-                  src="https://greenhouse.agency/wp-content/uploads/charlie-paton-copy.jpg"
+                <AdminImageUpload
+                  src={getHomeImg("charlie_paton_portrait", "https://greenhouse.agency/wp-content/uploads/charlie-paton-copy.jpg")}
                   alt="Charlie Paton"
-                  className="w-full h-full object-cover"
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg("charlie_paton_portrait", url)}
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover"
                 />
               </div>
               <img
