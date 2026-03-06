@@ -261,16 +261,18 @@ export default function TheInnovations() {
                    className="group rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300"
                  >
                    <div className="relative h-52 overflow-hidden">
-                     <AdminImageUpload
-                       src={getHomeImg(item.key, item.defaultImage)}
-                       alt={item.crop}
-                       isAdmin={isAdmin}
-                       onUploaded={(url) => setHomeImg(item.key, url)}
-                       className="w-full h-full"
-                       imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                     />
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                     <div className="absolute bottom-0 left-0 right-0 p-6">
+                     <div className="absolute inset-0 z-0">
+                       <AdminImageUpload
+                         src={getHomeImg(item.key, item.defaultImage)}
+                         alt={item.crop}
+                         isAdmin={isAdmin}
+                         onUploaded={(url) => setHomeImg(item.key, url)}
+                         className="w-full h-full"
+                         imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                       />
+                     </div>
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+                     <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                        <p className="text-white font-bold text-2xl mb-1">{item.crop}</p>
                        <p className="text-amber-400 font-bold text-3xl">{item.pct}</p>
                        <p className="text-white/70 text-sm mt-2">of Agricultural Water</p>
