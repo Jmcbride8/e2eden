@@ -443,7 +443,7 @@ export default function Home() {
                     className="w-full h-full"
                     imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3 w-8 h-8 rounded-full bg-amber-500/90 flex items-center justify-center text-black font-bold text-sm">
+                  <div className="absolute top-3 left-3 w-10 h-10 rounded-full bg-amber-500/90 flex items-center justify-center text-black font-bold text-base">
                     {idx + 1}
                   </div>
                 </div>
