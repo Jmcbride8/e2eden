@@ -354,10 +354,10 @@ export default function Home() {
               className="text-center mb-16">
 
               <h2 className="text-5xl font-bold mb-6 text-white">
-                A Story Written in Water
+                The Water Wars Have Begun
               </h2>
               <p className="text-xl text-white/60 max-w-3xl mx-auto">
-                Humanity's greatest triumphs were built on water. Now, the bill is due.
+                With water we conquered the desert. But there are no more untapped rivers. The struggle has just begun.
               </p>
             </motion.div>
 
@@ -371,32 +371,32 @@ export default function Home() {
                   body: "We dammed the Colorado, Nile, and Yangtze—bending nature's power to feed our cities."
                 },
                 {
-                  key: "shortage_2",
-                  defaultImg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-                  alt: "Water brought to desert",
-                  title: "We Brought Water to the Desert",
-                  body: "Aqueducts and canals stretched hundreds of miles. We moved water to where nature never intended—turning wasteland into farmland."
+                   key: "shortage_2",
+                   defaultImg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+                   alt: "Water brought to desert",
+                   title: "We watered the desert",
+                   body: "Aqueducts and canals stretched hundreds of miles. We moved water to where nature never intended—turning wasteland into farmland."
                 },
                 {
-                  key: "shortage_3",
-                  defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-                  alt: "Desert farms feeding millions",
-                  title: "We Fed Millions from Desert Sand",
-                  body: "Imperial Valley, the Negev, the Arabian Peninsula—deserts bloomed, harvests exploded, and we fed billions from once-barren land."
+                   key: "shortage_3",
+                   defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
+                   alt: "Desert farms feeding millions",
+                   title: "We fed millions from sand",
+                   body: "Imperial Valley, the Negev, the Arabian Peninsula—deserts bloomed, harvests exploded, and we fed billions from once-barren land."
                 },
                 {
-                  key: "shortage_4",
-                  defaultImg: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=600&fit=crop",
-                  alt: "Cities in the desert",
-                  title: "We Built Cities Where Nothing Could Live",
-                  body: "Las Vegas, Phoenix, Dubai, Cairo—great civilizations rose in Earth's harshest places, all standing on borrowed water."
+                   key: "shortage_4",
+                   defaultImg: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=600&fit=crop",
+                   alt: "Cities in the desert",
+                   title: "And built cities from nothing",
+                   body: "Las Vegas, Phoenix, Dubai, Cairo—great civilizations rose in Earth's harshest places, all standing on borrowed water."
                 },
                 {
-                  key: "shortage_5",
-                  defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-                  alt: "Hoover Dam and drained Colorado River",
-                  title: "Now the Colorado Runs Dry",
-                  body: "Lake Mead has fallen 180 feet. The Colorado no longer reaches the sea. We spent centuries of water in decades."
+                   key: "shortage_5",
+                   defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                   alt: "Hoover Dam and drained Colorado River",
+                   title: "But our rivers are dry",
+                   body: "Lake Mead has fallen 180 feet. The Colorado no longer reaches the sea. We spent centuries of water in decades."
                 },
                 {
                   key: "shortage_6",
@@ -406,18 +406,18 @@ export default function Home() {
                   body: "States sue states. Nations threaten nations. The fights over what's left are already here—and only getting fiercer."
                 },
                 {
-                  key: "shortage_7",
-                  defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop",
-                  alt: "Fallowed farmland",
-                  title: "Cities Buy the Farms",
-                  body: "Unable to find more water, cities and investors buy farmland and fallow it permanently. Farmers walk away with a check and no future."
+                   key: "shortage_7",
+                   defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop",
+                   alt: "Fallowed farmland",
+                   title: "Now cities buyout the farmers",
+                   body: "Unable to find more water, cities and investors buy farmland and fallow it permanently. Farmers walk away with a check and no future."
                 },
                 {
-                  key: "shortage_8",
-                  defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-                  alt: "Rural town decay",
-                  title: "Then the Towns Die",
-                  body: "When farms go, everything goes—feed stores, equipment dealers, restaurants, jobs. Rural communities collapse into poverty."
+                   key: "shortage_8",
+                   defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                   alt: "Rural town decay",
+                   title: "Leaving the towns to die",
+                   body: "When farms go, everything goes—feed stores, equipment dealers, restaurants, jobs. Rural communities collapse into poverty."
                 },
                 {
                   key: "shortage_9",
