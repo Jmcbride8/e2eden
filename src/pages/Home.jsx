@@ -502,7 +502,7 @@ export default function Home() {
                   key: "wind_cool",
                   title: "Cools the Wind",
                   defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
-                  body: "When liquid water evaporates, it absorbs latent heat from the surrounding air — the same principle that makes sweating cool your body. Our panels are continuously wetted with saline or brackish water, causing incoming hot air to lose 10–15°C of temperature as the water molecules transition from liquid to vapor."
+                  body: "As salty water evaporates through the panels, it steals heat from the air. That cooled air is denser — it sinks, smothering the field in a cool, protective layer."
                 },
                 {
                   key: "wind_humid",
