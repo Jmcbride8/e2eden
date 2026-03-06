@@ -487,16 +487,7 @@ export default function Home() {
                 imgClassName="w-full h-[38.4rem] object-cover rounded-2xl" />
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-12 max-w-3xl mx-auto text-center">
-              <p className="text-xl leading-relaxed text-white/70">
-                Why it works
-              </p>
-            </motion.div>
+
 
             {/* Why It Works */}
             <div className="grid md:grid-cols-3 gap-10 mt-12">
