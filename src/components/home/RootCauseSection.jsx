@@ -63,9 +63,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          <h2 className="text-5xl font-bold text-white mb-6">Agriculture Uses 85% of Our Water
-
-          </h2>
+          <h2 className="text-5xl font-bold text-white mb-6">Agriculture Uses 85% Of Our Water</h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
             Agriculture consumes 85% of freshwater. In the desert Southwest, crops must sweat constantly just to survive the heat. That water evaporates — it doesn't become food. Until now, there was no way out.
@@ -84,7 +82,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                   className="w-full h-full"
                   imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{img.title}</h3>
+                <h3 className="text-lg font-bold text-white mb-3">{img.title}</h3>
                 <p className="text-white/60 text-sm leading-relaxed">
                   {img.caption}
                 </p>
