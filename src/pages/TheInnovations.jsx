@@ -217,7 +217,7 @@ export default function TheInnovations() {
           ))}
         </div>
 
-        {/* The Problem It Solves */}
+        {/* Why Traditional Desalination Won't Work */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -227,39 +227,144 @@ export default function TheInnovations() {
         >
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Problem It Solves</span>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Why Desalination Won't Work</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-white mb-6">Agriculture Uses 85% of Our Water</h2>
-              <p className="text-white/70 text-lg leading-relaxed mb-6">
-                In desert heat, crops constantly lose water to evaporation—it never becomes food. Desalination seems promising until you see the math: $20,000 per acre of desalinated water versus $4,000 per acre of yield. The economics don't work.
-              </p>
-              <p className="text-white/70 text-lg leading-relaxed">
-                Saltwater cooling walls use what's already there—saline groundwater beneath millions of acres of farmland—transforming it into a climate weapon without the cost.
-              </p>
+
+          {/* The Scale Problem */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">Agriculture Uses 85% of Our Water</h2>
+            <p className="text-white/70 text-lg leading-relaxed mb-8">
+              The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { crop: "Alfalfa", pct: "42%", acres: "~12M acres" },
+                { crop: "Cotton", pct: "18%", acres: "~9M acres" },
+                { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres" },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  className="p-6 rounded-xl bg-white/5 border border-white/10"
+                >
+                  <p className="text-white/70 text-sm mb-2">{item.crop}</p>
+                  <div className="text-4xl font-bold text-amber-400 mb-1">{item.pct}</div>
+                  <p className="text-white/50 text-xs">{item.acres}</p>
+                </motion.div>
+              ))}
             </div>
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <div className="text-8xl font-bold text-amber-400 mb-4">85%</div>
-              <p className="text-2xl font-semibold text-white mb-4">Of freshwater goes to agriculture</p>
+          </div>
+
+          {/* The Cost Problem */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">Desalination Is Too Expensive</h2>
+            <p className="text-white/70 text-lg leading-relaxed mb-8">
+              Desalination costs $20,000+ per acre-foot of water. Compare that to what farmers earn: $4,000 per acre of crops annually. The water alone costs 5x the value of what you can grow.
+            </p>
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="p-8 rounded-2xl bg-white/5 border border-white/10"
+              >
+                <div className="text-2xl font-bold text-white mb-2">Desalinated Water Cost</div>
+                <div className="text-5xl font-bold text-red-400 mb-4">$20,000+</div>
+                <p className="text-white/60 text-sm">per acre-foot</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="p-8 rounded-2xl bg-white/5 border border-white/10"
+              >
+                <div className="text-2xl font-bold text-white mb-2">Crop Value</div>
+                <div className="text-5xl font-bold text-green-400 mb-4">$4,000</div>
+                <p className="text-white/60 text-sm">per acre annually</p>
+              </motion.div>
+            </div>
+            <p className="text-white/60 text-base mt-6 italic">
+              The economics are fundamentally broken. You'd lose money on every crop.
+            </p>
+          </div>
+
+          {/* The Future Problem */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">And It Always Will Be</h2>
+            <p className="text-white/70 text-lg leading-relaxed mb-8">
+              Desalination costs have flatlined. We've hit the physics limit of the process. Energy inputs dominate the cost curve, and renewable energy improvements aren't enough to bridge a 5x gap.
+            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="p-8 rounded-2xl bg-white/5 border border-white/10"
+            >
+              <div className="text-center mb-6">
+                <p className="text-white/60 text-sm mb-4">Cost Trajectory (Decades of Data)</p>
+              </div>
               <div className="space-y-4">
                 {[
-                  { name: "Alfalfa", pct: "42%", color: "#f59e0b" },
-                  { name: "Cotton", pct: "18%", color: "#60a5fa" },
-                  { name: "Vegetables & Melons", pct: "15%", color: "#34d399" },
-                ].map((crop) => (
-                  <div key={crop.name}>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-white/70">{crop.name}</span>
-                      <span className="text-white font-semibold">{crop.pct}</span>
-                    </div>
-                    <div className="h-1.5 rounded-full bg-white/10">
-                      <div className="h-1.5 rounded-full" style={{ width: crop.pct, backgroundColor: crop.color }} />
-                    </div>
+                  { year: "1990s", cost: "$25,000", status: "Very Expensive" },
+                  { year: "2000s", cost: "$22,000", status: "Expensive" },
+                  { year: "2010s", cost: "$20,000", status: "Still Expensive" },
+                  { year: "2020s", cost: "$18,000", status: "Barely Moving" },
+                  { year: "Needed Cost", cost: "$4,000", status: "Impossible Gap" },
+                ].map((row, idx) => (
+                  <div key={idx} className="flex justify-between items-center pb-3 border-b border-white/5 last:border-b-0">
+                    <span className="text-white/70 font-medium">{row.year}</span>
+                    <span className={idx === 4 ? "text-red-400 font-bold" : "text-amber-400 font-semibold"}>{row.cost}</span>
+                    <span className="text-white/50 text-sm">{row.status}</span>
                   </div>
                 ))}
               </div>
+            </motion.div>
+          </div>
+
+          {/* Alternative Technologies */}
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-4">Why Other Technologies Don't Work</h2>
+            <p className="text-white/70 text-lg leading-relaxed mb-8">
+              The farming regions we target grow large-scale field crops with mechanized equipment. Common water-saving technologies hit hard limits in this environment.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Drip Irrigation",
+                  problem: "Requires dense micro-tubing that blocks heavy equipment and prevents mechanized planting/harvesting.",
+                  unsuitable: "Fundamentally incompatible with large-scale field crop operations"
+                },
+                {
+                  title: "Greenhouses",
+                  problem: "Structures block sunlight, prevent machinery access, and cost $100K+ per acre to install.",
+                  unsuitable: "Designed for high-value crops, not low-margin commodity farming"
+                },
+                {
+                  title: "Precision Agriculture",
+                  problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
+                  unsuitable: "Addresses efficiency, not the fundamental physics of water loss"
+                },
+              ].map((tech, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  className="p-6 rounded-2xl bg-white/5 border border-white/10"
+                >
+                  <h3 className="text-xl font-bold text-white mb-3">{tech.title}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed mb-3">{tech.problem}</p>
+                  <p className="text-red-400/80 text-xs font-semibold">{tech.unsuitable}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.div>
