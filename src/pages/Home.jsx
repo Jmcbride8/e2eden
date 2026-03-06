@@ -456,6 +456,8 @@ export default function Home() {
         {/* 2. The Problem is Agriculture */}
         <RootCauseSection isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
 
+
+
         {/* 3. The Solution */}
         <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
@@ -561,8 +563,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-
 
         {/* 4. Getting Started - Imperial Valley */}
         <section className="py-24 px-6 sm:px-12 bg-black">
