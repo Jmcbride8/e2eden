@@ -271,7 +271,7 @@ export default function TheInnovations() {
                          imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                        />
                      </div>
-                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent backdrop-blur-sm z-10" />
                      <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                        <p className="text-white font-bold text-2xl mb-1">{item.crop}</p>
                        <p className="text-amber-400 font-bold text-3xl">{item.pct}</p>
