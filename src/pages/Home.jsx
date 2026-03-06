@@ -472,63 +472,63 @@ export default function Home() {
                   defaultImg: "https://images.unsplash.com/photo-1515339760107-1952b7a08454?w=800&h=600&fit=crop",
                   alt: "Tamed rivers",
                   title: "We Tamed Mighty Rivers",
-                  body: "We dammed the Colorado, the Nile, the Yangtze. We redirected the forces of nature itself — bending rivers to our will to power cities and quench a growing world's thirst."
+                  body: "We dammed the Colorado, Nile, and Yangtze—bending nature's power to feed our cities."
                 },
                 {
                   key: "shortage_2",
                   defaultImg: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
                   alt: "Water brought to desert",
                   title: "We Brought Water to the Desert",
-                  body: "Canals stretching hundreds of miles. Aqueducts defying gravity. We moved water where nature never intended it to go — and turned wasteland into farmland."
+                  body: "Aqueducts and canals stretched hundreds of miles. We moved water to where nature never intended—turning wasteland into farmland."
                 },
                 {
                   key: "shortage_3",
                   defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
                   alt: "Desert farms feeding millions",
                   title: "We Fed Millions from Desert Sand",
-                  body: "Imperial Valley. The Negev. The Arabian Peninsula. Deserts bloomed. Harvests exploded. Supermarkets filled. We fed a civilization from land that was once considered dead."
+                  body: "Imperial Valley, the Negev, the Arabian Peninsula—deserts bloomed, harvests exploded, and we fed billions from once-barren land."
                 },
                 {
                   key: "shortage_4",
                   defaultImg: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=600&fit=crop",
                   alt: "Cities in the desert",
                   title: "We Built Cities Where Nothing Could Live",
-                  body: "Las Vegas. Phoenix. Dubai. Cairo. Great civilizations rose in the harshest places on Earth — monuments to human ingenuity, all of it standing on a foundation of borrowed water."
+                  body: "Las Vegas, Phoenix, Dubai, Cairo—great civilizations rose in Earth's harshest places, all standing on borrowed water."
                 },
                 {
                   key: "shortage_5",
                   defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
                   alt: "Hoover Dam and drained Colorado River",
                   title: "Now the Colorado Runs Dry",
-                  body: "Hoover Dam's waterline has fallen over 180 feet. The Colorado River no longer reaches the sea. Lake Mead is a ghost of itself. We spent centuries of stored water in decades."
+                  body: "Lake Mead has fallen 180 feet. The Colorado no longer reaches the sea. We spent centuries of water in decades."
                 },
                 {
                   key: "shortage_6",
                   defaultImg: "https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=800&h=600&fit=crop",
                   alt: "Water wars",
                   title: "The Water Wars Have Begun",
-                  body: "States sue states. Nations threaten nations. Farmers vs. cities. Present vs. future. The fights over what's left are already here — and they will only get fiercer."
+                  body: "States sue states. Nations threaten nations. The fights over what's left are already here—and only getting fiercer."
                 },
                 {
                   key: "shortage_7",
                   defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop",
                   alt: "Fallowed farmland",
                   title: "Cities Buy the Farms",
-                  body: "When cities can't build more supply, they buy it. Water districts and Wall Street investors purchase farmland and fallow it — permanently taking land out of production. Farmers are offered a check and told to walk away from everything their family built."
+                  body: "Unable to find more water, cities and investors buy farmland and fallow it permanently. Farmers walk away with a check and no future."
                 },
                 {
                   key: "shortage_8",
                   defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
                   alt: "Rural town decay",
                   title: "Then the Towns Die",
-                  body: "When the farms go, so does everything else. The feed stores, the equipment dealers, the packing sheds, the restaurants. As one farmer put it: \"City folk need to understand — we don't grow food because we like it as a hobby. We are your food supply.\" Without farming, rural communities collapse into poverty."
+                  body: "When farms go, everything goes—feed stores, equipment dealers, restaurants, jobs. Rural communities collapse into poverty."
                 },
                 {
                   key: "shortage_9",
                   defaultImg: "https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=800&h=600&fit=crop",
                   alt: "Salton Sea environmental collapse",
                   title: "And the Land Turns to Dust",
-                  body: "Removing water doesn't just end farming — it ends ecosystems. The Salton Sea and Owens Lake are cautionary tales: once water was diverted to cities, exposed lakebeds became toxic dust bowls, triggering public health crises and environmental collapse that haunt those regions to this day."
+                  body: "The Salton Sea and Owens Lake show the cost: exposed lakebeds become toxic wastelands, leaving public health crises and environmental collapse."
                 }
               ].map((card, idx) =>
               <motion.div
