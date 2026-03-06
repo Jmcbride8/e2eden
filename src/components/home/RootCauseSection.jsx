@@ -19,21 +19,7 @@ const DEFAULT_IMAGES = [
   default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
   caption: "Cities, for all their size and density, consume a relatively small fraction of the world's freshwater. Every water-saving initiative aimed at households and industry combined cannot match the impact of fixing how we farm. That is where the real battle will be won or lost."
 },
-{
-  key: "root_cause_img_4",
-  default: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop",
-  caption: "When cities can't build more supply, they buy it. Water districts and Wall Street investors purchase farmland and fallow it — permanently taking land out of production. Farmers are offered a check and told to walk away from everything their family built."
-},
-{
-  key: "root_cause_img_5",
-  default: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-  caption: "When the farms go, so does everything else. The feed stores, the equipment dealers, the packing sheds, the restaurants. As one farmer put it: \"City folk need to understand — we don't grow food because we like it as a hobby. We are your food supply.\" Without farming, rural communities collapse into poverty."
-},
-{
-  key: "root_cause_img_6",
-  default: "https://images.unsplash.com/photo-1569163139599-0f4517e36f51?w=800&h=600&fit=crop",
-  caption: "Removing water doesn't just end farming — it ends ecosystems. The Salton Sea and Owens Lake are cautionary tales: once water was diverted to cities, exposed lakebeds became toxic dust bowls, triggering public health crises and environmental collapse that haunt those regions to this day."
-}];
+];
 
 
 const PIE_DATA = [
