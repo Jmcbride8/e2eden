@@ -7,7 +7,7 @@ import AdminImageUpload from "../components/home/AdminImageUpload";
 import { useQueryClient } from "@tanstack/react-query";
 import SeawaterGreenhouseSection from "../components/home/SeawaterGreenhouseSection";
 
-export default function Technology() {
+export default function TheInnovations() {
   const [videoOpen, setVideoOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const queryClient = useQueryClient();
