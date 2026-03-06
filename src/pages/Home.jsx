@@ -610,10 +610,24 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <p className="text-lg leading-relaxed text-white/70 mt-6">
-                Our first installations are already demonstrating dramatic water savings and improved crop yields. 
-                This is just the beginning of a global transformation.
-              </p>
+              {/* Pilot Project Spotlight */}
+              <div className="mt-10 grid md:grid-cols-2 gap-8 items-center rounded-2xl overflow-hidden border border-white/10 bg-white/5">
+                <div className="p-8">
+                  <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">Pilot Project</span>
+                  <h3 className="text-2xl font-bold text-white mt-2 mb-3">UC Desert Research &amp; Extension Center</h3>
+                  <p className="text-amber-400/80 text-sm mb-4">Imperial Valley, CA · United States</p>
+                  <p className="text-white/70 leading-relaxed">Our Proof of Concept farm in Imperial Valley to deploy and demonstrate the feasibility of the Evaporative Cooling Wall technology in the USA — one of the hottest, driest agricultural regions on Earth.</p>
+                </div>
+                <div className="h-64 md:h-full min-h-[260px]">
+                  <AdminImageUpload
+                    src={getHomeImg("iv_pilot_project", "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/public/6993b7c68cee7955d3266d09/fa3b93fe7_darla-hueske-fqoq39Jj5us-unsplash.jpg")}
+                    alt="UC Desert Research Center Pilot Farm"
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setHomeImg("iv_pilot_project", url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover" />
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
