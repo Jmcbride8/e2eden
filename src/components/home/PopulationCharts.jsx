@@ -9,7 +9,7 @@ export function FertilizerChart({ isAdmin, getHomeImg, setHomeImg }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
-      className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8"
+      className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 h-full flex flex-col"
     >
       <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">
         Fertilizer fed <span className="text-green-400">6 billion people</span>
@@ -23,8 +23,8 @@ export function FertilizerChart({ isAdmin, getHomeImg, setHomeImg }) {
         alt="Fertilizer population chart"
         isAdmin={isAdmin}
         onUploaded={(url) => setHomeImg("fertilizer_chart", url)}
-        className="w-full"
-        imgClassName="w-full object-contain"
+        className="w-full flex-1"
+        imgClassName="w-full h-full object-contain"
       />
     </motion.div>
   );
@@ -37,7 +37,7 @@ export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: 0.15 }}
-      className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8"
+      className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 h-full flex flex-col"
     >
       <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">
         Abundant water to feed<br />
@@ -48,8 +48,8 @@ export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
         alt="Saltwater population chart"
         isAdmin={isAdmin}
         onUploaded={(url) => setHomeImg("saltwater_chart", url)}
-        className="w-full"
-        imgClassName="w-full object-contain"
+        className="w-full flex-1"
+        imgClassName="w-full h-full object-contain"
       />
     </motion.div>
   );
