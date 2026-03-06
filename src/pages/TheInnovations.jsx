@@ -398,20 +398,6 @@ export default function TheInnovations() {
           </div>
         </motion.div>
 
-        {/* Don't Reinvent the Wheel - Seawater Greenhouse Legacy */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-24"
-        >
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Don't Reinvent the Wheel</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
-        </motion.div>
         <SeawaterGreenhouseSection />
 
         {/* The Mind Behind It All - Charlie Paton */}
