@@ -7,17 +7,17 @@ const DEFAULT_IMAGES = [
 {
   key: "root_cause_img_3",
   default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-  caption: "Cities, for all their size and density, consume a relatively small fraction of the world's freshwater. Every water-saving initiative aimed at households and industry combined cannot match the impact of fixing how we farm. That is where the real battle will be won or lost."
+  caption: "Every water-saving campaign combined — shorter showers, low-flow toilets, industrial conservation — barely registers. Fix farming, and you fix the crisis."
 },
 {
   key: "root_cause_img_2",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "Desert farms apply 6 to 10 feet of water per acre every year — not because farmers love wasting it, but because plants in extreme heat suffer heat stress and must transpire constantly just to survive. Drip irrigation can't solve this; the water isn't being wasted in delivery, it's being consumed by the plant's cooling system, and lost to the sky."
+  caption: "In extreme heat, plants must transpire constantly just to stay alive — not to grow food, but to cool themselves. That water doesn't hydrate the crop. It evaporates into the sky."
 },
 {
   key: "root_cause_img_desalination",
   default: "https://images.unsplash.com/photo-1548783300-b4f9d05cdd67?w=800&h=600&fit=crop",
-  caption: "Desalination is far too expensive for farming. It costs roughly $20,000 worth of desalinated water to grow a single acre of alfalfa — the region's main crop — which sells for only $4,000. No farmer can survive that math."
+  caption: "Desalination sounds like a fix — until you do the math. It costs $20,000 in desalinated water to grow one acre of alfalfa. That acre sells for $4,000. The numbers don't work."
 },
 ];
 
