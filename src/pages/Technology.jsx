@@ -234,13 +234,10 @@ export default function Technology() {
             <div>
               <h2 className="text-4xl font-bold text-white mb-6">Agriculture Uses 85% of Our Water</h2>
               <p className="text-white/70 text-lg leading-relaxed mb-6">
-                In punishing desert heat, crops must sweat constantly just to survive. That water doesn't become food — it vanishes into the sky. Until now, there was no way out.
-              </p>
-              <p className="text-white/70 text-lg leading-relaxed mb-6">
-                Desalination sounds like a fix — until you do the math. It costs $20,000 in desalinated water to grow one acre of alfalfa. That acre sells for $4,000. The numbers don't work.
+                In desert heat, crops constantly lose water to evaporation—it never becomes food. Desalination seems promising until you see the math: $20,000 per acre of desalinated water versus $4,000 per acre of yield. The economics don't work.
               </p>
               <p className="text-white/70 text-lg leading-relaxed">
-                Saltwater cooling walls are different. They use water that's already there — the saline water that lies useless beneath millions of acres of farmland — and turn it into a climate weapon.
+                Saltwater cooling walls use what's already there—saline groundwater beneath millions of acres of farmland—transforming it into a climate weapon without the cost.
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
