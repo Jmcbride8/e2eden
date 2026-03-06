@@ -563,9 +563,7 @@ export default function TheInnovations() {
             <div className="h-px flex-1 bg-white/10" />
           </div>
           
-          <p className="text-center text-white/70 text-lg max-w-3xl mx-auto mb-12 leading-relaxed">
-            The business model is as important as the technology. We're bringing the Silicon Valley entrepreneurial playbook to agriculture — focusing on profitability, capital efficiency, and market-driven innovation.
-          </p>
+          <h3 className="text-center text-white text-3xl font-bold mb-12">Make Money to Make a Difference</h3>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
