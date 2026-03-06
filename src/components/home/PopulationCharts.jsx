@@ -40,7 +40,7 @@ export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
       className="rounded-2xl border border-amber-500/30 bg-white/5 p-6 sm:p-8"
     >
       <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6">
-        Saltwater Farms could feed<br />
+        Abundant water could feed<br />
         <span className="text-sky-400">the next 6 billion</span>
       </h3>
       <AdminImageUpload
