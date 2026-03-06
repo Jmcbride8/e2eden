@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import AdminImageUpload from "./AdminImageUpload";
 
-export function FertilizerChart() {
+export function FertilizerChart({ isAdmin, getHomeImg, setHomeImg }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -17,16 +18,19 @@ export function FertilizerChart() {
         "It is estimated that a third of annual global food production uses ammonia from the Haber–Bosch process, and that this food supports nearly half the world's population"
       </p>
       <p className="text-black/40 text-xs mb-4">– Oxford Scientist</p>
-      <img
-        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/c524cc5fd_Fertilizer_population.png"
-        alt="Fertilizer fed 6 billion people chart"
-        className="w-full object-contain"
+      <AdminImageUpload
+        src={getHomeImg("fertilizer_chart", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/c524cc5fd_Fertilizer_population.png")}
+        alt="Fertilizer population chart"
+        isAdmin={isAdmin}
+        onUploaded={(url) => setHomeImg("fertilizer_chart", url)}
+        className="w-full"
+        imgClassName="w-full object-contain"
       />
     </motion.div>
   );
 }
 
-export function SaltwaterChart() {
+export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -39,10 +43,13 @@ export function SaltwaterChart() {
         Saltwater Farms could feed<br />
         <span className="text-sky-500">the next 6 billion</span>
       </h3>
-      <img
-        src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/60e566c7d_Water_population.png"
-        alt="Saltwater farms could feed the next 6 billion chart"
-        className="w-full object-contain"
+      <AdminImageUpload
+        src={getHomeImg("saltwater_chart", "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/60e566c7d_Water_population.png")}
+        alt="Saltwater population chart"
+        isAdmin={isAdmin}
+        onUploaded={(url) => setHomeImg("saltwater_chart", url)}
+        className="w-full"
+        imgClassName="w-full object-contain"
       />
     </motion.div>
   );
