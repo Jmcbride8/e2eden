@@ -234,29 +234,43 @@ export default function TheInnovations() {
 
           {/* The Scale Problem */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Agriculture Uses 85% of Our Water</h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-8">
-              The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { crop: "Alfalfa", pct: "42%", acres: "~12M acres" },
-                { crop: "Cotton", pct: "18%", acres: "~9M acres" },
-                { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres" },
-              ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="p-6 rounded-xl bg-white/5 border border-white/10"
-                >
-                  <p className="text-white/70 text-sm mb-2">{item.crop}</p>
-                  <div className="text-4xl font-bold text-amber-400 mb-1">{item.pct}</div>
-                  <p className="text-white/50 text-xs">{item.acres}</p>
-                </motion.div>
-              ))}
+            <h2 className="text-3xl font-bold text-white mb-8">Agriculture Uses 85% of Our Water</h2>
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <p className="text-white/70 text-lg leading-relaxed">
+                  The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
+                </p>
+              </motion.div>
+              <div className="space-y-4">
+                {[
+                  { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=300&h=250&fit=crop" },
+                  { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", image: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=300&h=250&fit=crop" },
+                  { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", image: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=300&h=250&fit=crop" },
+                ].map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.1 }}
+                    className="rounded-xl bg-white/5 border border-white/10 overflow-hidden flex gap-4"
+                  >
+                    <div className="w-24 h-24 flex-shrink-0">
+                      <img src={item.image} alt={item.crop} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex-1 p-4 flex flex-col justify-center">
+                      <p className="text-white font-semibold mb-1">{item.crop}</p>
+                      <p className="text-amber-400 text-sm font-bold mb-1">{item.pct} of AG water</p>
+                      <p className="text-white/50 text-xs">{item.water}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -306,30 +320,58 @@ export default function TheInnovations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="p-8 rounded-2xl bg-white/5 border border-white/10"
+              className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-sm"
             >
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={[
-                  { year: "1990", cost: 25000 },
-                  { year: "2000", cost: 22000 },
-                  { year: "2010", cost: 20000 },
-                  { year: "2020", cost: 18000 },
-                  { year: "2025", cost: 17500 },
-                  { year: "2030", cost: 17000 },
-                ]} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                  <XAxis dataKey="year" stroke="#ffffff80" />
-                  <YAxis stroke="#ffffff80" label={{ value: 'Cost per Acre-Foot ($)', angle: -90, position: 'insideLeft' }} />
+                  { year: "1960s", cost: 35000, period: "Early days" },
+                  { year: "1980s", cost: 32000, period: "Technology emerging" },
+                  { year: "2000s", cost: 22000, period: "Some improvements" },
+                  { year: "2010s", cost: 20000, period: "Hit the wall" },
+                  { year: "2020s", cost: 18000, period: "Stalled" },
+                  { year: "Today", cost: 17500, period: "Stuck" },
+                ]} margin={{ top: 30, right: 30, left: 30, bottom: 30 }}>
+                  <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.08)" vertical={false} />
+                  <XAxis dataKey="year" stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px", fontWeight: 500 }} />
+                  <YAxis stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px" }} tickFormatter={(val) => `$${(val/1000).toFixed(0)}k`} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "8px" }}
-                    formatter={(value) => `$${value.toLocaleString()}`}
+                    contentStyle={{ 
+                      backgroundColor: "rgba(0,0,0,0.9)", 
+                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      borderRadius: "12px",
+                      padding: "12px"
+                    }}
+                    formatter={(value) => `$${value.toLocaleString()}/acre-ft`}
+                    labelStyle={{ color: "#ffffff" }}
+                    cursor={{ stroke: "rgba(245, 158, 11, 0.2)", strokeWidth: 2 }}
                   />
-                  <Line type="monotone" dataKey="cost" stroke="#f59e0b" dot={{ fill: '#f59e0b', r: 4 }} strokeWidth={3} />
+                  <Line 
+                    type="natural" 
+                    dataKey="cost" 
+                    stroke="#f59e0b" 
+                    dot={false}
+                    strokeWidth={3}
+                    isAnimationActive={true}
+                  />
                 </LineChart>
               </ResponsiveContainer>
-              <p className="text-white/60 text-sm text-center mt-6">
-                <span className="text-red-400 font-semibold">Desalination: Stuck at $17K-18K</span> | <span className="text-green-400 font-semibold">Needed for Viability: $4K</span>
-              </p>
+              <div className="mt-8 grid md:grid-cols-3 gap-4">
+                <div className="text-center">
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Desalination Today</p>
+                  <p className="text-2xl font-bold text-amber-400">$17,500</p>
+                  <p className="text-white/40 text-xs mt-1">per acre-foot</p>
+                </div>
+                <div className="text-center border-l border-r border-white/10">
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Cost Reduction (60 yrs)</p>
+                  <p className="text-2xl font-bold text-white">50%</p>
+                  <p className="text-white/40 text-xs mt-1">still 4x too expensive</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Needed for Viability</p>
+                  <p className="text-2xl font-bold text-red-400">$4,000</p>
+                  <p className="text-white/40 text-xs mt-1">impossible gap</p>
+                </div>
+              </div>
             </motion.div>
           </div>
 
