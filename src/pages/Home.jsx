@@ -570,24 +570,42 @@ export default function Home() {
                   className="w-full h-full"
                   imgClassName="w-full h-full object-cover" />
               </div>
-              {/* Three image cards */}
+              {/* Three image cards with flip animation */}
               <div className="grid md:grid-cols-3 gap-4">
                 {[
-                  { key: "iv_what_it_is", title: "What It Is", defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=400&fit=crop" },
-                  { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=800&h=400&fit=crop" },
-                  { key: "iv_what_we_can_make_it", title: "What We Can Make It", defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=400&fit=crop" },
+                  { key: "iv_what_it_is", title: "What It Is", defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=400&fit=crop", blurb: "Imperial Valley is one of the most water-stressed yet productive farming regions in North America — a paradox held together by aging infrastructure and borrowed time." },
+                  { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=800&h=400&fit=crop", blurb: "Our first pilot installations will demonstrate 90% water savings on real commercial farms, proving the technology works at scale in the harshest conditions on Earth." },
+                  { key: "iv_what_we_can_make_it", title: "What We Can Make It", defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=400&fit=crop", blurb: "A thriving, resilient agricultural region that produces more food with a fraction of the water — a model for every arid farming community in the world." },
                 ].map((card) => (
-                  <div key={card.key} className="relative rounded-xl overflow-hidden group h-48">
-                    <AdminImageUpload
-                      src={getHomeImg(card.key, card.defaultImg)}
-                      alt={card.title}
-                      isAdmin={isAdmin}
-                      onUploaded={(url) => setHomeImg(card.key, url)}
-                      className="w-full h-full"
-                      imgClassName="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <h4 className="text-white font-bold text-base">{card.title}</h4>
+                  <div key={card.key} className="h-48 group" style={{ perspective: '1000px' }}>
+                    <div
+                      className="relative w-full h-full transition-transform duration-500"
+                      style={{ transformStyle: 'preserve-3d', transform: 'rotateY(0deg)' }}
+                      onMouseEnter={e => e.currentTarget.style.transform = 'rotateY(180deg)'}
+                      onMouseLeave={e => e.currentTarget.style.transform = 'rotateY(0deg)'}
+                    >
+                      {/* Front */}
+                      <div className="absolute inset-0 rounded-xl overflow-hidden" style={{ backfaceVisibility: 'hidden' }}>
+                        <AdminImageUpload
+                          src={getHomeImg(card.key, card.defaultImg)}
+                          alt={card.title}
+                          isAdmin={isAdmin}
+                          onUploaded={(url) => setHomeImg(card.key, url)}
+                          className="w-full h-full"
+                          imgClassName="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 right-0 p-3">
+                          <h4 className="text-white font-bold text-base">{card.title}</h4>
+                        </div>
+                      </div>
+                      {/* Back */}
+                      <div
+                        className="absolute inset-0 rounded-xl bg-amber-500/10 border border-amber-500/30 flex flex-col items-center justify-center p-5 text-center"
+                        style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                      >
+                        <h4 className="text-amber-400 font-bold text-base mb-3">{card.title}</h4>
+                        <p className="text-white/80 text-sm leading-relaxed">{card.blurb}</p>
+                      </div>
                     </div>
                   </div>
                 ))}
