@@ -79,8 +79,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           </h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
-            Agriculture consumes a staggering 85% of global freshwater resources. Traditional farming methods are
-            incredibly inefficient — most water evaporates or runs off before crops can even use it.
+            Agriculture consumes 85% of global freshwater — not because farmers are careless, but because feeding cities in harsh, arid climates is genuinely hard. In extreme heat, crops must continuously transpire to cool themselves or they die. That water goes into the air, not the food. Farmers aren't wasting water; they're caught in a system with no better option. Until now.
           </p>
 
           {/* Image Grid */}
