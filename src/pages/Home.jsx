@@ -574,7 +574,7 @@ export default function Home() {
               <div className="grid md:grid-cols-3 gap-4">
                 {[
                   { key: "iv_what_it_is", title: "What It Is", defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=400&fit=crop", blurb: "Imperial Valley is one of the most water-stressed yet productive farming regions in North America — a paradox held together by aging infrastructure and borrowed time." },
-                  { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=800&h=400&fit=crop", blurb: "Our first pilot installations will demonstrate 90% water savings on real commercial farms, proving the technology works at scale in the harshest conditions on Earth." },
+                  { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop", blurb: "Without intervention, the Colorado River compact collapses, water allocations are slashed, and hundreds of thousands of acres are permanently fallowed. Farms fail. Towns empty. The food supply shrinks." },
                   { key: "iv_what_we_can_make_it", title: "What We Can Make It", defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=400&fit=crop", blurb: "A thriving, resilient agricultural region that produces more food with a fraction of the water — a model for every arid farming community in the world." },
                 ].map((card) => (
                   <div key={card.key} className="h-48 group" style={{ perspective: '1000px' }}>
