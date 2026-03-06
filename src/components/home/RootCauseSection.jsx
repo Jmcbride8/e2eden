@@ -65,7 +65,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           </h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
-            Agriculture consumes 85% of global freshwater — not because farmers are careless, but because feeding cities in harsh, arid climates is genuinely hard. In extreme heat, crops must continuously transpire to cool themselves or they die. That water goes into the air, not the food. Farmers aren't wasting water; they're caught in a system with no better option. Until now.
+            Agriculture consumes 85% of freshwater — and in the US Southwest, that number climbs even higher. Farmers aren't careless. In punishing desert heat, crops must sweat constantly just to survive. That water doesn't become food — it vanishes into the sky. Until now, there was no way out.
           </p>
 
           {/* Image Grid */}
