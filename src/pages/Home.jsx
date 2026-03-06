@@ -508,7 +508,7 @@ export default function Home() {
                   key: "wind_humid",
                   title: "Humidifies the Wind",
                   defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
-                  body: "The evaporating water doesn't disappear — it saturates the air passing through the panels, raising relative humidity by up to 50%. This moisture-rich microclimate reduces plant transpiration stress, slows soil evaporation, and allows crops to thrive in arid conditions with a fraction of the irrigation water normally required."
+                  body: "The moisture doesn't vanish — it stays. Humid air clings to the field, slowing evaporation from soil and plant alike. Crops stop fighting the heat and start putting their energy into growth."
                 }
               ].map((card, idx) =>
               <motion.div
