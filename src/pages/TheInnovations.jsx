@@ -324,13 +324,13 @@ export default function TheInnovations() {
             >
               <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={[
-                  { year: "1970s", cost: 9700, period: "Early RO era" },
-                  { year: "1980s", cost: 8500, period: "Tech improving" },
-                  { year: "1990s", cost: 6000, period: "Membrane advances" },
-                  { year: "2000s", cost: 4500, period: "Economies of scale" },
-                  { year: "2010s", cost: 2500, period: "Optimization peak" },
-                  { year: "2020", cost: 2329, period: "Efficient plants" },
-                  { year: "2024", cost: 3400, period: "Carlsbad standard" },
+                  { year: "1970s", desal: 9700, iidfarmers: 25, farmers: 25 },
+                  { year: "1980s", desal: 8500, iidfarmers: 25, farmers: 25 },
+                  { year: "1990s", desal: 6000, iidfarmers: 20, farmers: 20 },
+                  { year: "2000s", desal: 4500, iidfarmers: 20, farmers: 20 },
+                  { year: "2010s", desal: 2500, iidfarmers: 20, farmers: 20 },
+                  { year: "2020", desal: 2329, iidfarmers: 20, farmers: 20 },
+                  { year: "2024", desal: 3400, iidfarmers: 25, farmers: 25 },
                 ]} margin={{ top: 30, right: 30, left: 30, bottom: 30 }}>
                   <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.08)" vertical={false} />
                   <XAxis dataKey="year" stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px", fontWeight: 500 }} />
@@ -338,39 +338,50 @@ export default function TheInnovations() {
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: "rgba(0,0,0,0.9)", 
-                      border: "1px solid rgba(245, 158, 11, 0.3)",
+                      border: "1px solid rgba(59, 130, 246, 0.3)",
                       borderRadius: "12px",
                       padding: "12px"
                     }}
                     formatter={(value) => `$${value.toLocaleString()}/acre-ft`}
                     labelStyle={{ color: "#ffffff" }}
-                    cursor={{ stroke: "rgba(245, 158, 11, 0.2)", strokeWidth: 2 }}
+                    cursor={{ stroke: "rgba(59, 130, 246, 0.2)", strokeWidth: 2 }}
                   />
                   <Line 
                     type="natural" 
-                    dataKey="cost" 
-                    stroke="#f59e0b" 
+                    dataKey="desal" 
+                    stroke="#3b82f6" 
                     dot={false}
                     strokeWidth={3}
                     isAnimationActive={true}
+                    name="Desalination Cost"
+                  />
+                  <Line 
+                    type="linear" 
+                    dataKey="iidfarmers" 
+                    stroke="#60a5fa" 
+                    dot={false}
+                    strokeWidth={2}
+                    strokeDasharray="5 5"
+                    isAnimationActive={true}
+                    name="What IID Farmers Pay"
                   />
                 </LineChart>
               </ResponsiveContainer>
               <div className="mt-8 grid md:grid-cols-3 gap-4">
                 <div className="text-center">
                   <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Current Standard (Carlsbad)</p>
-                  <p className="text-2xl font-bold text-amber-400">$3,400</p>
+                  <p className="text-2xl font-bold text-blue-400">$3,400</p>
                   <p className="text-white/40 text-xs mt-1">per acre-foot (2024)</p>
                 </div>
                 <div className="text-center border-l border-r border-white/10">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Cost Reduction (50 yrs)</p>
-                  <p className="text-2xl font-bold text-white">65%</p>
-                  <p className="text-white/40 text-xs mt-1">from 1970s peak</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">The Gap</p>
+                  <p className="text-2xl font-bold text-white">136x</p>
+                  <p className="text-white/40 text-xs mt-1">vs. what farmers pay</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Agriculture Viability Threshold</p>
-                  <p className="text-2xl font-bold text-red-400">$1,000</p>
-                  <p className="text-white/40 text-xs mt-1">still 3x too expensive</p>
+                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">What Colorado River Farmers Pay</p>
+                  <p className="text-2xl font-bold text-blue-300">$25</p>
+                  <p className="text-white/40 text-xs mt-1">per acre-foot (IID 2024)</p>
                 </div>
               </div>
             </motion.div>
