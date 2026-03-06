@@ -496,7 +496,7 @@ export default function Home() {
                   key: "wind_slow",
                   title: "Slows the Wind",
                   defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/41eb3c992_generated_image.png",
-                  body: "As hot desert air hits the porous cellulose panels, the structure creates a physical barrier that dramatically reduces wind velocity. Slower-moving air spends more time in contact with the wet media, maximizing the transfer of heat and moisture — the foundation of everything else that follows."
+                  body: "Hot desert wind strips the layer of moisture above the fields. Slowing the wind protects this layer."
                 },
                 {
                   key: "wind_cool",
