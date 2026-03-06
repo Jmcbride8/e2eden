@@ -303,21 +303,25 @@ export default function TheInnovations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="relative rounded-2xl overflow-hidden h-64 flex items-center justify-center group"
+                className="relative rounded-2xl overflow-hidden h-64 group"
               >
-                <AdminImageUpload
-                  src={getHomeImg("dessal_water_cost", "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop")}
-                  alt="Desalinated Water"
-                  isAdmin={isAdmin}
-                  onUploaded={(url) => setHomeImg("dessal_water_cost", url)}
-                  className="absolute inset-0"
-                  imgClassName="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-                <div className="relative z-10 text-center">
-                  <div className="text-2xl font-bold text-white mb-2">Desalinated Water Cost</div>
-                  <div className="text-5xl font-bold text-red-400 mb-4">$20,000+</div>
-                  <p className="text-white/80 text-sm">per acre-foot</p>
+                <div className="absolute inset-0 z-0">
+                  <AdminImageUpload
+                    src={getHomeImg("dessal_water_cost", "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop")}
+                    alt="Desalinated Water"
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setHomeImg("dessal_water_cost", url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10" />
+                <div className="absolute inset-0 z-20 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-white mb-2">Desalinated Water Cost</div>
+                    <div className="text-5xl font-bold text-red-400 mb-4">$20,000+</div>
+                    <p className="text-white/80 text-sm">per acre-foot</p>
+                  </div>
                 </div>
               </motion.div>
               <motion.div
@@ -325,21 +329,25 @@ export default function TheInnovations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="relative rounded-2xl overflow-hidden h-64 flex items-center justify-center group"
+                className="relative rounded-2xl overflow-hidden h-64 group"
               >
-                <AdminImageUpload
-                  src={getHomeImg("crop_value_alfalfa", "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop")}
-                  alt="Alfalfa Crop"
-                  isAdmin={isAdmin}
-                  onUploaded={(url) => setHomeImg("crop_value_alfalfa", url)}
-                  className="absolute inset-0"
-                  imgClassName="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-                <div className="relative z-10 text-center">
-                  <div className="text-2xl font-bold text-white mb-2">Crop Value (Alfalfa)</div>
-                  <div className="text-5xl font-bold text-green-400 mb-4">$4,000</div>
-                  <p className="text-white/80 text-sm">per acre annually</p>
+                <div className="absolute inset-0 z-0">
+                  <AdminImageUpload
+                    src={getHomeImg("crop_value_alfalfa", "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop")}
+                    alt="Alfalfa Crop"
+                    isAdmin={isAdmin}
+                    onUploaded={(url) => setHomeImg("crop_value_alfalfa", url)}
+                    className="w-full h-full"
+                    imgClassName="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10" />
+                <div className="absolute inset-0 z-20 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-white mb-2">Crop Value (Alfalfa)</div>
+                    <div className="text-5xl font-bold text-green-400 mb-4">$4,000</div>
+                    <p className="text-white/80 text-sm">per acre annually</p>
+                  </div>
                 </div>
               </motion.div>
             </div>
