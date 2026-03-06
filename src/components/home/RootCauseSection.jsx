@@ -89,9 +89,9 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           </div>
 
           {/* Stat + Pie Chart layout */}
-          <div className="grid md:grid-cols-2 gap-8 items-center mt-0">
+          <div className="grid md:grid-cols-2 gap-8 items-stretch mt-0">
             {/* Big stat */}
-            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 h-full flex flex-col justify-center">
+            <div className="p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-center">
               <div className="text-8xl font-bold text-amber-400 mb-4">85%</div>
               <p className="text-2xl font-semibold mb-3 text-white">
                 Of US Southwest freshwater goes to agriculture
