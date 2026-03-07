@@ -181,9 +181,9 @@ export default function GanttChart({ projects, milestones }) {
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.25 }}
-                    className="overflow-hidden ml-[180px] sm:ml-[220px] pl-3"
+                    className="overflow-hidden"
                   >
-                    <div className="py-2 space-y-1.5 border-l border-white/10 pl-3">
+                    <div className="py-2 space-y-1.5 border-l border-white/10 ml-[44px] sm:ml-[44px] pl-3">
                       {ms.map((m) => {
                         const msCfg = STATUS_CONFIG[m.status] || STATUS_CONFIG.planned;
                         const Icon = msCfg.icon;
