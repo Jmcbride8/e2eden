@@ -74,6 +74,41 @@ export default function Projects() {
     }
   };
 
+  // Company queries & mutations
+  const { data: companies = [], isLoading: companiesLoading } = useQuery({
+    queryKey: ['companies'],
+    queryFn: () => base44.entities.Company.list('name'),
+  });
+
+  const createCompanyMutation = useMutation({
+    mutationFn: (data) => base44.entities.Company.create(data),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['companies'] }); setShowAddCompanyModal(false); toast.success("Company created"); },
+  });
+
+  const updateCompanyMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.Company.update(id, data),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['companies'] }); setEditingCompany(null); toast.success("Company updated"); },
+  });
+
+  const deleteCompanyMutation = useMutation({
+    mutationFn: (id) => base44.entities.Company.delete(id),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['companies'] }); toast.success("Company deleted"); },
+  });
+
+  const handleSaveCompany = async (data) => {
+    if (editingCompany) {
+      await updateCompanyMutation.mutateAsync({ id: editingCompany.id, data });
+    } else {
+      await createCompanyMutation.mutateAsync(data);
+    }
+  };
+
+  const handleDeleteCompany = (id) => {
+    if (confirm("Are you sure you want to delete this company?")) {
+      deleteCompanyMutation.mutate(id);
+    }
+  };
+
   const handleDragEnd = async (result) => {
     if (!result.destination) return;
 
