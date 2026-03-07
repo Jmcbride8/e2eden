@@ -72,6 +72,12 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           onChange={(e) => setFormData({ ...formData, linkedin_url: e.target.value })}
           className="bg-white/10 border-white/20 text-white"
         />
+        <Input
+          placeholder="Education Logo URL"
+          value={formData.education_logo_url || ""}
+          onChange={(e) => setFormData({ ...formData, education_logo_url: e.target.value })}
+          className="bg-white/10 border-white/20 text-white"
+        />
 
         <div className="flex gap-2 pt-2">
           <Button size="sm" className="bg-amber-500 hover:bg-amber-600" onClick={handleSave}>
