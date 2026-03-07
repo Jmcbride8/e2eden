@@ -23,7 +23,7 @@ export function FertilizerChart({ isAdmin, getHomeImg, setHomeImg }) {
         alt="Fertilizer population chart"
         isAdmin={isAdmin}
         onUploaded={(url) => setHomeImg("fertilizer_chart", url)}
-        className="w-full flex-1"
+        className="w-full flex-1 min-h-64"
         imgClassName="w-full h-full object-contain"
       />
     </motion.div>
@@ -48,7 +48,7 @@ export function SaltwaterChart({ isAdmin, getHomeImg, setHomeImg }) {
         alt="Saltwater population chart"
         isAdmin={isAdmin}
         onUploaded={(url) => setHomeImg("saltwater_chart", url)}
-        className="w-full flex-1"
+        className="w-full flex-1 min-h-64"
         imgClassName="w-full h-full object-contain"
       />
     </motion.div>
