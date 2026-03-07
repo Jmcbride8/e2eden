@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Wrench, Leaf, MapPin, Calendar, ArrowLeft, Plus, Pencil, Trash2, GripVertical } from "lucide-react";
+import { Wrench, Leaf, MapPin, ArrowLeft, Plus, Pencil, Trash2, GripVertical, Building2, Globe, Mail, Phone, ExternalLink } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPageUrl } from "../utils";
 import ProjectEditModal from "../components/projects/ProjectEditModal";
+import CompanyEditModal from "../components/projects/CompanyEditModal";
 import { toast } from "sonner";
 
 const typeConfig = {
