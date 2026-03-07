@@ -5,7 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 
-const PHASES = ["R&D", "Commercialization", "Transformation"];
+const PHASES = ["All", "R&D", "Commercialization", "Transformation"];
 
 const statusConfig = {
   completed: { icon: CheckCircle2, color: "text-green-400", bg: "bg-green-500/20", border: "border-green-500/30", label: "Completed" },
