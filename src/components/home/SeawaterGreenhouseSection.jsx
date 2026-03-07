@@ -6,6 +6,27 @@ import { useQuery } from "@tanstack/react-query";
 
 export default function SeawaterGreenhouseSection() {
   const scrollRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    let animId;
+
+    const step = () => {
+      if (!paused && el) {
+        el.scrollLeft += 0.5;
+        // Loop back to start when reaching the end
+        if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) {
+          el.scrollLeft = 0;
+        }
+      }
+      animId = requestAnimationFrame(step);
+    };
+
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [paused]);
 
   const { data: allProjects = [] } = useQuery({
     queryKey: ['projects'],
