@@ -523,6 +523,20 @@ export default function TheInnovations() {
               </motion.div>
             )}
           </div>
+
+          {/* System Diagram */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-10 rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] p-6">
+            <img
+              src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/804a29724_generated_image.png"
+              alt="Saltwater Farm System Diagram"
+              className="w-full object-contain max-h-64"
+            />
+          </motion.div>
         </motion.div>
 
         {/* Hero Image */}
