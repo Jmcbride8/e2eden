@@ -120,12 +120,12 @@ export default function ProjectModal({ project, location, onClose }) {
                          </CarouselItem>
                        ))}
                      </CarouselContent>
-                    {project.images.length > 1 && (
+                     {project.images && project.images.length > 0 && (
                       <>
                         <CarouselPrevious className="left-4 bg-black/50 hover:bg-black/70 border-white/20 text-white" />
                         <CarouselNext className="right-4 bg-black/50 hover:bg-black/70 border-white/20 text-white" />
                       </>
-                    )}
+                     )}
                   </Carousel>
                 </div>
               ) : null}
