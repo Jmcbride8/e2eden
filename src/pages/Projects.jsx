@@ -420,8 +420,7 @@ export default function Projects() {
                 </tbody>
               </table>
             </div>
-          )
-        ))}
+        )}
       </div>
       {(showAddModal || editingProject) && (
         <ProjectEditModal
