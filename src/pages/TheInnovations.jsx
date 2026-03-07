@@ -651,7 +651,7 @@ export default function TheInnovations() {
             <div className="flex-shrink-0 flex flex-col items-center md:items-start">
               <div
                 className="w-[308px] h-[308px] rounded-2xl overflow-hidden border border-white/10 mb-4 relative cursor-pointer group"
-                onClick={() => setCharlieVideoOpen(true)}
+                onClick={() => window.open("https://youtu.be/P4YCZgfchO0?si=H4k0zZHMp1PgCri1", "_blank")}
               >
                 <img
                   src={getHomeImg("charlie_paton_portrait", "https://greenhouse.agency/wp-content/uploads/charlie-paton-copy.jpg")}
