@@ -9,6 +9,46 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TeamCard from "../components/about/TeamCard";
 
 export default function About() {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const queryClient = useQueryClient();
+
+  const { data: teamMembers = [] } = useQuery({
+    queryKey: ['team'],
+    queryFn: () => base44.entities.Team.list('sort_order')
+  });
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const user = await base44.auth.me();
+      setIsAdmin(user?.role === 'admin');
+    };
+    checkAdmin();
+  }, []);
+
+  const updateMemberMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.Team.update(id, data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['team'] })
+  });
+
+  const deleteMemberMutation = useMutation({
+    mutationFn: (id) => base44.entities.Team.delete(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['team'] })
+  });
+
+  const createMemberMutation = useMutation({
+    mutationFn: (data) => base44.entities.Team.create(data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['team'] })
+  });
+
+  const handleAddMember = () => {
+    createMemberMutation.mutate({
+      name: "New Team Member",
+      role: "Role",
+      bio: "Bio",
+      sort_order: teamMembers.length
+    });
+  };
+
   return (
     <div className="min-h-screen bg-black">
       {/* Header */}
