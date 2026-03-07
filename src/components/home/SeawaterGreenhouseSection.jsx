@@ -73,7 +73,7 @@ export default function SeawaterGreenhouseSection() {
             >
               Seawater Greenhouse Ltd <ExternalLink className="w-4 h-4" />
             </a>
-            , this technology has transformed deserts across three continents. We're not starting from scratch — we're bringing what works to the United States at a scale never attempted before.
+            , this technology has transformed deserts across three continents.
           </p>
 
 
