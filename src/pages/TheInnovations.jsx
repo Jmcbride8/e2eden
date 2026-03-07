@@ -10,6 +10,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 export default function TheInnovations() {
   const [videoOpen, setVideoOpen] = useState(false);
+  const [charlieVideoOpen, setCharlieVideoOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const queryClient = useQueryClient();
 
