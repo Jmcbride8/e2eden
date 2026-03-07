@@ -79,23 +79,14 @@ export default function About() {
       {/* Team Members Section */}
       <section className="py-24 px-6 sm:px-12 bg-black">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl font-bold text-white"
-            >
-              Meet the Team
-            </motion.h2>
-            {isAdmin && (
+          {isAdmin && (
+            <div className="flex justify-end mb-8">
               <Button onClick={handleAddMember} className="bg-amber-500 hover:bg-amber-600">
                 <Plus className="w-4 h-4 mr-2" />
                 Add Member
               </Button>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="grid md:grid-cols-3 gap-6">
             {teamMembers.map((member, idx) => (
