@@ -328,14 +328,116 @@ export default function Projects() {
         )}
       </div>
 
+        ) : (
+          /* Companies Table */
+          companiesLoading ? (
+            <div className="text-white/40 text-center py-12">Loading companies...</div>
+          ) : companies.length === 0 ? (
+            <div className="text-white/40 text-center py-12">
+              No companies yet. {isAdmin && "Click 'Add Company' to create one."}
+            </div>
+          ) : (
+            <div className="bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Logo</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Company</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Type</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Owner</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Contact</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Country</th>
+                    <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Status</th>
+                    {isAdmin && <th className="text-right px-6 py-4 text-sm font-semibold text-white/70">Actions</th>}
+                  </tr>
+                </thead>
+                <tbody>
+                  {companies.map((company) => (
+                    <tr key={company.id} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                      <td className="px-6 py-4">
+                        {company.logo_url ? (
+                          <img src={company.logo_url} alt={company.name} className="w-12 h-12 object-contain rounded-lg bg-white/5 p-1" />
+                        ) : (
+                          <div className="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center">
+                            <Building2 className="w-5 h-5 text-white/20" />
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-medium text-white">{company.name}</div>
+                        {company.full_brand_name && company.full_brand_name !== company.name && (
+                          <div className="text-xs text-white/40 mt-0.5">{company.full_brand_name}</div>
+                        )}
+                        {company.website && (
+                          <a href={company.website} target="_blank" rel="noopener noreferrer"
+                            className="text-xs text-amber-400/70 hover:text-amber-400 flex items-center gap-1 mt-0.5">
+                            <ExternalLink className="w-3 h-3" /> {company.website.replace(/^https?:\/\//, '')}
+                          </a>
+                        )}
+                      </td>
+                      <td className="px-6 py-4">
+                        <Badge className="bg-blue-500/10 text-blue-400 text-xs border-0">{company.type || "—"}</Badge>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-white/70">{company.owner || "—"}</td>
+                      <td className="px-6 py-4">
+                        {company.contact_name && <div className="text-sm text-white/70">{company.contact_name}</div>}
+                        {company.contact_email && (
+                          <a href={`mailto:${company.contact_email}`} className="text-xs text-white/40 hover:text-white/70 flex items-center gap-1">
+                            <Mail className="w-3 h-3" />{company.contact_email}
+                          </a>
+                        )}
+                        {company.contact_phone && (
+                          <div className="text-xs text-white/40 flex items-center gap-1 mt-0.5">
+                            <Phone className="w-3 h-3" />{company.contact_phone}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-white/60">{company.country || "—"}</td>
+                      <td className="px-6 py-4">
+                        <Badge className={`text-xs border-0 ${
+                          company.status === "active" ? "bg-emerald-500/20 text-emerald-400" :
+                          company.status === "inactive" ? "bg-red-500/20 text-red-400" :
+                          "bg-amber-500/20 text-amber-400"
+                        }`}>
+                          {company.status || "active"}
+                        </Badge>
+                      </td>
+                      {isAdmin && (
+                        <td className="px-6 py-4">
+                          <div className="flex gap-2 justify-end">
+                            <Button variant="ghost" size="icon" onClick={() => setEditingCompany(company)}
+                              className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/10">
+                              <Pencil className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" onClick={() => handleDeleteCompany(company.id)}
+                              className="h-8 w-8 text-red-400 hover:text-red-300 hover:bg-red-500/10">
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )
+        )}
+      </div>
+
       {(showAddModal || editingProject) && (
         <ProjectEditModal
           project={editingProject}
-          onClose={() => {
-            setShowAddModal(false);
-            setEditingProject(null);
-          }}
+          onClose={() => { setShowAddModal(false); setEditingProject(null); }}
           onSave={handleSave}
+        />
+      )}
+
+      {(showAddCompanyModal || editingCompany) && (
+        <CompanyEditModal
+          company={editingCompany}
+          onClose={() => { setShowAddCompanyModal(false); setEditingCompany(null); }}
+          onSave={handleSaveCompany}
         />
       )}
     </div>
