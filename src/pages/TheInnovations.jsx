@@ -566,7 +566,7 @@ export default function TheInnovations() {
             <div className="h-px flex-1 bg-white/10" />
           </div>
           
-          <h3 className="text-5xl font-bold text-white mb-6\n">Make Money to Make a Difference</h3>
+          <h3 className="text-5xl font-bold text-white mb-10">Make Money to Make a Difference</h3>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
