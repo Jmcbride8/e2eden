@@ -60,6 +60,9 @@ import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
 import TheInnovations from './pages/TheInnovations';
 import UserManagement from './pages/UserManagement';
+import Technology from './pages/Technology';
+import BusinessModel from './pages/BusinessModel';
+import Innovators from './pages/Innovators';
 import __Layout from './Layout.jsx';
 
 
@@ -77,6 +80,9 @@ export const PAGES = {
     "TaskManager": TaskManager,
     "TheInnovations": TheInnovations,
     "UserManagement": UserManagement,
+    "Technology": Technology,
+    "BusinessModel": BusinessModel,
+    "Innovators": Innovators,
 }
 
 export const pagesConfig = {
