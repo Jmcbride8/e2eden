@@ -325,9 +325,6 @@ export default function Projects() {
               </DragDropContext>
             </table>
           </div>
-        )}
-      </div>
-
         ) : (
           /* Companies Table */
           companiesLoading ? (
