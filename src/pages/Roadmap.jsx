@@ -308,25 +308,67 @@ export default function Roadmap() {
               <div className="h-px flex-1 bg-white/10" />
             </div>
 
-            {/* Project cards */}
+            {/* Project cards — center timeline */}
             {phaseProjects.length === 0 ? (
               <p className="text-center text-white/40 py-16">No projects in this phase yet.</p>
             ) : (
-              <div className="space-y-4">
-                {phaseProjects.map((project, idx) => (
-                  <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: idx * 0.08 }}
-                  >
-                    <ProjectCard
-                      project={project}
-                      milestones={getMilestonesForProject(project.id)}
-                      isAdmin={isAdmin}
-                    />
-                  </motion.div>
-                ))}
+              <div className="relative">
+                {/* Center vertical line */}
+                <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block" />
+
+                <div className="space-y-10">
+                  {phaseProjects.map((project, idx) => {
+                    const isLeft = idx % 2 === 0;
+                    return (
+                      <motion.div
+                        key={project.id}
+                        initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: idx * 0.08 }}
+                        className="relative flex items-center md:grid md:grid-cols-2 md:gap-8"
+                      >
+                        {/* Left side */}
+                        <div className={isLeft ? "md:block" : "md:block"}>
+                          {isLeft ? (
+                            <ProjectCard
+                              project={project}
+                              milestones={getMilestonesForProject(project.id)}
+                              isAdmin={isAdmin}
+                            />
+                          ) : (
+                            <div className="hidden md:block" />
+                          )}
+                        </div>
+
+                        {/* Center dot */}
+                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 border-2 border-black shadow-lg shadow-amber-500/40 hidden md:block z-10" />
+
+                        {/* Right side */}
+                        <div>
+                          {!isLeft ? (
+                            <ProjectCard
+                              project={project}
+                              milestones={getMilestonesForProject(project.id)}
+                              isAdmin={isAdmin}
+                            />
+                          ) : (
+                            <div className="hidden md:block" />
+                          )}
+                        </div>
+
+                        {/* Mobile: full-width card with left line */}
+                        <div className="md:hidden w-full pl-6 border-l border-amber-500/30 relative">
+                          <div className="absolute left-0 top-4 w-3 h-3 rounded-full bg-amber-500 -translate-x-1.5" />
+                          <ProjectCard
+                            project={project}
+                            milestones={getMilestonesForProject(project.id)}
+                            isAdmin={isAdmin}
+                          />
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </motion.div>
