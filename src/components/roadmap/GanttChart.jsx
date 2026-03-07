@@ -146,7 +146,7 @@ export default function GanttChart({ projects, milestones }) {
                       animate={{ scaleX: 1 }}
                       transition={{ duration: 0.8, delay: rowIdx * 0.06 + 0.3, ease: "easeOut" }}
                       style={{ left: `${barLeft}%`, right: `${barRight}%`, transformOrigin: "left center" }}
-                      className={`absolute top-1 bottom-1 rounded-full bg-gradient-to-r ${colors.bar}`}
+                      className={`absolute top-1 bottom-1 rounded-full ${statusCfg.bg} border ${statusCfg.border}`}
                     />
                   )}
 
