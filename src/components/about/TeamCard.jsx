@@ -96,16 +96,17 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="rounded-xl bg-white/5 border border-white/10 p-6 hover:border-amber-500/50 transition-colors group"
+      className="rounded-xl bg-white/5 border border-white/10 overflow-hidden hover:border-amber-500/50 transition-colors group"
     >
       {/* Profile Image */}
-      <div className="w-full h-56 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-600 mb-4 overflow-hidden">
+      <div className="w-full h-56 bg-gradient-to-br from-amber-500 to-yellow-600 overflow-hidden">
         {formData.image_url && (
           <img src={formData.image_url} alt={formData.name} className="w-full h-full object-cover" />
         )}
       </div>
 
-      <h3 className="text-lg font-bold text-white mb-1">{formData.name}</h3>
+      <div className="p-6">
+        <h3 className="text-lg font-bold text-white mb-1">{formData.name}</h3>
       <p className="text-amber-400 text-sm font-semibold mb-3">{formData.role}</p>
       <p className="text-white/60 text-sm mb-4">{formData.bio}</p>
 
