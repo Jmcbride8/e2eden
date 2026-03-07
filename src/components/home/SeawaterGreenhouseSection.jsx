@@ -55,19 +55,7 @@ export default function SeawaterGreenhouseSection() {
             , this technology has transformed deserts across three continents. We're not starting from scratch — we're bringing what works to the United States at a scale never attempted before.
           </p>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-6 mt-10">
-            {[
-              { number: "30+", label: "Years of R&D" },
-              { number: "3", label: "Continents Deployed" },
-              { number: "1st", label: "Time in the USA" },
-            ].map((stat, idx) => (
-              <div key={idx} className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
-                <div className="text-4xl font-bold text-amber-400 mb-1">{stat.number}</div>
-                <div className="text-sm text-white/60">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+
         </motion.div>
 
         {/* Scrollable Cards */}
