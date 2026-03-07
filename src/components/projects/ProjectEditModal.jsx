@@ -174,6 +174,7 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
                     <SelectItem value="E2Eden">E2Eden</SelectItem>
                     <SelectItem value="Partner">Partner</SelectItem>
                     <SelectItem value="Joint Venture">Joint Venture</SelectItem>
+                    <SelectItem value="Seawater Greenhouse">Seawater Greenhouse</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
