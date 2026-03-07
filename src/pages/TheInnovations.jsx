@@ -237,7 +237,7 @@ export default function TheInnovations() {
 
               <h2 className="text-4xl font-bold text-white mb-4">Most of our water is used in agriculture...</h2>
               <p className="text-white/70 text-lg leading-relaxed max-w-2xl">
-                The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
+                Farming is where the world's water is used, and where it must be saved.
               </p>
             </motion.div>
             <div className="grid md:grid-cols-3 gap-6">
