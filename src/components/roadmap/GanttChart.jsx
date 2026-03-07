@@ -23,6 +23,7 @@ const COMPANY_LOGOS = {
 
 export default function GanttChart({ projects, milestones }) {
   const [expandedRows, setExpandedRows] = useState({});
+  const [yearRange, setYearRange] = useState([2, 5]); // [pastBuffer, futureBuffer]
 
   const { minYear, maxYear, years } = useMemo(() => {
     const allDates = milestones
