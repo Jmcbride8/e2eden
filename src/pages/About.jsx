@@ -55,13 +55,6 @@ export default function About() {
       {/* Header */}
       <div className="pt-32 pb-24 px-6 sm:px-12 bg-black">
         <div className="max-w-4xl mx-auto">
-          <Link to={createPageUrl("Home")}>
-            <Button variant="ghost" className="mb-8 text-white/60 hover:text-white">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back
-            </Button>
-          </Link>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
