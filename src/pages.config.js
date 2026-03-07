@@ -57,8 +57,8 @@ import Profile from './pages/Profile';
 import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
-import UserManagement from './pages/UserManagement';
 import TheInnovations from './pages/TheInnovations';
+import UserManagement from './pages/UserManagement';
 import __Layout from './Layout.jsx';
 
 
@@ -73,8 +73,8 @@ export const PAGES = {
     "Projects": Projects,
     "Roadmap": Roadmap,
     "TaskManager": TaskManager,
-    "UserManagement": UserManagement,
     "TheInnovations": TheInnovations,
+    "UserManagement": UserManagement,
 }
 
 export const pagesConfig = {

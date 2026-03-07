@@ -334,7 +334,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="flex flex-col justify-end">
                 <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
               </div>
@@ -342,6 +342,37 @@ export default function Home() {
                 <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
               </div>
             </div>
+
+            {/* Combined Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center">
+              <div className="flex-1">
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                  Fertilizer fed <span className="text-green-400">6 billion people</span>
+                </h3>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                  Abundant water to feed<br />
+                  <span className="text-sky-400">the next 6 billion</span>
+                </h3>
+                <p className="text-white/60 leading-relaxed">
+                  The Haber–Bosch process feeds half the world's population, but it requires massive energy inputs. Meanwhile, abundant water—not energy—is the limiting factor for the next 6 billion. By combining saltwater cooling with sustainable agriculture, we unlock both the productivity of the past and the abundance of the future.
+                </p>
+              </div>
+              <div className="flex-1">
+                <AdminImageUpload
+                  src={getHomeImg("combined_leap", "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=800&fit=crop")}
+                  alt="The Next Giant Leap"
+                  isAdmin={isAdmin}
+                  onUploaded={(url) => setHomeImg("combined_leap", url)}
+                  className="w-full rounded-xl overflow-hidden"
+                  imgClassName="w-full h-64 object-cover rounded-xl"
+                />
+              </div>
+            </motion.div>
           </div>
         </section>
 
