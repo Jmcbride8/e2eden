@@ -335,8 +335,12 @@ export default function Home() {
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-6 items-end">
-              <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
-              <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+              <div className="h-80">
+                <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+              </div>
+              <div className="h-80">
+                <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
+              </div>
             </div>
           </div>
         </section>
