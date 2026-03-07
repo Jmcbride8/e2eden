@@ -688,17 +688,16 @@ export default function TheInnovations() {
                   </div>
                 </div>
               </div>
-              <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/fba830cbc_seawater_greenhouse_logo_white.png"
-                alt="Seawater Greenhouse"
-                className="h-6 object-contain opacity-70 mb-3" />
-
               <h3 className="text-2xl font-bold text-white mb-1">Charlie Paton</h3>
               <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Founder and Director</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-4">
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">Royal Designer for Industry</span>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">30+ Years of Innovation</span>
               </div>
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/fba830cbc_seawater_greenhouse_logo_white.png"
+                alt="Seawater Greenhouse"
+                className="h-6 object-contain opacity-70" />
             </div>
 
             {/* Bio */}
