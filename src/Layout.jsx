@@ -40,11 +40,17 @@ export default function Layout({ children, currentPageName }) {
         <UserMenu />
       </div>
       {children}
-      <footer className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 z-40 hidden sm:block">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex justify-center items-center gap-4 text-white/60 text-sm">
-          <Link to={createPageUrl("About")} className="hover:text-white transition-colors">
-            About Us
-          </Link>
+      <footer className="bg-black border-t border-white/10 mt-24">
+        <div className="max-w-6xl mx-auto px-8 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/60 text-sm">
+          <p>&copy; 2026 E2Eden. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <Link to={createPageUrl("About")} className="hover:text-white transition-colors">
+              About Us
+            </Link>
+            <a href="#" className="hover:text-white transition-colors">
+              Contact
+            </a>
+          </div>
         </div>
       </footer>
       <MobileNav />
