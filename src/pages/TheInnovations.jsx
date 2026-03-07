@@ -184,11 +184,6 @@ export default function TheInnovations() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12">
 
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">How It Works</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
           <h2 className="text-4xl font-bold text-white mb-4">One wall. Three ways it fights water loss.</h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
             Plants lose water to wind, heat, and dry air. These saltwater cooling walls attack all three — simultaneously.
