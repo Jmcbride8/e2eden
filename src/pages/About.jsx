@@ -112,8 +112,10 @@ export default function About() {
       </section>
 
       {/* Brands Ticker Section */}
-      <section className="py-24 px-6 sm:px-12 bg-black">
-        <BrandsTicker isAdmin={isAdmin} />
+      <section className="py-12 px-6 sm:px-12 bg-black">
+        <div className="max-w-6xl mx-auto">
+          <BrandsTicker isAdmin={isAdmin} />
+        </div>
       </section>
     </div>
   );
