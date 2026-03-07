@@ -560,7 +560,7 @@ export default function TheInnovations() {
           transition={{ duration: 0.8 }}
           className="mb-24">
 
-          <div className="flex items-center gap-4 mb-12">
+          <div className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-white/10" />
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Business Model Innovation</span>
             <div className="h-px flex-1 bg-white/10" />
