@@ -334,11 +334,11 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6 items-end">
-              <div className="h-80">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="flex flex-col justify-end">
                 <FertilizerChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
               </div>
-              <div className="h-80">
+              <div className="flex flex-col justify-end">
                 <SaltwaterChart isAdmin={isAdmin} getHomeImg={getHomeImg} setHomeImg={setHomeImg} />
               </div>
             </div>
