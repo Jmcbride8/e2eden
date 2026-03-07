@@ -497,11 +497,7 @@ export default function TheInnovations() {
           transition={{ duration: 0.8 }}
           className="mb-24">
 
-          <div className="flex items-center gap-4 mb-10">
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">The Saltwater Advantage</span>
-            <div className="h-px flex-1 bg-white/10" />
-          </div>
+          <h2 className="text-3xl font-bold text-white mb-10">Except Saltwater Cooling Walls</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {[
             { title: "What we use", icon: "💧", body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." },
