@@ -31,8 +31,8 @@ export default function GanttChart({ projects, milestones }) {
       .map(m => new Date(m.date).getFullYear());
 
     const now = new Date().getFullYear();
-    const min = Math.min(...allDates, now - 1);
-    const max = Math.max(...allDates, now + 2);
+    const min = Math.min(...allDates, now) - yearRange[0];
+    const max = Math.max(...allDates, now) + yearRange[1];
 
     const yrs = [];
     for (let y = min; y <= max; y++) yrs.push(y);
