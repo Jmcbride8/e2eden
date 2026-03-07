@@ -103,46 +103,9 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission Section */}
+      {/* Brands Ticker Section */}
       <section className="py-24 px-6 sm:px-12 bg-black">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold text-white mb-6">Our Mission</h2>
-            <p className="text-lg text-white/70 leading-relaxed mb-4">
-              We're on a mission to unlock Earth's abundance by pioneering technology that transforms how we grow food and use water. By developing saltwater cooling walls, we're making it possible to feed 10 billion people while preserving our most precious resource.
-            </p>
-            <p className="text-lg text-white/70 leading-relaxed">
-              Every member of our team brings expertise, passion, and commitment to solving one of humanity's greatest challenges: ensuring food security in a water-scarce world.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-6 sm:px-12 bg-black">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold text-white mb-6">Join Our Mission</h2>
-            <p className="text-lg text-white/70 mb-8">
-              We're always looking for talented individuals who share our vision of a water-secure future.
-            </p>
-            <Link to={createPageUrl("Partnerships")}>
-              <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-6 text-lg font-semibold">
-                Learn More
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
+        <BrandsTicker isAdmin={isAdmin} />
       </section>
     </div>
   );
