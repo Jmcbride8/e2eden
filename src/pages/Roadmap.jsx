@@ -245,7 +245,7 @@ export default function Roadmap() {
   });
 
   const phaseProjects = allProjects
-    .filter(p => p.phase === selectedPhase)
+    .filter(p => selectedPhase === "All" || p.phase === selectedPhase)
     .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
 
   const getMilestonesForProject = (projectId) =>
