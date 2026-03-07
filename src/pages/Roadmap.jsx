@@ -270,13 +270,14 @@ export default function Roadmap() {
           </p>
         </motion.div>
 
-        {/* Phase Toggle */}
+        {/* Controls Row: Phase Toggle + View Toggle */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex justify-center mb-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
+          {/* Phase toggle */}
           <div className="inline-flex rounded-xl bg-white/5 border border-white/10 p-1 gap-1">
             {PHASES.map(phase => (
               <button
@@ -291,6 +292,30 @@ export default function Roadmap() {
                 {phase}
               </button>
             ))}
+          </div>
+
+          {/* View toggle */}
+          <div className="inline-flex rounded-xl bg-white/5 border border-white/10 p-1 gap-1">
+            <button
+              onClick={() => setViewMode("timeline")}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                viewMode === "timeline"
+                  ? "bg-white/15 text-white"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              <LayoutList className="w-4 h-4" /> Timeline
+            </button>
+            <button
+              onClick={() => setViewMode("gantt")}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                viewMode === "gantt"
+                  ? "bg-white/15 text-white"
+                  : "text-white/40 hover:text-white/70"
+              }`}
+            >
+              <BarChart2 className="w-4 h-4" /> Gantt
+            </button>
           </div>
         </motion.div>
 
