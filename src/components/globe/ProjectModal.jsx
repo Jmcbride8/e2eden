@@ -96,20 +96,30 @@ export default function ProjectModal({ project, location, onClose }) {
               <h2 className="text-2xl font-bold text-white mb-2">{project.name}</h2>
               
               {/* Image Carousel */}
-              {project.images && project.images.length > 0 ? (
-                <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3">
-                  <Carousel className="w-full h-full">
-                    <CarouselContent className="h-full">
-                      {project.images.map((image, index) => (
-                        <CarouselItem key={index} className="h-64">
-                          <img 
-                            src={image}
-                            alt={`${project.name} - Image ${index + 1}`}
-                            className="w-full h-full object-cover rounded-xl"
-                          />
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
+               {project.hero_image || (project.images && project.images.length > 0) ? (
+                 <div className="relative w-full h-64 rounded-xl overflow-hidden mb-3">
+                   <Carousel className="w-full h-full">
+                     <CarouselContent className="h-full">
+                       {project.hero_image && (
+                         <CarouselItem className="h-64">
+                           <img 
+                             src={project.hero_image}
+                             alt={`${project.name} - Hero`}
+                             className="w-full h-full object-cover rounded-xl"
+                             style={{ objectPosition: project.hero_image_position || 'center center' }}
+                           />
+                         </CarouselItem>
+                       )}
+                       {project.images && project.images.map((image, index) => (
+                         <CarouselItem key={index} className="h-64">
+                           <img 
+                             src={image}
+                             alt={`${project.name} - Image ${index + 1}`}
+                             className="w-full h-full object-cover rounded-xl"
+                           />
+                         </CarouselItem>
+                       ))}
+                     </CarouselContent>
                     {project.images.length > 1 && (
                       <>
                         <CarouselPrevious className="left-4 bg-black/50 hover:bg-black/70 border-white/20 text-white" />
