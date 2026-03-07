@@ -99,6 +99,8 @@ export default function SeawaterGreenhouseSection() {
             ref={scrollRef}
             className="flex gap-5 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden"
             style={{ scrollbarWidth: "none" }}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
           >
             {projects.map((project, idx) => (
               <motion.div
