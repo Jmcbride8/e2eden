@@ -335,18 +335,16 @@ export default function Roadmap() {
               <div className="h-px flex-1 bg-white/10" />
             </div>
 
-            {/* Gantt Chart */}
-            {phaseProjects.length > 0 && (
+            {phaseProjects.length === 0 ? (
+              <p className="text-center text-white/40 py-16">No projects in this phase yet.</p>
+            ) : viewMode === "gantt" ? (
+              /* Gantt Chart view */
               <GanttChart
                 projects={phaseProjects}
                 milestones={allMilestones.filter(m => phaseProjects.some(p => p.id === m.project_id))}
               />
-            )}
-
-            {/* Project cards — center timeline */}
-            {phaseProjects.length === 0 ? (
-              <p className="text-center text-white/40 py-16">No projects in this phase yet.</p>
             ) : (
+              /* Timeline view */
               <div className="relative">
                 {/* Center vertical line */}
                 <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block" />
@@ -363,7 +361,7 @@ export default function Roadmap() {
                         className="relative flex items-center md:grid md:grid-cols-2 md:gap-8"
                       >
                         {/* Left side */}
-                        <div className={isLeft ? "md:block" : "md:block"}>
+                        <div>
                           {isLeft ? (
                             <ProjectCard
                               project={project}
@@ -375,8 +373,14 @@ export default function Roadmap() {
                           )}
                         </div>
 
-                        {/* Center dot */}
-                        <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-amber-500 border-2 border-black shadow-lg shadow-amber-500/40 hidden md:block z-10" />
+                        {/* Center logo node */}
+                        <div className="absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-black border border-white/20 shadow-lg shadow-amber-500/20 hidden md:flex items-center justify-center z-10 overflow-hidden">
+                          <img
+                            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png"
+                            alt="E2Eden"
+                            className="w-7 h-7 object-contain"
+                          />
+                        </div>
 
                         {/* Right side */}
                         <div>
