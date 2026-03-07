@@ -18,8 +18,11 @@ const typeConfig = {
 
 export default function Projects() {
   const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState("projects");
   const [editingProject, setEditingProject] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [editingCompany, setEditingCompany] = useState(null);
+  const [showAddCompanyModal, setShowAddCompanyModal] = useState(false);
   const queryClient = useQueryClient();
 
   useEffect(() => {
