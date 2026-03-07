@@ -687,6 +687,93 @@ export default function TheInnovations() {
           </div>
         </motion.div>
 
+        {/* Whitepapers Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-20"
+        >
+          <div className="text-center mb-10">
+            <p className="text-amber-400 text-xs font-semibold uppercase tracking-widest mb-3">Research & Literature</p>
+            <h2 className="text-3xl font-bold text-white">Whitepapers & Academic Research</h2>
+            <p className="text-white/50 mt-3 max-w-xl mx-auto text-sm">Peer-reviewed research and technical papers underpinning the science behind Seawater Greenhouse technology.</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: "The Seawater Greenhouse: Background, Theory and Current Status",
+                authors: "Paton & Davies",
+                year: "2005",
+                description: "Foundational paper describing the theory of the Seawater Greenhouse and deriving the minimum condenser effectiveness required for net freshwater production.",
+                tag: "Core Theory",
+                url: "https://scispace.com/pdf/the-seawater-greenhouse-background-theory-and-current-status-3fj8fjqr00.pdf",
+              },
+              {
+                title: "The Seawater Greenhouse: Cooling, Fresh Water and Fresh Produce from Salt Water",
+                authors: "Paton",
+                year: "2006",
+                description: "Technical overview of how seawater and solar energy combine to produce desalination and cooling, with applications for arid coastal regions.",
+                tag: "Technology Overview",
+                url: "https://icwrae-psipw.org/papers/2006/Water/18.pdf",
+              },
+              {
+                title: "Review of Seawater Greenhouses: Integrating Sustainable Agriculture into Green Building",
+                authors: "Multiple Authors",
+                year: "2025",
+                description: "Comprehensive review synthesizing research on SWGH operational principles, design evolution, and integration into green building strategies for food security.",
+                tag: "Review Paper",
+                url: "https://www.researchgate.net/publication/393684185_Review_of_Seawater_Greenhouses_Integrating_Sustainable_Agriculture_into_Green_Building",
+              },
+              {
+                title: "Integrating Renewable Energy Technologies into Seawater Greenhouses",
+                authors: "Multiple Authors",
+                year: "2025",
+                description: "Critical review of renewable energy integration pathways into Seawater Greenhouse systems, presenting sustainable routes to zero-emission food production.",
+                tag: "Energy Integration",
+                url: "https://www.sciencedirect.com/science/article/pii/S2590174525004854",
+              },
+              {
+                title: "Seawater Greenhouse – Impact on Sustainable Food Production in Arid Regions",
+                authors: "REF Impact Case Study",
+                year: "2021",
+                description: "Impact assessment of prototype solar-driven desalination and fan ventilation systems, addressing food security and climate resilience in arid environments.",
+                tag: "Impact Study",
+                url: "https://results2021.ref.ac.uk/impact/c08ec50a-ac5c-4f76-b521-087856e2656e/pdf",
+              },
+              {
+                title: "Saltwater Greenhouse Cooling System for Agricultural Drainage",
+                authors: "UC eScholarship",
+                year: "2023",
+                description: "Study of a spray-drying evaporative system that intakes agricultural drainage water to cool greenhouses, lowering freshwater dependency.",
+                tag: "Water Recycling",
+                url: "https://escholarship.org/uc/item/5nb5d75s",
+              },
+            ].map((paper, i) => (
+              <a
+                key={i}
+                href={paper.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-3 p-5 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-amber-400/30 hover:bg-white/[0.06] transition-all duration-300"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-[10px] font-semibold uppercase tracking-widest px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 whitespace-nowrap">{paper.tag}</span>
+                  <span className="text-white/30 text-xs flex-shrink-0">{paper.year}</span>
+                </div>
+                <h4 className="text-sm font-semibold text-white leading-snug group-hover:text-amber-300 transition-colors">{paper.title}</h4>
+                <p className="text-xs text-white/40 leading-relaxed flex-1">{paper.description}</p>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-xs text-white/30 italic">{paper.authors}</span>
+                  <span className="text-xs text-amber-400/70 group-hover:text-amber-400 transition-colors">Read paper →</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
       </div>
     </div>);
 
