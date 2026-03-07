@@ -234,7 +234,7 @@ const COMPANY_LOGOS = {
 };
 
 export default function Roadmap() {
-  const [selectedPhase, setSelectedPhase] = useState("All");
+  const [selectedPhase, setSelectedPhase] = useState("R&D");
   const [viewMode, setViewMode] = useState("timeline"); // "timeline" | "gantt"
   const [isAdmin, setIsAdmin] = useState(false);
 
