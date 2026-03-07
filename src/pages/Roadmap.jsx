@@ -398,11 +398,11 @@ export default function Roadmap() {
                         </div>
 
                         {/* Center logo node */}
-                        <div className="absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-black border border-white/20 shadow-lg shadow-amber-500/20 hidden md:flex items-center justify-center z-10 overflow-hidden">
+                        <div className="absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-black border border-white/20 shadow-lg shadow-amber-500/20 hidden md:flex items-center justify-center z-10 overflow-hidden p-1">
                           <img
-                            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png"
-                            alt="E2Eden"
-                            className="w-7 h-7 object-contain"
+                            src={COMPANY_LOGOS[project.company] || COMPANY_LOGOS["E2Eden"]}
+                            alt={project.company || "E2Eden"}
+                            className="w-full h-full object-contain"
                           />
                         </div>
 
