@@ -431,23 +431,7 @@ export default function Roadmap() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-12 flex flex-wrap gap-6 p-5 rounded-xl bg-white/[0.03] border border-white/10"
-        >
-          {Object.entries(statusConfig).map(([status, config]) => {
-            const Icon = config.icon;
-            return (
-              <div key={status} className="flex items-center gap-2">
-                <Icon className={`w-4 h-4 ${config.color}`} />
-                <span className="text-sm text-white/60">{config.label}</span>
-              </div>
-            );
-          })}
-        </motion.div>
+
       </div>
     </div>
   );
