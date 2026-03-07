@@ -184,10 +184,6 @@ export default function TheInnovations() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12">
 
-          <h2 className="text-4xl font-bold text-white mb-4">One wall. Three ways it fights water loss.</h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Plants lose water to wind, heat, and dry air. These saltwater cooling walls attack all three — simultaneously.
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-10 mb-24">
