@@ -55,83 +55,75 @@ export default function BrandsTicker({ isAdmin }) {
     }
   };
 
+  if (isAddingBrand && isAdmin) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white/5 border border-amber-500/50 rounded-xl p-6 space-y-4 max-w-md"
+      >
+        <Input
+          placeholder="Brand name"
+          value={newBrand.name}
+          onChange={(e) => setNewBrand({ ...newBrand, name: e.target.value })}
+          className="bg-white/10 border-white/20 text-white"
+        />
+        <div className="relative">
+          {newBrand.logo_url && (
+            <img src={newBrand.logo_url} alt="Preview" className="h-12 object-contain mb-4" />
+          )}
+          <label className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-lg cursor-pointer hover:bg-white/20 transition-colors text-white">
+            <Upload className="w-4 h-4" />
+            {uploading ? "Uploading..." : "Upload Logo"}
+            <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
+          </label>
+        </div>
+        <div className="flex gap-2">
+          <Button size="sm" className="bg-amber-500 hover:bg-amber-600" onClick={handleAddBrand}>
+            Save
+          </Button>
+          <Button size="sm" variant="outline" onClick={() => {
+            setIsAddingBrand(false);
+            setNewBrand({ name: "", logo_url: "" });
+          }}>
+            Cancel
+          </Button>
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl font-bold text-white"
-        >
-          Our Partners
-        </motion.h2>
-        {isAdmin && (
+    <div className="w-full overflow-hidden bg-black">
+      {isAdmin && (
+        <div className="mb-6">
           <Button onClick={() => setIsAddingBrand(true)} className="bg-amber-500 hover:bg-amber-600">
             <Plus className="w-4 h-4 mr-2" />
             Add Brand
           </Button>
-        )}
-      </div>
-
-      {isAddingBrand && isAdmin && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white/5 border border-amber-500/50 rounded-xl p-6 mb-8 space-y-4"
-        >
-          <Input
-            placeholder="Brand name"
-            value={newBrand.name}
-            onChange={(e) => setNewBrand({ ...newBrand, name: e.target.value })}
-            className="bg-white/10 border-white/20 text-white"
-          />
-          <div className="relative">
-            {newBrand.logo_url && (
-              <img src={newBrand.logo_url} alt="Preview" className="h-12 object-contain mb-4" />
-            )}
-            <label className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-lg cursor-pointer hover:bg-white/20 transition-colors text-white">
-              <Upload className="w-4 h-4" />
-              {uploading ? "Uploading..." : "Upload Logo"}
-              <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
-            </label>
-          </div>
-          <div className="flex gap-2">
-            <Button size="sm" className="bg-amber-500 hover:bg-amber-600" onClick={handleAddBrand}>
-              Save
-            </Button>
-            <Button size="sm" variant="outline" onClick={() => {
-              setIsAddingBrand(false);
-              setNewBrand({ name: "", logo_url: "" });
-            }}>
-              Cancel
-            </Button>
-          </div>
-        </motion.div>
+        </div>
       )}
 
-      <div className="flex flex-wrap gap-6 items-center justify-center">
-        {brands.map((brand, idx) => (
-          <motion.div
-            key={brand.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: idx * 0.05 }}
-            className="relative group"
-          >
-            <img src={brand.logo_url} alt={brand.name} className="h-12 object-contain" />
-            {isAdmin && (
-              <button
-                onClick={() => deleteBrandMutation.mutate(brand.id)}
-                className="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <X className="w-3 h-3 text-white" />
-              </button>
-            )}
-          </motion.div>
-        ))}
+      <div className="relative flex overflow-hidden">
+        <motion.div
+          className="flex gap-8 whitespace-nowrap"
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          {[...brands, ...brands].map((brand, idx) => (
+            <div key={`${brand.id}-${idx}`} className="relative group flex-shrink-0">
+              <img src={brand.logo_url} alt={brand.name} className="h-16 object-contain" />
+              {isAdmin && (
+                <button
+                  onClick={() => deleteBrandMutation.mutate(brand.id)}
+                  className="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <X className="w-3 h-3 text-white" />
+                </button>
+              )}
+            </div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
