@@ -421,7 +421,6 @@ export default function Projects() {
           )
         )}
       </div>
-
       {(showAddModal || editingProject) && (
         <ProjectEditModal
           project={editingProject}
