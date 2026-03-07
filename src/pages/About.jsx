@@ -7,7 +7,7 @@ import { ArrowLeft, Plus } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TeamCard from "../components/about/TeamCard";
-import BrandsTicker from "../components/about/BrandsTicker";
+import BrandsTicker from "../components/about/BrandsTicker.jsx";
 
 export default function About() {
   const [isAdmin, setIsAdmin] = useState(false);
