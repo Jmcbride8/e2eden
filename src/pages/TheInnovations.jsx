@@ -152,30 +152,7 @@ export default function TheInnovations() {
           </div>
         }
 
-        {/* Charlie Paton Video Modal */}
-        {charlieVideoOpen &&
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-6"
-          onClick={() => setCharlieVideoOpen(false)}>
-          <div
-            className="relative w-full max-w-4xl rounded-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setCharlieVideoOpen(false)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-              <X className="w-5 h-5 text-white" />
-            </button>
-            <div style={{ aspectRatio: '16/9' }}>
-              <iframe
-                src="https://www.youtube.com/embed/P4YCZgfchO0?autoplay=1"
-                title="Charlie Paton – Seawater Greenhouse"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full" />
-            </div>
-          </div>
-        </div>
-        }
+
 
         {/* KPI Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-20">
