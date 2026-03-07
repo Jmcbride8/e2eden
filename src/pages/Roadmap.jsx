@@ -227,6 +227,12 @@ function ProjectCard({ project, milestones, isAdmin, onMilestoneChange }) {
   );
 }
 
+const COMPANY_LOGOS = {
+  "E2Eden": "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/public/6993b7c68cee7955d3266d09/78e62a5b6_Brand_Yellow.png",
+  "Seawater Greenhouse": "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/public/6993b7c68cee7955d3266d09/6120500fd_seawater_greenhouse_logo_white.png",
+  "Global Green": "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/public/6993b7c68cee7955d3266d09/c0468d7cc_Global-Green-Logo.png",
+};
+
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("All");
   const [viewMode, setViewMode] = useState("timeline"); // "timeline" | "gantt"
