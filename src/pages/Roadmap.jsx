@@ -229,6 +229,7 @@ function ProjectCard({ project, milestones, isAdmin, onMilestoneChange }) {
 
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("All");
+  const [viewMode, setViewMode] = useState("timeline"); // "timeline" | "gantt"
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
