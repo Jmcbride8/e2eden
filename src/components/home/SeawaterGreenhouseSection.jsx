@@ -42,23 +42,18 @@ export default function SeawaterGreenhouseSection() {
           <h2 className="text-5xl font-bold text-white mb-6">
             Standing on the Shoulders of Giants
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            <p className="text-xl text-white/70 leading-relaxed">
-              E2Eden is built on over 30 years of proven science and real-world deployments by our partner{" "}
-              <a
-                href="https://www.seawatergreenhouse.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-amber-400 hover:text-amber-300 underline underline-offset-4 inline-flex items-center gap-1"
-              >
-                Seawater Greenhouse Ltd <ExternalLink className="w-4 h-4" />
-              </a>
-              . This technology has already transformed deserts across three continents.
-            </p>
-            <p className="text-xl text-white/70 leading-relaxed">
-              We are not starting from scratch — we are adapting what works for the United States market and scaling it to a level never attempted before. These greenhouses have been built. They grow food. Now we bring them home.
-            </p>
-          </div>
+          <p className="text-xl text-white/70 leading-relaxed max-w-3xl">
+            E2Eden is built on over 30 years of proven science and real-world deployments by our partner{" "}
+            <a
+              href="https://www.seawatergreenhouse.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-amber-400 hover:text-amber-300 underline underline-offset-4 inline-flex items-center gap-1"
+            >
+              Seawater Greenhouse Ltd <ExternalLink className="w-4 h-4" />
+            </a>
+            . This technology has already transformed deserts across three continents. We are not starting from scratch — we are adapting what works for the United States market and scaling it to a level never attempted before. These greenhouses have been built. They grow food. Now we bring them home.
+          </p>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6 mt-10">
