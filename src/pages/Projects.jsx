@@ -189,13 +189,13 @@ export default function Projects() {
           )}
         </div>
 
-        {activeTab === "projects" && isLoading ? (
+        {activeTab === "projects" && (isLoading ? (
           <div className="text-white/40 text-center py-12">Loading projects...</div>
-        ) : activeTab === "projects" && projects.length === 0 ? (
+        ) : projects.length === 0 ? (
           <div className="text-white/40 text-center py-12">
             No projects yet. {isAdmin && "Click 'Add Project' to create one."}
           </div>
-        ) : activeTab === "projects" ? (
+        ) : (
           <div className="bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
             <table className="w-full">
               <thead>
