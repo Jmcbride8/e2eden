@@ -354,7 +354,7 @@ export default function TheInnovations() {
 
           {/* The Future Problem */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">And It Always Will Be</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">...And it always will be</h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
               Desalination costs have flatlined. We've hit the physics limit of the process. Energy inputs dominate the cost curve, and renewable energy improvements aren't enough to bridge a 5x gap.
             </p>
