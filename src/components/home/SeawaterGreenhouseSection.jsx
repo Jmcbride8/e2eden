@@ -42,8 +42,8 @@ export default function SeawaterGreenhouseSection() {
           <h2 className="text-5xl font-bold text-white mb-6">
             Standing on the Shoulders of Giants
           </h2>
-          <p className="text-xl text-white/70 leading-relaxed max-w-3xl">
-            E2Eden is built on over 30 years of proven science and real-world deployments by our partner{" "}
+          <p className="text-xl text-white/70 leading-relaxed w-full">
+            Built on 30+ years of proven science by our partner{" "}
             <a
               href="https://www.seawatergreenhouse.com"
               target="_blank"
@@ -52,7 +52,7 @@ export default function SeawaterGreenhouseSection() {
             >
               Seawater Greenhouse Ltd <ExternalLink className="w-4 h-4" />
             </a>
-            . This technology has already transformed deserts across three continents. We are not starting from scratch — we are adapting what works for the United States market and scaling it to a level never attempted before. These greenhouses have been built. They grow food. Now we bring them home.
+            , this technology has transformed deserts across three continents. We're not starting from scratch — we're bringing what works to the United States at a scale never attempted before.
           </p>
 
           {/* Stats */}
