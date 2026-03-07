@@ -453,7 +453,7 @@ export default function TheInnovations() {
                 defaultImage: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
               },
               {
-                title: "Precision Agriculture",
+                title: "Pivot Irrigation",
                 problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
                 unsuitable: "Addresses efficiency, not the fundamental physics of water loss",
                 key: "tech_precision",
