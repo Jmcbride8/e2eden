@@ -227,7 +227,7 @@ function ProjectCard({ project, milestones, isAdmin, onMilestoneChange }) {
 }
 
 export default function Roadmap() {
-  const [selectedPhase, setSelectedPhase] = useState("R&D");
+  const [selectedPhase, setSelectedPhase] = useState("All");
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
