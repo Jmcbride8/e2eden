@@ -209,7 +209,7 @@ export default function TheInnovations() {
 
               <div className={`flex items-center gap-2 mb-3`}>
                 <m.icon className={`w-5 h-5 ${m.color}`} />
-                <h3 className={`text-xl font-bold ${m.color}`}>{m.title}</h3>
+                <h3 className="text-xl font-bold text-white">{m.title}</h3>
               </div>
               <p className="text-white/60 text-sm leading-relaxed">{m.body}</p>
             </motion.div>
