@@ -327,13 +327,15 @@ export default function Projects() {
           </div>
         ))}
 
-        {activeTab === "companies" && (companiesLoading ? (
-            <div className="text-white/40 text-center py-12">Loading companies...</div>
-          ) : companies.length === 0 ? (
-            <div className="text-white/40 text-center py-12">
-              No companies yet. {isAdmin && "Click 'Add Company' to create one."}
-            </div>
-          ) : (
+        {activeTab === "companies" && companiesLoading && (
+          <div className="text-white/40 text-center py-12">Loading companies...</div>
+        )}
+        {activeTab === "companies" && !companiesLoading && companies.length === 0 && (
+          <div className="text-white/40 text-center py-12">
+            No companies yet. {isAdmin && "Click 'Add Company' to create one."}
+          </div>
+        )}
+        {activeTab === "companies" && !companiesLoading && companies.length > 0 && (
             <div className="bg-white/[0.04] border border-white/10 rounded-xl overflow-hidden backdrop-blur-sm">
               <table className="w-full">
                 <thead>
