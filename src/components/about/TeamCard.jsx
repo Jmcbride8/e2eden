@@ -107,29 +107,29 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
 
       <div className="p-6">
         <h3 className="text-lg font-bold text-white mb-1">{formData.name}</h3>
-      <p className="text-amber-400 text-sm font-semibold mb-3">{formData.role}</p>
-      <p className="text-white/60 text-sm mb-4">{formData.bio}</p>
+        <p className="text-amber-400 text-sm font-semibold mb-3">{formData.role}</p>
+        <p className="text-white/60 text-sm mb-4">{formData.bio}</p>
 
-      <div className="space-y-4">
-        {formData.education_logo_url && (
-          <div>
-            <p className="text-white/60 text-xs font-semibold mb-2">Education</p>
-            <img src={formData.education_logo_url} alt="University" className="h-10 object-contain" />
-          </div>
-        )}
-        <div className="flex items-center gap-2">
-          {formData.linkedin_url && (
-            <a
-              href={formData.linkedin_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white/60 hover:text-blue-400 transition-colors"
-            >
-              <Linkedin className="w-4 h-4" />
-            </a>
+        <div className="space-y-4">
+          {formData.education_logo_url && (
+            <div>
+              <p className="text-white/60 text-xs font-semibold mb-2">Education</p>
+              <img src={formData.education_logo_url} alt="University" className="h-10 object-contain" />
+            </div>
           )}
+          <div className="flex items-center gap-2">
+            {formData.linkedin_url && (
+              <a
+                href={formData.linkedin_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-blue-400 transition-colors"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+            )}
+          </div>
         </div>
-      </div>
 
         {isAdmin && (
           <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
