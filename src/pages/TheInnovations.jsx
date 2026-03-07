@@ -498,6 +498,23 @@ export default function TheInnovations() {
           className="mb-24">
 
           <h2 className="text-3xl font-bold text-white mb-10">Except Saltwater Cooling Walls</h2>
+          <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-24">
+
+          <AdminImageUpload
+            src={getHomeImg("innovation_hero", "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=1400&h=700&fit=crop")}
+            alt="Saltwater Cooling Walls in action"
+            isAdmin={isAdmin}
+            onUploaded={(url) => setHomeImg("innovation_hero", url)}
+            className="w-full rounded-2xl overflow-hidden"
+            imgClassName="w-full h-[44.35rem] object-cover rounded-2xl" />
+
+        </motion.div>
+
           <div className="grid md:grid-cols-2 gap-6">
             {[
             { title: "What we use", icon: "💧", body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." },
@@ -519,24 +536,6 @@ export default function TheInnovations() {
               </motion.div>
             )}
           </div>
-        </motion.div>
-
-        {/* Hero Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-24">
-
-          <AdminImageUpload
-            src={getHomeImg("innovation_hero", "https://images.unsplash.com/photo-1586771107445-d3ca888129ce?w=1400&h=700&fit=crop")}
-            alt="Saltwater Cooling Walls in action"
-            isAdmin={isAdmin}
-            onUploaded={(url) => setHomeImg("innovation_hero", url)}
-            className="w-full rounded-2xl overflow-hidden"
-            imgClassName="w-full h-[44.35rem] object-cover rounded-2xl" />
-
         </motion.div>
 
         {/* Our Strategic Approach */}
