@@ -369,7 +369,7 @@ export default function Home() {
                   isAdmin={isAdmin}
                   onUploaded={(url) => setHomeImg("combined_leap", url)}
                   className="w-full rounded-xl overflow-hidden"
-                  imgClassName="w-full h-64 object-cover rounded-xl"
+                  imgClassName="w-full h-full object-cover rounded-xl"
                 />
               </div>
             </motion.div>
