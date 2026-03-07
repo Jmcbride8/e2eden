@@ -68,7 +68,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
-              Our Team
+              About E2Eden
             </h1>
             <p className="text-xl text-white/70 leading-relaxed max-w-2xl">
               A global team dedicated to revolutionizing agriculture and securing water for the next generation.
