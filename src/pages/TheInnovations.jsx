@@ -316,7 +316,7 @@ export default function TheInnovations() {
                   <div className="text-center">
                     <div className="text-2xl font-bold text-white mb-2">Desalinated Water Cost</div>
                     <div className="text-5xl font-bold text-red-400 mb-4">$20,000+</div>
-                    <p className="text-white/80 text-sm">per acre-foot</p>
+                    <p className="text-white/80 text-sm">per acre</p>
                   </div>
                 </div>
               </motion.div>
