@@ -79,52 +79,33 @@ export default function About() {
       {/* Team Members Section */}
       <section className="py-24 px-6 sm:px-12 bg-black">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl font-bold text-white mb-12 text-center"
-          >
-            Meet the Team
-          </motion.h2>
+          <div className="flex items-center justify-between mb-12">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl font-bold text-white"
+            >
+              Meet the Team
+            </motion.h2>
+            {isAdmin && (
+              <Button onClick={handleAddMember} className="bg-amber-500 hover:bg-amber-600">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Member
+              </Button>
+            )}
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                name: "Sarah Johnson",
-                role: "Chief Executive Officer",
-                bio: "Former agriculture tech innovator with 15 years of industry experience."
-              },
-              {
-                name: "Dr. Marcus Chen",
-                role: "Chief Technology Officer",
-                bio: "PhD in Environmental Engineering, leading our saltwater cooling research."
-              },
-              {
-                name: "Elena Rodriguez",
-                role: "Head of Partnerships",
-                bio: "Building relationships with global governments and agricultural stakeholders."
-              },
-              {
-                name: "James Patterson",
-                role: "Director of Operations",
-                bio: "Scaling field operations across three continents with precision and impact."
-              }
-            ].map((member, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="rounded-xl bg-white/5 border border-white/10 p-6 hover:border-amber-500/50 transition-colors"
-              >
-                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-600 mb-4" />
-                <h3 className="text-lg font-bold text-white mb-1">{member.name}</h3>
-                <p className="text-amber-400 text-sm font-semibold mb-3">{member.role}</p>
-                <p className="text-white/60 text-sm">{member.bio}</p>
-              </motion.div>
+            {teamMembers.map((member, idx) => (
+              <TeamCard
+                key={member.id}
+                member={member}
+                isAdmin={isAdmin}
+                onMemberUpdate={(id, data) => updateMemberMutation.mutate({ id, data })}
+                onDelete={(id) => deleteMemberMutation.mutate(id)}
+              />
             ))}
           </div>
         </div>
