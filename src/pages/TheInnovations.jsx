@@ -432,7 +432,7 @@ export default function TheInnovations() {
 
           {/* Alternative Technologies */}
           <div>
-            <h2 className="text-3xl font-bold text-white mb-4">Why Other Technologies Don't Work</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">...And there are few suitable tools for saving water in these environments</h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
               The farming regions we target grow large-scale field crops with mechanized equipment. Common water-saving technologies hit hard limits in this environment.
             </p>
