@@ -309,6 +309,14 @@ export default function Roadmap() {
               <div className="h-px flex-1 bg-white/10" />
             </div>
 
+            {/* Gantt Chart */}
+            {phaseProjects.length > 0 && (
+              <GanttChart
+                projects={phaseProjects}
+                milestones={allMilestones.filter(m => phaseProjects.some(p => p.id === m.project_id))}
+              />
+            )}
+
             {/* Project cards — center timeline */}
             {phaseProjects.length === 0 ? (
               <p className="text-center text-white/40 py-16">No projects in this phase yet.</p>
