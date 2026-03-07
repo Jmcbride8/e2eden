@@ -347,9 +347,7 @@ export default function TheInnovations() {
                 </div>
               </motion.div>
             </div>
-            <p className="text-white/60 text-base mt-6 italic">
-              The economics are fundamentally broken. You'd lose money on every crop.
-            </p>
+
           </div>
 
           {/* The Future Problem */}
