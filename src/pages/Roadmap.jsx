@@ -304,7 +304,7 @@ export default function Roadmap() {
             {/* Phase label */}
             <div className="flex items-center gap-4 mb-8">
               <div className="h-px flex-1 bg-white/10" />
-              <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">{selectedPhase} Phase</span>
+              <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">{selectedPhase === "All" ? "All Phases" : `${selectedPhase} Phase`}</span>
               <div className="h-px flex-1 bg-white/10" />
             </div>
 
