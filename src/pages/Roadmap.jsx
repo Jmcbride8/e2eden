@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Circle, Clock, ChevronDown, ChevronRight, Plus, Pencil, Trash2, X, Save } from "lucide-react";
+import { CheckCircle2, Circle, Clock, ChevronDown, ChevronRight, Plus, Pencil, Trash2, X, Save, LayoutList, BarChart2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
