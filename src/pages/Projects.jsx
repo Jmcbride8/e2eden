@@ -147,20 +147,46 @@ export default function Projects() {
               Back to Globe
             </Button>
           </Link>
-          {isAdmin && (
-            <Button
-              onClick={() => setShowAddModal(true)}
-              className="ml-auto bg-amber-500 hover:bg-amber-600 text-white"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Project
+          {isAdmin && activeTab === "projects" && (
+            <Button onClick={() => setShowAddModal(true)} className="ml-auto bg-amber-500 hover:bg-amber-600 text-white">
+              <Plus className="w-4 h-4 mr-2" /> Add Project
+            </Button>
+          )}
+          {isAdmin && activeTab === "companies" && (
+            <Button onClick={() => setShowAddCompanyModal(true)} className="ml-auto bg-amber-500 hover:bg-amber-600 text-white">
+              <Plus className="w-4 h-4 mr-2" /> Add Company
             </Button>
           )}
         </div>
 
+        {/* Tab selector */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">All Projects</h2>
-          <p className="text-white/40">Browse our complete portfolio of engineering and farming initiatives worldwide</p>
+          <div className="inline-flex rounded-xl bg-white/5 border border-white/10 p-1 gap-1 mb-6">
+            <button
+              onClick={() => setActiveTab("projects")}
+              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeTab === "projects" ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20" : "text-white/50 hover:text-white/80"}`}
+            >
+              Projects
+            </button>
+            <button
+              onClick={() => setActiveTab("companies")}
+              className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${activeTab === "companies" ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20" : "text-white/50 hover:text-white/80"}`}
+            >
+              Companies
+            </button>
+          </div>
+          {activeTab === "projects" && (
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2">All Projects</h2>
+              <p className="text-white/40">Browse our complete portfolio of engineering and farming initiatives worldwide</p>
+            </div>
+          )}
+          {activeTab === "companies" && (
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2">Companies</h2>
+              <p className="text-white/40">Partners, investors, and collaborators in our network</p>
+            </div>
+          )}
         </div>
 
         {isLoading ? (
