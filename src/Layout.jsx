@@ -41,48 +41,15 @@ export default function Layout({ children, currentPageName }) {
       </div>
       {children}
       <footer className="bg-black border-t border-white/10 mt-24">
-        <div className="max-w-6xl mx-auto px-8 py-16">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
-            <div>
-              <h4 className="text-white font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><Link to={createPageUrl("TheInnovations")} className="hover:text-white transition-colors">The Innovations</Link></li>
-                <li><Link to={createPageUrl("Roadmap")} className="hover:text-white transition-colors">Roadmap</Link></li>
-                <li><Link to={createPageUrl("Projects")} className="hover:text-white transition-colors">Projects</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><Link to={createPageUrl("About")} className="hover:text-white transition-colors">About Us</Link></li>
-                <li><a href="mailto:hello@e2eden.com" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Partnerships</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><Link to={createPageUrl("Partnerships")} className="hover:text-white transition-colors">Partner With Us</Link></li>
-                <li><Link to={createPageUrl("Funding")} className="hover:text-white transition-colors">Investment</Link></li>
-                <li><a href="#" className="hover:text-white transition-colors">Opportunities</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-white/60 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Cookies</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-white/60 text-sm">&copy; 2026 E2Eden. All rights reserved.</p>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">LinkedIn</a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">Twitter</a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors text-sm">Facebook</a>
-            </div>
+        <div className="max-w-6xl mx-auto px-8 py-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-white/60 text-sm">
+          <p>&copy; 2026 E2Eden. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <Link to={createPageUrl("About")} className="hover:text-white transition-colors">
+              About Us
+            </Link>
+            <a href="#" className="hover:text-white transition-colors">
+              Contact
+            </a>
           </div>
         </div>
       </footer>
