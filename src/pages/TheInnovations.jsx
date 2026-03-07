@@ -647,15 +647,21 @@ export default function TheInnovations() {
           <div className="flex flex-col md:flex-row gap-8 items-start">
             {/* Portrait + identity */}
             <div className="flex-shrink-0 flex flex-col items-center md:items-start">
-              <div className="w-[308px] h-[308px] rounded-2xl overflow-hidden border border-white/10 mb-4">
-                <AdminImageUpload
+              <div
+                className="w-[308px] h-[308px] rounded-2xl overflow-hidden border border-white/10 mb-4 relative cursor-pointer group"
+                onClick={() => setCharlieVideoOpen(true)}
+              >
+                <img
                   src={getHomeImg("charlie_paton_portrait", "https://greenhouse.agency/wp-content/uploads/charlie-paton-copy.jpg")}
                   alt="Charlie Paton"
-                  isAdmin={isAdmin}
-                  onUploaded={(url) => setHomeImg("charlie_paton_portrait", url)}
-                  className="w-full h-full"
-                  imgClassName="w-full h-full object-cover" />
-
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
+                    <Play className="w-6 h-6 text-white fill-white ml-1" />
+                  </div>
+                </div>
               </div>
               <img
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/fba830cbc_seawater_greenhouse_logo_white.png"
@@ -663,7 +669,7 @@ export default function TheInnovations() {
                 className="h-6 object-contain opacity-70 mb-3" />
 
               <h3 className="text-2xl font-bold text-white mb-1">Charlie Paton</h3>
-              <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Founder & Director, Seawater Greenhouse Ltd</p>
+              <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Founder and Director</p>
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">Royal Designer for Industry</span>
                 <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-xs">30+ Years of Innovation</span>
