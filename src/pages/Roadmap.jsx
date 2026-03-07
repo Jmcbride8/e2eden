@@ -1,150 +1,350 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { CheckCircle2, Circle, Clock } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, Circle, Clock, ChevronDown, ChevronRight, Plus, Pencil, Trash2, X, Save } from "lucide-react";
+import { base44 } from "@/api/base44Client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+
+const PHASES = ["R&D", "Commercialization", "Transformation"];
+
+const statusConfig = {
+  completed: { icon: CheckCircle2, color: "text-green-400", bg: "bg-green-500/20", border: "border-green-500/30", label: "Completed" },
+  active:    { icon: Clock,         color: "text-amber-400", bg: "bg-amber-500/20", border: "border-amber-500/30", label: "In Progress" },
+  planned:   { icon: Circle,        color: "text-blue-400",  bg: "bg-blue-500/20",  border: "border-blue-500/30",  label: "Planned" },
+};
+
+function MilestoneForm({ projectId, milestone, onSave, onCancel }) {
+  const [form, setForm] = useState(
+    milestone || { title: "", description: "", date: "", status: "planned", sort_order: 99 }
+  );
+  return (
+    <div className="p-4 rounded-xl bg-white/5 border border-white/20 space-y-3">
+      <input
+        className="w-full bg-white/10 text-white rounded-lg px-3 py-2 text-sm border border-white/10 focus:outline-none focus:border-amber-400/50"
+        placeholder="Milestone title"
+        value={form.title}
+        onChange={e => setForm({ ...form, title: e.target.value })}
+      />
+      <textarea
+        className="w-full bg-white/10 text-white rounded-lg px-3 py-2 text-sm border border-white/10 focus:outline-none focus:border-amber-400/50 resize-none"
+        placeholder="Description (optional)"
+        rows={2}
+        value={form.description}
+        onChange={e => setForm({ ...form, description: e.target.value })}
+      />
+      <div className="flex gap-3">
+        <input
+          type="date"
+          className="flex-1 bg-white/10 text-white rounded-lg px-3 py-2 text-sm border border-white/10 focus:outline-none focus:border-amber-400/50"
+          value={form.date}
+          onChange={e => setForm({ ...form, date: e.target.value })}
+        />
+        <select
+          className="flex-1 bg-white/10 text-white rounded-lg px-3 py-2 text-sm border border-white/10 focus:outline-none focus:border-amber-400/50"
+          value={form.status}
+          onChange={e => setForm({ ...form, status: e.target.value })}
+        >
+          <option value="planned">Planned</option>
+          <option value="active">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+      <div className="flex gap-2 justify-end">
+        <Button size="sm" variant="ghost" onClick={onCancel} className="text-white/60 hover:text-white">
+          <X className="w-4 h-4 mr-1" /> Cancel
+        </Button>
+        <Button
+          size="sm"
+          onClick={() => onSave({ ...form, project_id: projectId })}
+          className="bg-amber-500 hover:bg-amber-600 text-white"
+          disabled={!form.title.trim()}
+        >
+          <Save className="w-4 h-4 mr-1" /> Save
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function ProjectCard({ project, milestones, isAdmin, onMilestoneChange }) {
+  const [expanded, setExpanded] = useState(false);
+  const [addingMilestone, setAddingMilestone] = useState(false);
+  const [editingMilestone, setEditingMilestone] = useState(null);
+  const queryClient = useQueryClient();
+
+  const config = statusConfig[project.status] || statusConfig.planned;
+  const Icon = config.icon;
+
+  const createMutation = useMutation({
+    mutationFn: (data) => base44.entities.ProjectMilestone.create(data),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["milestones"] }); setAddingMilestone(false); }
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({ id, data }) => base44.entities.ProjectMilestone.update(id, data),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["milestones"] }); setEditingMilestone(null); }
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => base44.entities.ProjectMilestone.delete(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["milestones"] })
+  });
+
+  const sortedMilestones = [...milestones].sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+
+  return (
+    <div className="rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02] hover:border-white/20 transition-all duration-300">
+      {/* Project Header */}
+      <button
+        className="w-full text-left flex items-start gap-4 p-5 group"
+        onClick={() => setExpanded(!expanded)}
+      >
+        {/* Hero image thumbnail */}
+        <div className="flex-shrink-0 w-20 h-16 rounded-xl overflow-hidden bg-white/5">
+          {project.hero_image && (
+            <img
+              src={project.hero_image}
+              alt={project.name}
+              className="w-full h-full object-cover"
+              style={{ objectPosition: project.hero_image_position || "center center" }}
+            />
+          )}
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className={`flex items-center justify-center w-7 h-7 rounded-full ${config.bg} border ${config.border} flex-shrink-0`}>
+              <Icon className={`w-3.5 h-3.5 ${config.color}`} />
+            </div>
+            <span className={`text-xs font-semibold uppercase tracking-wider ${config.color}`}>{config.label}</span>
+            {project.year && <span className="text-xs text-white/30">{project.year}</span>}
+          </div>
+          <h3 className="text-lg font-bold text-white mt-1 leading-tight">{project.name}</h3>
+          <p className="text-sm text-white/40 mt-0.5">{project.location}, {project.country}</p>
+          {sortedMilestones.length > 0 && (
+            <p className="text-xs text-amber-400/70 mt-1">{sortedMilestones.length} milestone{sortedMilestones.length !== 1 ? "s" : ""}</p>
+          )}
+        </div>
+
+        <div className="flex-shrink-0 mt-1">
+          {expanded
+            ? <ChevronDown className="w-5 h-5 text-white/40" />
+            : <ChevronRight className="w-5 h-5 text-white/40" />
+          }
+        </div>
+      </button>
+
+      {/* Expanded: description + milestones */}
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <div className="px-5 pb-5 border-t border-white/10 pt-4 space-y-4">
+              {project.description && (
+                <p className="text-sm text-white/60 leading-relaxed">{project.description}</p>
+              )}
+
+              {/* Milestones */}
+              {sortedMilestones.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">Milestones</h4>
+                  {sortedMilestones.map((ms) => {
+                    const msCfg = statusConfig[ms.status] || statusConfig.planned;
+                    const MsIcon = msCfg.icon;
+                    return editingMilestone?.id === ms.id ? (
+                      <MilestoneForm
+                        key={ms.id}
+                        projectId={project.id}
+                        milestone={{ ...ms }}
+                        onSave={(data) => updateMutation.mutate({ id: ms.id, data })}
+                        onCancel={() => setEditingMilestone(null)}
+                      />
+                    ) : (
+                      <div
+                        key={ms.id}
+                        className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] group/ms"
+                      >
+                        <div className={`flex-shrink-0 mt-0.5 w-5 h-5 rounded-full ${msCfg.bg} border ${msCfg.border} flex items-center justify-center`}>
+                          <MsIcon className={`w-3 h-3 ${msCfg.color}`} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-sm font-semibold text-white">{ms.title}</span>
+                            {ms.date && (
+                              <span className="text-xs text-white/30">
+                                {new Date(ms.date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                              </span>
+                            )}
+                          </div>
+                          {ms.description && (
+                            <p className="text-xs text-white/50 mt-1 leading-relaxed">{ms.description}</p>
+                          )}
+                        </div>
+                        {isAdmin && (
+                          <div className="flex-shrink-0 flex gap-1 opacity-0 group-hover/ms:opacity-100 transition-opacity">
+                            <button onClick={() => setEditingMilestone(ms)} className="p-1 rounded hover:bg-white/10 text-white/40 hover:text-white transition-colors">
+                              <Pencil className="w-3 h-3" />
+                            </button>
+                            <button onClick={() => deleteMutation.mutate(ms.id)} className="p-1 rounded hover:bg-red-500/20 text-white/40 hover:text-red-400 transition-colors">
+                              <Trash2 className="w-3 h-3" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Add milestone */}
+              {isAdmin && (
+                addingMilestone ? (
+                  <MilestoneForm
+                    projectId={project.id}
+                    onSave={(data) => createMutation.mutate(data)}
+                    onCancel={() => setAddingMilestone(false)}
+                  />
+                ) : (
+                  <button
+                    onClick={() => setAddingMilestone(true)}
+                    className="flex items-center gap-2 text-xs text-amber-400/70 hover:text-amber-400 transition-colors py-1"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Milestone
+                  </button>
+                )
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function Roadmap() {
-  const milestones = [
-    {
-      year: "2023",
-      status: "completed",
-      items: [
-        { title: "Dead Sea Restoration Initiative Completed", description: "Successfully implemented water management systems in Israel" },
-        { title: "Lake Turkana Pilot Program", description: "Launched sustainable fishing and solar power project in Kenya" },
-        { title: "Amazon Basin Partnership", description: "Established collaboration with indigenous communities in Brazil" }
-      ]
-    },
-    {
-      year: "2024",
-      status: "completed",
-      items: [
-        { title: "Qattara Feasibility Study", description: "Comprehensive analysis of hydroelectric potential in Egypt" },
-        { title: "Expanded to 6 Continents", description: "Reached operational presence across all inhabited continents" },
-        { title: "Technology Platform Launch", description: "Released open-source monitoring tools for partner organizations" }
-      ]
-    },
-    {
-      year: "2025",
-      status: "active",
-      items: [
-        { title: "Lake Eyre Salt Harvest Project", description: "Sustainable mineral extraction and halophyte agriculture in Australia" },
-        { title: "Sahel Green Belt Expansion", description: "Scaling regenerative agriculture across 5 African nations" },
-        { title: "Pacific Island Climate Resilience", description: "Implementing coastal protection and food security systems" }
-      ]
-    },
-    {
-      year: "2026",
-      status: "planned",
-      items: [
-        { title: "Qattara Phase 1 Construction", description: "Breaking ground on hydroelectric infrastructure in Egypt" },
-        { title: "South Asian Water Initiative", description: "Large-scale irrigation modernization across India and Bangladesh" },
-        { title: "Carbon Credit Platform", description: "Launch blockchain-based verification system for regenerative projects" }
-      ]
-    },
-    {
-      year: "2027",
-      status: "planned",
-      items: [
-        { title: "Aral Sea Restoration Pilot", description: "Collaborative effort with Central Asian governments" },
-        { title: "Global Knowledge Network", description: "Establishing training centers on all continents" },
-        { title: "1 Million Hectares Milestone", description: "Reaching one million hectares of restored and productive land" }
-      ]
-    }
-  ];
+  const [selectedPhase, setSelectedPhase] = useState("R&D");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const statusConfig = {
-    completed: { icon: CheckCircle2, color: "text-green-400", bg: "bg-green-500/20", border: "border-green-500/30" },
-    active: { icon: Clock, color: "text-amber-400", bg: "bg-amber-500/20", border: "border-amber-500/30" },
-    planned: { icon: Circle, color: "text-blue-400", bg: "bg-blue-500/20", border: "border-blue-500/30" }
-  };
+  useEffect(() => {
+    base44.auth.me().then(user => setIsAdmin(user?.role === "admin"));
+  }, []);
+
+  const { data: allProjects = [] } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => base44.entities.Project.list("sort_order"),
+  });
+
+  const { data: allMilestones = [] } = useQuery({
+    queryKey: ["milestones"],
+    queryFn: () => base44.entities.ProjectMilestone.list("sort_order"),
+  });
+
+  const phaseProjects = allProjects
+    .filter(p => p.phase === selectedPhase)
+    .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+
+  const getMilestonesForProject = (projectId) =>
+    allMilestones.filter(m => m.project_id === projectId);
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 sm:px-8 sm:pt-28">
-         {/* Header */}
-         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.6 }}
-           className="text-center mb-16"
-         >
-           <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 tracking-tight">
-             Our Roadmap
-           </h1>
-           <p className="text-xl text-white/70 max-w-3xl mx-auto">
-             A strategic vision for sustainable development spanning from foundational
-             projects to global transformation initiatives.
-           </p>
-         </motion.div>
+      <div className="max-w-4xl mx-auto px-6 pt-24 pb-20 sm:px-8 sm:pt-28">
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-white/10" />
-
-          <div className="space-y-12">
-            {milestones.map((milestone, idx) => {
-              const config = statusConfig[milestone.status];
-              const Icon = config.icon;
-              
-              return (
-                <motion.div
-                  key={milestone.year}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: idx * 0.15 }}
-                  className="relative"
-                >
-                  {/* Year marker */}
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className={`relative z-10 flex items-center justify-center w-16 h-16 rounded-full ${config.bg} border-2 ${config.border}`}>
-                      <Icon className={`w-7 h-7 ${config.color}`} />
-                    </div>
-                    <div>
-                      <h2 className="text-3xl font-bold text-white">{milestone.year}</h2>
-                      <span className={`text-sm uppercase tracking-wider ${config.color}`}>
-                        {milestone.status}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Items */}
-                  <div className="ml-24 space-y-4">
-                    {milestone.items.map((item, itemIdx) => (
-                      <motion.div
-                        key={itemIdx}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: idx * 0.15 + itemIdx * 0.1 }}
-                        className="p-5 rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                      >
-                        <h3 className="text-lg font-semibold text-white mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-sm text-white/60 leading-relaxed">
-                          {item.description}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Legend */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mt-16 flex flex-wrap gap-6 p-6 rounded-xl bg-white/[0.03] border border-white/10"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-4 tracking-tight">Roadmap</h1>
+          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+            From pioneering research to global transformation — our journey to make deserts bloom.
+          </p>
+        </motion.div>
+
+        {/* Phase Toggle */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex justify-center mb-12"
+        >
+          <div className="inline-flex rounded-xl bg-white/5 border border-white/10 p-1 gap-1">
+            {PHASES.map(phase => (
+              <button
+                key={phase}
+                onClick={() => setSelectedPhase(phase)}
+                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  selectedPhase === phase
+                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/20"
+                    : "text-white/50 hover:text-white/80"
+                }`}
+              >
+                {phase}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Phase description */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={selectedPhase}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.35 }}
+          >
+            {/* Phase label */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px flex-1 bg-white/10" />
+              <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">{selectedPhase} Phase</span>
+              <div className="h-px flex-1 bg-white/10" />
+            </div>
+
+            {/* Project cards */}
+            {phaseProjects.length === 0 ? (
+              <p className="text-center text-white/40 py-16">No projects in this phase yet.</p>
+            ) : (
+              <div className="space-y-4">
+                {phaseProjects.map((project, idx) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  >
+                    <ProjectCard
+                      project={project}
+                      milestones={getMilestonesForProject(project.id)}
+                      isAdmin={isAdmin}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Legend */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-12 flex flex-wrap gap-6 p-5 rounded-xl bg-white/[0.03] border border-white/10"
         >
           {Object.entries(statusConfig).map(([status, config]) => {
             const Icon = config.icon;
             return (
               <div key={status} className="flex items-center gap-2">
                 <Icon className={`w-4 h-4 ${config.color}`} />
-                <span className="text-sm text-white/70 capitalize">{status}</span>
+                <span className="text-sm text-white/60">{config.label}</span>
               </div>
             );
           })}
