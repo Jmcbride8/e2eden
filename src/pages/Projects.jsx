@@ -419,7 +419,7 @@ export default function Projects() {
               </table>
             </div>
           )
-        )}
+        ))}
       </div>
       {(showAddModal || editingProject) && (
         <ProjectEditModal
