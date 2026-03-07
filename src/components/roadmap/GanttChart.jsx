@@ -124,10 +124,10 @@ export default function GanttChart({ projects, milestones }) {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-xs font-semibold truncate ${colors.text} group-hover:text-white transition-colors`}>
+                    <p className={`text-xs font-semibold truncate ${statusCfg.color} group-hover:text-white transition-colors`}>
                       {project.name}
                     </p>
-                    <p className="text-[10px] text-white/20 truncate">{project.phase}</p>
+                    <p className={`text-[10px] truncate ${statusCfg.color} opacity-70`}>{statusCfg.label}</p>
                   </div>
                   {hasMilestones && (
                     <div className="flex-shrink-0 text-white/20">
