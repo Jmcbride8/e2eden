@@ -4,6 +4,7 @@ import { CheckCircle2, Circle, Clock, ChevronDown, ChevronRight, Plus, Pencil, T
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import GanttChart from "../components/roadmap/GanttChart";
 
 const PHASES = ["All", "R&D", "Commercialization", "Transformation"];
 
