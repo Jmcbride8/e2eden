@@ -290,9 +290,9 @@ export default function TheInnovations() {
           {/* The Cost Problem */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-white mb-4">...Where desalination is far too expensive...</h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Desalination costs $20,000+ per acre-foot of water. Compare that to what farmers earn: $4,000 per acre of crops annually. The water alone costs 5x the value of what you can grow.
-            </p>
+             <p className="text-white/70 text-lg leading-relaxed mb-8">
+               Desalination costs 5x more than crops are worth.
+             </p>
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
