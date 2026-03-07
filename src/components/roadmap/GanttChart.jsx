@@ -73,8 +73,28 @@ export default function GanttChart({ projects, milestones }) {
       className="mb-14 rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden backdrop-blur-sm"
     >
       {/* Header */}
-      <div className="px-6 pt-5 pb-3 border-b border-white/[0.06]">
+      <div className="px-6 pt-5 pb-4 border-b border-white/[0.06] flex flex-wrap items-center gap-6">
         <p className="text-xs font-semibold uppercase tracking-widest text-white/30">Project Timeline</p>
+        <div className="flex items-center gap-4 ml-auto">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-white/30 whitespace-nowrap">Past: {yearRange[0]}y</span>
+            <input
+              type="range" min={0} max={10} step={1}
+              value={yearRange[0]}
+              onChange={e => setYearRange(r => [+e.target.value, r[1]])}
+              className="w-20 accent-amber-400"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-white/30 whitespace-nowrap">Future: {yearRange[1]}y</span>
+            <input
+              type="range" min={0} max={15} step={1}
+              value={yearRange[1]}
+              onChange={e => setYearRange(r => [r[0], +e.target.value])}
+              className="w-20 accent-amber-400"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Year axis */}
