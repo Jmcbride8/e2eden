@@ -440,22 +440,22 @@ export default function TheInnovations() {
               {[
               {
                 title: "Drip Irrigation",
-                problem: "Requires dense micro-tubing that blocks heavy equipment and prevents mechanized planting/harvesting.",
-                unsuitable: "Fundamentally incompatible with large-scale field crop operations",
+                problem: "Blocks heavy machinery. Incompatible with commodity crops.",
+                unsuitable: "Impossible at scale",
                 key: "tech_drip",
                 defaultImage: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
               },
               {
                 title: "Greenhouses",
-                problem: "Structures block sunlight, prevent machinery access, and cost $100K+ per acre to install.",
-                unsuitable: "Designed for high-value crops, not low-margin commodity farming",
+                problem: "Block sunlight, machinery, and cost $100K+/acre.",
+                unsuitable: "Only for high-value crops",
                 key: "tech_greenhouses",
                 defaultImage: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
               },
               {
                 title: "Pivot Irrigation",
-                problem: "Smart irrigation systems optimize water use but don't eliminate evaporative loss—the core problem in deserts.",
-                unsuitable: "Addresses efficiency, not the fundamental physics of water loss",
+                problem: "Optimizes efficiency but doesn't stop evaporation.",
+                unsuitable: "Improves the wrong variable",
                 key: "tech_precision",
                 defaultImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
               }].
