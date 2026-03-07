@@ -131,26 +131,27 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
         </div>
       </div>
 
-      {isAdmin && (
-        <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Button
-            size="sm"
-            variant="ghost"
-            className="text-white/60 hover:text-white"
-            onClick={() => setIsEditing(true)}
-          >
-            <Pencil className="w-4 h-4" />
-          </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            className="text-white/60 hover:text-red-400"
-            onClick={() => onDelete(member.id)}
-          >
-            <Trash2 className="w-4 h-4" />
-          </Button>
-        </div>
-      )}
+        {isAdmin && (
+          <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-white/60 hover:text-white"
+              onClick={() => setIsEditing(true)}
+            >
+              <Pencil className="w-4 h-4" />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-white/60 hover:text-red-400"
+              onClick={() => onDelete(member.id)}
+            >
+              <Trash2 className="w-4 h-4" />
+            </Button>
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 }
