@@ -253,7 +253,7 @@ export default function Roadmap() {
 
   return (
     <div className="min-h-screen bg-black">
-      <div className="max-w-4xl mx-auto px-6 pt-24 pb-20 sm:px-8 sm:pt-28">
+      <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 sm:px-8 sm:pt-28">
 
         {/* Header */}
         <motion.div
