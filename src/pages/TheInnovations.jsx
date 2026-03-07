@@ -235,7 +235,7 @@ export default function TheInnovations() {
               transition={{ duration: 0.6 }}
               className="mb-12">
 
-              <h2 className="text-4xl font-bold text-white mb-4">Agriculture Uses 85% of Our Water</h2>
+              <h2 className="text-4xl font-bold text-white mb-4">Most of our water is used in agriculture...</h2>
               <p className="text-white/70 text-lg leading-relaxed max-w-2xl">
                 The farming sector consumes the vast majority of freshwater globally. This isn't a niche problem—it's the core challenge. Any solution must scale across millions of acres to matter.
               </p>
