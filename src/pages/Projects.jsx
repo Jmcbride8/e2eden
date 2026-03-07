@@ -327,7 +327,7 @@ export default function Projects() {
               </DragDropContext>
             </table>
           </div>
-        ))}
+        )}
 
         {activeTab === "companies" && companiesLoading && (
           <div className="text-white/40 text-center py-12">Loading companies...</div>
