@@ -40,6 +40,13 @@ export default function Layout({ children, currentPageName }) {
         <UserMenu />
       </div>
       {children}
+      <footer className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 z-40 hidden sm:block">
+        <div className="max-w-6xl mx-auto px-8 py-4 flex justify-center items-center gap-4 text-white/60 text-sm">
+          <Link to={createPageUrl("About")} className="hover:text-white transition-colors">
+            About Us
+          </Link>
+        </div>
+      </footer>
       <MobileNav />
     </div>
   );
