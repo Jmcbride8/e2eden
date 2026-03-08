@@ -667,13 +667,13 @@ export default function TheInnovations() {
                 "Solving problems is fun and interesting. Light and photosynthesis fascinate me, and I enjoy creating the right environment for things to grow."
               </blockquote>
               <p className="text-white/70 leading-relaxed mb-3">
-                Charlie Paton is a British designer, inventor, and the visionary behind Seawater Greenhouse technology. Trained at the Central School of Art and Design in London, he spent years as a lighting and special effects designer before a bus ride through Morocco sparked an idea that would change the course of desert agriculture.
+                Charlie Paton is a British designer, inventor, and the visionary behind Seawater Greenhouse technology. Over three decades he has deployed this technology across three continents — from Abu Dhabi to Australia — building a body of proven, real-world deployments that demonstrate the core science works at scale.
               </p>
               <p className="text-white/70 leading-relaxed mb-3">
-                In the early 1990s, Paton developed a greenhouse system using sunshine and seawater to create cool, humid growing environments in the harshest climates. Over three decades, he deployed this across three continents — from Abu Dhabi to Australia — proving the concept at scale. His work has produced thousands of tonnes of crops where nature said nothing could grow.
+                E2Eden is evolving that foundation in a crucial way: we are re-engineering the business model to solve industrialized agriculture at scale. Where traditional Seawater Greenhouse projects served niche, high-value crops, we target the vast open-field commodity farming that consumes 70% of the world's fresh water. Our model monetizes the water saved — selling conserved water back into drought-stressed markets — while simultaneously improving crop quality through consistently cooler, more humid growing conditions.
               </p>
               <p className="text-white/70 leading-relaxed">
-                In 2012, Charlie was elected a Royal Designer for Industry by the Royal Society for the Encouragement of Arts. E2Eden is proud to stand on his shoulders as we bring this proven technology to the United States and to the world's most vulnerable farming communities.
+                The technology is proven. The missing piece was a business model that could deploy it at the scale the water crisis demands. That is what E2Eden is building.
               </p>
             </div>
           </div>
