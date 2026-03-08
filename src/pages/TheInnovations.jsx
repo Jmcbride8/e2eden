@@ -626,7 +626,7 @@ export default function TheInnovations() {
 
           <div className="flex items-center gap-4 mb-10">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Honoring The Mind Behind It All</span>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Evolving Proven Technology</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
