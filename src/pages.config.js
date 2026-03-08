@@ -61,7 +61,6 @@ import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
 import Technology from './pages/Technology';
-import TheInnovations from './pages/TheInnovations';
 import UserManagement from './pages/UserManagement';
 import __Layout from './Layout.jsx';
 
@@ -81,7 +80,6 @@ export const PAGES = {
     "Roadmap": Roadmap,
     "TaskManager": TaskManager,
     "Technology": Technology,
-    "TheInnovations": TheInnovations,
     "UserManagement": UserManagement,
 }
 
