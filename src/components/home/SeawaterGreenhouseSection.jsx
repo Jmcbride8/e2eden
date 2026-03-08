@@ -64,7 +64,7 @@ export default function SeawaterGreenhouseSection() {
             Standing on the Shoulders of Giants
           </h2>
           <p className="text-xl text-white/70 leading-relaxed w-full">
-            Built on 30+ years of proven science by our partner{" "}
+            We're not building bespoke farms in the desert. We're taking 30+ years of proven water-saving science from our partner{" "}
             <a
               href="https://www.seawatergreenhouse.com"
               target="_blank"
@@ -73,7 +73,7 @@ export default function SeawaterGreenhouseSection() {
             >
               Seawater Greenhouse Ltd <ExternalLink className="w-4 h-4" />
             </a>
-            , this technology has transformed deserts across three continents.
+            {" "}and deploying it at industrial scale across US commodity agriculture — conserving massive volumes of fresh water while dramatically improving crop quality and value.
           </p>
 
 
