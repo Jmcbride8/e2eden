@@ -56,7 +56,7 @@ export default function SeawaterGreenhouseSection() {
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px flex-1 bg-white/10" />
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Built on Decades of Proof</span>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Evolving Proven Technology</span>
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
