@@ -35,7 +35,7 @@ export default function Home() {
     return map;
   }, [homeContentRecords]);
 
-  const getHomeImg = (key, fallback) => homeContentMap[key]?.image_url || fallback;
+  const getHomeImg = (key) => homeContentMap[key]?.image_url || null;
 
   const setHomeImg = async (key, url) => {
     const existing = homeContentMap[key];

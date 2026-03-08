@@ -48,41 +48,41 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import About from './pages/About';
+import BusinessModel from './pages/BusinessModel';
 import CRM from './pages/CRM';
 import CapTable from './pages/CapTable';
 import Conferences from './pages/Conferences';
 import Funding from './pages/Funding';
 import Home from './pages/Home';
+import Innovators from './pages/Innovators';
 import Partnerships from './pages/Partnerships';
 import Profile from './pages/Profile';
 import Projects from './pages/Projects';
 import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
+import Technology from './pages/Technology';
 import TheInnovations from './pages/TheInnovations';
 import UserManagement from './pages/UserManagement';
-import Technology from './pages/Technology';
-import BusinessModel from './pages/BusinessModel';
-import Innovators from './pages/Innovators';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "About": About,
+    "BusinessModel": BusinessModel,
     "CRM": CRM,
     "CapTable": CapTable,
     "Conferences": Conferences,
     "Funding": Funding,
     "Home": Home,
+    "Innovators": Innovators,
     "Partnerships": Partnerships,
     "Profile": Profile,
     "Projects": Projects,
     "Roadmap": Roadmap,
     "TaskManager": TaskManager,
+    "Technology": Technology,
     "TheInnovations": TheInnovations,
     "UserManagement": UserManagement,
-    "Technology": Technology,
-    "BusinessModel": BusinessModel,
-    "Innovators": Innovators,
 }
 
 export const pagesConfig = {

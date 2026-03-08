@@ -45,7 +45,12 @@ export default function AdminImageUpload({ src, alt, isAdmin, onUploaded, classN
   return (
     <>
       <div className={`relative group ${className}`}>
-        <img src={src} alt={alt} className={imgClassName} />
+        {src
+          ? <img src={src} alt={alt} className={imgClassName} />
+          : <div className={`bg-white/5 border border-dashed border-white/20 flex items-center justify-center ${imgClassName}`}>
+              {isAdmin && <span className="text-white/30 text-sm">No image uploaded</span>}
+            </div>
+        }
 
         {isAdmin && (
           <button
