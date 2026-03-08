@@ -735,10 +735,7 @@ export default function Home() {
               <p className="text-2xl leading-relaxed mb-6 text-white/80">
                 Feed 10 billion people. Save our water. Make deserts bloom.
               </p>
-              <p className="text-xl leading-relaxed mb-12 text-white/70">
-                This isn't just about technology—it's about survival. It's about creating abundance where there was 
-                scarcity. It's about ensuring that no child goes hungry because we ran out of water.
-              </p>
+
               <p className="text-2xl font-bold text-amber-400 mb-12">
                 The next green revolution starts now. Join us.
               </p>
