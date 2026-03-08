@@ -64,7 +64,7 @@ export default function SeawaterGreenhouseSection() {
             Standing on the Shoulders of Giants
           </h2>
           <p className="text-xl text-white/70 leading-relaxed w-full">
-            We're not building bespoke farms in the desert. We're taking 30+ years of proven water-saving science from our partner{" "}
+            We're taking 30+ years of proven water-saving science from our partner{" "}
             <a
               href="https://www.seawatergreenhouse.com"
               target="_blank"
