@@ -73,6 +73,12 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           className="bg-white/10 border-white/20 text-white"
         />
         <Input
+          placeholder="Industry"
+          value={formData.industry || ""}
+          onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+          className="bg-white/10 border-white/20 text-white"
+        />
+        <Input
           placeholder="Education Logo URL"
           value={formData.education_logo_url || ""}
           onChange={(e) => setFormData({ ...formData, education_logo_url: e.target.value })}
@@ -107,7 +113,10 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
 
       <div className="p-6">
         <h3 className="text-lg font-bold text-white mb-1">{formData.name}</h3>
-        <p className="text-amber-400 text-sm font-semibold mb-3">{formData.role}</p>
+        <p className="text-amber-400 text-sm font-semibold mb-1">{formData.role}</p>
+        {formData.industry && (
+          <p className="text-white/50 text-xs mb-3">{formData.industry}</p>
+        )}
 
         <div className="space-y-4">
           {formData.education_logo_url && (
