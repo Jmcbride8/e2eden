@@ -46,8 +46,21 @@ export default function About() {
     createMemberMutation.mutate({
       name: "New Team Member",
       role: "Role",
+      label: "Team Member",
+      section: "Team",
       bio: "Bio",
-      sort_order: teamMembers.length
+      sort_order: allMembers.length
+    });
+  };
+
+  const handleAddPartner = () => {
+    createMemberMutation.mutate({
+      name: "New Partner",
+      role: "Organization",
+      label: "Partner",
+      section: "Partners",
+      bio: "Bio",
+      sort_order: allMembers.length
     });
   };
 
