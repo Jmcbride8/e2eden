@@ -479,7 +479,7 @@ export default function Home() {
               </div>
               <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls</h2>
               <p className="text-xl mb-0 text-white/70">
-                We substitute saltwater for fresh — cooling farms with the briny, unusable water hiding beneath our feet, unleashing abundance.
+                A powerfully simple solution - A cardboard wall continuously drenched in saltwater, turning blistering desert heat into a smothering blanket of cool, humid air to dramatically crush freshwater use by an astonishing 70-90% - a real difference that matters
               </p>
             </motion.div>
 
