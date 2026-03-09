@@ -8,7 +8,7 @@ const DEFAULT_IMAGES = [
   key: "root_cause_img_3",
   title: "We farm in deserts",
   default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-  caption: "Every water-saving campaign combined barely registers. Fix farming, fix the crisis."
+  caption: "People moved to the coasts, pushing farms into deserts where plants use 10x as much water to grow."
 },
 {
   key: "root_cause_img_2",
