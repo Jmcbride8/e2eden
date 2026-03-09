@@ -60,6 +60,15 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           onChange={(e) => setFormData({ ...formData, role: e.target.value })}
           className="bg-white/10 border-white/20 text-white"
         />
+        <select
+          value={formData.label || "Team Member"}
+          onChange={(e) => setFormData({ ...formData, label: e.target.value })}
+          className="w-full rounded-md bg-white/10 border border-white/20 text-white text-sm px-3 py-2"
+        >
+          {["Team Member","Founder","Advisor","Mentor","Investor","Consultant","Partner","Board Member"].map(l => (
+            <option key={l} value={l} className="bg-gray-900">{l}</option>
+          ))}
+        </select>
         <Textarea
           placeholder="Bio"
           value={formData.bio || ""}
