@@ -92,32 +92,33 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
 
           {/* Stat + Pie Chart layout */}
           <div className="grid md:grid-cols-2 gap-8 items-stretch mt-0">
-            {/* Big stat */}
+            {/* Water Price Comparison */}
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-center">
-              <div className="text-8xl font-bold text-amber-400 mb-4">85%</div>
-              <p className="text-2xl font-semibold mb-3 text-white">
-                Of US Southwest freshwater goes to agriculture
-              </p>
-              <p className="text-lg text-white/60 mb-6">
-                Top crops driving that demand:
-              </p>
-              <div className="space-y-3">
+              <h3 className="text-white/70 text-sm uppercase tracking-widest mb-6">Water Price per Acre-Foot</h3>
+              <div className="space-y-5">
                 {[
-                { name: "Alfalfa", pct: "42%", color: "#f59e0b" },
-                { name: "Cotton", pct: "18%", color: "#60a5fa" },
-                { name: "Vegetables & Melons", pct: "15%", color: "#34d399" }].
-                map((crop) =>
-                <div key={crop.name}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-white/70">{crop.name}</span>
-                    <span className="text-white font-semibold">{crop.pct}</span>
+                  { label: "Las Vegas (city)", price: "$1,800", bar: 90, color: "#60a5fa", note: "Municipal rate" },
+                  { label: "Los Angeles (city)", price: "$1,200", bar: 60, color: "#34d399", note: "Municipal rate" },
+                  { label: "Phoenix (city)", price: "$900", bar: 45, color: "#a78bfa", note: "Municipal rate" },
+                  { label: "IID Farms", price: "$20", bar: 1, color: "#f59e0b", note: "Imperial Irrigation District" },
+                ].map((item) => (
+                  <div key={item.label}>
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <div>
+                        <span className="text-white font-semibold text-sm">{item.label}</span>
+                        <span className="text-white/40 text-xs ml-2">{item.note}</span>
+                      </div>
+                      <span className="font-bold text-lg" style={{ color: item.color }}>{item.price}</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-white/10">
+                      <div className="h-2 rounded-full transition-all duration-700" style={{ width: `${item.bar}%`, backgroundColor: item.color }} />
+                    </div>
                   </div>
-                  <div className="h-1.5 rounded-full bg-white/10">
-                    <div className="h-1.5 rounded-full" style={{ width: crop.pct, backgroundColor: crop.color }} />
-                  </div>
-                </div>
-                )}
+                ))}
               </div>
+              <p className="text-white/40 text-xs mt-6 border-t border-white/10 pt-4">
+                Cities pay up to <span className="text-amber-400 font-semibold">90x more</span> for the same water IID farmers receive — a structural subsidy baked into century-old water rights.
+              </p>
             </div>
 
             {/* Pie Chart */}
