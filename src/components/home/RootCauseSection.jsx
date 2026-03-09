@@ -66,7 +66,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
           <h2 className="text-5xl font-bold text-white mb-6">Agriculture Uses 85% Of Our Water</h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
-            Agriculture consumes 85% of freshwater. In the desert Southwest, crops must sweat constantly just to survive the heat. That water evaporates — it doesn't become food. Until now, there was no way out.
+            Desert farms are where water is used, lost, and must be saved
           </p>
 
           {/* Image Grid */}
