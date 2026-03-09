@@ -33,7 +33,7 @@ const PIE_DATA = [
 
 const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
   const RADIAN = Math.PI / 180;
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.78;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
   return (
