@@ -118,6 +118,40 @@ export default function About() {
         </div>
       </section>
 
+      {/* Partners Section */}
+      <section className="px-6 sm:px-12 py-16 bg-black">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl font-bold text-white"
+            >
+              Partners
+            </motion.h2>
+            {isAdmin && (
+              <Button onClick={handleAddPartner} className="bg-amber-500 hover:bg-amber-600">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Partner
+              </Button>
+            )}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {partners.map((member) => (
+              <TeamCard
+                key={member.id}
+                member={member}
+                isAdmin={isAdmin}
+                onMemberUpdate={(id, data) => updateMemberMutation.mutate({ id, data })}
+                onDelete={(id) => deleteMemberMutation.mutate(id)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Brands Ticker Section */}
       <section className="py-12 px-6 sm:px-12 bg-black">
         <div className="max-w-6xl mx-auto">
