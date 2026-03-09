@@ -121,6 +121,11 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
       </div>
 
       <div className="p-6">
+        {formData.label && (
+          <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-2">
+            {formData.label}
+          </span>
+        )}
         <h3 className="text-lg font-bold text-white mb-1">{formData.name}</h3>
         <p className="text-amber-400 text-sm font-semibold mb-1">{formData.role}</p>
         {formData.industry && (
