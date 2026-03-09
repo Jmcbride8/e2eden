@@ -147,25 +147,20 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           <p className="text-white/50 text-xs mb-3">{formData.industry}</p>
         )}
 
-        <div className="space-y-4">
+        <div className="flex items-center gap-3 mt-2">
           {formData.education_logo_url && (
-            <div>
-              <p className="text-white/60 text-xs font-semibold mb-2">Education</p>
-              <img src={formData.education_logo_url} alt="University" className="h-10 object-contain" />
-            </div>
+            <img src={formData.education_logo_url} alt="Brand" className="h-8 object-contain" />
           )}
-          <div className="flex items-center gap-2">
-            {formData.linkedin_url && (
-              <a
-                href={formData.linkedin_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 hover:text-blue-400 transition-colors"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            )}
-          </div>
+          {formData.linkedin_url && (
+            <a
+              href={formData.linkedin_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-blue-400 transition-colors"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+          )}
         </div>
 
         {isAdmin && (
