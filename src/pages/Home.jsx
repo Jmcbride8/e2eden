@@ -538,7 +538,7 @@ export default function Home() {
                   key: "wind_cool",
                   title: "Cools the Wind",
                   defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
-                  body: "As salty water evaporates through the panels, it steals heat from the air. That cooled air is denser — it sinks, smothering the field in a cool, protective layer."
+                  body: "As salty water evaporates through the panels, it steals heat from the air. That cooled air is denser, sinking and smothering the field in a cool, protective layer."
                 },
                 {
                   key: "wind_humid",
