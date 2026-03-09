@@ -87,12 +87,27 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
           className="bg-white/10 border-white/20 text-white"
         />
-        <Input
-          placeholder="Education Logo URL"
-          value={formData.education_logo_url || ""}
-          onChange={(e) => setFormData({ ...formData, education_logo_url: e.target.value })}
-          className="bg-white/10 border-white/20 text-white"
-        />
+        <div>
+          <p className="text-white/60 text-xs mb-2">Brand / Education Logo</p>
+          <div className="relative w-full h-16 rounded-lg bg-white/5 border border-white/20 flex items-center justify-center overflow-hidden group cursor-pointer">
+            {formData.education_logo_url && (
+              <img src={formData.education_logo_url} alt="Brand" className="h-full object-contain p-2" />
+            )}
+            <label className={`${formData.education_logo_url ? 'absolute inset-0 opacity-0 group-hover:opacity-100' : ''} bg-black/50 flex items-center justify-center cursor-pointer transition-opacity`}>
+              <Upload className="w-4 h-4 text-white mr-1" />
+              <span className="text-white text-xs">Upload Logo</span>
+              <input type="file" accept="image/*" onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                setUploading(true);
+                try {
+                  const { file_url } = await base44.integrations.Core.UploadFile({ file });
+                  setFormData(f => ({ ...f, education_logo_url: file_url }));
+                } finally { setUploading(false); }
+              }} className="hidden" />
+            </label>
+          </div>
+        </div>
 
         <div className="flex gap-2 pt-2">
           <Button size="sm" className="bg-amber-500 hover:bg-amber-600" onClick={handleSave}>
