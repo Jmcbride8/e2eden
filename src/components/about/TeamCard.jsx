@@ -167,14 +167,11 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           <p className="text-white/50 text-xs mb-3">{formData.industry}</p>
         )}
 
-        {formData.education_logo_url && (
-          <div className="mt-2">
+        <div className="mt-3 flex items-center justify-between">
+          {formData.education_logo_url ? (
             <img src={formData.education_logo_url} alt="Brand" className="h-8 object-contain" />
-          </div>
-        )}
-
-        {formData.linkedin_url && (
-          <div className="mt-4 flex justify-center">
+          ) : <div />}
+          {formData.linkedin_url && (
             <a
               href={formData.linkedin_url}
               target="_blank"
@@ -183,8 +180,8 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
             >
               <Linkedin className="w-4 h-4" />
             </a>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </motion.div>
   );
