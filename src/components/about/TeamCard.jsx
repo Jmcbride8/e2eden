@@ -129,15 +129,35 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
       className="rounded-xl bg-white/5 border border-white/10 overflow-hidden hover:border-amber-500/50 transition-colors group"
     >
       {/* Profile Image */}
-      <div className="w-full h-56 bg-gradient-to-br from-amber-500 to-yellow-600 overflow-hidden">
+      <div className="relative w-full h-56 bg-gradient-to-br from-amber-500 to-yellow-600 overflow-hidden">
         {formData.image_url && (
           <img src={formData.image_url} alt={formData.name} className="w-full h-full object-cover" />
         )}
+        {isAdmin && (
+          <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-7 w-7 p-0 bg-black/50 text-white/80 hover:text-white hover:bg-black/70"
+              onClick={() => setIsEditing(true)}
+            >
+              <Pencil className="w-3 h-3" />
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-7 w-7 p-0 bg-black/50 text-white/80 hover:text-red-400 hover:bg-black/70"
+              onClick={() => onDelete(member.id)}
+            >
+              <Trash2 className="w-3 h-3" />
+            </Button>
+          </div>
+        )}
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex flex-col">
         {formData.label && (
-          <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-2">
+          <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-2 self-start">
             {formData.label}
           </span>
         )}
@@ -147,11 +167,14 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
           <p className="text-white/50 text-xs mb-3">{formData.industry}</p>
         )}
 
-        <div className="flex items-center gap-3 mt-2">
-          {formData.education_logo_url && (
+        {formData.education_logo_url && (
+          <div className="mt-2">
             <img src={formData.education_logo_url} alt="Brand" className="h-8 object-contain" />
-          )}
-          {formData.linkedin_url && (
+          </div>
+        )}
+
+        {formData.linkedin_url && (
+          <div className="mt-4 flex justify-center">
             <a
               href={formData.linkedin_url}
               target="_blank"
@@ -160,27 +183,6 @@ export default function TeamCard({ member, isAdmin, onUpdate, onDelete, onMember
             >
               <Linkedin className="w-4 h-4" />
             </a>
-          )}
-        </div>
-
-        {isAdmin && (
-          <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <Button
-              size="sm"
-              variant="ghost"
-              className="text-white/60 hover:text-white"
-              onClick={() => setIsEditing(true)}
-            >
-              <Pencil className="w-4 h-4" />
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              className="text-white/60 hover:text-red-400"
-              onClick={() => onDelete(member.id)}
-            >
-              <Trash2 className="w-4 h-4" />
-            </Button>
           </div>
         )}
       </div>
