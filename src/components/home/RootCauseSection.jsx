@@ -37,7 +37,7 @@ const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
   return (
-    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" fontSize={13} fontWeight="bold">
+    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" fontSize={18} fontWeight="bold">
       {value}%
     </text>);
 
