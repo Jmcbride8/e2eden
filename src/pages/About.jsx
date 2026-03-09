@@ -11,10 +11,13 @@ export default function About() {
   const [isAdmin, setIsAdmin] = useState(false);
   const queryClient = useQueryClient();
 
-  const { data: teamMembers = [] } = useQuery({
+  const { data: allMembers = [] } = useQuery({
     queryKey: ['team'],
     queryFn: () => base44.entities.Team.list('sort_order')
   });
+
+  const teamMembers = allMembers.filter(m => !m.section || m.section === 'Team');
+  const partners = allMembers.filter(m => m.section === 'Partners');
 
   useEffect(() => {
     const checkAdmin = async () => {
