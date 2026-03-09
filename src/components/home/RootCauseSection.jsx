@@ -14,7 +14,7 @@ const DEFAULT_IMAGES = [
   key: "root_cause_img_2",
   title: "Water evaporates away",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "In desert heat, crops must sweat constantly just to survive. That water evaporates into the sky, not into food."
+  caption: "In desert heat, crops sweat constantly just to survive, losing 10ft of water a year to the sky."
 },
 {
   key: "root_cause_img_desalination",
