@@ -221,12 +221,18 @@ export default function Funding() {
             Contact our investment team to discuss opportunities that align with your goals and values.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="mailto:invest@e2eden.org" className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors">
+            <button
+              onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
+              className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+            >
               Contact Investment Team
-            </a>
-            <a href="mailto:partnerships@e2eden.org" className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium transition-colors border border-white/20">
+            </button>
+            <button
+              onClick={() => setContactModal({ isOpen: true, defaultReason: "Explore Partnerships" })}
+              className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium transition-colors border border-white/20"
+            >
               Explore Partnerships
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>
