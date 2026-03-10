@@ -48,11 +48,19 @@ export default function ContactModal({ isOpen, onClose, defaultReason }) {
       return;
     }
     setSubmitting(true);
-    await base44.integrations.Core.SendEmail({
-      to: "info@e2eden.com",
-      subject: `[${form.reason}] Contact from ${form.name}`,
-      body: `Name: ${form.name}\nEmail: ${form.email}\nReason: ${form.reason}\n\n${form.message}`,
-    });
+    await Promise.all([
+      base44.integrations.Core.SendEmail({
+        to: "info@e2eden.com",
+        subject: `[${form.reason}] Contact from ${form.name}`,
+        body: `Name: ${form.name}\nEmail: ${form.email}\nReason: ${form.reason}\n\n${form.message}`,
+      }),
+      base44.entities.ContactSubmission.create({
+        name: form.name,
+        email: form.email,
+        reason: form.reason,
+        message: form.message,
+      }),
+    ]);
     setSubmitted(true);
     setSubmitting(false);
   };
