@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, User, Briefcase, Settings, LogOut, Users, Calendar, Shield, ListChecks } from "lucide-react";
+import { Menu, X, User, Briefcase, Settings, LogOut, Users, Calendar, Shield, ListChecks, TrendingUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPageUrl } from "../../utils";
 import { base44 } from "@/api/base44Client";
