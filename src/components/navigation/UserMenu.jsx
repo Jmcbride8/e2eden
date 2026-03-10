@@ -30,6 +30,7 @@ export default function UserMenu() {
     { icon: Calendar, label: "Conferences", path: createPageUrl("Conferences") },
     { icon: ListChecks, label: "Task Manager", path: createPageUrl("TaskManager") },
     ...(user?.role === 'admin' ? [{ icon: Shield, label: "User Management", path: createPageUrl("UserManagement") }] : []),
+    ...(user?.company === 'E2Eden' || user?.role === 'admin' ? [{ icon: TrendingUp, label: "Cap Table", path: createPageUrl("CapTable") }] : []),
     { icon: Settings, label: "Profile Settings", path: createPageUrl("Profile") },
   ];
 
