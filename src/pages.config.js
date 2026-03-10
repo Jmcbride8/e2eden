@@ -62,6 +62,7 @@ import Roadmap from './pages/Roadmap';
 import TaskManager from './pages/TaskManager';
 import Technology from './pages/Technology';
 import UserManagement from './pages/UserManagement';
+import Contact from './pages/Contact';
 import __Layout from './Layout.jsx';
 
 
@@ -81,6 +82,7 @@ export const PAGES = {
     "TaskManager": TaskManager,
     "Technology": Technology,
     "UserManagement": UserManagement,
+    "Contact": Contact,
 }
 
 export const pagesConfig = {
