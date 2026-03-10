@@ -3,13 +3,12 @@ import { motion } from "framer-motion";
 import { TrendingUp, Heart, Building2, FileText } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "../utils";
 import DonationModal from "../components/funding/DonationModal";
-import CapTablePreview from "../components/funding/CapTablePreview";
+import ContactModal from "../components/contact/ContactModal";
 
 export default function Funding() {
   const [donationModal, setDonationModal] = useState({ isOpen: false, projectName: null });
+  const [contactModal, setContactModal] = useState({ isOpen: false, defaultReason: "" });
 
   const { data: projects = [] } = useQuery({
     queryKey: ['projects'],
