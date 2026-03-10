@@ -242,6 +242,11 @@ export default function Funding() {
         onClose={() => setDonationModal({ isOpen: false, projectName: null })}
         projectName={donationModal.projectName}
       />
+      <ContactModal
+        isOpen={contactModal.isOpen}
+        onClose={() => setContactModal({ isOpen: false, defaultReason: "" })}
+        defaultReason={contactModal.defaultReason}
+      />
     </div>
   );
 }
