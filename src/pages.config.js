@@ -63,6 +63,7 @@ import TaskManager from './pages/TaskManager';
 import Technology from './pages/Technology';
 import UserManagement from './pages/UserManagement';
 import Contact from './pages/Contact';
+import ContactSubmissions from './pages/ContactSubmissions';
 import __Layout from './Layout.jsx';
 
 
@@ -83,6 +84,7 @@ export const PAGES = {
     "Technology": Technology,
     "UserManagement": UserManagement,
     "Contact": Contact,
+    "ContactSubmissions": ContactSubmissions,
 }
 
 export const pagesConfig = {
