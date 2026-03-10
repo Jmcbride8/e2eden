@@ -61,10 +61,13 @@ export default function Funding() {
               <p className="text-sm text-white/70 leading-relaxed mb-4">
                 Partner with us on large-scale infrastructure projects that generate both environmental and financial returns. Clear milestones, ROI projections, and measurable impact metrics.
               </p>
-              <Link to={createPageUrl("CapTable")} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 font-medium transition-colors border border-blue-500/20">
+              <button
+                onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 font-medium transition-colors border border-blue-500/20"
+              >
                 <TrendingUp className="w-4 h-4" />
                 View Cap Table & Invest
-              </Link>
+              </button>
             </div>
           </div>
         </motion.div>
