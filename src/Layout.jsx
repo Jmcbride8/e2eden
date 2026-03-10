@@ -60,9 +60,9 @@ export default function Layout({ children, currentPageName }) {
             <Link to={createPageUrl("About")} className="hover:text-white transition-colors">
               About Us
             </Link>
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to={createPageUrl("Contact")} className="hover:text-white transition-colors">
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </footer>
