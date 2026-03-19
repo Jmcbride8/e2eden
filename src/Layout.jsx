@@ -42,7 +42,9 @@ export default function Layout({ children, currentPageName }) {
           <Link to={createPageUrl("Roadmap")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
             Roadmap
           </Link>
-
+          <Link to={createPageUrl("Funding")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
+            Funding
+          </Link>
           <Link to={createPageUrl("Partnerships")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
             Partnerships
           </Link>
