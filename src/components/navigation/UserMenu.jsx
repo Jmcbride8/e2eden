@@ -31,6 +31,7 @@ export default function UserMenu() {
     { icon: ListChecks, label: "Task Manager", path: createPageUrl("TaskManager") },
     ...(user?.role === 'admin' ? [{ icon: Shield, label: "User Management", path: createPageUrl("UserManagement") }] : []),
     ...(user?.role === 'admin' ? [{ icon: Info, label: "About", path: createPageUrl("About") }] : []),
+    ...(user?.role === 'admin' ? [{ icon: DollarSign, label: "Funding", path: createPageUrl("Funding") }] : []),
     ...(user?.company === 'E2Eden' || user?.role === 'admin' ? [{ icon: TrendingUp, label: "Cap Table", path: createPageUrl("CapTable") }] : []),
     ...(user?.role === 'admin' && user?.company === 'E2Eden' ? [{ icon: Inbox, label: "Contact Responses", path: createPageUrl("ContactSubmissions") }] : []),
     { icon: Settings, label: "Profile Settings", path: createPageUrl("Profile") },
