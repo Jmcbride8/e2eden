@@ -10,7 +10,6 @@ export default function MobileNav() {
     { name: "Home", icon: Home, path: createPageUrl("Home") },
     { name: "Innovations", icon: Lightbulb, path: createPageUrl("TheInnovations") },
     { name: "Roadmap", icon: Map, path: createPageUrl("Roadmap") },
-    { name: "Funding", icon: DollarSign, path: createPageUrl("Funding") },
     { name: "Partnerships", icon: Handshake, path: createPageUrl("Partnerships") }
   ];
 
