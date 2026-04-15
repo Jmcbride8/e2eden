@@ -1,0 +1,147 @@
+{
+  "name": "Project",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project name"
+    },
+    "company": {
+      "type": "string",
+      "enum": [
+        "E2Eden",
+        "Seawater Greenhouse"
+      ],
+      "default": "E2Eden",
+      "description": "Company that owns this project"
+    },
+    "type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Farming",
+          "Tunnels",
+          "Minerals"
+        ]
+      },
+      "description": "Project types"
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "R&D",
+        "Commercialization",
+        "Transformation"
+      ],
+      "default": "R&D",
+      "description": "Project phase"
+    },
+    "ownership_type": {
+      "type": "string",
+      "enum": [
+        "E2Eden",
+        "Partner",
+        "Joint Venture",
+        "Seawater Greenhouse"
+      ],
+      "default": "E2Eden",
+      "description": "Project ownership or origin"
+    },
+    "description": {
+      "type": "string",
+      "description": "Project description"
+    },
+    "location": {
+      "type": "string",
+      "description": "Location name (e.g., Nairobi, S\u00e3o Paulo)"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region (e.g., East Africa, South America)"
+    },
+    "lat": {
+      "type": "number",
+      "description": "Latitude coordinate"
+    },
+    "lon": {
+      "type": "number",
+      "description": "Longitude coordinate"
+    },
+    "year": {
+      "type": "string",
+      "description": "Project year"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "completed",
+        "planned"
+      ],
+      "default": "active",
+      "description": "Project status"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of image URLs"
+    },
+    "details": {
+      "type": "string",
+      "description": "Additional project details"
+    },
+    "hero_image": {
+      "type": "string",
+      "description": "Main hero image for the project modal"
+    },
+    "hero_image_position": {
+      "type": "string",
+      "default": "center center",
+      "description": "CSS object-position for hero image (e.g., 'center center', 'top left')"
+    },
+    "backstory": {
+      "type": "string",
+      "description": "Project backstory"
+    },
+    "our_solution": {
+      "type": "string",
+      "description": "Our solution for the project"
+    },
+    "project_updates": {
+      "type": "string",
+      "description": "Latest project updates"
+    },
+    "funding": {
+      "type": "string",
+      "description": "Funding information"
+    },
+    "partners": {
+      "type": "string",
+      "description": "Project partners"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "YouTube video URL for the project (optional)"
+    },
+    "sort_order": {
+      "type": "number",
+      "description": "Display order for projects"
+    }
+  },
+  "required": [
+    "name",
+    "type",
+    "description",
+    "location",
+    "country",
+    "lat",
+    "lon"
+  ]
+}

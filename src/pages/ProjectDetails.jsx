@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
-import { MapPin, Calendar } from "lucide-react";
+import { MapPin, Calendar, Pencil, Check, X } from "lucide-react";
 import { createPageUrl } from "../utils";
+
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null;
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+}
 
 export default function ProjectDetails() {
   const { id } = useParams();
+  const queryClient = useQueryClient();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [editingVideo, setEditingVideo] = useState(false);
+  const [videoInput, setVideoInput] = useState("");
+
+  useEffect(() => {
+    base44.auth.me().then((u) => setIsAdmin(u?.role === "admin")).catch(() => {});
+  }, []);
 
   const { data: project, isLoading } = useQuery({
     queryKey: ["project", id],
@@ -15,6 +29,12 @@ export default function ProjectDetails() {
     select: (data) => data?.[0],
     enabled: !!id,
   });
+
+  const saveVideo = async () => {
+    await base44.entities.Project.update(id, { video_url: videoInput });
+    queryClient.invalidateQueries({ queryKey: ["project", id] });
+    setEditingVideo(false);
+  };
 
   if (isLoading) {
     return (
@@ -143,6 +163,52 @@ export default function ProjectDetails() {
                 />
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Video */}
+        {(project.video_url || isAdmin) && (
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div>
+                <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">Video</span>
+                <h2 className="text-3xl font-bold text-white mt-1">Watch</h2>
+              </div>
+              {isAdmin && !editingVideo && (
+                <button
+                  onClick={() => { setVideoInput(project.video_url || ""); setEditingVideo(true); }}
+                  className="ml-2 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white/60 hover:text-white transition-colors"
+                >
+                  <Pencil className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            {editingVideo ? (
+              <div className="flex gap-2 items-center">
+                <input
+                  type="text"
+                  value={videoInput}
+                  onChange={(e) => setVideoInput(e.target.value)}
+                  placeholder="Paste YouTube URL..."
+                  className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-amber-500/50"
+                />
+                <button onClick={saveVideo} className="p-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white transition-colors"><Check className="w-4 h-4" /></button>
+                <button onClick={() => setEditingVideo(false)} className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/60 transition-colors"><X className="w-4 h-4" /></button>
+              </div>
+            ) : project.video_url ? (
+              <div className="rounded-xl overflow-hidden aspect-video">
+                <iframe
+                  src={getYouTubeEmbedUrl(project.video_url)}
+                  title="Project Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+            ) : isAdmin ? (
+              <p className="text-white/30 text-sm italic">No video added yet. Click the pencil icon to add a YouTube link.</p>
+            ) : null}
           </div>
         )}
 
