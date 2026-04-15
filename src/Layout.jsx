@@ -4,6 +4,7 @@ import { createPageUrl } from './utils';
 import UserMenu from './components/navigation/UserMenu';
 import MobileNav from './components/navigation/MobileNav';
 import TaskCounter from './components/navigation/TaskCounter.jsx';
+import ProjectsDropdown from './components/navigation/ProjectsDropdown';
 
 export default function Layout({ children, currentPageName }) {
   return (
@@ -39,6 +40,7 @@ export default function Layout({ children, currentPageName }) {
               </Link>
             </div>
           </div>
+          <ProjectsDropdown />
           <Link to={createPageUrl("Roadmap")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
             Roadmap
           </Link>

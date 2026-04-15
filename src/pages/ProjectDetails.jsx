@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
-import { ArrowLeft, MapPin, Calendar, Tag } from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 import { createPageUrl } from "../utils";
 
 export default function ProjectDetails() {
@@ -47,17 +47,6 @@ export default function ProjectDetails() {
           <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-
-        {/* Back button */}
-        <div className="absolute top-6 left-6 z-10">
-          <Link
-            to={createPageUrl("Home")}
-            className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </Link>
-        </div>
 
         {/* Hero text */}
         <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 max-w-4xl">
