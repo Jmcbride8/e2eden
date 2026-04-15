@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, ChevronDown, Pause, Play, Upload } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPageUrl } from "../utils";
@@ -9,13 +9,12 @@ import GlobeScene from "../components/globe/GlobeScene";
 
 import RootCauseSection from "../components/home/RootCauseSection";
 import AdminImageUpload from "../components/home/AdminImageUpload";
-import ProjectModal from "../components/globe/ProjectModal";
 import { Button } from "@/components/ui/button";
 import { FertilizerChart, SaltwaterChart } from "../components/home/PopulationCharts";
 
 
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const navigate = useNavigate();
   const [isPaused, setIsPaused] = useState(false);
   const [selectedPhase, setSelectedPhase] = useState("R&D");
   const [isAdmin, setIsAdmin] = useState(false);
@@ -89,12 +88,8 @@ export default function Home() {
   );
 
   const handleSelectProject = useCallback((project) => {
-    setSelectedProject(project);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setSelectedProject(null);
-  }, []);
+    navigate(`/project/${project.id}`);
+  }, [navigate]);
 
   const scrollProjects = (direction) => {
     if (scrollRef.current) {
@@ -170,7 +165,7 @@ export default function Home() {
       <div className="absolute inset-0">
         <GlobeScene
             projects={projects}
-            selectedProject={selectedProject}
+            selectedProject={null}
             onSelectProject={handleSelectProject}
             isPaused={isPaused} />
 
@@ -296,17 +291,6 @@ export default function Home() {
           <ChevronDown className="w-5 h-5" />
         </Button>
       </motion.div>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {selectedProject &&
-          <ProjectModal
-            project={selectedProject}
-            location={selectedProject.location}
-            onClose={handleClose} />
-
-          }
-      </AnimatePresence>
 
       {/* Bottom gradient fade */}
       <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t pointer-events-none z-[5] from-black to-transparent" />
