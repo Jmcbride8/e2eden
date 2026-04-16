@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { Pencil, Check, X } from "lucide-react";
 import AdminImageUpload from "./AdminImageUpload";
 
 const DEFAULT_IMAGES = [
@@ -25,27 +25,26 @@ const DEFAULT_IMAGES = [
 
 
 
-const PIE_DATA = [
-{ name: "Agriculture", value: 85, color: "#f59e0b" },
-{ name: "Municipal / Residential", value: 8, color: "#60a5fa" },
-{ name: "Industrial & Commercial", value: 7, color: "#34d399" }];
-
-
-const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
-  const RADIAN = Math.PI / 180;
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.78;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  return (
-    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" fontSize={18} fontWeight="bold">
-      {value}%
-    </text>);
-
-};
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null;
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+}
 
 export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
   const getImg = (key, fallback) => getHomeImg ? getHomeImg(key, fallback) : fallback;
   const setImg = (key, url) => setHomeImg ? setHomeImg(key, url) : null;
+
+  const [editingVideo, setEditingVideo] = useState(false);
+  const [videoInput, setVideoInput] = useState("");
+
+  const currentVideoUrl = getImg("root_cause_video", "");
+  const embedUrl = getYouTubeEmbedUrl(currentVideoUrl);
+
+  const saveVideo = () => {
+    setImg("root_cause_video", videoInput);
+    setEditingVideo(false);
+  };
 
   return (
     <section className="py-24 px-6 sm:px-12 bg-black">
@@ -121,42 +120,49 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
               </p>
             </div>
 
-            {/* Pie Chart */}
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <h3 className="text-center text-white/70 text-sm uppercase tracking-widest mb-4">
-                US Southwest Freshwater Usage Breakdown
-              </h3>
-              <ResponsiveContainer width="100%" height={280}>
-                <PieChart>
-                  <Pie
-                    data={PIE_DATA}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={110}
-                    dataKey="value"
-                    labelLine={false}
-                    label={CustomLabel}>
+            {/* Video Panel */}
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-white/70 text-sm uppercase tracking-widest">Watch</h3>
+                {isAdmin && !editingVideo && (
+                  <button
+                    onClick={() => { setVideoInput(currentVideoUrl || ""); setEditingVideo(true); }}
+                    className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white/60 hover:text-white transition-colors"
+                  >
+                    <Pencil className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
 
-                    {PIE_DATA.map((entry, idx) =>
-                    <Cell key={idx} fill={entry.color} />
-                    )}
-                  </Pie>
-                  <Tooltip
-                    formatter={(value, name) => [`${value}%`, name]}
-                    contentStyle={{
-                      backgroundColor: "rgba(0,0,0,0.85)",
-                      border: "1px solid rgba(255,255,255,0.15)",
-                      borderRadius: "8px",
-                      color: "#fff"
-                    }}
-                    itemStyle={{ color: "#fff" }}
-                    labelStyle={{ color: "#fff" }} />
-
-                  <Legend
-                    formatter={(value) => <span style={{ color: "rgba(255,255,255,0.6)", fontSize: 13 }}>{value}</span>} />
-
-                </PieChart>
-              </ResponsiveContainer>
+              {editingVideo ? (
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="text"
+                    value={videoInput}
+                    onChange={(e) => setVideoInput(e.target.value)}
+                    placeholder="Paste YouTube URL..."
+                    className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-amber-500/50"
+                  />
+                  <button onClick={saveVideo} className="p-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white transition-colors"><Check className="w-4 h-4" /></button>
+                  <button onClick={() => setEditingVideo(false)} className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/60 transition-colors"><X className="w-4 h-4" /></button>
+                </div>
+              ) : embedUrl ? (
+                <div className="rounded-xl overflow-hidden aspect-video flex-1">
+                  <iframe
+                    src={embedUrl}
+                    title="Section Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+              ) : (
+                <div className="flex-1 flex items-center justify-center rounded-xl bg-white/5 border border-dashed border-white/20 min-h-[200px]">
+                  <p className="text-white/30 text-sm italic text-center px-4">
+                    {isAdmin ? "Click the pencil icon to add a YouTube video." : "No video available."}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
