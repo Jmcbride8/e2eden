@@ -85,19 +85,34 @@ export default function Funding() {
                    <p className="text-white/70">Initial Proof of Concept Deployment</p>
                  </div>
 
-                 <div className="space-y-4 mb-8 flex-grow">
-                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                     <h4 className="text-white font-semibold mb-2 text-sm">Equipment & Setup</h4>
-                     <p className="text-amber-400 text-lg font-bold">$25K</p>
-                   </div>
-                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                     <h4 className="text-white font-semibold mb-2 text-sm">Operations (3 months)</h4>
-                     <p className="text-amber-400 text-lg font-bold">$15K</p>
-                   </div>
-                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                     <h4 className="text-white font-semibold mb-2 text-sm">Monitoring & Analysis</h4>
-                     <p className="text-amber-400 text-lg font-bold">$10K</p>
-                   </div>
+                 {/* Donut Chart */}
+                 <div className="mb-8 flex justify-center">
+                   <ResponsiveContainer width="100%" height={220}>
+                     <PieChart>
+                       <Pie
+                         data={[
+                           { name: "Equipment & Setup", value: 25000, fill: "#F59E0B" },
+                           { name: "Operations", value: 15000, fill: "#FBBF24" },
+                           { name: "Monitoring & Analysis", value: 10000, fill: "#FCD34D" }
+                         ]}
+                         cx="50%"
+                         cy="50%"
+                         innerRadius={50}
+                         outerRadius={80}
+                         paddingAngle={2}
+                         dataKey="value"
+                       >
+                         <Cell fill="#F59E0B" />
+                         <Cell fill="#FBBF24" />
+                         <Cell fill="#FCD34D" />
+                       </Pie>
+                       <Tooltip 
+                         formatter={(value) => `$${(value / 1000).toFixed(0)}K`}
+                         contentStyle={{ backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.2)" }}
+                         labelStyle={{ color: "#fff" }}
+                       />
+                     </PieChart>
+                   </ResponsiveContainer>
                  </div>
 
                  <div className="pt-6 border-t border-white/10">
