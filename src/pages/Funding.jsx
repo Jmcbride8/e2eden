@@ -45,100 +45,112 @@ export default function Funding() {
         </motion.div>
 
         {/* Capital Raise Target */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-white mb-6">Capital Raise: USA Pilot Project</h2>
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              {/* Hero Image */}
-              {usePilotProject?.hero_image && (
-                <div className="mb-8 rounded-xl overflow-hidden h-64 md:h-80">
-                  <img 
-                    src={usePilotProject.hero_image}
-                    alt="USA Pilot Project"
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: usePilotProject.hero_image_position || 'center center' }}
-                  />
-                </div>
-              )}
+         <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.6, delay: 0.3 }}
+           className="mb-16"
+         >
+           <h2 className="text-3xl font-bold text-white mb-8">Capital Raise: USA Pilot Project</h2>
 
-              <div className="mb-8">
-                <div className="text-4xl font-bold text-amber-400 mb-2">$5,000,000</div>
-                <p className="text-white/70">Total Capital Target for Imperial Valley Pilot Deployment</p>
-              </div>
+           {/* Main Content Grid */}
+           <div className="grid lg:grid-cols-2 gap-8">
+             {/* Left: Hero Image */}
+             {usePilotProject?.hero_image && (
+               <motion.div
+                 initial={{ opacity: 0, x: -20 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 transition={{ duration: 0.6, delay: 0.4 }}
+                 className="rounded-2xl overflow-hidden border border-white/10 h-96 lg:h-full min-h-96"
+               >
+                 <img 
+                   src={usePilotProject.hero_image}
+                   alt="USA Pilot Project"
+                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                   style={{ objectPosition: usePilotProject.hero_image_position || 'center center' }}
+                 />
+               </motion.div>
+             )}
 
-              {/* Chart and Breakdown Grid */}
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
-                {/* Donut Chart */}
-                <div className="flex items-center justify-center">
-                  <ResponsiveContainer width="100%" height={300}>
-                    <PieChart>
-                      <Pie
-                        data={costData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={80}
-                        outerRadius={120}
-                        paddingAngle={2}
-                        dataKey="value"
-                      >
-                        {costData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.fill} />
-                        ))}
-                      </Pie>
-                      <Tooltip 
-                        formatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
-                        contentStyle={{ backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.2)" }}
-                        labelStyle={{ color: "#fff" }}
-                      />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
+             {/* Right: Content */}
+             <motion.div
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6, delay: 0.4 }}
+               className="relative group"
+             >
+               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 h-full flex flex-col">
+                 <div className="mb-8">
+                   <div className="text-4xl font-bold text-amber-400 mb-2">$5,000,000</div>
+                   <p className="text-white/70">Total Capital Target for Imperial Valley Pilot Deployment</p>
+                 </div>
 
-                {/* Cost Breakdown */}
-                <div className="space-y-3">
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <h4 className="text-white font-semibold mb-2">Infrastructure & Equipment</h4>
-                    <p className="text-amber-400 text-lg font-bold mb-1">$2,500,000</p>
-                    <p className="text-white/60 text-sm">Cooling wall systems, irrigation infrastructure, and facility construction</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <h4 className="text-white font-semibold mb-2">Operations & Labor</h4>
-                    <p className="text-amber-400 text-lg font-bold mb-1">$1,500,000</p>
-                    <p className="text-white/60 text-sm">18-month operational costs, staffing, and maintenance</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <h4 className="text-white font-semibold mb-2">Research & Monitoring</h4>
-                    <p className="text-amber-400 text-lg font-bold mb-1">$750,000</p>
-                    <p className="text-white/60 text-sm">Data collection, analysis, and third-party verification</p>
-                  </div>
-                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                    <h4 className="text-white font-semibold mb-2">Contingency & Admin</h4>
-                    <p className="text-amber-400 text-lg font-bold mb-1">$250,000</p>
-                    <p className="text-white/60 text-sm">Risk mitigation and project administration</p>
-                  </div>
-                </div>
-              </div>
+                 {/* Donut Chart */}
+                 <div className="mb-8 flex justify-center">
+                   <ResponsiveContainer width="100%" height={250}>
+                     <PieChart>
+                       <Pie
+                         data={costData}
+                         cx="50%"
+                         cy="50%"
+                         innerRadius={60}
+                         outerRadius={90}
+                         paddingAngle={2}
+                         dataKey="value"
+                       >
+                         {costData.map((entry, index) => (
+                           <Cell key={`cell-${index}`} fill={entry.fill} />
+                         ))}
+                       </Pie>
+                       <Tooltip 
+                         formatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                         contentStyle={{ backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.2)" }}
+                         labelStyle={{ color: "#fff" }}
+                       />
+                     </PieChart>
+                   </ResponsiveContainer>
+                 </div>
 
-              <div className="pt-8 border-t border-white/10">
-                <p className="text-white/70 mb-4">
-                  This proof-of-concept deployment will validate technology performance, demonstrate economic viability, and establish a blueprint for global scaling.
-                </p>
-                <button
-                  onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
-                  className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
-                >
-                  Contact Investment Team
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+                 <div className="pt-6 border-t border-white/10 mt-auto">
+                   <p className="text-white/70 mb-4 text-sm">
+                     This proof-of-concept deployment will validate technology performance, demonstrate economic viability, and establish a blueprint for global scaling.
+                   </p>
+                   <button
+                     onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
+                     className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors w-full"
+                   >
+                     Contact Investment Team
+                   </button>
+                 </div>
+               </div>
+             </motion.div>
+           </div>
+
+           {/* Cost Breakdown Below */}
+           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+             <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+               <h4 className="text-white font-semibold mb-2 text-sm">Infrastructure & Equipment</h4>
+               <p className="text-amber-400 text-lg font-bold">$2.5M</p>
+               <p className="text-white/60 text-xs mt-1">Cooling walls, irrigation & facility</p>
+             </div>
+             <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+               <h4 className="text-white font-semibold mb-2 text-sm">Operations & Labor</h4>
+               <p className="text-amber-400 text-lg font-bold">$1.5M</p>
+               <p className="text-white/60 text-xs mt-1">18-month operations & staffing</p>
+             </div>
+             <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+               <h4 className="text-white font-semibold mb-2 text-sm">Research & Monitoring</h4>
+               <p className="text-amber-400 text-lg font-bold">$750K</p>
+               <p className="text-white/60 text-xs mt-1">Data collection & verification</p>
+             </div>
+             <div className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+               <h4 className="text-white font-semibold mb-2 text-sm">Contingency & Admin</h4>
+               <p className="text-amber-400 text-lg font-bold">$250K</p>
+               <p className="text-white/60 text-xs mt-1">Risk mitigation & administration</p>
+             </div>
+           </div>
+         </motion.div>
       </div>
 
       <DonationModal
