@@ -44,11 +44,83 @@ export default function Funding() {
           </p>
         </motion.div>
 
-        {/* Capital Raise Target */}
+        {/* Capital Raise Sections */}
+        <div className="space-y-16">
+         {/* $50K PoC Farm */}
          <motion.div
            initial={{ opacity: 0, y: 20 }}
            animate={{ opacity: 1, y: 0 }}
            transition={{ duration: 0.6, delay: 0.3 }}
+           className="mb-16"
+         >
+           <h2 className="text-3xl font-bold text-white mb-8">Capital Raise: Proof of Concept Farm</h2>
+           
+           {/* Main Content Grid */}
+           <div className="grid lg:grid-cols-2 gap-8">
+             {/* Left: Hero Image */}
+             <motion.div
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6, delay: 0.4 }}
+               className="rounded-2xl overflow-hidden border border-white/10 h-96 lg:h-full min-h-96"
+             >
+               <img 
+                 src="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/49ed4c6ca_ChatGPTImageApr21202603_30_44PM.png"
+                 alt="Proof of Concept Farm"
+                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+               />
+             </motion.div>
+
+             {/* Right: Content */}
+             <motion.div
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6, delay: 0.4 }}
+               className="relative group"
+             >
+               <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 h-full flex flex-col">
+                 <div className="mb-8">
+                   <div className="text-4xl font-bold text-amber-400 mb-2">$50,000</div>
+                   <p className="text-white/70">Initial Proof of Concept Deployment</p>
+                 </div>
+
+                 <div className="space-y-4 mb-8 flex-grow">
+                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                     <h4 className="text-white font-semibold mb-2 text-sm">Equipment & Setup</h4>
+                     <p className="text-amber-400 text-lg font-bold">$25K</p>
+                   </div>
+                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                     <h4 className="text-white font-semibold mb-2 text-sm">Operations (3 months)</h4>
+                     <p className="text-amber-400 text-lg font-bold">$15K</p>
+                   </div>
+                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                     <h4 className="text-white font-semibold mb-2 text-sm">Monitoring & Analysis</h4>
+                     <p className="text-amber-400 text-lg font-bold">$10K</p>
+                   </div>
+                 </div>
+
+                 <div className="pt-6 border-t border-white/10">
+                   <p className="text-white/70 mb-4 text-sm">
+                     Validate core technology with a small-scale deployment to prove concept viability and gather essential performance data.
+                   </p>
+                   <button
+                     onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
+                     className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors w-full"
+                   >
+                     Contact Investment Team
+                   </button>
+                 </div>
+               </div>
+             </motion.div>
+           </div>
+         </motion.div>
+
+         {/* $5M USA Pilot */}
+         <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 0.6, delay: 0.5 }}
            className="mb-16"
          >
            <h2 className="text-3xl font-bold text-white mb-8">Capital Raise: USA Pilot Project</h2>
@@ -56,21 +128,18 @@ export default function Funding() {
            {/* Main Content Grid */}
            <div className="grid lg:grid-cols-2 gap-8">
              {/* Left: Hero Image */}
-             {usePilotProject?.hero_image && (
-               <motion.div
-                 initial={{ opacity: 0, x: -20 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 transition={{ duration: 0.6, delay: 0.4 }}
-                 className="rounded-2xl overflow-hidden border border-white/10 h-96 lg:h-full min-h-96"
-               >
-                 <img 
-                   src={usePilotProject.hero_image}
-                   alt="USA Pilot Project"
-                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                   style={{ objectPosition: usePilotProject.hero_image_position || 'center center' }}
-                 />
-               </motion.div>
-             )}
+             <motion.div
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ duration: 0.6, delay: 0.6 }}
+               className="rounded-2xl overflow-hidden border border-white/10 h-96 lg:h-full min-h-96"
+             >
+               <img 
+                 src="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/c77b2ee30_ChatGPTImageApr21202603_25_40PM.png"
+                 alt="USA Pilot Project"
+                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+               />
+             </motion.div>
 
              {/* Right: Content */}
              <motion.div
@@ -151,6 +220,7 @@ export default function Funding() {
              </div>
            </div>
          </motion.div>
+        </div>
       </div>
 
       <DonationModal
