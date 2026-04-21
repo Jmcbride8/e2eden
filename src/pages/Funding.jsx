@@ -135,11 +135,11 @@ export default function Funding() {
 
               {/* Capital Raise Target */}
               <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mb-16"
-        >
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="mb-16"
+              >
           <h2 className="text-3xl font-bold text-white mb-6">Capital Raise: USA Pilot Project</h2>
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
