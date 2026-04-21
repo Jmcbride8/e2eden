@@ -34,102 +34,11 @@ export default function Funding() {
           </p>
         </motion.div>
 
-        {/* 1. Venture Investment */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-white mb-6">Venture Investment</h2>
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="p-3 rounded-xl bg-white/[0.06] text-blue-400">
-                  <Building2 className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    Strategic Investment
-                  </h3>
-                  <div className="text-xs uppercase tracking-wider text-white/40">
-                    From $5M+
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-white/70 leading-relaxed mb-4">
-                Partner with us on large-scale infrastructure projects that generate both environmental and financial returns. Clear milestones, ROI projections, and measurable impact metrics.
-              </p>
-              <button
-                onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 font-medium transition-colors border border-blue-500/20"
-              >
-                <TrendingUp className="w-4 h-4" />
-                Contact Us
-              </button>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 2. Project Fundraising */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-white mb-6">Project Opportunities</h2>
-            <h3 className="text-lg font-semibold text-white mb-4 text-white/80">Support our two flagship projects driving climate impact</h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.filter(p => p.status !== "completed" && p.phase !== "Transformation").map((project, idx) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.5 + idx * 0.1 }}
-                  className="relative group cursor-pointer rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden"
-                >
-                  <div className="relative h-48">
-                    {project.hero_image ? (
-                      <img 
-                        src={project.hero_image}
-                        alt={project.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                        style={{ objectPosition: project.hero_image_position || 'center center' }}
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h4 className="text-white font-semibold text-lg leading-tight drop-shadow-lg">
-                        {project.name}
-                      </h4>
-                      <p className="text-white/70 text-xs mt-1">{project.location}</p>
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <p className="text-sm text-white/70 leading-relaxed mb-3 line-clamp-2">
-                      {project.description}
-                    </p>
-                    <button
-                      onClick={() => setDonationModal({ isOpen: true, projectName: project.name })}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-medium transition-colors border border-amber-500/20 text-sm"
-                    >
-                      Donate to Project
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-         </motion.div>
-
         {/* Capital Raise Target */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-16"
         >
           <h2 className="text-3xl font-bold text-white mb-6">Capital Raise: USA Pilot Project</h2>
