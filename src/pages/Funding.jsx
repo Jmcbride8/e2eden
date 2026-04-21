@@ -109,20 +109,13 @@ export default function Funding() {
                        <Tooltip 
                          formatter={(value) => `$${(value / 1000).toFixed(0)}K`}
                          contentStyle={{ 
-                           backgroundColor: "rgba(0,0,0,0.95)", 
+                           backgroundColor: "#000000", 
                            border: "2px solid #F59E0B",
                            borderRadius: "8px",
-                           padding: "10px 14px",
-                           boxShadow: "0 4px 12px rgba(0,0,0,0.5)"
+                           padding: "12px 16px"
                          }}
-                         labelStyle={{ color: "#F59E0B", fontWeight: "600", fontSize: "14px" }}
-                         contentStyle={{
-                           backgroundColor: "rgba(0,0,0,0.95)",
-                           border: "2px solid #F59E0B",
-                           borderRadius: "8px",
-                           padding: "10px 14px",
-                           boxShadow: "0 4px 12px rgba(0,0,0,0.5)"
-                         }}
+                         labelStyle={{ color: "#FFFFFF", fontWeight: "700", fontSize: "16px" }}
+                         wrapperStyle={{ outline: "none" }}
                        />
                      </PieChart>
                    </ResponsiveContainer>
@@ -203,13 +196,13 @@ export default function Funding() {
                        <Tooltip 
                          formatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
                          contentStyle={{ 
-                           backgroundColor: "rgba(0,0,0,0.95)", 
+                           backgroundColor: "#000000", 
                            border: "2px solid #F59E0B",
                            borderRadius: "8px",
-                           padding: "10px 14px",
-                           boxShadow: "0 4px 12px rgba(0,0,0,0.5)"
+                           padding: "12px 16px"
                          }}
-                         labelStyle={{ color: "#F59E0B", fontWeight: "600", fontSize: "14px" }}
+                         labelStyle={{ color: "#FFFFFF", fontWeight: "700", fontSize: "16px" }}
+                         wrapperStyle={{ outline: "none" }}
                        />
                      </PieChart>
                    </ResponsiveContainer>
