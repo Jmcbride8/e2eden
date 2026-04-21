@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, Building2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import DonationModal from "../components/funding/DonationModal";
 import ContactModal from "../components/contact/ContactModal";
 
@@ -14,6 +15,15 @@ export default function Funding() {
     queryKey: ['projects'],
     queryFn: () => base44.entities.Project.list('sort_order'),
   });
+
+  const usePilotProject = projects.find(p => p.name && p.name.toLowerCase().includes('imperial valley'));
+
+  const costData = [
+    { name: "Infrastructure & Equipment", value: 2500000, fill: "#F59E0B" },
+    { name: "Operations & Labor", value: 1500000, fill: "#FBBF24" },
+    { name: "Research & Monitoring", value: 750000, fill: "#FCD34D" },
+    { name: "Contingency & Admin", value: 250000, fill: "#FEF08A" }
+  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -45,13 +55,53 @@ export default function Funding() {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+              {/* Hero Image */}
+              {usePilotProject?.hero_image && (
+                <div className="mb-8 rounded-xl overflow-hidden h-64 md:h-80">
+                  <img 
+                    src={usePilotProject.hero_image}
+                    alt="USA Pilot Project"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: usePilotProject.hero_image_position || 'center center' }}
+                  />
+                </div>
+              )}
+
               <div className="mb-8">
                 <div className="text-4xl font-bold text-amber-400 mb-2">$5,000,000</div>
                 <p className="text-white/70">Total Capital Target for Imperial Valley Pilot Deployment</p>
               </div>
-              
-              <div className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
+
+              {/* Chart and Breakdown Grid */}
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                {/* Donut Chart */}
+                <div className="flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={costData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={80}
+                        outerRadius={120}
+                        paddingAngle={2}
+                        dataKey="value"
+                      >
+                        {costData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        formatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
+                        contentStyle={{ backgroundColor: "rgba(0,0,0,0.8)", border: "1px solid rgba(255,255,255,0.2)" }}
+                        labelStyle={{ color: "#fff" }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Cost Breakdown */}
+                <div className="space-y-3">
                   <div className="p-4 rounded-lg bg-white/5 border border-white/10">
                     <h4 className="text-white font-semibold mb-2">Infrastructure & Equipment</h4>
                     <p className="text-amber-400 text-lg font-bold mb-1">$2,500,000</p>
@@ -75,7 +125,7 @@ export default function Funding() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-white/10">
+              <div className="pt-8 border-t border-white/10">
                 <p className="text-white/70 mb-4">
                   This proof-of-concept deployment will validate technology performance, demonstrate economic viability, and establish a blueprint for global scaling.
                 </p>
