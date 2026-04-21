@@ -150,48 +150,10 @@ export default function Funding() {
                <p className="text-white/60 text-xs mt-1">Risk mitigation & administration</p>
              </div>
            </div>
-           </motion.div>
+         </motion.div>
+      </div>
 
-           {/* Enabled Projects Section */}
-           <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.6, delay: 0.5 }}
-           className="mt-20"
-           >
-           <h2 className="text-3xl font-bold text-white mb-8">Projects Enabled by This Funding</h2>
-           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-             {projects.filter(p => p.phase === "Transformation").slice(0, 3).map((project, idx) =>
-               <motion.div
-                 key={project.id}
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                 className="relative rounded-xl overflow-hidden cursor-pointer group h-72 border border-white/10 hover:border-white/30 transition-all"
-               >
-                 {project.hero_image ? (
-                   <img
-                     src={project.hero_image}
-                     alt={project.name}
-                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                     style={{ objectPosition: project.hero_image_position || 'center center' }}
-                   />
-                 ) : (
-                   <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
-                 )}
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                   <h3 className="text-white font-bold text-lg">{project.name}</h3>
-                   <p className="text-amber-400 text-sm">{project.location}</p>
-                 </div>
-               </motion.div>
-             )}
-           </div>
-           </motion.div>
-           </div>
-
-           <DonationModal
+      <DonationModal
         isOpen={donationModal.isOpen}
         onClose={() => setDonationModal({ isOpen: false, projectName: null })}
         projectName={donationModal.projectName}
