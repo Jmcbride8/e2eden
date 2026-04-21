@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { TrendingUp, Building2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
 import DonationModal from "../components/funding/DonationModal";
 import ContactModal from "../components/contact/ContactModal";
 
@@ -15,13 +14,6 @@ export default function Funding() {
     queryKey: ['projects'],
     queryFn: () => base44.entities.Project.list('sort_order'),
   });
-
-  const budgetData = [
-    { name: "Infrastructure & Equipment", value: 2500000, color: "#f59e0b" },
-    { name: "Operations & Labor", value: 1500000, color: "#d97706" },
-    { name: "Research & Monitoring", value: 750000, color: "#b45309" },
-    { name: "Contingency & Admin", value: 250000, color: "#92400e" }
-  ];
 
   return (
     <div className="min-h-screen bg-black">
@@ -133,13 +125,13 @@ export default function Funding() {
               </div>
               </motion.div>
 
-              {/* Capital Raise Target */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="mb-16"
-              >
+        {/* Capital Raise Target */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-16"
+        >
           <h2 className="text-3xl font-bold text-white mb-6">Capital Raise: USA Pilot Project</h2>
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -148,56 +140,31 @@ export default function Funding() {
                 <div className="text-4xl font-bold text-amber-400 mb-2">$5,000,000</div>
                 <p className="text-white/70">Total Capital Target for Imperial Valley Pilot Deployment</p>
               </div>
-
-              <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-                <div>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <PieChart>
-                      <Pie
-                        data={budgetData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={80}
-                        outerRadius={120}
-                        paddingAngle={2}
-                        dataKey="value"
-                      >
-                        {budgetData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
-                        ))}
-                      </Pie>
-                      <Tooltip 
-                        formatter={(value) => `$${(value / 1000000).toFixed(1)}M`}
-                        contentStyle={{ backgroundColor: "#1f2937", border: "1px solid rgba(255,255,255,0.1)" }}
-                        labelStyle={{ color: "#fff" }}
-                      />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </div>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                      <h4 className="text-white font-semibold mb-2">Infrastructure & Equipment</h4>
-                      <p className="text-amber-400 text-lg font-bold mb-1">$2,500,000</p>
-                      <p className="text-white/60 text-sm">Cooling wall systems, irrigation infrastructure, and facility construction</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                      <h4 className="text-white font-semibold mb-2">Operations & Labor</h4>
-                      <p className="text-amber-400 text-lg font-bold mb-1">$1,500,000</p>
-                      <p className="text-white/60 text-sm">18-month operational costs, staffing, and maintenance</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                      <h4 className="text-white font-semibold mb-2">Research & Monitoring</h4>
-                      <p className="text-amber-400 text-lg font-bold mb-1">$750,000</p>
-                      <p className="text-white/60 text-sm">Data collection, analysis, and third-party verification</p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                      <h4 className="text-white font-semibold mb-2">Contingency & Admin</h4>
-                      <p className="text-amber-400 text-lg font-bold mb-1">$250,000</p>
-                      <p className="text-white/60 text-sm">Risk mitigation and project administration</p>
-                    </div>
+              
+              <div className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Infrastructure & Equipment</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$2,500,000</p>
+                    <p className="text-white/60 text-sm">Cooling wall systems, irrigation infrastructure, and facility construction</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Operations & Labor</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$1,500,000</p>
+                    <p className="text-white/60 text-sm">18-month operational costs, staffing, and maintenance</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Research & Monitoring</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$750,000</p>
+                    <p className="text-white/60 text-sm">Data collection, analysis, and third-party verification</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Contingency & Admin</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$250,000</p>
+                    <p className="text-white/60 text-sm">Risk mitigation and project administration</p>
                   </div>
                 </div>
+              </div>
 
               <div className="mt-8 pt-8 border-t border-white/10">
                 <p className="text-white/70 mb-4">
