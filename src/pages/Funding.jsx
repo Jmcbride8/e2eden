@@ -122,8 +122,8 @@ export default function Funding() {
                   </div>
                 </motion.div>
               ))}
-              </div>
-              </motion.div>
+            </div>
+         </motion.div>
 
         {/* Capital Raise Target */}
         <motion.div
