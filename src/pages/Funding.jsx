@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { TrendingUp, Heart, Building2, FileText } from "lucide-react";
+import { TrendingUp, Building2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import DonationModal from "../components/funding/DonationModal";
@@ -72,63 +72,15 @@ export default function Funding() {
           </div>
         </motion.div>
 
-        {/* 2. Donate */}
+        {/* 2. Project Fundraising */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-bold text-white mb-6">Donate</h2>
-          
-          {/* (a) E2Eden General */}
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold text-white mb-4">Support E2Eden</h3>
-            <div className="relative group overflow-hidden rounded-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative grid md:grid-cols-2 gap-0 bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden">
-                {/* Image Side */}
-                <div className="relative h-64 md:h-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&h=600&fit=crop"
-                    alt="Sustainable agriculture"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/60 md:to-black/80" />
-                </div>
-                
-                {/* Content Side */}
-                <div className="p-8">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-white/[0.06] text-pink-400">
-                      <Heart className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-white mb-1">
-                        General Fund
-                      </h3>
-                      <div className="text-xs uppercase tracking-wider text-white/40">
-                        Any amount
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-white/70 leading-relaxed mb-4">
-                    Make a direct impact through donations that fund research, training, and pilot programs in underserved regions.
-                  </p>
-                  <button
-                    onClick={() => setDonationModal({ isOpen: true, projectName: null })}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-medium transition-colors border border-pink-500/20"
-                  >
-                    Donate to E2Eden
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* (b) Projects */}
-          <div>
-            <h3 className="text-xl font-semibold text-white mb-4">Support Specific Projects</h3>
+          <h2 className="text-3xl font-bold text-white mb-6">Project Opportunities</h2>
+            <h3 className="text-lg font-semibold text-white mb-4 text-white/80">Support our two flagship projects driving climate impact</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.filter(p => p.status !== "completed" && p.phase !== "Transformation").map((project, idx) => (
                 <motion.div
@@ -170,41 +122,8 @@ export default function Funding() {
                   </div>
                 </motion.div>
               ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 3. Grants */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-white mb-6">Grants</h2>
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
-              <div className="flex items-start gap-4 mb-4">
-                <div className="p-3 rounded-xl bg-white/[0.06] text-green-400">
-                  <FileText className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    Community & Research Grants
-                  </h3>
-                  <div className="text-xs uppercase tracking-wider text-white/40">
-                    From $50K+
-                  </div>
-                </div>
               </div>
-              <p className="text-sm text-white/70 leading-relaxed">
-                Support grassroots projects that empower local communities through sustainable agriculture, renewable energy, and innovative water management solutions.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
+              </motion.div>
 
 
         {/* CTA */}
