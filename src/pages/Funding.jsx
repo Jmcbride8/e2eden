@@ -125,33 +125,59 @@ export default function Funding() {
               </div>
               </motion.div>
 
-
-        {/* CTA */}
+        {/* Capital Raise Target */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mt-12 text-center p-8"
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mb-16"
         >
-          <h3 className="text-2xl font-bold text-white mb-3">
-            Ready to Make a Difference?
-          </h3>
-          <p className="text-white/70 mb-6">
-            Contact our investment team to discuss opportunities that align with your goals and values.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <button
-              onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
-              className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
-            >
-              Contact Investment Team
-            </button>
-            <button
-              onClick={() => setContactModal({ isOpen: true, defaultReason: "Explore Partnerships" })}
-              className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium transition-colors border border-white/20"
-            >
-              Explore Partnerships
-            </button>
+          <h2 className="text-3xl font-bold text-white mb-6">Capital Raise: USA Pilot Project</h2>
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="mb-8">
+                <div className="text-4xl font-bold text-amber-400 mb-2">$5,000,000</div>
+                <p className="text-white/70">Total Capital Target for Imperial Valley Pilot Deployment</p>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Infrastructure & Equipment</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$2,500,000</p>
+                    <p className="text-white/60 text-sm">Cooling wall systems, irrigation infrastructure, and facility construction</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Operations & Labor</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$1,500,000</p>
+                    <p className="text-white/60 text-sm">18-month operational costs, staffing, and maintenance</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Research & Monitoring</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$750,000</p>
+                    <p className="text-white/60 text-sm">Data collection, analysis, and third-party verification</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                    <h4 className="text-white font-semibold mb-2">Contingency & Admin</h4>
+                    <p className="text-amber-400 text-lg font-bold mb-1">$250,000</p>
+                    <p className="text-white/60 text-sm">Risk mitigation and project administration</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-8 border-t border-white/10">
+                <p className="text-white/70 mb-4">
+                  This proof-of-concept deployment will validate technology performance, demonstrate economic viability, and establish a blueprint for global scaling.
+                </p>
+                <button
+                  onClick={() => setContactModal({ isOpen: true, defaultReason: "Venture Investment" })}
+                  className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-medium transition-colors"
+                >
+                  Contact Investment Team
+                </button>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
