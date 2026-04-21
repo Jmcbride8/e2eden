@@ -133,7 +133,7 @@ export default function Funding() {
               </div>
               </motion.div>
 
-        {/* Capital Raise Target */}
+              {/* Capital Raise Target */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
