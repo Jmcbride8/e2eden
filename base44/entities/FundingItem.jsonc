@@ -1,0 +1,36 @@
+{
+  "name": "FundingItem",
+  "type": "object",
+  "properties": {
+    "raise": {
+      "type": "string",
+      "enum": [
+        "poc",
+        "pilot"
+      ],
+      "description": "Which capital raise this item belongs to"
+    },
+    "label": {
+      "type": "string",
+      "description": "Category label"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Amount in USD"
+    },
+    "color": {
+      "type": "string",
+      "description": "Hex color for the chart segment"
+    },
+    "sort_order": {
+      "type": "number",
+      "description": "Display order"
+    }
+  },
+  "required": [
+    "raise",
+    "label",
+    "amount",
+    "color"
+  ]
+}
