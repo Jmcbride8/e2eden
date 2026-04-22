@@ -157,7 +157,7 @@ export default function Funding() {
             subtitle="Initial Proof of Concept Deployment"
             description="Validate core technology with a small-scale deployment to prove concept viability and gather essential performance data before scaling."
             chartData={pocData}
-            chartFormatter={(value) => [`$${(value / 1000).toFixed(0)}K`, ""]}
+            chartFormatter={(value, name) => [`$${(value / 1000).toFixed(0)}K`, name]}
             breakdown={[
               { label: "Equipment & Setup", value: "$25K", color: "#F59E0B" },
               { label: "Operations", value: "$15K", color: "#FBBF24" },
@@ -174,7 +174,7 @@ export default function Funding() {
             subtitle="Imperial Valley Pilot Deployment"
             description="Validate technology performance at scale, demonstrate economic viability, and establish a repeatable blueprint for global expansion."
             chartData={pilotData}
-            chartFormatter={(value) => [`$${(value / 1000000).toFixed(1)}M`, ""]}
+            chartFormatter={(value, name) => [`$${(value / 1000000).toFixed(1)}M`, name]}
             breakdown={[
               { label: "Infrastructure & Equipment", value: "$2.5M", color: "#F59E0B" },
               { label: "Operations & Labor", value: "$1.5M", color: "#FBBF24" },
