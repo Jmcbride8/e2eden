@@ -55,7 +55,7 @@ export default function ProjectDetails() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero */}
-      <div className="relative h-[60vh] overflow-hidden">
+      <div className="relative h-[72vh] overflow-hidden">
         {project.hero_image ? (
           <img
             src={project.hero_image}
