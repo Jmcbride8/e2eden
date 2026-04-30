@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Pencil, Check, X } from "lucide-react";
+import { MapPin, Calendar, Pencil, Check, X, Upload, Trash2 } from "lucide-react";
 import { createPageUrl } from "../utils";
 
 function getYouTubeEmbedUrl(url) {
@@ -18,6 +18,9 @@ export default function ProjectDetails() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [editingVideo, setEditingVideo] = useState(false);
   const [videoInput, setVideoInput] = useState("");
+  const [editingHero, setEditingHero] = useState(false);
+  const [editingGallery, setEditingGallery] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     base44.auth.me().then((u) => setIsAdmin(u?.role === "admin")).catch(() => {});
@@ -34,6 +37,27 @@ export default function ProjectDetails() {
     await base44.entities.Project.update(id, { video_url: videoInput });
     queryClient.invalidateQueries({ queryKey: ["project", id] });
     setEditingVideo(false);
+  };
+
+  const handleImageUpload = async (e, field) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      await base44.entities.Project.update(id, { [field]: file_url });
+      queryClient.invalidateQueries({ queryKey: ["project", id] });
+      setEditingHero(false);
+      setEditingGallery(false);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const removeGalleryImage = async (index) => {
+    const updated = project.images.filter((_, i) => i !== index);
+    await base44.entities.Project.update(id, { images: updated });
+    queryClient.invalidateQueries({ queryKey: ["project", id] });
   };
 
   if (isLoading) {
@@ -55,18 +79,41 @@ export default function ProjectDetails() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero */}
-      <div className="relative h-[72vh] overflow-hidden">
-        {project.hero_image ? (
-          <img
-            src={project.hero_image}
-            alt={project.name}
-            className="w-full h-full object-cover"
-            style={{ objectPosition: project.hero_image_position || "center center" }}
-          />
+      <div className="relative h-[72vh] overflow-hidden group">
+        {editingHero ? (
+          <div className="w-full h-full bg-black/80 flex items-center justify-center">
+            <label className="cursor-pointer">
+              <div className="flex flex-col items-center gap-3 text-white/60 hover:text-white transition-colors">
+                <Upload className="w-8 h-8" />
+                <span className="text-sm">Click to upload hero image</span>
+                <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, "hero_image")} className="hidden" disabled={uploading} />
+              </div>
+            </label>
+            {uploading && <p className="absolute text-white text-sm">Uploading...</p>}
+          </div>
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+          <>
+            {project.hero_image ? (
+              <img
+                src={project.hero_image}
+                alt={project.name}
+                className="w-full h-full object-cover"
+                style={{ objectPosition: project.hero_image_position || "center center" }}
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+            {isAdmin && (
+              <button
+                onClick={() => setEditingHero(true)}
+                className="absolute top-4 right-4 p-2 rounded-lg bg-black/60 hover:bg-black/80 text-white/60 hover:text-white transition-colors opacity-0 group-hover:opacity-100 z-20"
+              >
+                <Upload className="w-4 h-4" />
+              </button>
+            )}
+          </>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
         {/* Hero text */}
         <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 max-w-4xl">
@@ -150,19 +197,54 @@ export default function ProjectDetails() {
         )}
 
         {/* Image Gallery */}
-        {project.images?.length > 0 && (
+        {(project.images?.length > 0 || isAdmin) && (
           <div>
-            <SectionHeader index={5} label="Gallery" title="Gallery" />
-            <div className="grid sm:grid-cols-2 gap-4 mt-6">
-              {project.images.map((img, i) => (
-                <img
-                  key={i}
-                  src={img}
-                  alt={`${project.name} ${i + 1}`}
-                  className="w-full h-56 object-cover rounded-xl"
-                />
-              ))}
+            <div className="flex items-center justify-between mb-6">
+              <SectionHeader index={5} label="Gallery" title="Gallery" />
+              {isAdmin && !editingGallery && (
+                <button
+                  onClick={() => setEditingGallery(true)}
+                  className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white/60 hover:text-white transition-colors"
+                >
+                  <Pencil className="w-4 h-4" />
+                </button>
+              )}
             </div>
+            {editingGallery ? (
+              <div className="space-y-4">
+                <label className="block cursor-pointer">
+                  <div className="border-2 border-dashed border-white/20 rounded-xl p-8 text-center hover:border-white/40 transition-colors">
+                    <Upload className="w-6 h-6 mx-auto mb-2 text-white/40" />
+                    <p className="text-white/60 text-sm">Click to add image to gallery</p>
+                    <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, "images")} className="hidden" disabled={uploading} />
+                  </div>
+                </label>
+                {uploading && <p className="text-white/60 text-sm">Uploading...</p>}
+                <button onClick={() => setEditingGallery(false)} className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm transition-colors">Done</button>
+              </div>
+            ) : project.images?.length > 0 ? (
+              <div className="grid sm:grid-cols-2 gap-4 mt-6">
+                {project.images.map((img, i) => (
+                  <div key={i} className="relative group">
+                    <img
+                      src={img}
+                      alt={`${project.name} ${i + 1}`}
+                      className="w-full h-56 object-cover rounded-xl"
+                    />
+                    {isAdmin && editingGallery && (
+                      <button
+                        onClick={() => removeGalleryImage(i)}
+                        className="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500/80 hover:bg-red-600 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : isAdmin ? (
+              <p className="text-white/30 text-sm italic">No gallery images yet. Click edit to add some.</p>
+            ) : null}
           </div>
         )}
 
