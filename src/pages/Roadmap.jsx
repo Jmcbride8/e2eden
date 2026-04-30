@@ -16,8 +16,8 @@ export default function Roadmap() {
   const phaseOrder = { "R&D": 0, "US Commercialization": 1, "Salton Sea Transformation": 2, "Global Deployment": 3 };
   
   const legacyProjects = projects.filter((p) => p.company === "Seawater Greenhouse");
-  const e2edenProjects = projects.filter((p) => (p.company === "E2Eden" || !p.company) && p.category !== "Visionary");
-  const visionaryProjects = projects.filter((p) => p.category === "Visionary");
+  const e2edenProjects = projects.filter((p) => (p.company === "E2Eden" || !p.company) && p.category !== "Visionary" && p.phase !== "Transformation");
+  const visionaryProjects = projects.filter((p) => p.category === "Visionary" || p.phase === "Transformation");
   
   const filteredProjects =
     selectedPhase === "all"
