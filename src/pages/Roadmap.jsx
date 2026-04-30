@@ -6,7 +6,6 @@ import { CheckCircle2, Loader2, MapPin } from "lucide-react";
 
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("all");
-  const [viewMode, setViewMode] = useState("timeline");
 
   const { data: projects = [] } = useQuery({
     queryKey: ["projects"],
@@ -67,22 +66,7 @@ export default function Roadmap() {
             ))}
           </div>
 
-          {/* View Toggle */}
-          <div className="flex gap-2">
-            {["Timeline", "Gantt"].map((mode) => (
-              <button
-                key={mode}
-                onClick={() => setViewMode(mode.toLowerCase())}
-                className={`px-6 py-2 rounded-lg font-medium transition-all border-2 ${
-                  viewMode === mode.toLowerCase()
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-gray-800 border-gray-300 hover:border-blue-600"
-                }`}
-              >
-                {mode}
-              </button>
-            ))}
-          </div>
+
         </div>
 
         {/* Legacy Foundation Section */}
@@ -120,9 +104,8 @@ export default function Roadmap() {
           </motion.div>
         )}
 
-        {/* Timeline View */}
-        {viewMode === "timeline" && (
-          <div className="space-y-12">
+        {/* Timeline */}
+        <div className="space-y-12">
             {Object.entries(groupedByPhase).map(([phase, phaseProjects]) => (
               <motion.div
                 key={phase}
@@ -231,15 +214,7 @@ export default function Roadmap() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        )}
-
-        {/* Gantt View Placeholder */}
-        {viewMode === "gantt" && (
-          <div className="bg-gray-50 rounded-xl p-12 text-center">
-            <p className="text-gray-600 text-lg">Gantt view coming soon</p>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
