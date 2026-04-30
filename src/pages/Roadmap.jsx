@@ -12,7 +12,7 @@ export default function Roadmap() {
     queryFn: () => base44.entities.Project.list("sort_order"),
   });
 
-  const phaseOrder = { "R&D": 0, Commercialization: 1, Transformation: 2 };
+  const phaseOrder = { "R&D": 0, "US Commercialization": 1, "Salton Sea Transformation": 2, "Global Deployment": 3 };
   
   const legacyProjects = projects.filter((p) => p.company === "Seawater Greenhouse");
   const e2edenProjects = projects.filter((p) => p.company === "E2Eden" || !p.company);
@@ -40,18 +40,23 @@ export default function Roadmap() {
           className="text-center mb-12"
         >
           <h1 className="text-5xl sm:text-6xl font-bold text-black mb-5 tracking-tight">
-            Roadmap
+            Solving the Colorado River Crisis
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            From pioneering research to global transformation — our journey to make deserts bloom.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
+            E2Eden is bringing innovative saltwater cooling and farming technologies to the American Southwest to address the Colorado River water crisis. Our mission: configure proven technologies for the US context, scale production in the Southwest, transform the Salton Sea region, and then deploy this integrated farm + tunnel approach globally.
           </p>
+          <div className="inline-block px-6 py-3 bg-blue-50 border-2 border-blue-200 rounded-lg">
+            <p className="text-sm font-semibold text-blue-900">
+              From R&D validation → US Southwest commercialization → Salton Sea transformation → Global deployment
+            </p>
+          </div>
         </motion.div>
 
         {/* Controls */}
         <div className="flex flex-col sm:flex-row gap-6 justify-between items-center mb-16">
           {/* Phase Filters */}
           <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
-            {["All", "R&D", "Commercialization", "Transformation"].map((phase) => (
+            {["All", "R&D", "US Commercialization", "Salton Sea Transformation", "Global Deployment"].map((phase) => (
               <button
                 key={phase}
                 onClick={() => setSelectedPhase(phase === "All" ? "all" : phase)}
@@ -75,11 +80,11 @@ export default function Roadmap() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="mb-16 p-6 bg-gray-50 border-2 border-gray-300 rounded-xl"
+            className="mb-16 p-8 bg-blue-50 border-2 border-blue-300 rounded-xl"
           >
-            <h2 className="text-xl font-bold text-gray-700 mb-4">Building on Legacy</h2>
-            <p className="text-gray-600 mb-6">
-              We stand on the shoulders of pioneering work done by Seawater Greenhouse. These projects demonstrated the viability of saltwater evaporative cooling and established the foundation for our mission.
+            <h2 className="text-2xl font-bold text-blue-900 mb-4">Building on Legacy: Seawater Greenhouse Foundation</h2>
+            <p className="text-blue-800 mb-6 leading-relaxed">
+              E2Eden's approach builds directly on proven technologies from Seawater Greenhouse. Their groundbreaking projects demonstrated the viability and effectiveness of saltwater evaporative cooling and integrated farming systems. We're now applying these validated techniques to solve the Colorado River crisis and configure them for large-scale deployment in the US Southwest and beyond.
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               {legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
@@ -113,9 +118,21 @@ export default function Roadmap() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-2xl font-bold text-black mb-6 pb-3 border-b-2 border-gray-300">
-                  {phase.toUpperCase()} PHASE
+                <h2 className="text-2xl font-bold text-black mb-3 pb-3 border-b-2 border-gray-300">
+                  {phase.toUpperCase()}
                 </h2>
+                {phase === "US Commercialization" && (
+                  <p className="text-gray-700 text-sm mb-6 italic">Scale farming operations across the Southwest to demonstrate economic viability and establish our production blueprint.</p>
+                )}
+                {phase === "Salton Sea Transformation" && (
+                  <p className="text-gray-700 text-sm mb-6 italic">Deploy integrated farm + tunnel infrastructure to import water at scale, transform the region's microclimate, and revitalize the Salton Sea basin.</p>
+                )}
+                {phase === "Global Deployment" && (
+                  <p className="text-gray-700 text-sm mb-6 italic">Roll out proven farm and tunnel technologies worldwide to address water scarcity and create sustainable agricultural zones globally.</p>
+                )}
+                {phase === "R&D" && (
+                  <p className="text-gray-700 text-sm mb-6 italic">Validate core technologies and configure solutions for US context deployment.</p>
+                )}
 
                 <div className="relative">
                   {/* Vertical Line */}
