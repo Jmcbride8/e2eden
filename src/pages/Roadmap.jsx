@@ -14,10 +14,14 @@ export default function Roadmap() {
   });
 
   const phaseOrder = { "R&D": 0, Commercialization: 1, Transformation: 2 };
+  
+  const legacyProjects = projects.filter((p) => p.company === "Seawater Greenhouse");
+  const e2edenProjects = projects.filter((p) => p.company === "E2Eden" || !p.company);
+  
   const filteredProjects =
     selectedPhase === "all"
-      ? projects.sort((a, b) => (phaseOrder[a.phase] ?? 999) - (phaseOrder[b.phase] ?? 999))
-      : projects.filter((p) => p.phase === selectedPhase).sort((a, b) => (a.year || "").localeCompare(b.year || ""));
+      ? e2edenProjects.sort((a, b) => (phaseOrder[a.phase] ?? 999) - (phaseOrder[b.phase] ?? 999))
+      : e2edenProjects.filter((p) => p.phase === selectedPhase).sort((a, b) => (a.year || "").localeCompare(b.year || ""));
 
   const groupedByPhase = filteredProjects.reduce((acc, project) => {
     const phase = project.phase || "Other";
@@ -80,6 +84,41 @@ export default function Roadmap() {
             ))}
           </div>
         </div>
+
+        {/* Legacy Foundation Section */}
+        {legacyProjects.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 p-6 bg-gray-50 border-2 border-gray-300 rounded-xl"
+          >
+            <h2 className="text-xl font-bold text-gray-700 mb-4">Building on Legacy</h2>
+            <p className="text-gray-600 mb-6">
+              We stand on the shoulders of pioneering work done by Seawater Greenhouse. These projects demonstrated the viability of saltwater evaporative cooling and established the foundation for our mission.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
+                <div key={project.id} className="bg-white p-4 rounded-lg border border-gray-200">
+                  <div className="flex gap-4">
+                    {project.hero_image && (
+                      <img
+                        src={project.hero_image}
+                        alt={project.name}
+                        className="w-20 h-20 object-cover rounded flex-shrink-0"
+                      />
+                    )}
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-800 text-sm">{project.name}</h3>
+                      <p className="text-xs text-gray-500 mt-1">{project.location}</p>
+                      <p className="text-xs text-gray-600 font-medium mt-2">{project.year || "Date TBD"}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Timeline View */}
         {viewMode === "timeline" && (
