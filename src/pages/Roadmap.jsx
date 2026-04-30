@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { CheckCircle2, Loader2, MapPin } from "lucide-react";
+import PhaseCarousel from "@/components/roadmap/PhaseCarousel";
 
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("all");
@@ -145,128 +145,11 @@ export default function Roadmap() {
           </motion.div>
         )}
 
-        {/* Timeline */}
+        {/* Timeline Carousel */}
         <div className="space-y-12">
-            {Object.entries(groupedByPhase).map(([phase, phaseProjects]) => (
-              <motion.div
-                key={phase}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-2xl font-bold text-white mb-3 pb-3 border-b-2 border-white/20">
-                  {phase.toUpperCase()}
-                </h2>
-                {phase === "US Commercialization" && (
-                  <p className="text-white/70 text-sm mb-6 italic">Scale farming operations across the Southwest to demonstrate economic viability and establish our production blueprint.</p>
-                )}
-                {phase === "Salton Sea Transformation" && (
-                  <p className="text-white/70 text-sm mb-6 italic">Deploy integrated farm + tunnel infrastructure to import water at scale, transform the region's microclimate, and revitalize the Salton Sea basin.</p>
-                )}
-                {phase === "Global Deployment" && (
-                  <p className="text-white/70 text-sm mb-6 italic">Roll out proven farm and tunnel technologies worldwide to address water scarcity and create sustainable agricultural zones globally.</p>
-                )}
-                {phase === "R&D" && (
-                  <p className="text-white/70 text-sm mb-6 italic">Validate core technologies and configure solutions for US context deployment.</p>
-                )}
-
-                <div className="relative">
-                  {/* Vertical Line */}
-                  <div className="absolute left-6 top-0 bottom-0 w-1 bg-amber-400" />
-
-                  {/* Timeline Items */}
-                  <div className="space-y-6 ml-20">
-                    {phaseProjects.map((project, idx) => {
-                      const isCompleted = project.status === "completed";
-                      const isInProgress = project.status === "active";
-                      const milestoneCount = project.project_updates ? project.project_updates.split(",").length : 8;
-
-                      return (
-                        <motion.div
-                          key={project.id}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: idx * 0.1 }}
-                          className="relative"
-                        >
-                          {/* Marker */}
-                          <div className="absolute -left-16 top-6 w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-4 border-black shadow-md">
-                            {isCompleted ? (
-                              <CheckCircle2 className="w-6 h-6 text-black" />
-                            ) : isInProgress ? (
-                              <Loader2 className="w-6 h-6 text-black animate-spin" />
-                            ) : (
-                              <div className="w-2 h-2 bg-black rounded-full" />
-                            )}
-                          </div>
-
-                          {/* Card */}
-                          <div className="border-2 border-white/20 rounded-xl p-6 bg-white/5 hover:shadow-lg hover:shadow-amber-400/10 transition-shadow">
-                            <div className="flex gap-6">
-                              {/* Image */}
-                              {project.hero_image && (
-                                <img
-                                  src={project.hero_image}
-                                  alt={project.name}
-                                  className="w-32 h-32 object-cover rounded-lg flex-shrink-0"
-                                />
-                              )}
-
-                              {/* Content */}
-                              <div className="flex-1">
-                                {/* Status Badge */}
-                                <div className="mb-3">
-                                  <span
-                                    className={`inline-block px-3 py-1 text-xs font-bold rounded ${
-                                      isCompleted
-                                        ? "bg-white/20 text-white"
-                                        : isInProgress
-                                          ? "bg-amber-400/20 text-amber-400"
-                                          : "bg-white/10 text-white/70"
-                                    }`}
-                                  >
-                                    {isCompleted
-                                      ? `COMPLETED ${project.year}`
-                                      : isInProgress
-                                        ? `IN PROGRESS ${project.year}`
-                                        : `PLANNED ${project.year}`}
-                                  </span>
-                                </div>
-
-                                {/* Title */}
-                                <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
-
-                                {/* Location */}
-                                <div className="flex items-center gap-1 text-white/60 mb-4">
-                                  <MapPin className="w-4 h-4" />
-                                  <span>{project.location}</span>
-                                </div>
-
-                                {/* Milestones */}
-                                <div className="text-sm text-white/70 mb-3">
-                                  {milestoneCount} milestones
-                                </div>
-
-                                {/* Progress Bar */}
-                                <div className="w-full bg-white/10 rounded-full h-2">
-                                  <div
-                                    className="bg-amber-400 h-2 rounded-full"
-                                    style={{ width: isCompleted ? "100%" : isInProgress ? "75%" : "0%" }}
-                                  />
-                                </div>
-                                <div className="text-right text-sm text-white/50 mt-1">
-                                  {isCompleted ? "8/8" : isInProgress ? "6/8" : "0/8"}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          {Object.entries(groupedByPhase).map(([phase, phaseProjects]) => (
+            <PhaseCarousel key={phase} phase={phase} projects={phaseProjects} />
+          ))}
         </div>
       </div>
     </div>
