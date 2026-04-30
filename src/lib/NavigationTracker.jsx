@@ -10,8 +10,10 @@ export default function NavigationTracker() {
     const { Pages, mainPage } = pagesConfig;
     const mainPageKey = mainPage ?? Object.keys(Pages)[0];
 
-    // Log user activity when navigating to a page
+    // Scroll to top on route change and log user activity
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         // Extract page name from pathname
         const pathname = location.pathname;
         let pageName;
