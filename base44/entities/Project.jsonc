@@ -27,6 +27,15 @@
       },
       "description": "Project types"
     },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Core Initiative",
+        "Visionary"
+      ],
+      "default": "Core Initiative",
+      "description": "Project category"
+    },
     "phase": {
       "type": "string",
       "enum": [

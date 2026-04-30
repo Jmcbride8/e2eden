@@ -15,7 +15,8 @@ export default function Roadmap() {
   const phaseOrder = { "R&D": 0, "US Commercialization": 1, "Salton Sea Transformation": 2, "Global Deployment": 3 };
   
   const legacyProjects = projects.filter((p) => p.company === "Seawater Greenhouse");
-  const e2edenProjects = projects.filter((p) => p.company === "E2Eden" || !p.company);
+  const e2edenProjects = projects.filter((p) => (p.company === "E2Eden" || !p.company) && p.category !== "Visionary");
+  const visionaryProjects = projects.filter((p) => p.category === "Visionary");
   
   const filteredProjects =
     selectedPhase === "all"
@@ -73,6 +74,41 @@ export default function Roadmap() {
 
 
         </div>
+
+        {/* Visionary Projects Section */}
+        {visionaryProjects.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 p-8 bg-purple-50 border-2 border-purple-300 rounded-xl"
+          >
+            <h2 className="text-2xl font-bold text-purple-900 mb-4">Visionary Projects: Regional Transformation</h2>
+            <p className="text-purple-800 mb-6 leading-relaxed">
+              Large-scale regional transformation initiatives that reimagine landscapes and create new microclimate ecosystems through integrated saltwater infrastructure and sustainable agriculture.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              {visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
+                <div key={project.id} className="bg-white p-4 rounded-lg border border-gray-200">
+                  <div className="flex gap-4">
+                    {project.hero_image && (
+                      <img
+                        src={project.hero_image}
+                        alt={project.name}
+                        className="w-20 h-20 object-cover rounded flex-shrink-0"
+                      />
+                    )}
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-800 text-sm">{project.name}</h3>
+                      <p className="text-xs text-gray-500 mt-1">{project.location}</p>
+                      <p className="text-xs text-gray-600 font-medium mt-2">{project.year || "Date TBD"}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Legacy Foundation Section */}
         {legacyProjects.length > 0 && (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Wrench, Leaf, MapPin, ArrowLeft, Plus, Pencil, Trash2, GripVertical, Building2, Globe, Mail, Phone, ExternalLink } from "lucide-react";
+import { Wrench, Leaf, MapPin, ArrowLeft, Plus, Pencil, Trash2, GripVertical, Building2, Globe, Mail, Phone, ExternalLink, Sparkles } from "lucide-react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -206,6 +206,7 @@ export default function Projects() {
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Image</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Project</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Company</th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Category</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Type</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Location</th>
                   <th className="text-left px-6 py-4 text-sm font-semibold text-white/70">Year</th>
@@ -262,6 +263,16 @@ export default function Projects() {
                                       : 'bg-amber-500/10 text-amber-400'
                                   }`}>
                                     {project.company || 'E2Eden'}
+                                  </span>
+                                </td>
+                                <td className="px-6 py-4">
+                                  <span className={`text-xs font-medium px-2 py-1 rounded-md flex items-center gap-1 w-fit ${
+                                    project.category === 'Visionary'
+                                      ? 'bg-purple-500/10 text-purple-400'
+                                      : 'bg-gray-500/10 text-gray-400'
+                                  }`}>
+                                    {project.category === 'Visionary' && <Sparkles className="w-3 h-3" />}
+                                    {project.category || 'Core Initiative'}
                                   </span>
                                 </td>
                                 <td className="px-6 py-4">
