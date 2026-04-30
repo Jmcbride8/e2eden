@@ -383,13 +383,8 @@ export default function Home() {
                 isAdmin={isAdmin}
                 onUploaded={(url) => setHomeImg("innovation_hero", url)}
                 className="w-full rounded-2xl overflow-hidden"
-                imgClassName="w-full h-[44.2rem] object-cover rounded-2xl" />
+                imgClassName="w-full h-auto object-cover rounded-2xl" />
             </motion.div>
-
-            {/* Why It Works */}
-            <div className="text-center mt-12 mb-10">
-              <h3 className="text-3xl font-bold text-white mb-3">How it works</h3>
-            </div>
             <div className="grid md:grid-cols-3 gap-10">
               {[
                 {
