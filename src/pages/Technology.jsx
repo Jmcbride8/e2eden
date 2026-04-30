@@ -494,7 +494,7 @@ export default function Technology() {
             isAdmin={isAdmin}
             onUploaded={(url) => setHomeImg("innovation_hero", url)}
             className="w-full rounded-2xl overflow-hidden"
-            imgClassName="w-full h-[44.35rem] object-cover rounded-2xl" />
+            imgClassName="w-full h-[35.48rem] object-cover rounded-2xl" />
 
         </motion.div>
 
