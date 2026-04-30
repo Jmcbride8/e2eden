@@ -500,10 +500,54 @@ export default function Technology() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {[
-            { title: "What we use", icon: "💧", body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." },
-            { title: "What we replace", icon: "🌊", body: "Freshwater irrigation — the most precious resource on earth. By eliminating the need for fresh water in the cooling process and dramatically reducing crop transpiration, we cut total farm water demand by up to 90%." },
-            { title: "The physics", icon: "🔬", body: "Evaporative cooling is the same principle as sweating. As water evaporates, it absorbs heat. Our panels maximize the surface area for evaporation, creating the most efficient natural cooling system possible at agricultural scale." },
-            { title: "The scale", icon: "🌍", body: "The technology works at any scale — from a single farm to an entire region. Each wall protects a strip of land downwind. Walls can be arranged in arrays to protect hundreds of acres, creating a new form of climate infrastructure for food production." }].
+            { 
+              title: "What we use", 
+              icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="16" cy="8" r="4" fill="currentColor" opacity="0.6" />
+                  <path d="M16 12 L20 18 L12 18 Z" fill="currentColor" opacity="0.8" />
+                  <path d="M14 20 L18 26 L10 26 Z" fill="currentColor" opacity="0.5" />
+                  <path d="M20 20 L24 26 L16 26 Z" fill="currentColor" opacity="0.5" />
+                </svg>
+              ),
+              body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." 
+            },
+            { 
+              title: "What we replace", 
+              icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 14 Q8 6 16 6 Q24 6 24 14 L24 20 Q24 26 16 26 Q8 26 8 20 Z" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.3" />
+                  <circle cx="13" cy="12" r="2" fill="currentColor" opacity="0.7" />
+                  <circle cx="19" cy="14" r="2.5" fill="currentColor" opacity="0.6" />
+                  <circle cx="16" cy="20" r="1.5" fill="currentColor" opacity="0.5" />
+                </svg>
+              ),
+              body: "Freshwater irrigation — the most precious resource on earth. By eliminating the need for fresh water in the cooling process and dramatically reducing crop transpiration, we cut total farm water demand by up to 90%." 
+            },
+            { 
+              title: "The physics", 
+              icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="16" cy="16" r="10" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+                  <circle cx="16" cy="16" r="6" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+                  <circle cx="16" cy="16" r="3" fill="currentColor" opacity="0.8" />
+                  <path d="M16 6 L18 10 M16 26 L18 22 M6 16 L10 14 M26 16 L22 18" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+                </svg>
+              ),
+              body: "Evaporative cooling is the same principle as sweating. As water evaporates, it absorbs heat. Our panels maximize the surface area for evaporation, creating the most efficient natural cooling system possible at agricultural scale." 
+            },
+            { 
+              title: "The scale", 
+              icon: (
+                <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="4" y="10" width="4" height="16" fill="currentColor" opacity="0.4" />
+                  <rect x="10" y="8" width="4" height="18" fill="currentColor" opacity="0.6" />
+                  <rect x="16" y="6" width="4" height="20" fill="currentColor" opacity="0.8" />
+                  <rect x="22" y="10" width="4" height="16" fill="currentColor" opacity="0.5" />
+                </svg>
+              ),
+              body: "The technology works at any scale — from a single farm to an entire region. Each wall protects a strip of land downwind. Walls can be arranged in arrays to protect hundreds of acres, creating a new form of climate infrastructure for food production." 
+            }].
             map((item, idx) =>
             <motion.div
               key={idx}
@@ -513,7 +557,7 @@ export default function Technology() {
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               className="p-8 rounded-2xl bg-white/5 border border-white/10">
 
-                <div className="text-3xl mb-4">{item.icon}</div>
+                <div className="text-white/70 mb-4">{item.icon}</div>
                 <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                 <p className="text-white/60 leading-relaxed">{item.body}</p>
               </motion.div>
