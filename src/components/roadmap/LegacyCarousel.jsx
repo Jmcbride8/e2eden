@@ -41,28 +41,28 @@ export default function LegacyCarousel({ projects }) {
               transition={{ duration: 0.4, delay: idx * 0.05 }}
               className="flex-[0_0_100%] sm:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(33.333%-16px)] min-w-0"
             >
-              <div className="bg-white/5 p-4 rounded-lg border border-blue-400/20 hover:shadow-lg hover:shadow-blue-400/10 transition-shadow h-full flex flex-col">
+              <div className="border-2 border-white/20 rounded-xl p-6 bg-white/5 hover:shadow-lg hover:shadow-amber-400/10 transition-shadow h-full flex flex-col">
                 {/* Image */}
                 {project.hero_image && (
                   <img
                     src={project.hero_image}
                     alt={project.name}
-                    className="w-full h-40 object-cover rounded mb-4"
+                    className="w-full h-48 object-cover rounded-lg mb-4"
                   />
                 )}
 
                 {/* Title */}
-                <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">{project.name}</h3>
+                <h3 className="text-lg font-bold text-white mb-2 line-clamp-2">{project.name}</h3>
 
                 {/* Location */}
-                <div className="flex items-center gap-1 text-blue-300/70 mb-4">
-                  <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                  <span className="text-xs">{project.location}</span>
+                <div className="flex items-center gap-1 text-white/60 mb-4">
+                  <MapPin className="w-4 h-4 flex-shrink-0" />
+                  <span className="text-sm">{project.location}</span>
                 </div>
 
                 {/* Year */}
                 <div className="mt-auto">
-                  <p className="text-xs text-blue-300 font-medium">{project.year || "Date TBD"}</p>
+                  <p className="text-sm text-white/70">{project.year || "Date TBD"}</p>
                 </div>
               </div>
             </motion.div>
@@ -74,14 +74,14 @@ export default function LegacyCarousel({ projects }) {
       <button
         onClick={scrollPrev}
         disabled={prevBtnDisabled}
-        className="absolute -left-12 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-blue-400/20 text-blue-400 hover:bg-blue-400/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        className="absolute -left-12 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-amber-400/20 text-amber-400 hover:bg-amber-400/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={scrollNext}
         disabled={nextBtnDisabled}
-        className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-blue-400/20 text-blue-400 hover:bg-blue-400/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+        className="absolute -right-12 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-amber-400/20 text-amber-400 hover:bg-amber-400/30 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
@@ -92,7 +92,7 @@ export default function LegacyCarousel({ projects }) {
           <div
             key={idx}
             className={`h-2 rounded-full transition-all ${
-              idx === currentIndex ? "w-8 bg-blue-400" : "w-2 bg-white/20"
+              idx === currentIndex ? "w-8 bg-amber-400" : "w-2 bg-white/20"
             }`}
           />
         ))}
