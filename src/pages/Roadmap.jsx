@@ -4,6 +4,7 @@ import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import PhaseCarousel from "@/components/roadmap/PhaseCarousel";
 import LegacyCarousel from "@/components/roadmap/LegacyCarousel";
+import VisionaryCarousel from "@/components/roadmap/VisionaryCarousel";
 
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("all");
@@ -88,26 +89,7 @@ export default function Roadmap() {
             <p className="text-purple-200/80 mb-6 leading-relaxed">
               Large-scale regional transformation initiatives that reimagine landscapes and create new microclimate ecosystems through integrated saltwater infrastructure and sustainable agriculture.
             </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              {visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
-                <div key={project.id} className="bg-white/5 p-4 rounded-lg border border-purple-400/20">
-                  <div className="flex gap-4">
-                    {project.hero_image && (
-                      <img
-                        src={project.hero_image}
-                        alt={project.name}
-                        className="w-20 h-20 object-cover rounded flex-shrink-0"
-                      />
-                    )}
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-white text-sm">{project.name}</h3>
-                      <p className="text-xs text-white/50 mt-1">{project.location}</p>
-                      <p className="text-xs text-purple-300 font-medium mt-2">{project.year || "Date TBD"}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <VisionaryCarousel projects={visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
           </motion.div>
         )}
 
