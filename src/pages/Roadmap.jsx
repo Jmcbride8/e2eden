@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import PhaseCarousel from "@/components/roadmap/PhaseCarousel";
+import LegacyCarousel from "@/components/roadmap/LegacyCarousel";
 
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("all");
@@ -122,26 +123,7 @@ export default function Roadmap() {
             <p className="text-blue-200/80 mb-6 leading-relaxed">
               E2Eden's approach builds directly on proven technologies from Seawater Greenhouse. Their groundbreaking projects demonstrated the viability and effectiveness of saltwater evaporative cooling and integrated farming systems. We're now applying these validated techniques to solve the Colorado River crisis and configure them for large-scale deployment in the US Southwest and beyond.
             </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              {legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
-                <div key={project.id} className="bg-white/5 p-4 rounded-lg border border-blue-400/20">
-                  <div className="flex gap-4">
-                    {project.hero_image && (
-                      <img
-                        src={project.hero_image}
-                        alt={project.name}
-                        className="w-20 h-20 object-cover rounded flex-shrink-0"
-                      />
-                    )}
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-white text-sm">{project.name}</h3>
-                      <p className="text-xs text-white/50 mt-1">{project.location}</p>
-                      <p className="text-xs text-blue-300 font-medium mt-2">{project.year || "Date TBD"}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <LegacyCarousel projects={legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
           </motion.div>
         )}
 
