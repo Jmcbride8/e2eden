@@ -15,6 +15,7 @@ export default function Roadmap() {
   });
 
   const phaseOrder = { "R&D": 0, "US Commercialization": 1, "Salton Sea Transformation": 2, "Global Deployment": 3 };
+  const phaseList = ["R&D", "US Commercialization", "Salton Sea Transformation", "Global Deployment"];
   
   const legacyProjects = projects.filter((p) => p.company === "Seawater Greenhouse");
   const e2edenProjects = projects.filter((p) => (p.company === "E2Eden" || !p.company) && p.category !== "Visionary" && p.phase !== "Transformation");
@@ -25,10 +26,8 @@ export default function Roadmap() {
       ? e2edenProjects.sort((a, b) => (phaseOrder[a.phase] ?? 999) - (phaseOrder[b.phase] ?? 999))
       : e2edenProjects.filter((p) => p.phase === selectedPhase).sort((a, b) => (a.year || "").localeCompare(b.year || ""));
 
-  const groupedByPhase = filteredProjects.reduce((acc, project) => {
-    const phase = project.phase || "Other";
-    if (!acc[phase]) acc[phase] = [];
-    acc[phase].push(project);
+  const groupedByPhase = phaseList.reduce((acc, phase) => {
+    acc[phase] = filteredProjects.filter((p) => p.phase === phase);
     return acc;
   }, {});
 
