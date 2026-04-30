@@ -76,42 +76,44 @@ export default function Roadmap() {
 
         </div>
 
-        {/* Visionary Projects Section */}
-        {visionaryProjects.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="mb-16 p-8 bg-purple-900/20 border-2 border-purple-400/30 rounded-xl"
-          >
-            <h2 className="text-2xl font-bold text-purple-300 mb-4">Visionary Projects: Regional Transformation</h2>
-            <p className="text-purple-200/80 mb-6 leading-relaxed">
-              Large-scale regional transformation initiatives that reimagine landscapes and create new microclimate ecosystems through integrated saltwater infrastructure and sustainable agriculture.
-            </p>
-            <VisionaryCarousel projects={visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
-          </motion.div>
-        )}
-
-        {/* Legacy Foundation Section */}
-        {legacyProjects.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="mb-16 p-8 bg-blue-900/20 border-2 border-blue-400/30 rounded-xl"
-          >
-            <h2 className="text-2xl font-bold text-blue-300 mb-4">Building on Legacy: Seawater Greenhouse Foundation</h2>
-            <p className="text-blue-200/80 mb-6 leading-relaxed">
-              E2Eden's approach builds directly on proven technologies from Seawater Greenhouse. Their groundbreaking projects demonstrated the viability and effectiveness of saltwater evaporative cooling and integrated farming systems. We're now applying these validated techniques to solve the Colorado River crisis and configure them for large-scale deployment in the US Southwest and beyond.
-            </p>
-            <LegacyCarousel projects={legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
-          </motion.div>
-        )}
-
         {/* Timeline Carousel */}
         <div className="space-y-12">
           {Object.entries(groupedByPhase).map(([phase, phaseProjects]) => (
-            <PhaseCarousel key={phase} phase={phase} projects={phaseProjects} />
+            <div key={phase}>
+              <PhaseCarousel phase={phase} projects={phaseProjects} />
+              
+              {/* Visionary Projects under Global Deployment */}
+              {phase === "Global Deployment" && visionaryProjects.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="mt-12 p-8 bg-purple-900/20 border-2 border-purple-400/30 rounded-xl"
+                >
+                  <h2 className="text-2xl font-bold text-purple-300 mb-4">Visionary Projects: Regional Transformation</h2>
+                  <p className="text-purple-200/80 mb-6 leading-relaxed">
+                    Large-scale regional transformation initiatives that reimagine landscapes and create new microclimate ecosystems through integrated saltwater infrastructure and sustainable agriculture.
+                  </p>
+                  <VisionaryCarousel projects={visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
+                </motion.div>
+              )}
+
+              {/* Legacy Foundation under Global Deployment */}
+              {phase === "Global Deployment" && legacyProjects.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="mt-12 p-8 bg-blue-900/20 border-2 border-blue-400/30 rounded-xl"
+                >
+                  <h2 className="text-2xl font-bold text-blue-300 mb-4">Building on Legacy: Seawater Greenhouse Foundation</h2>
+                  <p className="text-blue-200/80 mb-6 leading-relaxed">
+                    E2Eden's approach builds directly on proven technologies from Seawater Greenhouse. Their groundbreaking projects demonstrated the viability and effectiveness of saltwater evaporative cooling and integrated farming systems. We're now applying these validated techniques to solve the Colorado River crisis and configure them for large-scale deployment in the US Southwest and beyond.
+                  </p>
+                  <LegacyCarousel projects={legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
+                </motion.div>
+              )}
+            </div>
           ))}
         </div>
       </div>
