@@ -13,7 +13,7 @@ export default function USAPilotProject() {
     queryFn: () => base44.entities.HomeContent.list()
   });
 
-  const homeContentMap = React.useMemo(() => {
+  const homeContentMap = useMemo(() => {
     const map = {};
     homeContentRecords.forEach((r) => {map[r.key] = r;});
     return map;
