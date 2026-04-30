@@ -31,7 +31,7 @@ export default function Roadmap() {
   }, {});
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       <div className="max-w-6xl mx-auto px-6 pt-32 pb-24 sm:px-8">
         {/* Header */}
         <motion.div
@@ -40,14 +40,14 @@ export default function Roadmap() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl sm:text-6xl font-bold text-black mb-5 tracking-tight">
+          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-5 tracking-tight">
             Solving the Colorado River Crisis
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
+          <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed mb-6">
             E2Eden is bringing innovative saltwater cooling and farming technologies to the American Southwest to address the Colorado River water crisis. Our mission: configure proven technologies for the US context, scale production in the Southwest, transform the Salton Sea region, and then deploy this integrated farm + tunnel approach globally.
           </p>
-          <div className="inline-block px-6 py-3 bg-blue-50 border-2 border-blue-200 rounded-lg">
-            <p className="text-sm font-semibold text-blue-900">
+          <div className="inline-block px-6 py-3 bg-amber-400/10 border-2 border-amber-400/30 rounded-lg">
+            <p className="text-sm font-semibold text-amber-400">
               From R&D validation → US Southwest commercialization → Salton Sea transformation → Global deployment
             </p>
           </div>
@@ -63,8 +63,8 @@ export default function Roadmap() {
                 onClick={() => setSelectedPhase(phase === "All" ? "all" : phase)}
                 className={`px-6 py-2 rounded-lg font-medium transition-all border-2 ${
                   selectedPhase === (phase === "All" ? "all" : phase)
-                    ? "bg-blue-600 text-white border-blue-600"
-                    : "bg-white text-gray-800 border-gray-300 hover:border-blue-600"
+                    ? "bg-amber-400 text-black border-amber-400"
+                    : "bg-black text-white/70 border-white/20 hover:border-amber-400"
                 }`}
               >
                 {phase}
@@ -81,15 +81,15 @@ export default function Roadmap() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="mb-16 p-8 bg-purple-50 border-2 border-purple-300 rounded-xl"
+            className="mb-16 p-8 bg-purple-900/20 border-2 border-purple-400/30 rounded-xl"
           >
-            <h2 className="text-2xl font-bold text-purple-900 mb-4">Visionary Projects: Regional Transformation</h2>
-            <p className="text-purple-800 mb-6 leading-relaxed">
+            <h2 className="text-2xl font-bold text-purple-300 mb-4">Visionary Projects: Regional Transformation</h2>
+            <p className="text-purple-200/80 mb-6 leading-relaxed">
               Large-scale regional transformation initiatives that reimagine landscapes and create new microclimate ecosystems through integrated saltwater infrastructure and sustainable agriculture.
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               {visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
-                <div key={project.id} className="bg-white p-4 rounded-lg border border-gray-200">
+                <div key={project.id} className="bg-white/5 p-4 rounded-lg border border-purple-400/20">
                   <div className="flex gap-4">
                     {project.hero_image && (
                       <img
@@ -99,9 +99,9 @@ export default function Roadmap() {
                       />
                     )}
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-800 text-sm">{project.name}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{project.location}</p>
-                      <p className="text-xs text-gray-600 font-medium mt-2">{project.year || "Date TBD"}</p>
+                      <h3 className="font-semibold text-white text-sm">{project.name}</h3>
+                      <p className="text-xs text-white/50 mt-1">{project.location}</p>
+                      <p className="text-xs text-purple-300 font-medium mt-2">{project.year || "Date TBD"}</p>
                     </div>
                   </div>
                 </div>
@@ -116,15 +116,15 @@ export default function Roadmap() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="mb-16 p-8 bg-blue-50 border-2 border-blue-300 rounded-xl"
+            className="mb-16 p-8 bg-blue-900/20 border-2 border-blue-400/30 rounded-xl"
           >
-            <h2 className="text-2xl font-bold text-blue-900 mb-4">Building on Legacy: Seawater Greenhouse Foundation</h2>
-            <p className="text-blue-800 mb-6 leading-relaxed">
+            <h2 className="text-2xl font-bold text-blue-300 mb-4">Building on Legacy: Seawater Greenhouse Foundation</h2>
+            <p className="text-blue-200/80 mb-6 leading-relaxed">
               E2Eden's approach builds directly on proven technologies from Seawater Greenhouse. Their groundbreaking projects demonstrated the viability and effectiveness of saltwater evaporative cooling and integrated farming systems. We're now applying these validated techniques to solve the Colorado River crisis and configure them for large-scale deployment in the US Southwest and beyond.
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               {legacyProjects.sort((a, b) => (b.year || "").localeCompare(a.year || "")).map((project) => (
-                <div key={project.id} className="bg-white p-4 rounded-lg border border-gray-200">
+                <div key={project.id} className="bg-white/5 p-4 rounded-lg border border-blue-400/20">
                   <div className="flex gap-4">
                     {project.hero_image && (
                       <img
@@ -134,9 +134,9 @@ export default function Roadmap() {
                       />
                     )}
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-800 text-sm">{project.name}</h3>
-                      <p className="text-xs text-gray-500 mt-1">{project.location}</p>
-                      <p className="text-xs text-gray-600 font-medium mt-2">{project.year || "Date TBD"}</p>
+                      <h3 className="font-semibold text-white text-sm">{project.name}</h3>
+                      <p className="text-xs text-white/50 mt-1">{project.location}</p>
+                      <p className="text-xs text-blue-300 font-medium mt-2">{project.year || "Date TBD"}</p>
                     </div>
                   </div>
                 </div>
@@ -154,25 +154,25 @@ export default function Roadmap() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-2xl font-bold text-black mb-3 pb-3 border-b-2 border-gray-300">
+                <h2 className="text-2xl font-bold text-white mb-3 pb-3 border-b-2 border-white/20">
                   {phase.toUpperCase()}
                 </h2>
                 {phase === "US Commercialization" && (
-                  <p className="text-gray-700 text-sm mb-6 italic">Scale farming operations across the Southwest to demonstrate economic viability and establish our production blueprint.</p>
+                  <p className="text-white/70 text-sm mb-6 italic">Scale farming operations across the Southwest to demonstrate economic viability and establish our production blueprint.</p>
                 )}
                 {phase === "Salton Sea Transformation" && (
-                  <p className="text-gray-700 text-sm mb-6 italic">Deploy integrated farm + tunnel infrastructure to import water at scale, transform the region's microclimate, and revitalize the Salton Sea basin.</p>
+                  <p className="text-white/70 text-sm mb-6 italic">Deploy integrated farm + tunnel infrastructure to import water at scale, transform the region's microclimate, and revitalize the Salton Sea basin.</p>
                 )}
                 {phase === "Global Deployment" && (
-                  <p className="text-gray-700 text-sm mb-6 italic">Roll out proven farm and tunnel technologies worldwide to address water scarcity and create sustainable agricultural zones globally.</p>
+                  <p className="text-white/70 text-sm mb-6 italic">Roll out proven farm and tunnel technologies worldwide to address water scarcity and create sustainable agricultural zones globally.</p>
                 )}
                 {phase === "R&D" && (
-                  <p className="text-gray-700 text-sm mb-6 italic">Validate core technologies and configure solutions for US context deployment.</p>
+                  <p className="text-white/70 text-sm mb-6 italic">Validate core technologies and configure solutions for US context deployment.</p>
                 )}
 
                 <div className="relative">
                   {/* Vertical Line */}
-                  <div className="absolute left-6 top-0 bottom-0 w-1 bg-blue-600" />
+                  <div className="absolute left-6 top-0 bottom-0 w-1 bg-amber-400" />
 
                   {/* Timeline Items */}
                   <div className="space-y-6 ml-20">
@@ -190,18 +190,18 @@ export default function Roadmap() {
                           className="relative"
                         >
                           {/* Marker */}
-                          <div className="absolute -left-16 top-6 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center border-4 border-white shadow-md">
+                          <div className="absolute -left-16 top-6 w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-4 border-black shadow-md">
                             {isCompleted ? (
-                              <CheckCircle2 className="w-6 h-6 text-white" />
+                              <CheckCircle2 className="w-6 h-6 text-black" />
                             ) : isInProgress ? (
-                              <Loader2 className="w-6 h-6 text-white animate-spin" />
+                              <Loader2 className="w-6 h-6 text-black animate-spin" />
                             ) : (
-                              <div className="w-2 h-2 bg-white rounded-full" />
+                              <div className="w-2 h-2 bg-black rounded-full" />
                             )}
                           </div>
 
                           {/* Card */}
-                          <div className="border-2 border-gray-300 rounded-xl p-6 bg-white hover:shadow-lg transition-shadow">
+                          <div className="border-2 border-white/20 rounded-xl p-6 bg-white/5 hover:shadow-lg hover:shadow-amber-400/10 transition-shadow">
                             <div className="flex gap-6">
                               {/* Image */}
                               {project.hero_image && (
@@ -217,12 +217,12 @@ export default function Roadmap() {
                                 {/* Status Badge */}
                                 <div className="mb-3">
                                   <span
-                                    className={`inline-block px-3 py-1 text-xs font-bold rounded text-white ${
+                                    className={`inline-block px-3 py-1 text-xs font-bold rounded ${
                                       isCompleted
-                                        ? "bg-gray-600"
+                                        ? "bg-white/20 text-white"
                                         : isInProgress
-                                          ? "bg-blue-600"
-                                          : "bg-gray-500"
+                                          ? "bg-amber-400/20 text-amber-400"
+                                          : "bg-white/10 text-white/70"
                                     }`}
                                   >
                                     {isCompleted
@@ -234,27 +234,27 @@ export default function Roadmap() {
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-2xl font-bold text-black mb-2">{project.name}</h3>
+                                <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
 
                                 {/* Location */}
-                                <div className="flex items-center gap-1 text-gray-600 mb-4">
+                                <div className="flex items-center gap-1 text-white/60 mb-4">
                                   <MapPin className="w-4 h-4" />
                                   <span>{project.location}</span>
                                 </div>
 
                                 {/* Milestones */}
-                                <div className="text-sm text-gray-700 mb-3">
+                                <div className="text-sm text-white/70 mb-3">
                                   {milestoneCount} milestones
                                 </div>
 
                                 {/* Progress Bar */}
-                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="w-full bg-white/10 rounded-full h-2">
                                   <div
-                                    className="bg-blue-600 h-2 rounded-full"
+                                    className="bg-amber-400 h-2 rounded-full"
                                     style={{ width: isCompleted ? "100%" : isInProgress ? "75%" : "0%" }}
                                   />
                                 </div>
-                                <div className="text-right text-sm text-gray-600 mt-1">
+                                <div className="text-right text-sm text-white/50 mt-1">
                                   {isCompleted ? "8/8" : isInProgress ? "6/8" : "0/8"}
                                 </div>
                               </div>
