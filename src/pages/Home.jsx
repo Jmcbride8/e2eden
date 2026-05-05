@@ -148,16 +148,7 @@ export default function Home() {
 
             Commercialization
           </Button>
-          <Button
-              onClick={() => setSelectedPhase("Transformation")}
-              className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "Transformation" ?
-              'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
-              'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
-              }>
 
-            Transformation
-          </Button>
         </div>
       </motion.div>
 
@@ -636,61 +627,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. Scale */}
-        <section className="py-24 px-6 sm:px-12 bg-black">
-          <div className="max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center">
-
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-px flex-1 bg-white/10" />
-                <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Global Vision</span>
-                <div className="h-px flex-1 bg-white/10" />
-              </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">Green the World, Feed the World
-
-              </h2>
-              <p className="text-xl leading-relaxed mb-8 text-white/70">
-                From Imperial Valley to Africa to the Middle East—our technology is designed for global deployment
-              </p>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {allProjects.filter(p => p.phase === "Transformation").sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0)).map((project, idx) =>
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: idx * 0.1 }}
-                  onClick={() => handleSelectProject(project)}
-                  className="relative rounded-2xl overflow-hidden cursor-pointer group h-64">
-
-                  {project.hero_image ?
-                    <img
-                      src={project.hero_image}
-                      alt={project.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{ objectPosition: project.hero_image_position || 'center center' }} /> :
-                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900" />
-                  }
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-left">
-                    <h3 className="text-white font-bold text-lg leading-tight">{project.name}</h3>
-                    <p className="text-amber-400 text-sm mt-1">{project.location}</p>
-                    <p className="text-white/60 text-xs mt-1 line-clamp-2">{project.description}</p>
-                  </div>
-                </motion.div>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* 7. Change the World */}
+        {/* 6. Change the World */}
         <section className="py-32 px-6 sm:px-12 bg-black">
           <div className="max-w-5xl mx-auto text-center">
             <motion.div

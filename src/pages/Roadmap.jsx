@@ -4,7 +4,6 @@ import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import PhaseCarousel from "@/components/roadmap/PhaseCarousel";
 import LegacyCarousel from "@/components/roadmap/LegacyCarousel";
-import VisionaryCarousel from "@/components/roadmap/VisionaryCarousel";
 
 export default function Roadmap() {
   const [selectedPhase, setSelectedPhase] = useState("all");
@@ -19,7 +18,6 @@ export default function Roadmap() {
   
   const legacyProjects = projects.filter((p) => p.company === "Seawater Greenhouse");
   const e2edenProjects = projects.filter((p) => (p.company === "E2Eden" || !p.company) && p.category !== "Visionary" && p.phase !== "Transformation");
-  const visionaryProjects = projects.filter((p) => p.category === "Visionary" || p.phase === "Transformation");
   
   const filteredProjects =
     selectedPhase === "all"
@@ -82,22 +80,6 @@ export default function Roadmap() {
             <div key={phase}>
               <PhaseCarousel phase={phase} projects={phaseProjects} />
               
-              {/* Visionary Projects under Global Deployment */}
-              {phase === "Global Deployment" && visionaryProjects.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="mt-12 p-8 bg-purple-900/20 border-2 border-purple-400/30 rounded-xl"
-                >
-                  <h2 className="text-2xl font-bold text-purple-300 mb-4">Visionary Projects: Regional Transformation</h2>
-                  <p className="text-purple-200/80 mb-6 leading-relaxed">
-                    Large-scale regional transformation initiatives that reimagine landscapes and create new microclimate ecosystems through integrated saltwater infrastructure and sustainable agriculture.
-                  </p>
-                  <VisionaryCarousel projects={visionaryProjects.sort((a, b) => (b.year || "").localeCompare(a.year || ""))} />
-                </motion.div>
-              )}
-
               {/* Legacy Foundation under Global Deployment */}
               {phase === "Global Deployment" && legacyProjects.length > 0 && (
                 <motion.div
