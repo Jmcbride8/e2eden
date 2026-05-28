@@ -140,9 +140,11 @@ export default function Home() {
                 }>
               Seawater Greenhouse
             </Button>
-            <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
-              The pioneer. Decades of global deployments that proved the science.
-            </p>
+            {selectedPhase === "Seawater Greenhouse" && (
+              <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
+                The pioneer. Decades of global deployments that proved the science.
+              </p>
+            )}
           </div>
           <div>
             <Button
@@ -154,9 +156,11 @@ export default function Home() {
                 }>
               Saltwater Farms
             </Button>
-            <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
-              The successor — reconfigured for the US, field crops at scale, and global transformation.
-            </p>
+            {selectedPhase === "Saltwater Farms" && (
+              <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
+                The successor — reconfigured for the US, field crops at scale, and global transformation.
+              </p>
+            )}
           </div>
         </div>
       </motion.div>
