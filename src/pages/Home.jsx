@@ -16,7 +16,7 @@ import { FertilizerChart, SaltwaterChart } from "../components/home/PopulationCh
 export default function Home() {
   const navigate = useNavigate();
   const [isPaused, setIsPaused] = useState(false);
-  const [selectedPhase, setSelectedPhase] = useState("R&D");
+  const [selectedPhase, setSelectedPhase] = useState("Seawater Greenhouse");
   const [isAdmin, setIsAdmin] = useState(false);
   const [uploadingBrand, setUploadingBrand] = useState(null);
   const scrollRef = useRef(null);
@@ -84,7 +84,9 @@ export default function Home() {
   };
 
   const projects = allProjects.filter((project) =>
-  project.phase === selectedPhase
+    selectedPhase === "Seawater Greenhouse"
+      ? project.company === "Seawater Greenhouse"
+      : project.company === "E2Eden" || !project.company
   );
 
   const handleSelectProject = useCallback((project) => {
@@ -129,24 +131,22 @@ export default function Home() {
         </p>
         <div className="flex flex-wrap gap-3 mt-3 mb-0 lg:mb-0">
           <Button
-              onClick={() => setSelectedPhase("R&D")}
+              onClick={() => setSelectedPhase("Seawater Greenhouse")}
               className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "R&D" ?
+              selectedPhase === "Seawater Greenhouse" ?
               'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
               'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
               }>
-
-            R&D
+            Seawater Greenhouse
           </Button>
           <Button
-              onClick={() => setSelectedPhase("Commercialization")}
+              onClick={() => setSelectedPhase("Saltwater Farms")}
               className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "Commercialization" ?
+              selectedPhase === "Saltwater Farms" ?
               'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
               'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
               }>
-
-            Commercialization
+            Saltwater Farms
           </Button>
 
         </div>
