@@ -129,26 +129,35 @@ export default function Home() {
         <p className="text-sm mt-2 leading-relaxed max-w-sm text-white/90">
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
-        <div className="flex flex-wrap gap-3 mt-3 mb-0 lg:mb-0">
-          <Button
-              onClick={() => setSelectedPhase("Seawater Greenhouse")}
-              className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "Seawater Greenhouse" ?
-              'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
-              'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
-              }>
-            Seawater Greenhouse
-          </Button>
-          <Button
-              onClick={() => setSelectedPhase("Saltwater Farms")}
-              className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
-              selectedPhase === "Saltwater Farms" ?
-              'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
-              'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
-              }>
-            Saltwater Farms
-          </Button>
-
+        <div className="flex flex-col gap-3 mt-3 mb-0 lg:mb-0">
+          <div>
+            <Button
+                onClick={() => setSelectedPhase("Seawater Greenhouse")}
+                className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+                selectedPhase === "Seawater Greenhouse" ?
+                'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
+                'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
+                }>
+              Seawater Greenhouse
+            </Button>
+            <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
+              The pioneer. Decades of global deployments that proved the science.
+            </p>
+          </div>
+          <div>
+            <Button
+                onClick={() => setSelectedPhase("Saltwater Farms")}
+                className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+                selectedPhase === "Saltwater Farms" ?
+                'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
+                'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
+                }>
+              Saltwater Farms
+            </Button>
+            <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
+              The successor — reconfigured for the US, field crops at scale, and global transformation.
+            </p>
+          </div>
         </div>
       </motion.div>
 
