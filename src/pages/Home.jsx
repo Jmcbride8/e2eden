@@ -16,7 +16,7 @@ import { FertilizerChart, SaltwaterChart } from "../components/home/PopulationCh
 export default function Home() {
   const navigate = useNavigate();
   const [isPaused, setIsPaused] = useState(false);
-  const [selectedPhase, setSelectedPhase] = useState("Seawater Greenhouse");
+  const [selectedPhase, setSelectedPhase] = useState("Saltwater Farms");
   const [isAdmin, setIsAdmin] = useState(false);
   const [uploadingBrand, setUploadingBrand] = useState(null);
   const scrollRef = useRef(null);
@@ -133,20 +133,22 @@ export default function Home() {
           <div className="flex flex-wrap gap-3">
             <Button
                 onClick={() => setSelectedPhase("Seawater Greenhouse")}
-                className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+                className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
                 selectedPhase === "Seawater Greenhouse" ?
                 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
                 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
                 }>
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png" alt="SGH" className="w-5 h-5 object-contain" />
               Seawater Greenhouse
             </Button>
             <Button
                 onClick={() => setSelectedPhase("Saltwater Farms")}
-                className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
+                className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
                 selectedPhase === "Saltwater Farms" ?
                 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
                 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
                 }>
+              <img src="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/387064630_SaltwaterFarming_Transparent.png" alt="Saltwater Farms" className="w-5 h-5 object-contain" />
               Saltwater Farms
             </Button>
           </div>
