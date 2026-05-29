@@ -138,7 +138,7 @@ export default function Home() {
                 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
                 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
                 }>
-              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png" alt="SGH" className="w-5 h-5 object-contain" />
+              <img src="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/839fcabd4_seawater_greenhouse_logo_white.png" alt="SGH" className="w-5 h-5 object-contain" />
               Seawater Greenhouse
             </Button>
             <Button
