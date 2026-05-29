@@ -148,7 +148,7 @@ export default function Home() {
                 'bg-amber-500/30 hover:bg-amber-500/40 text-white border border-amber-500/50' :
                 'bg-white/10 hover:bg-white/20 text-white/60 border border-white/20'}`
                 }>
-              <img src="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/44c585a4a_SaltwaterFarming_Transparent.png" alt="Saltwater Farms" className="w-6 h-6 object-contain" />
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/aba199569_Brand_Yellow.png" alt="E2Eden" className="w-5 h-5 object-contain" />
               Saltwater Farms
             </Button>
           </div>
