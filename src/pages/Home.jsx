@@ -129,8 +129,8 @@ export default function Home() {
         <p className="text-sm mt-2 leading-relaxed max-w-sm text-white/90">
           Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
         </p>
-        <div className="flex flex-col gap-3 mt-3 mb-0 lg:mb-0">
-          <div>
+        <div className="mt-3 mb-0 lg:mb-0">
+          <div className="flex flex-wrap gap-3">
             <Button
                 onClick={() => setSelectedPhase("Seawater Greenhouse")}
                 className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
@@ -140,13 +140,6 @@ export default function Home() {
                 }>
               Seawater Greenhouse
             </Button>
-            {selectedPhase === "Seawater Greenhouse" && (
-              <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
-                The pioneer. Decades of global deployments that proved the science.
-              </p>
-            )}
-          </div>
-          <div>
             <Button
                 onClick={() => setSelectedPhase("Saltwater Farms")}
                 className={`px-6 py-3 text-sm font-semibold rounded-lg backdrop-blur-sm transition-all ${
@@ -156,12 +149,17 @@ export default function Home() {
                 }>
               Saltwater Farms
             </Button>
-            {selectedPhase === "Saltwater Farms" && (
-              <p className="text-white/40 text-[11px] mt-1 ml-1 max-w-[220px]">
-                The successor — reconfigured for the US, field crops at scale, and global transformation.
-              </p>
-            )}
           </div>
+          {selectedPhase === "Seawater Greenhouse" && (
+            <p className="text-white/40 text-[11px] mt-2 max-w-[260px]">
+              The pioneer. Decades of global deployments that proved the science.
+            </p>
+          )}
+          {selectedPhase === "Saltwater Farms" && (
+            <p className="text-white/40 text-[11px] mt-2 max-w-[260px]">
+              The successor — reconfigured for the US, field crops at scale, and global transformation.
+            </p>
+          )}
         </div>
       </motion.div>
 
