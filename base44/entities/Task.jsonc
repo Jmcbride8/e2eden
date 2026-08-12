@@ -1,0 +1,52 @@
+{
+  "name": "Task",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Task title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Task description"
+    },
+    "assigned_to": {
+      "type": "string",
+      "description": "Email of assigned user"
+    },
+    "assigned_company": {
+      "type": "string",
+      "enum": [
+        "E2Eden",
+        "Seawater Greenhouse",
+        "Partner",
+        "Other"
+      ],
+      "description": "Company this task is assigned to"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "todo",
+        "in_progress",
+        "completed"
+      ],
+      "default": "todo",
+      "description": "Task status"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Due date"
+    }
+  },
+  "required": [
+    "title",
+    "assigned_company"
+  ]
+}

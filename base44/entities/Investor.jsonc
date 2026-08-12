@@ -1,0 +1,42 @@
+{
+  "name": "Investor",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Investor name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Investor email"
+    },
+    "investment_amount": {
+      "type": "number",
+      "description": "Investment amount in USD"
+    },
+    "ownership_percentage": {
+      "type": "number",
+      "description": "Calculated ownership percentage"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "Investment status"
+    },
+    "investment_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of investment"
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "investment_amount"
+  ]
+}

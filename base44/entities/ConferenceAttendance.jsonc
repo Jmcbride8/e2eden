@@ -1,0 +1,28 @@
+{
+  "name": "ConferenceAttendance",
+  "type": "object",
+  "properties": {
+    "conference_id": {
+      "type": "string",
+      "description": "ID of the conference"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of the user"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "attending",
+        "maybe",
+        "not_attending"
+      ],
+      "description": "Attendance status"
+    }
+  },
+  "required": [
+    "conference_id",
+    "user_email",
+    "status"
+  ]
+}

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import ProjectDetails from './pages/ProjectDetails';
 import USAPilotProject from './pages/USAPilotProject';
 import Roadmap from './pages/Roadmap';
@@ -18,6 +19,19 @@ const MainPage = mainPageKey ? Pages[mainPageKey] : <></>;
 const LayoutWrapper = ({ children, currentPageName }) => Layout ?
   <Layout currentPageName={currentPageName}>{children}</Layout>
   : <>{children}</>;
+
+// Pages that require a logged-in user (internal/admin tools).
+// All other pages remain publicly accessible when the app is set to Public.
+const PROTECTED_PAGES = new Set([
+  'CRM',
+  'TaskManager',
+  'CapTable',
+  'Conferences',
+  'Projects',
+  'UserManagement',
+  'ContactSubmissions',
+  'Profile',
+]);
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -56,7 +70,13 @@ const AuthenticatedApp = () => {
           path={`/${path}`}
           element={
             <LayoutWrapper currentPageName={path}>
-              <Page />
+              {PROTECTED_PAGES.has(path) ? (
+                <ProtectedRoute>
+                  <Page />
+                </ProtectedRoute>
+              ) : (
+                <Page />
+              )}
             </LayoutWrapper>
           }
         />

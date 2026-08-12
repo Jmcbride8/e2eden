@@ -1,0 +1,70 @@
+{
+  "name": "Lead",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Lead name or company"
+    },
+    "contact_person": {
+      "type": "string",
+      "description": "Contact person name"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "company": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "website": {
+      "type": "string",
+      "description": "Website URL"
+    },
+    "lead_type": {
+      "type": "string",
+      "enum": [
+        "Customer",
+        "Partnership",
+        "Investor",
+        "University",
+        "Government",
+        "NGO/Foundation",
+        "Media/Reporter",
+        "Supplier/Vendor",
+        "Community Leader",
+        "Consultant/Advisor"
+      ],
+      "description": "Type of lead for business categorization"
+    },
+    "lead_status": {
+      "type": "string",
+      "enum": [
+        "prospect",
+        "engaged",
+        "hot",
+        "cold",
+        "dead"
+      ],
+      "default": "prospect",
+      "description": "Lead status in pipeline"
+    },
+    "notes": {
+      "type": "string",
+      "description": "General notes about the lead"
+    },
+    "last_engaged": {
+      "type": "string",
+      "format": "date",
+      "description": "Last engagement date"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "TaskUpdate",
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "description": "ID of the task this update belongs to"
+    },
+    "comment": {
+      "type": "string",
+      "description": "Update comment or description"
+    },
+    "update_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the update"
+    }
+  },
+  "required": [
+    "task_id",
+    "comment",
+    "update_date"
+  ]
+}

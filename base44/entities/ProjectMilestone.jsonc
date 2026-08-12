@@ -1,0 +1,42 @@
+{
+  "name": "ProjectMilestone",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "ID of the parent project"
+    },
+    "title": {
+      "type": "string",
+      "description": "Milestone title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Milestone description"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Target or actual date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "active",
+        "completed"
+      ],
+      "default": "planned",
+      "description": "Milestone status"
+    },
+    "sort_order": {
+      "type": "number",
+      "description": "Display order within project"
+    }
+  },
+  "required": [
+    "project_id",
+    "title",
+    "status"
+  ]
+}

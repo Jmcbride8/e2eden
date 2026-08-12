@@ -1,0 +1,45 @@
+{
+  "name": "Conference",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Conference or meeting name"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Conference start date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Conference end date"
+    },
+    "location": {
+      "type": "string",
+      "description": "Conference location"
+    },
+    "link": {
+      "type": "string",
+      "description": "Conference website or registration link"
+    },
+    "cost": {
+      "type": "number",
+      "description": "Cost to attend (0 if free)"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Person who added this opportunity"
+    },
+    "description": {
+      "type": "string",
+      "description": "Additional details about the conference"
+    }
+  },
+  "required": [
+    "name",
+    "start_date",
+    "location"
+  ]
+}

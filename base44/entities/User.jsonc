@@ -1,0 +1,45 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "description": "User's first name"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "User's last name"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user",
+      "description": "User role"
+    },
+    "company": {
+      "type": "string",
+      "enum": [
+        "E2Eden",
+        "Seawater Greenhouse",
+        "Partner",
+        "Other"
+      ],
+      "description": "Company/organization designation"
+    },
+    "profile_picture": {
+      "type": "string",
+      "description": "URL to user's profile picture"
+    },
+    "profile_picture_position": {
+      "type": "string",
+      "description": "CSS object-position for profile picture",
+      "default": "center center"
+    }
+  },
+  "required": [
+    "company"
+  ]
+}

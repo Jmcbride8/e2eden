@@ -1,0 +1,18 @@
+{
+  "name": "HomeContent",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Unique key identifying the content slot (e.g. shortage_1, imperial_valley)"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "URL of the uploaded image"
+    }
+  },
+  "required": [
+    "key",
+    "image_url"
+  ]
+}

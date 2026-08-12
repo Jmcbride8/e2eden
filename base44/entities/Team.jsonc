@@ -1,0 +1,66 @@
+{
+  "name": "Team",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Team member name"
+    },
+    "role": {
+      "type": "string",
+      "description": "Job title or role"
+    },
+    "label": {
+      "type": "string",
+      "enum": [
+        "Team Member",
+        "Founder",
+        "Advisor",
+        "Mentor",
+        "Investor",
+        "Consultant",
+        "Partner",
+        "Board Member"
+      ],
+      "default": "Team Member",
+      "description": "Role label / badge shown on the card"
+    },
+    "section": {
+      "type": "string",
+      "enum": [
+        "Team",
+        "Partners"
+      ],
+      "default": "Team",
+      "description": "Which section this card appears in"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Industry or sector"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Short biography"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Profile picture URL"
+    },
+    "linkedin_url": {
+      "type": "string",
+      "description": "LinkedIn profile URL"
+    },
+    "education_logo_url": {
+      "type": "string",
+      "description": "University logo URL"
+    },
+    "sort_order": {
+      "type": "number",
+      "description": "Display order"
+    }
+  },
+  "required": [
+    "name",
+    "role"
+  ]
+}

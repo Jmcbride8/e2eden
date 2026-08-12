@@ -1,0 +1,76 @@
+{
+  "name": "Company",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Company logo image URL"
+    },
+    "full_brand_name": {
+      "type": "string",
+      "description": "Full legal brand name"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Partner",
+        "Investor",
+        "Supplier",
+        "Joint Venture",
+        "NGO",
+        "Government",
+        "Other"
+      ],
+      "description": "Company type/category"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner or founder name"
+    },
+    "contact_name": {
+      "type": "string",
+      "description": "Primary contact person"
+    },
+    "contact_email": {
+      "type": "string",
+      "description": "Primary contact email"
+    },
+    "contact_phone": {
+      "type": "string",
+      "description": "Primary contact phone"
+    },
+    "website": {
+      "type": "string",
+      "description": "Company website URL"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of headquarters"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief company description"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Internal notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "prospect"
+      ],
+      "default": "active",
+      "description": "Relationship status"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
