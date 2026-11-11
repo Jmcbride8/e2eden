@@ -670,11 +670,13 @@ export default function Home() {
                     Partner With Us
                   </Button>
                 </Link>
-                <Link to={createPageUrl("Funding")}>
-                  <Button variant="outline" className="px-10 py-7 text-xl font-semibold bg-transparent border-white/20 text-white hover:bg-white/10">
-                    Support Our Mission
-                  </Button>
-                </Link>
+                {isAdmin && (
+                  <Link to="/Funding">
+                    <Button variant="outline" className="px-10 py-7 text-xl font-semibold bg-transparent border-white/20 text-white hover:bg-white/10">
+                      Support Our Mission
+                    </Button>
+                  </Link>
+                )}
               </div>
             </motion.div>
           </div>

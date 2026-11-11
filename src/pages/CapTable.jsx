@@ -111,12 +111,14 @@ export default function CapTable() {
     <div className="min-h-screen bg-black">
       <div className="max-w-7xl mx-auto px-6 pt-24 pb-20 sm:px-8 sm:pt-28">
         {/* Back Button */}
-        <Link to={createPageUrl("Funding")}>
-          <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 mb-8">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Funding
-          </Button>
-        </Link>
+        {isAdmin && (
+          <Link to="/Funding">
+            <Button variant="ghost" className="text-white/70 hover:text-white hover:bg-white/10 mb-8">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Funding
+            </Button>
+          </Link>
+        )}
 
         {/* Header */}
         <motion.div

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '@/lib/AuthContext';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from './utils';
 import UserMenu from './components/navigation/UserMenu';
@@ -7,6 +8,7 @@ import TaskCounter from './components/navigation/TaskCounter.jsx';
 import ProjectsDropdown from './components/navigation/ProjectsDropdown';
 
 export default function Layout({ children, currentPageName }) {
+  const { user, isAuthenticated } = useAuth();
   return (
     <div className="min-h-screen bg-black">
       <div className="fixed top-6 left-6 sm:top-8 sm:left-8 z-50">
@@ -44,9 +46,11 @@ export default function Layout({ children, currentPageName }) {
           <Link to={createPageUrl("Roadmap")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
             Roadmap
           </Link>
-          <Link to={createPageUrl("Funding")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
-            Funding
-          </Link>
+          {isAuthenticated && user?.role === 'admin' && (
+            <Link to="/Funding" className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
+              Funding
+            </Link>
+          )}
           <Link to={createPageUrl("Partnerships")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
             Partnerships
           </Link>

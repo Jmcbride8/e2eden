@@ -1,10 +1,12 @@
 import React from "react";
+import { useAuth } from '@/lib/AuthContext';
 import { Link, useLocation } from "react-router-dom";
 import { Home, Lightbulb, Map, DollarSign, Handshake } from "lucide-react";
 import { createPageUrl } from "../../utils";
 
 export default function MobileNav() {
   const location = useLocation();
+  const { user, isAuthenticated } = useAuth();
   
   const navItems = [
     { name: "Home", icon: Home, path: createPageUrl("Home") },
@@ -17,7 +19,7 @@ export default function MobileNav() {
   return (
     <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-t border-white/10">
       <div className="flex items-center justify-around px-2 py-3">
-        {navItems.map((item) => {
+        {navItems.filter(item => item.name !== 'Funding' || (isAuthenticated && user?.role === 'admin')).map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
           
