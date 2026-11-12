@@ -20,6 +20,9 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
   <Layout currentPageName={currentPageName}>{children}</Layout>
   : <>{children}</>;
 
+// Pages only the admin can open; everyone else is sent home.
+const ADMIN_ONLY_PAGES = new Set(['Funding', 'Partnerships']);
+
 // Pages that require a logged-in user (internal/admin tools).
 // All other pages remain publicly accessible when the app is set to Public.
 const PROTECTED_PAGES = new Set([
@@ -70,7 +73,7 @@ const AuthenticatedApp = () => {
           path={`/${path}`}
           element={
             <LayoutWrapper currentPageName={path}>
-              {path === 'Funding' ? (
+              {ADMIN_ONLY_PAGES.has(path) ? (
                 isAuthenticated && user?.role === 'admin' ? <Page /> : <Navigate to="/" replace />
               ) : PROTECTED_PAGES.has(path) ? (
                 <ProtectedRoute>

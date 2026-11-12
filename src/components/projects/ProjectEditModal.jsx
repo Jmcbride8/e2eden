@@ -361,6 +361,16 @@ export default function ProjectEditModal({ project, onClose, onSave }) {
               </div>
 
               <div className="col-span-2">
+                <Label className="text-white/70">Video URL (YouTube)</Label>
+                <Input
+                  value={formData.video_url || ""}
+                  onChange={(e) => setFormData({ ...formData, video_url: e.target.value })}
+                  className="bg-white/[0.06] border-white/10 text-white"
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
+              </div>
+
+              <div className="col-span-2">
                 <Label className="text-white/70">Project Images</Label>
                 <div className="space-y-3">
                   {/* Image previews */}

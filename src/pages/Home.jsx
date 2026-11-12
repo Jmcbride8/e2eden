@@ -665,11 +665,13 @@ export default function Home() {
                 The next green revolution starts now. Join us.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to={createPageUrl("Partnerships")}>
-                  <Button className="bg-amber-500 hover:bg-amber-600 text-white px-10 py-7 text-xl font-semibold shadow-2xl shadow-amber-500/30">
-                    Partner With Us
-                  </Button>
-                </Link>
+                {isAdmin && (
+                  <Link to="/Partnerships">
+                    <Button className="bg-amber-500 hover:bg-amber-600 text-white px-10 py-7 text-xl font-semibold shadow-2xl shadow-amber-500/30">
+                      Partner With Us
+                    </Button>
+                  </Link>
+                )}
                 {isAdmin && (
                   <Link to="/Funding">
                     <Button variant="outline" className="px-10 py-7 text-xl font-semibold bg-transparent border-white/20 text-white hover:bg-white/10">

@@ -51,9 +51,11 @@ export default function Layout({ children, currentPageName }) {
               Funding
             </Link>
           )}
-          <Link to={createPageUrl("Partnerships")} className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
-            Partnerships
-          </Link>
+          {isAuthenticated && user?.role === 'admin' && (
+            <Link to="/Partnerships" className="px-4 py-2 text-sm rounded-lg transition-all text-white/70 hover:text-white hover:bg-white/10">
+              Partnerships
+            </Link>
+          )}
         </nav>
         <TaskCounter />
         <UserMenu />
