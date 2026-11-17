@@ -27,7 +27,14 @@
         "Partner",
         "Other"
       ],
-      "description": "Company/organization designation"
+      "description": "Company/organization designation (assigned by admins only)",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "profile_picture": {
       "type": "string",

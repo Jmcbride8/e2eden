@@ -21,18 +21,21 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
   : <>{children}</>;
 
 // Pages only the admin can open; everyone else is sent home.
-const ADMIN_ONLY_PAGES = new Set(['Funding', 'Partnerships']);
+const ADMIN_ONLY_PAGES = new Set([
+  'Funding',
+  'Partnerships',
+  'CRM',
+  'CapTable',
+  'Projects',
+  'UserManagement',
+  'ContactSubmissions',
+]);
 
 // Pages that require a logged-in user (internal/admin tools).
 // All other pages remain publicly accessible when the app is set to Public.
 const PROTECTED_PAGES = new Set([
-  'CRM',
   'TaskManager',
-  'CapTable',
   'Conferences',
-  'Projects',
-  'UserManagement',
-  'ContactSubmissions',
   'Profile',
 ]);
 
