@@ -369,7 +369,9 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         const world = marker.anchor.clone().applyMatrix4(globeGroup.matrixWorld);
         scratch.copy(camera.position).sub(world);
         const dist = scratch.length();
-        const facing = marker.anchor
+        // Judge visibility from the marker's rotated world position, so labels on
+        // every project surface as the globe turns (not just the starting half).
+        const facing = world
           .clone()
           .normalize()
           .dot(scratch.clone().normalize());
