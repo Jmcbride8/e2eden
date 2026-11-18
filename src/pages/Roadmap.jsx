@@ -25,16 +25,8 @@ const chapters = [
     description:
       "Three connected steps, each one earning the next: a small instrumented trial, an independently measured pilot, then a working commercial offer to growers.",
     phases: [
-      {
-        stage: "PHASE 1 · PROOF OF CONCEPT",
-        phase: "R&D",
-        image: "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/280b10ffe_generated_image.png",
-      },
-      {
-        stage: "PHASE 2 · AT-SCALE PILOT",
-        phase: "US Commercialization",
-        image: "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/1bbc30fe8_generated_image.png",
-      },
+      { stage: "PHASE 1 · PROOF OF CONCEPT", phase: "R&D" },
+      { stage: "PHASE 2 · AT-SCALE PILOT", phase: "US Commercialization" },
       {
         stage: "PHASE 3 · COMMERCIALIZATION",
         card: {
@@ -105,7 +97,7 @@ function CardShell({ stage, title, location, description, image, imageAlt }) {
   );
 }
 
-function ProjectCard({ project, stage, image }) {
+function ProjectCard({ project, stage }) {
   const statusLabel = project.status === "completed"
     ? "COMPLETED"
     : project.status === "active" ? "IN PROGRESS" : "PLANNED";
@@ -116,7 +108,7 @@ function ProjectCard({ project, stage, image }) {
       title={project.name}
       location={project.location}
       description={project.description}
-      image={image ?? project.hero_image}
+      image={project.hero_image}
       imageAlt={project.name}
     />
   );
@@ -155,7 +147,7 @@ function ChapterSection({ chapter, projects }) {
         .map((phase) => {
           if (phase.card) return { key: phase.stage, stage: phase.stage, card: phase.card };
           const project = chapterProjects.find((p) => p.phase === phase.phase);
-          return project ? { key: project.id, stage: phase.stage, image: phase.image, project } : null;
+          return project ? { key: project.id, stage: phase.stage, project } : null;
         })
         .filter(Boolean)
     : [...chapterProjects]
@@ -180,7 +172,7 @@ function ChapterSection({ chapter, projects }) {
           {cards.map((item) =>
             item.card
               ? <PhaseCard key={item.key} stage={item.stage} card={item.card} />
-              : <ProjectCard key={item.key} project={item.project} stage={item.stage} image={item.image} />
+              : <ProjectCard key={item.key} project={item.project} stage={item.stage} />
           )}
         </div>
       )}
