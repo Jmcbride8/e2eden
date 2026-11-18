@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import { MapPin } from "lucide-react";
+import SaltonSeaInfrastructure from "@/components/roadmap/SaltonSeaInfrastructure";
 
 // ─── Static narrative chapters ───────────────────────────────────────────────
 const chapters = [
@@ -113,6 +114,7 @@ function ChapterSection({ chapter, projects }) {
             ))}
         </div>
       )}
+      {chapter.id === "regional" && <SaltonSeaInfrastructure />}
     </section>
   );
 }
