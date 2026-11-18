@@ -203,7 +203,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
                 onClick={() => handleSelectProject(project)}
-                className="relative flex-shrink-0 w-36 h-24 rounded-lg overflow-hidden cursor-pointer group">
+                className="relative flex-shrink-0 w-36 h-[110px] rounded-lg overflow-hidden cursor-pointer group">
 
                 {project.hero_image ?
                 <img
@@ -261,7 +261,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.9 + idx * 0.05 }}
               onClick={() => handleSelectProject(project)}
-              className="relative h-40 rounded-xl overflow-hidden cursor-pointer group">
+              className="relative h-[184px] rounded-xl overflow-hidden cursor-pointer group">
 
             {project.hero_image ?
               <img
