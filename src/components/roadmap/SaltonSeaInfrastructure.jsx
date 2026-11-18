@@ -22,7 +22,7 @@ const illustrations = {
 export default function SaltonSeaInfrastructure() {
   return (
     <div id="salton-sea-infrastructure">
-      <p className="mb-7 max-w-[68ch] text-base leading-relaxed text-secondary/75">
+      <p className="mb-7 text-pretty text-base leading-relaxed text-secondary/75 sm:text-lg">
         Bring Pacific seawater to the Salton Sea at regional scale, then route lake brine inland to cool farms and manage the remaining salt. The import system is not a prerequisite for the earlier field trials or pilot.
       </p>
       <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary/60">The proposed system · E2Eden’s 2023 concept</p>

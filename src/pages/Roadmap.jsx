@@ -156,7 +156,7 @@ function ChapterSection({ chapter, projects }) {
 
   return (
     <section aria-labelledby={`roadmap-${chapter.id}`}>
-      <header className="mb-7 max-w-3xl sm:mb-9">
+      <header className="mb-7 sm:mb-9">
         <p className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs">
           <span className="font-semibold tracking-[0.16em] text-secondary/[0.85]">{chapter.act}</span>
           <span className="text-secondary/60">{chapter.label}</span>
@@ -164,7 +164,7 @@ function ChapterSection({ chapter, projects }) {
         <h2 id={`roadmap-${chapter.id}`} className="mb-3 text-2xl font-semibold leading-tight tracking-tight text-background sm:text-4xl">
           {chapter.title}
         </h2>
-        <p className="max-w-[68ch] text-base leading-relaxed text-secondary/75">{chapter.description}</p>
+        <p className="text-pretty text-base leading-relaxed text-secondary/75 sm:text-lg">{chapter.description}</p>
       </header>
 
       {cards.length > 0 && (
@@ -211,10 +211,10 @@ export default function Roadmap() {
           className="mb-10 border-b border-border/20 pb-8 sm:mb-12 sm:pb-12"
         >
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-amber-400">The Story So Far</p>
-          <h1 className="mb-5 max-w-3xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-background sm:text-6xl">
+          <h1 className="mb-5 max-w-4xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-background sm:text-6xl">
             From Desert Labs to the Colorado River
           </h1>
-          <p className="max-w-[62ch] text-base leading-relaxed text-secondary/75 sm:text-lg">
+          <p className="text-pretty text-base leading-relaxed text-secondary/75 sm:text-lg">
             A proven technology. A new context. A profound outcome. Here's how we get from thirty years of global innovation to freeing up the water that powers the American Southwest.
           </p>
         </motion.div>
