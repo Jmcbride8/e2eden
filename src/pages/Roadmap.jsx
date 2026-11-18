@@ -2,8 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
-import { MapPin, ArrowDown } from "lucide-react";
-import LegacyCarousel from "@/components/roadmap/LegacyCarousel";
+import { MapPin } from "lucide-react";
 
 // ─── Static narrative chapters ───────────────────────────────────────────────
 const chapters = [
@@ -12,11 +11,6 @@ const chapters = [
     act: "ACT I",
     label: "The Technology Is Proven",
     title: "Decades of Seawater Greenhouse Innovation",
-    color: "blue",
-    borderClass: "border-blue-400/40",
-    bgClass: "bg-blue-900/15",
-    accentClass: "text-blue-300",
-    badgeClass: "bg-blue-400/20 text-blue-300 border border-blue-400/30",
     description:
       "Decades of Seawater Greenhouse projects show that saline water can cool protected crops in dry climates. E2Eden is building on that work to ask a different question: how much net freshwater can the same principle save in open or semi-open fields?",
     projects: "seawater_greenhouse",
@@ -26,11 +20,6 @@ const chapters = [
     act: "ACT II · PHASE 1",
     label: "The US Insight",
     title: "Grant-Supported Proof of Concept",
-    color: "amber",
-    borderClass: "border-amber-400/40",
-    bgClass: "bg-amber-900/10",
-    accentClass: "text-amber-400",
-    badgeClass: "bg-amber-400/20 text-amber-400 border border-amber-400/30",
     description:
       "E2Eden is pursuing grant support for a small, instrumented field test. The first site is not fixed. The goal is to measure cooling reach, check salt and brine handling, and identify which configurations merit a larger crop trial. Open-field water savings have not yet been established.",
     phase: "R&D",
@@ -40,11 +29,6 @@ const chapters = [
     act: "ACT II · PHASE 2",
     label: "At-Scale Deployment",
     title: "UC Desert Research & Extension Center",
-    color: "amber",
-    borderClass: "border-amber-400/40",
-    bgClass: "bg-amber-900/10",
-    accentClass: "text-amber-400",
-    badgeClass: "bg-amber-400/20 text-amber-400 border border-amber-400/30",
     description:
       "The proposed second-site pilot at UC Desert Research & Extension Center in Holtville would compare cooled and untreated plots and independently measure net freshwater savings, crop performance and costs. E2Eden would bring those results to the Imperial Irrigation District and other water managers to seek conservation incentive eligibility. No rebate or payment is assumed.",
     phase: "US Commercialization",
@@ -54,11 +38,6 @@ const chapters = [
     act: "ACT II · PHASE 3",
     label: "Regional Transformation",
     title: "Commercial Deployment Across the Southwest",
-    color: "amber",
-    borderClass: "border-amber-400/40",
-    bgClass: "bg-amber-900/10",
-    accentClass: "text-amber-400",
-    badgeClass: "bg-amber-400/20 text-amber-400 border border-amber-400/30",
     description:
       "Commercial deployment would start with heat-sensitive specialty crops, where a longer growing window, better quality or an additional harvest could justify the investment. Larger-acreage field crops come later, once the model works commercially and a conservation payment mechanism is in place. Any benefits for the Salton Sea would require separate hydrological and environmental study.",
     phase: "Salton Sea Transformation",
@@ -66,46 +45,37 @@ const chapters = [
 ];
 
 // ─── Project Card ─────────────────────────────────────────────────────────────
-function ProjectCard({ project, accentClass }) {
+function ProjectCard({ project }) {
   const isCompleted = project.status === "completed";
   const isActive = project.status === "active";
 
   return (
-    <div className="border border-white/15 rounded-xl overflow-hidden bg-white/5 hover:bg-white/8 transition-all flex flex-col">
+    <article className="flex flex-col overflow-hidden rounded-xl border border-border/[0.15] bg-muted/5">
       {project.hero_image && (
         <img
           src={project.hero_image}
           alt={project.name}
-          className="w-full h-44 object-cover"
+          className="aspect-[16/10] w-full object-cover"
           style={{ objectPosition: project.hero_image_position || "center center" }}
         />
       )}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="mb-3">
-          <span
-            className={`inline-block px-2 py-0.5 text-[11px] font-bold rounded ${
-              isCompleted
-                ? "bg-white/15 text-white/70"
-                : isActive
-                ? "bg-amber-400/20 text-amber-400"
-                : "bg-white/8 text-white/50"
-            }`}
-          >
-            {isCompleted ? `COMPLETED ${project.year || ""}` : isActive ? `IN PROGRESS ${project.year || ""}` : `PLANNED ${project.year || ""}`}
-          </span>
-        </div>
-        <h3 className="text-base font-bold text-white mb-2 leading-snug">{project.name}</h3>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <p className="mb-3 text-[11px] font-semibold tracking-[0.14em] text-secondary/60">
+          {isCompleted ? "COMPLETED" : isActive ? "IN PROGRESS" : "PLANNED"}
+          {project.year && ` · ${project.year}`}
+        </p>
+        <h3 className="mb-2 text-lg font-semibold leading-snug text-background">{project.name}</h3>
         {project.location && (
-          <div className="flex items-center gap-1 text-white/50 mb-3">
-            <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+          <div className="mb-3 flex items-center gap-1.5 text-secondary/60">
+            <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
             <span className="text-xs">{project.location}</span>
           </div>
         )}
         {project.description && (
-          <p className="text-white/60 text-xs leading-relaxed line-clamp-3">{project.description}</p>
+          <p className="text-sm leading-relaxed text-secondary/75">{project.description}</p>
         )}
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -121,56 +91,38 @@ function ChapterSection({ chapter, projects }) {
       );
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7 }}
-      className={`rounded-2xl border-2 ${chapter.borderClass} ${chapter.bgClass} p-8 sm:p-10`}
-    >
-      {/* Act label */}
-      <div className="mb-4">
-        <span className={`text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full ${chapter.badgeClass}`}>
-          {chapter.act}
-        </span>
-      </div>
-
-      {/* Eyebrow */}
-      <p className={`text-sm font-semibold uppercase tracking-widest mb-2 ${chapter.accentClass}`}>
-        {chapter.label}
-      </p>
-
-      {/* Title */}
-      <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 leading-tight">{chapter.title}</h2>
-
-      {/* Description */}
-      <p className="text-white/70 text-base leading-relaxed max-w-3xl mb-8">{chapter.description}</p>
+    <section aria-labelledby={`roadmap-${chapter.id}`}>
+      <header className="mb-7 max-w-3xl sm:mb-9">
+        <p className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs">
+          <span className="font-semibold tracking-[0.16em] text-secondary/[0.85]">{chapter.act}</span>
+          <span className="text-secondary/60">{chapter.label}</span>
+        </p>
+        <h2 id={`roadmap-${chapter.id}`} className="mb-3 text-2xl font-semibold leading-tight tracking-tight text-background sm:text-4xl">
+          {chapter.title}
+        </h2>
+        <p className="max-w-[68ch] text-base leading-relaxed text-secondary/75">{chapter.description}</p>
+      </header>
 
       {/* Projects Grid */}
       {chapterProjects.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {chapterProjects
             .sort((a, b) => (a.sort_order ?? 999) - (b.sort_order ?? 999) || (a.year || "").localeCompare(b.year || ""))
             .map((project) => (
-              <ProjectCard key={project.id} project={project} accentClass={chapter.accentClass} />
+              <ProjectCard key={project.id} project={project} />
             ))}
         </div>
       )}
-    </motion.div>
+    </section>
   );
 }
 
-// ─── Connector Arrow ──────────────────────────────────────────────────────────
+// ─── Chapter Transition ──────────────────────────────────────────────────────────
 function Connector({ label }) {
   return (
-    <div className="flex flex-col items-center gap-2 py-2">
-      <div className="w-px h-8 bg-white/20" />
-      {label && (
-        <span className="text-xs text-white/40 uppercase tracking-widest font-medium px-3 py-1 border border-white/10 rounded-full">
-          {label}
-        </span>
-      )}
-      <ArrowDown className="w-5 h-5 text-white/30" />
+    <div className="flex items-center gap-4 py-10 sm:py-14">
+      <span className="shrink-0 text-xs text-secondary/60">{label}</span>
+      <div className="h-px flex-1 bg-border/20" aria-hidden="true" />
     </div>
   );
 }
@@ -183,21 +135,21 @@ export default function Roadmap() {
   });
 
   return (
-    <div className="min-h-screen bg-black">
-      <div className="max-w-5xl mx-auto px-6 pt-32 pb-24 sm:px-8">
+    <div className="min-h-screen bg-foreground">
+      <div className="mx-auto max-w-6xl px-6 pb-24 pt-32 sm:px-8 sm:pt-40">
 
         {/* Hero Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="mb-10 border-b border-border/20 pb-8 sm:mb-12 sm:pb-12"
         >
-          <p className="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-4">The Story So Far</p>
-          <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
-            From Desert Labs<br />to the Colorado River
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-amber-400">The Story So Far</p>
+          <h1 className="mb-5 max-w-3xl text-balance text-4xl font-semibold leading-[1.08] tracking-tight text-background sm:text-6xl">
+            From Desert Labs to the Colorado River
           </h1>
-          <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="max-w-[62ch] text-base leading-relaxed text-secondary/75 sm:text-lg">
             A proven technology. A new context. A profound outcome. Here's how we get from thirty years of global innovation to freeing up the water that powers the American Southwest.
           </p>
         </motion.div>
