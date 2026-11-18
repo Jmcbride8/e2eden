@@ -77,6 +77,8 @@ export default function ProjectDetails() {
     );
   }
 
+  const hasConceptGallery = ['69f3883d38f1f72419b3b191', '69f3883d38f1f72419b3b192'].includes(project.id);
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero */}
@@ -172,28 +174,28 @@ export default function ProjectDetails() {
         {/* 1. History / Backstory */}
         {project.backstory && (
           <Section index={1} label="History" title="How It Began">
-            <p className="text-white/70 leading-relaxed text-lg">{project.backstory}</p>
+            <p className="whitespace-pre-line text-white/70 leading-relaxed text-lg">{project.backstory}</p>
           </Section>
         )}
 
         {/* 2. Challenge */}
         {project.details && (
           <Section index={2} label="Challenge" title="The Challenge">
-            <p className="text-white/70 leading-relaxed text-lg">{project.details}</p>
+            <p className="whitespace-pre-line text-white/70 leading-relaxed text-lg">{project.details}</p>
           </Section>
         )}
 
         {/* 3. How We Solve */}
         {project.our_solution && (
           <Section index={3} label="How We Solve It" title="Our Solution">
-            <p className="text-white/70 leading-relaxed text-lg">{project.our_solution}</p>
+            <p className="whitespace-pre-line text-white/70 leading-relaxed text-lg">{project.our_solution}</p>
           </Section>
         )}
 
         {/* Updates */}
         {project.project_updates && (
-          <Section index={4} label="Updates" title="Project Updates">
-            <p className="text-white/70 leading-relaxed text-lg">{project.project_updates}</p>
+          <Section index={4} label={hasConceptGallery ? 'Deployment Plan' : 'Updates'} title={hasConceptGallery ? 'What Comes Next' : 'Project Updates'}>
+            <p className="whitespace-pre-line text-white/70 leading-relaxed text-lg">{project.project_updates}</p>
           </Section>
         )}
 
@@ -201,7 +203,7 @@ export default function ProjectDetails() {
         {project.images?.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-6">
-              <SectionHeader index={5} label="Gallery" title="Gallery" />
+              <SectionHeader index={5} label="Gallery" title={hasConceptGallery ? 'Concept Illustrations' : 'Gallery'} />
               {isAdmin && !editingGallery && (
                 <button
                   onClick={() => setEditingGallery(true)}
@@ -230,8 +232,8 @@ export default function ProjectDetails() {
                     <img
                       src={img}
                       alt={project.company === 'Seawater Greenhouse' ? `${project.location} project archive, image ${i + 1}` : `${project.name} ${i + 1}`}
-                      loading={project.company === 'Seawater Greenhouse' ? 'lazy' : undefined}
-                      className="w-full h-56 object-cover rounded-xl"
+                      loading={hasConceptGallery || project.company === 'Seawater Greenhouse' ? 'lazy' : undefined}
+                                             className={hasConceptGallery ? 'w-full h-auto rounded-xl' : 'w-full h-56 object-cover rounded-xl'}
                     />
                     {isAdmin && editingGallery && (
                       <button

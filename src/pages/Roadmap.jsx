@@ -18,21 +18,21 @@ const chapters = [
     accentClass: "text-blue-300",
     badgeClass: "bg-blue-400/20 text-blue-300 border border-blue-400/30",
     description:
-      "This isn't a bet on an unproven idea. For over three decades, Seawater Greenhouse has designed, built, and operated evaporative cooling and integrated saltwater farming systems across some of the world's harshest deserts — Oman, Tenerife, Abu Dhabi, Somaliland, Australia. The science is solid. The results are documented. The technology works.",
+      "Decades of Seawater Greenhouse projects show that saline water can cool protected crops in dry climates. E2Eden is building on that work to ask a different question: how much net freshwater can the same principle save in open or semi-open fields?",
     projects: "seawater_greenhouse",
   },
   {
     id: "poc",
     act: "ACT II · PHASE 1",
     label: "The US Insight",
-    title: "Reconceptualizing the Idea for America",
+    title: "Grant-Supported Proof of Concept",
     color: "amber",
     borderClass: "border-amber-400/40",
     bgClass: "bg-amber-900/10",
     accentClass: "text-amber-400",
     badgeClass: "bg-amber-400/20 text-amber-400 border border-amber-400/30",
     description:
-      "Seawater Greenhouse was built to grow food in food-scarce regions. But the US Southwest — Imperial Valley, the Salton Sea basin — already grows food extraordinarily well. What it is catastrophically short of is water. E2Eden had the key insight: flip the value proposition. The same low-tech cooling wall technology can be deployed purely to crush freshwater consumption by 70–90%, freeing up vast quantities of Colorado River water. No high-tech. No desalination. Just physics — and profound impact. The first step: prove it works here.",
+      "E2Eden is pursuing grant support for a small, instrumented field test. The first site is not fixed. The goal is to measure cooling reach, check salt and brine handling, and identify which configurations merit a larger crop trial. Open-field water savings have not yet been established.",
     phase: "R&D",
   },
   {
@@ -46,7 +46,7 @@ const chapters = [
     accentClass: "text-amber-400",
     badgeClass: "bg-amber-400/20 text-amber-400 border border-amber-400/30",
     description:
-      "With a validated proof of concept, E2Eden deploys at the UC Desert Research & Extension Center in Imperial Valley — one of the most productive yet water-stressed agricultural regions in North America. This is where the model gets pressure-tested at commercial scale: real farms, real growers, real water savings. The goal is a repeatable blueprint that any farmer in the Southwest can adopt.",
+      "The proposed second-site pilot at UC Desert Research & Extension Center in Holtville would compare cooled and untreated plots and independently measure net freshwater savings, crop performance and costs. E2Eden would bring those results to the Imperial Irrigation District and other water managers to seek conservation incentive eligibility. No rebate or payment is assumed.",
     phase: "US Commercialization",
   },
   {
@@ -60,7 +60,7 @@ const chapters = [
     accentClass: "text-amber-400",
     badgeClass: "bg-amber-400/20 text-amber-400 border border-amber-400/30",
     description:
-      "Once the blueprint is proven, E2Eden scales across the Salton Sea basin and the broader Southwest. Thousands of acres of farmland adopt the cooling wall system. Tens of thousands of acre-feet of Colorado River water are freed up annually. The Salton Sea — a dying, toxic body of water — begins its recovery as the inflow-outflow balance shifts. A low-tech solution delivers a high-stakes outcome.",
+      "Commercial deployment would start with heat-sensitive specialty crops, where a longer growing window, better quality or an additional harvest could justify the investment. Larger-acreage field crops come later, once the model works commercially and a conservation payment mechanism is in place. Any benefits for the Salton Sea would require separate hydrological and environmental study.",
     phase: "Salton Sea Transformation",
   },
 ];
