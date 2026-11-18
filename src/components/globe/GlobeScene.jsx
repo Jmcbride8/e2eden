@@ -85,7 +85,14 @@ function createLabelSprite(project) {
   const texture = new THREE.CanvasTexture(canvas);
   texture.anisotropy = 4;
   const sprite = new THREE.Sprite(
-    new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.9 })
+    new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      opacity: 0.9,
+      // Labels never write depth, so two labels sitting close together can't
+      // fight over which one draws on top.
+      depthWrite: false,
+    })
   );
   sprite.scale.set(width * LABEL_PX_TO_WORLD, height * LABEL_PX_TO_WORLD, 1);
 
@@ -277,6 +284,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         transparent: true,
         opacity: 0.9,
         side: THREE.DoubleSide,
+        depthWrite: false,
       });
       const ring = new THREE.Mesh(ringGeo, ringMat);
       ring.position.copy(pos);
@@ -290,6 +298,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         transparent: true,
         opacity: 1,
         side: THREE.DoubleSide,
+        depthWrite: false,
       });
       const dot = new THREE.Mesh(dotGeo, dotMat);
       dot.position.copy(pos);
@@ -304,6 +313,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         transparent: true,
         opacity: 0.4,
         side: THREE.DoubleSide,
+        depthWrite: false,
       });
       const pulse = new THREE.Mesh(pulseGeo, pulseMat);
       pulse.position.copy(pos);
@@ -318,7 +328,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         line,
         project,
         anchor: pos.clone(),
-        offset: new THREE.Vector2(0, 0),
+        offset: null,
         labelWidth,
         labelHeight,
       });
@@ -386,11 +396,16 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         const ppu = h / (2 * dist * fovHalfTan); // pixels per world unit at this depth
 
         // Start labels slightly away from the globe centre so they clear the marker
-        let dx = sx - w / 2;
-        let dy = sy - h / 2;
+        const dx = sx - w / 2;
+        const dy = sy - h / 2;
         const len = Math.hypot(dx, dy) || 1;
         const push = 48;
-        marker.offset.set((dx / len) * push, (dy / len) * push - 6);
+        const target = new THREE.Vector2((dx / len) * push, (dy / len) * push - 6);
+
+        // The applied offset carries over between frames and is eased toward the
+        // solved position, so labels on nearly coincident markers glide instead
+        // of snapping to a new slot every frame.
+        if (!marker.offset) marker.offset = target.clone();
 
         items.push({
           marker,
@@ -398,6 +413,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
           ppu,
           sx,
           sy,
+          target,
           halfW: marker.labelWidth * ppu * 0.5,
           halfH: marker.labelHeight * ppu * 0.5,
         });
@@ -411,10 +427,10 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
           for (let j = i + 1; j < items.length; j++) {
             const a = items[i];
             const b = items[j];
-            const ax = a.sx + a.marker.offset.x;
-            const ay = a.sy + a.marker.offset.y;
-            const bx = b.sx + b.marker.offset.x;
-            const by = b.sy + b.marker.offset.y;
+            const ax = a.sx + a.target.x;
+            const ay = a.sy + a.target.y;
+            const bx = b.sx + b.target.x;
+            const by = b.sy + b.target.y;
             const needX = a.halfW + b.halfW + 12;
             const needY = a.halfH + b.halfH + 8;
             const gapX = bx - ax;
@@ -424,28 +440,38 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
             if (overX <= 0 || overY <= 0) continue;
 
             moved = true;
-            if (overX / needX < overY / needY) {
-              const shift = (overX / 2 + 0.5) * (gapX >= 0 ? 1 : -1);
-              a.marker.offset.x -= shift;
-              b.marker.offset.x += shift;
+            // Markers sitting almost on top of each other leave a gap near zero,
+            // so its sign can flip frame to frame and make the labels jitter.
+            // Coincident pairs always separate the same way, and a near-tie in
+            // axis choice always resolves vertically.
+            const dirX = gapX < -0.5 ? -1 : 1;
+            const dirY = gapY < -0.5 ? -1 : 1;
+            if (overX / needX < (overY / needY) * 0.9) {
+              const shift = (overX / 2 + 0.5) * dirX;
+              a.target.x -= shift;
+              b.target.x += shift;
             } else {
-              const shift = (overY / 2 + 0.5) * (gapY >= 0 ? 1 : -1);
-              a.marker.offset.y -= shift;
-              b.marker.offset.y += shift;
+              const shift = (overY / 2 + 0.5) * dirY;
+              a.target.y -= shift;
+              b.target.y += shift;
             }
           }
         }
 
         // Keep labels within reach of their marker
-        items.forEach(({ marker }) => {
-          const reach = Math.hypot(marker.offset.x, marker.offset.y);
+        items.forEach(({ target }) => {
+          const reach = Math.hypot(target.x, target.y);
           if (reach > maxReach) {
-            marker.offset.multiplyScalar(maxReach / reach);
+            target.multiplyScalar(maxReach / reach);
           }
         });
 
         if (!moved) break;
       }
+
+      items.forEach(({ marker, target }) => {
+        marker.offset.lerp(target, 0.25);
+      });
 
       items.forEach(({ marker, world, ppu }) => {
         const { x: ox, y: oy } = marker.offset;
