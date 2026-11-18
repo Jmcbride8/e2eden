@@ -23,8 +23,10 @@ export const SITES = [
       "The Israeli pilot site will use brine discharge from the Sabha desalination plant, which supplies potable water to Eilat, on plots irrigated from brackish groundwater. Temperature, humidity, vapour-pressure deficit, wind and crop water use are measured against untreated plots. A proposed site: field work begins only if the proposal is funded.",
     image_key: "merc_site_israel",
     image_default:
-      "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/6ea891ec5_generated_image.png",
-    image_alt: "Arid desert agricultural valley in the Arava",
+      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/PikiWiki_Israel_41827_Yair_experimental_station_in_Arava_valley.JPG/1280px-PikiWiki_Israel_41827_Yair_experimental_station_in_Arava_valley.JPG",
+    image_alt: "Experimental agricultural station in the Arava valley",
+    image_credit:
+      "Yair agricultural research station, Arava Valley · Dr. Avishai Teicher / Pikiwiki Israel, CC BY 2.5",
   },
   {
     id: "jordan",
@@ -35,8 +37,10 @@ export const SITES = [
       "KWA will host the Jordanian pilot site on a working farm that irrigates from brackish groundwater. The same instrumentation, control hardware and test protocol as Israel and California are applied to locally relevant crops, water sources and soils. A proposed site, not an operating E2Eden facility.",
     image_key: "merc_site_jordan",
     image_default:
-      "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/e9ffc11de_generated_image.png",
-    image_alt: "Desert farm plots in Wadi Araba, Jordan",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Aqaba%2C_p%C4%9Bstov%C3%A1n%C3%AD_zeleniny.jpg/1280px-Aqaba%2C_p%C4%9Bstov%C3%A1n%C3%AD_zeleniny.jpg",
+    image_alt: "Vegetable plots outside Aqaba, Jordan",
+    image_credit:
+      "Vegetable growing near Aqaba, Jordan · Aktron / Wikimedia Commons, CC BY-SA 4.0",
   },
 ];
 

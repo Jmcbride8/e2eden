@@ -10,7 +10,7 @@ export default function ResearchSiteCard({ site, isAdmin, getHomeImg, setHomeImg
         <p className="text-amber-400/80 text-sm mb-4">{site.location}</p>
         <p className="text-white/70 leading-relaxed">{site.blurb}</p>
       </div>
-      <div className="h-64 md:h-full min-h-[260px]">
+      <div className="relative h-64 md:h-full min-h-[260px]">
         <AdminImageUpload
           src={getHomeImg(site.image_key, site.image_default)}
           alt={site.image_alt || site.name}
@@ -19,6 +19,11 @@ export default function ResearchSiteCard({ site, isAdmin, getHomeImg, setHomeImg
           className="w-full h-full"
           imgClassName="w-full h-full object-cover"
         />
+        {site.image_credit && (
+          <p className="absolute bottom-0 left-0 right-0 px-3 py-2 text-[10px] leading-tight text-white/70 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+            {site.image_credit}
+          </p>
+        )}
       </div>
     </div>
   );
