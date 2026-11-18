@@ -5,6 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
 import { MapPin, Calendar, Pencil, Check, X, Upload, Trash2 } from "lucide-react";
 import { createPageUrl } from "../utils";
+import SeawaterProjectSources from '@/components/projects/SeawaterProjectSources';
 
 function getYouTubeEmbedUrl(url) {
   if (!url) return null;
@@ -228,7 +229,8 @@ export default function ProjectDetails() {
                   <div key={i} className="relative group">
                     <img
                       src={img}
-                      alt={`${project.name} ${i + 1}`}
+                      alt={project.company === 'Seawater Greenhouse' ? `${project.location} project archive, image ${i + 1}` : `${project.name} ${i + 1}`}
+                      loading={project.company === 'Seawater Greenhouse' ? 'lazy' : undefined}
                       className="w-full h-56 object-cover rounded-xl"
                     />
                     {isAdmin && editingGallery && (
@@ -255,6 +257,9 @@ export default function ProjectDetails() {
               <div>
                 <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">Video</span>
                 <h2 className="text-3xl font-bold text-white mt-1">Watch</h2>
+                {project.company === 'Seawater Greenhouse' && !editingVideo && getYouTubeEmbedUrl(project.video_url) && (
+                  <a href={getYouTubeEmbedUrl(project.video_url).replace('/embed/', '/watch?v=')} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm text-amber-400 underline underline-offset-4">Watch on YouTube</a>
+                )}
               </div>
               {isAdmin && !editingVideo && (
                 <button
@@ -293,6 +298,8 @@ export default function ProjectDetails() {
             ) : null}
           </div>
         )}
+
+        {project.company === 'Seawater Greenhouse' && <SeawaterProjectSources projectId={project.id} />}
 
         {/* Meta */}
         <div className="pt-8 border-t border-white/10 grid sm:grid-cols-2 gap-6 text-sm text-white/50">
