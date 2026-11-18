@@ -112,7 +112,9 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
   const isDragging = useRef(false);
   const previousMouse = useRef({ x: 0, y: 0 });
   const rotationVelocity = useRef({ x: 0, y: 0 });
-  const autoRotate = useRef(true);
+  const autoRotate = useRef(!isPaused);
+  const paused = useRef(isPaused);
+  const resumeTimer = useRef(null);
   const markerMeshes = useRef([]);
   const raycaster = useRef(new THREE.Raycaster());
   const mouse = useRef(new THREE.Vector2());
@@ -478,8 +480,8 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         globeGroup.rotation.y += 0.002;
       }
 
-      // Apply drag velocity
-      if (!isDragging.current) {
+      // Apply drag velocity (never while paused, so the globe stays put)
+      if (!isDragging.current && !paused.current) {
         globeGroup.rotation.y += rotationVelocity.current.x;
         globeGroup.rotation.x += rotationVelocity.current.y;
         rotationVelocity.current.x *= 0.95;
@@ -539,8 +541,14 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
   }, [selectedProject]);
 
   useEffect(() => {
+    paused.current = isPaused;
+    if (resumeTimer.current) {
+      clearTimeout(resumeTimer.current);
+      resumeTimer.current = null;
+    }
     if (isPaused) {
       autoRotate.current = false;
+      rotationVelocity.current = { x: 0, y: 0 };
     } else if (!selectedProject) {
       autoRotate.current = true;
     }
@@ -626,8 +634,11 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         }
       }
       isDragging.current = false;
-      if (!selectedProject) {
-        setTimeout(() => { autoRotate.current = true; }, 3000);
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
+      if (!selectedProject && !paused.current) {
+        resumeTimer.current = setTimeout(() => {
+          if (!paused.current) autoRotate.current = true;
+        }, 3000);
       }
     };
 
@@ -641,6 +652,7 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       container.removeEventListener("pointermove", onPointerMove);
       container.removeEventListener("pointerup", onPointerUp);
       container.removeEventListener("pointerleave", () => {});
+      if (resumeTimer.current) clearTimeout(resumeTimer.current);
     };
   }, [onSelectProject, selectedProject]);
 
