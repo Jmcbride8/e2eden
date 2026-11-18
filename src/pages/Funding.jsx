@@ -148,7 +148,7 @@ function CapitalRaiseCard({ delay, image, tag, amount, subtitle, description, it
                 <Tooltip formatter={(value, name) => [formatAmount(value, raise), name]} {...TOOLTIP_STYLE} />
               </PieChart>
             </ResponsiveContainer>
-            <p className="text-center text-white/40 text-xs mt-2 tracking-wide uppercase">Budget Allocation</p>
+            <p className="text-center text-white/40 text-xs mt-2 tracking-wide uppercase">{raise === "poc" ? "Proposed Funding Sources" : "Budget Allocation"}</p>
           </div>
         </div>
       </div>
@@ -225,8 +225,8 @@ export default function Funding() {
             image="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/49ed4c6ca_ChatGPTImageApr21202603_30_44PM.png"
             tag="Capital Raise · Proof of Concept"
             amount={`$${finance.proof_of_concept_goal.toLocaleString('en-US')}`}
-            subtitle="Initial Proof of Concept Deployment"
-            description="Validate core technology with a small-scale deployment to prove concept viability and gather essential performance data before scaling."
+            subtitle="E2Eden’s Proposed 36-Month MERC Budget"
+            description="This budget covers E2Eden only and combines the federal grant request with E2Eden’s cost share. It is a proposal, not an award or a standalone budget for the initial field test."
             items={pocItems}
             raise="poc"
             isAdmin={isAdmin}
