@@ -28,7 +28,7 @@ const chapters = [
       {
         stage: "PHASE 1 · PROOF OF CONCEPT",
         phase: "R&D",
-        image: "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/0333f0519_generated_image.png",
+        image: "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/280b10ffe_generated_image.png",
       },
       {
         stage: "PHASE 2 · AT-SCALE PILOT",
