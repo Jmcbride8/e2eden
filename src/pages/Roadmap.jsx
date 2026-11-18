@@ -4,6 +4,7 @@ import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import { MapPin } from "lucide-react";
 import SaltonSeaInfrastructure from "@/components/roadmap/SaltonSeaInfrastructure";
+import GlobalTransformation from "@/components/roadmap/GlobalTransformation";
 
 // ─── Static narrative chapters ───────────────────────────────────────────────
 const chapters = [
@@ -168,6 +169,8 @@ export default function Roadmap() {
               )}
             </div>
           ))}
+          <Connector label="From farms to global basins" />
+          <GlobalTransformation />
         </div>
 
       </div>
