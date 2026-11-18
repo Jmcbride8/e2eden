@@ -113,10 +113,10 @@ export default function Innovators() {
                 Charlie Paton is a British designer, inventor, and the visionary behind Seawater Greenhouse technology. Trained at the Central School of Art and Design in London, he spent years as a lighting and special effects designer before a bus ride through Morocco sparked an idea that would change the course of desert agriculture.
               </p>
               <p className="text-white/70 leading-relaxed mb-3">
-                In the early 1990s, Paton developed a greenhouse system using sunshine and seawater to create cool, humid growing environments in the harshest climates. Over three decades, he deployed this across three continents — from Abu Dhabi to Australia — proving the concept at scale. His work has produced thousands of tonnes of crops where nature said nothing could grow.
+                In the early 1990s, Paton developed a greenhouse system using sunshine and seawater to create cool, humid growing environments in the harshest climates. Over three decades, the technology has been built and operated across several continents — from Abu Dhabi to Australia — demonstrating the concept across a range of arid climates. Those installations are covered greenhouse systems; extending the benefit to open fields is the work E2Eden is now proposing.
               </p>
               <p className="text-white/70 leading-relaxed">
-                In 2012, Charlie was elected a Royal Designer for Industry by the Royal Society for the Encouragement of Arts. E2Eden is proud to stand on his shoulders as we bring this proven technology to the United States and to the world's most vulnerable farming communities.
+                In 2012, Charlie was elected a Royal Designer for Industry by the Royal Society for the Encouragement of Arts. E2Eden is proud to stand on his shoulders as we test whether this technology can be made to work in open US fields and in the world's most vulnerable farming communities.
               </p>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function Innovators() {
           <div className="text-center mb-10">
             <p className="text-amber-400 text-xs font-semibold uppercase tracking-widest mb-3">Research & Literature</p>
             <h2 className="text-3xl font-bold text-white">Whitepapers & Academic Research</h2>
-            <p className="text-white/50 mt-3 max-w-xl mx-auto text-sm">Peer-reviewed research and technical papers underpinning the science behind Seawater Greenhouse technology.</p>
+            <p className="text-white/50 mt-3 max-w-xl mx-auto text-sm">Peer-reviewed research and technical papers underpinning the science behind Seawater Greenhouse technology. These studies describe enclosed greenhouse systems; none reports open-field freshwater savings, which is the gap our field program is designed to address.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">

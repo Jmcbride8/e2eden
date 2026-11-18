@@ -74,12 +74,12 @@ export default function USAPilotProject() {
           <h2 className="text-4xl font-bold mb-10 text-white">The Crisis. Here. Now.</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <p className="text-2xl font-bold text-red-400 mb-4">$20,000/year</p>
-              <p className="text-white/60 text-lg">Cost of desalinated water per acre — too expensive for crops</p>
+              <p className="text-2xl font-bold text-red-400 mb-4">~$3,400 / acre-foot</p>
+              <p className="text-white/60 text-lg">Delivered desalinated supply (Carlsbad, 2024) — several times what a field crop can pay</p>
             </div>
             <div className="p-8 rounded-2xl bg-white/5 border border-white/10">
-              <p className="text-2xl font-bold text-amber-400 mb-4">$2,400/year</p>
-              <p className="text-white/60 text-lg">Value of alfalfa per acre — the economic mismatch is unsustainable</p>
+              <p className="text-2xl font-bold text-amber-400 mb-4">~$700–1,000 / acre-foot</p>
+              <p className="text-white/60 text-lg">Gross value an acre of alfalfa can return per acre-foot of water used</p>
             </div>
           </div>
           <div className="mt-8 p-8 rounded-2xl bg-white/5 border border-white/10">

@@ -11,7 +11,7 @@ const chapters = [
   {
     id: "legacy",
     act: "ACT I",
-    label: "The technology is proven",
+    label: "The cooling physics is proven",
     title: "Decades of Seawater Greenhouse Innovation",
     description:
       "Decades of Seawater Greenhouse projects show that saline water can cool protected crops in dry climates. E2Eden is building on that work to ask a different question: how much net freshwater can the same principle save in open or semi-open fields?",
@@ -215,7 +215,7 @@ export default function Roadmap() {
             From Desert Labs to the Colorado River
           </h1>
           <p className="text-pretty text-base leading-relaxed text-secondary/75 sm:text-lg">
-            A proven technology. A new context. A profound outcome. Here's how we get from thirty years of global innovation to freeing up the water that powers the American Southwest.
+            Proven physics. A new context. An unproven application. Here's how we get from thirty years of greenhouse innovation to testing whether the same cooling can save water in open American fields.
           </p>
         </motion.div>
 

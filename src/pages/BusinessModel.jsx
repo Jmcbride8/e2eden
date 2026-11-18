@@ -79,15 +79,15 @@ export default function BusinessModel() {
             {
               key: "approach_brines",
               title: "Underground Brines",
-              subtitle: "Abundant, Useless Water",
-              body: "3/4th of Arizona's underground water is brines — mineral-rich saltwater that can't be used for drinking or irrigation. California, Nevada, and the Southwest have millions of acres underlain with these reserves. We've flipped the equation: instead of expensive freshwater desalination, we use abundant brines as a free resource for cooling.",
+              subtitle: "A Cheaper Cooling Input",
+              body: "Large volumes of brackish groundwater sit beneath the Southwest — mineral-rich water unsuitable for drinking or irrigation without treatment. Where a site has a usable supply, it is a far cheaper cooling input than freshwater, and it is not competing with cities or crops. Availability varies by location, which is one of the first things our field program assesses.",
               defaultImg: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop"
             },
             {
               key: "approach_profit",
               title: "Built for Profit",
               subtitle: "Water as Revenue",
-              body: "We don't measure success by crops grown — we measure it by water saved and sold. The real business model isn't agriculture; it's water markets. By creating a verified, bankable water savings asset, we enable farmers to monetize conservation. Massive profit drives scale.",
+              body: "The long-term business model is built on water saved rather than crop margin. That depends on a district or market recognizing independently verified savings — which is why measurement sits at the center of our research, not at the end of it. No conservation payment, credit or water sale is assumed until the savings are demonstrated and a buyer agrees to pay for them.",
               defaultImg: "https://images.unsplash.com/photo-1460925895917-afdab36c3a3f?w=600&h=400&fit=crop"
             },
             {

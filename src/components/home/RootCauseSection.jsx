@@ -8,19 +8,19 @@ const DEFAULT_IMAGES = [
   key: "root_cause_img_3",
   title: "We farm in deserts",
   default: "https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=800&h=600&fit=crop",
-  caption: "People moved to the coasts, pushing farms into deserts where plants use 10x as much water to grow."
+  caption: "Farms were pushed into deserts, where high evaporative demand means crops need far more water than in temperate climates."
 },
 {
   key: "root_cause_img_2",
   title: "Water evaporates away",
   default: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
-  caption: "In desert heat, crops sweat constantly just to survive, losing 7ft of water a year to the sky."
+  caption: "In low-desert heat, a multi-cut forage crop can move more than six feet of water per acre to the atmosphere in a year."
 },
 {
   key: "root_cause_img_desalination",
-  title: "Desalination is 10x too costly",
+  title: "Desalination costs more than crops can pay",
   default: "https://images.unsplash.com/photo-1548783300-b4f9d05cdd67?w=800&h=600&fit=crop",
-  caption: "Desalination costs $20,000 per acre-foot. Alfalfa sells for $4,000 per acre. The math doesn't work."
+  caption: "Desalinated supply runs about $3,400 per acre-foot. An acre of alfalfa grosses roughly $4,000 and uses several acre-feet. The math rarely works."
 }];
 
 
@@ -62,10 +62,10 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
             <div className="h-px flex-1 bg-white/10" />
           </div>
 
-          <h2 className="text-5xl font-bold text-white mb-6">Agriculture Uses 85% Of Our Water</h2>
+          <h2 className="text-5xl font-bold text-white mb-6">Agriculture Uses About 80% Of California's Water</h2>
 
           <p className="text-xl leading-relaxed mb-12 text-white/70">
-            Desert farms are where water is used, lost, and must be saved
+            Irrigated desert farms are where water is used, lost, and must be saved. Shares vary by state and year; in California, agriculture accounts for roughly four-fifths of developed water supply.
           </p>
 
           {/* Image Grid */}
@@ -116,7 +116,7 @@ export default function RootCauseSection({ isAdmin, getHomeImg, setHomeImg }) {
                 ))}
               </div>
               <p className="text-white/40 text-xs mt-6 border-t border-white/10 pt-4">
-                Cities pay up to <span className="text-amber-400 font-semibold">90x more</span> for the same water IID farmers receive — a structural subsidy baked into century-old water rights.
+                Cities pay up to <span className="text-amber-400 font-semibold">90x more</span> for the same water IID farmers receive — a gap rooted in century-old water rights. Municipal and agricultural rates are not strictly comparable, but the difference shapes what any new supply can be sold for.
               </p>
             </div>
 

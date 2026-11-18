@@ -11,6 +11,7 @@ import RootCauseSection from "../components/home/RootCauseSection";
 import AdminImageUpload from "../components/home/AdminImageUpload";
 import { Button } from "@/components/ui/button";
 import { FertilizerChart, SaltwaterChart } from "../components/home/PopulationCharts";
+import ScienceFrontier from "../components/science/ScienceFrontier";
 
 
 export default function Home() {
@@ -127,7 +128,7 @@ export default function Home() {
           </span>
         </h2>
         <p className="text-sm mt-2 leading-relaxed max-w-sm text-white/90">
-          Pioneering technology to unlock abundance in agriculture, feed the next 7 billion humans, and make deserts bloom.
+          Building on decades of proven greenhouse science to test whether saltwater cooling can cut water use across open desert farmland.
         </p>
         <div className="mt-3 mb-0 lg:mb-0">
           <div className="flex flex-wrap gap-3">
@@ -154,12 +155,12 @@ export default function Home() {
           </div>
           {selectedPhase === "Seawater Greenhouse" && (
             <p className="text-white/40 text-[11px] mt-2 max-w-[260px]">
-              The pioneer. Decades of global deployments that proved the science.
+              The pioneer. Three decades of greenhouse deployments that demonstrated saltwater cooling.
             </p>
           )}
           {selectedPhase === "Saltwater Farms" && (
             <p className="text-white/40 text-[11px] mt-2 max-w-[260px]">
-              The successor — reconfigured for the US, field crops at scale, and global transformation.
+              The research program — testing saltwater cooling in open US fields, then at regional scale.
             </p>
           )}
         </div>
@@ -333,6 +334,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 1b. Established science vs. proposed research */}
+        <ScienceFrontier withQuestions={false} />
+
         {/* 2. The Solution - Saltwater Cooling Walls */}
         <section className="py-24 px-6 sm:px-12 bg-black">
           <div className="max-w-6xl mx-auto">
@@ -350,16 +354,28 @@ export default function Home() {
               </div>
               <h2 className="text-5xl font-bold mb-6 text-white">Saltwater Cooling Walls</h2>
               <p className="text-xl mb-0 text-white/70">
-                A powerfully simple solution - A cardboard wall continuously drenched in saltwater, turning blistering desert heat into a smothering blanket of cool, humid air to dramatically crush freshwater use by an astonishing 70-90% - a real difference that matters
+                A powerfully simple idea: a cardboard wall continuously drenched in saltwater, cooling the air that moves across a field. What previous greenhouse work established is the cooling physics. What our field research will establish is how much of that cooling reaches a crop — and how much freshwater it actually saves.
               </p>
             </motion.div>
 
-            {/* KPI Stats */}
+            {/* Research objectives */}
             <div className="grid md:grid-cols-3 gap-6 mb-12">
               {[
-              { number: "90%", label: "Water Savings" },
-              { number: "27°F", label: "Temperature Reduction" },
-              { number: "50%", label: "Humidity Increase" }].
+              {
+                status: "To Be Validated",
+                metric: "Net Freshwater Savings",
+                body: "Controlled field trials will measure whether saline-water microclimate cooling reduces irrigation demand after accounting for additional salinity-management water."
+              },
+              {
+                status: "Under Investigation",
+                metric: "Cooling Reach",
+                body: "Measuring temperature reduction and its persistence at increasing distances from the cooling wall."
+              },
+              {
+                status: "Under Investigation",
+                metric: "Microclimate Modification",
+                body: "Measuring changes in relative humidity, vapor-pressure deficit, and crop-level conditions."
+              }].
               map((stat, idx) =>
               <motion.div
                 key={idx}
@@ -367,9 +383,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
-                  <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
-                  <div className="text-lg font-semibold text-white">{stat.label}</div>
+                className="p-6 rounded-xl bg-white/5 border border-white/10">
+                  <div className="text-3xl font-bold text-amber-400 mb-2 leading-tight">{stat.status}</div>
+                  <div className="text-lg font-semibold text-white mb-3">{stat.metric}</div>
+                  <p className="text-sm leading-relaxed text-white/50">{stat.body}</p>
                 </motion.div>
               )}
             </div>
@@ -401,13 +418,13 @@ export default function Home() {
                   key: "wind_cool",
                   title: "Cools the Wind",
                   defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
-                  body: "As salty water evaporates through the panels, it steals heat from the air. That cooled air is denser, sinking and smothering the field in a cool, protective layer."
+                  body: "As salty water evaporates through the panels, it absorbs heat from the air. That cooled, humidified air is denser than the hot desert air around it and settles toward the field."
                 },
                 {
                   key: "wind_humid",
                   title: "Humidifies the Wind",
                   defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
-                  body: "The drenched walls saturate the desert air, smothering the fields and returning moisture to the ground instead of stealing it"
+                  body: "The drenched walls raise the humidity of the air passing through them, which can lower the drying pull — the vapor-pressure deficit — on the crop downwind. How far that effect carries is what our trials measure."
                 }
               ].map((card, idx) =>
               <motion.div
@@ -474,7 +491,7 @@ export default function Home() {
                    defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=600&fit=crop",
                    alt: "Desert farms feeding millions",
                    title: "We Fed Millions From Sand",
-                   body: "Imperial Valley, the Negev, the Arabian Peninsula—deserts bloomed, harvests exploded, and we fed billions from once-barren land."
+                   body: "Imperial Valley, the Negev, the Arabian Peninsula—deserts bloomed, harvests grew, and millions were fed from once-barren land."
                 },
                 {
                    key: "shortage_4",
@@ -488,7 +505,7 @@ export default function Home() {
                    defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
                    alt: "Hoover Dam and drained Colorado River",
                    title: "But Our Rivers Are Dry",
-                   body: "Lake Mead has fallen 180 feet. The Colorado no longer reaches the sea. We spent centuries of water in decades."
+                   body: "Lake Mead has fallen roughly 180 feet since 2000. The Colorado no longer reaches the sea. We spent centuries of water in decades."
                 },
                 {
                   key: "shortage_6",
@@ -565,9 +582,9 @@ export default function Home() {
 
               </h2>
               <p className="text-xl leading-relaxed mb-8 text-white/70">
-                We chose Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
-                one of the most productive agricultural regions in the world. If we can make it work here, we can make 
-                it work anywhere.
+                We are proposing Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
+                one of the most productive agricultural regions in the world. If the cooling economics can be made to work here, 
+                they can be tested anywhere.
               </p>
               <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 mb-6" style={{ minHeight: '400px' }}>
                 <AdminImageUpload
@@ -582,7 +599,7 @@ export default function Home() {
               <div className="grid md:grid-cols-3 gap-4">
                 {[
                   { key: "iv_what_it_is", title: "What It Is", defaultImg: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=400&fit=crop", blurb: "Imperial Valley is one of the most water-stressed yet productive farming regions in North America — a paradox held together by aging infrastructure and borrowed time." },
-                  { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop", blurb: "Without intervention, the Colorado River compact collapses, water allocations are slashed, and hundreds of thousands of acres are permanently fallowed. Farms fail. Towns empty. The food supply shrinks." },
+                  { key: "iv_what_it_will_be", title: "What It Will Be", defaultImg: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop", blurb: "Without intervention, continued shortfalls could force deep cuts to Colorado River allocations and permanently fallow hundreds of thousands of acres. Farms fail. Towns empty. The food supply shrinks." },
                   { key: "iv_what_we_can_make_it", title: "What We Can Make It", defaultImg: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&h=400&fit=crop", blurb: "A thriving, resilient agricultural region that produces more food with a fraction of the water — a model for every arid farming community in the world." },
                 ].map((card) => (
                   <div key={card.key} className="h-48 group" style={{ perspective: '1000px' }}>
@@ -621,10 +638,10 @@ export default function Home() {
               {/* Pilot Project Spotlight */}
               <div className="mt-10 grid md:grid-cols-2 gap-8 items-center rounded-2xl overflow-hidden border border-white/10 bg-white/5">
                 <div className="p-8">
-                  <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">Pilot Project</span>
+                  <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">Proposed Research Site</span>
                   <h3 className="text-2xl font-bold text-white mt-2 mb-3">UC Desert Research &amp; Extension Center</h3>
-                  <p className="text-amber-400/80 text-sm mb-4">Imperial Valley, CA · United States</p>
-                  <p className="text-white/70 leading-relaxed">Our Proof of Concept farm in Imperial Valley to deploy and demonstrate the feasibility of the Evaporative Cooling Wall technology in the USA — one of the hottest, driest agricultural regions on Earth.</p>
+                  <p className="text-amber-400/80 text-sm mb-4">Holtville, Imperial Valley, CA · Prospective collaboration</p>
+                  <p className="text-white/70 leading-relaxed">The site we are proposing for our proof-of-concept field trial: an instrumented comparison of cooled and untreated plots in one of the hottest, driest agricultural regions on Earth. This is a planned trial, not an operating E2Eden farm.</p>
                 </div>
                 <div className="h-64 md:h-full min-h-[260px]">
                   <AdminImageUpload

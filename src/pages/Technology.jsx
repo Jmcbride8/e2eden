@@ -5,7 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { useQuery } from "@tanstack/react-query";
 import AdminImageUpload from "../components/home/AdminImageUpload";
 import { useQueryClient } from "@tanstack/react-query";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import ScienceFrontier from "../components/science/ScienceFrontier";
 
 export default function Technology() {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -54,7 +54,7 @@ export default function Technology() {
     title: "Cools the Wind",
     color: "text-cyan-400",
     defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/d10c5cc70_generated_image.png",
-    body: "As saltwater evaporates through the panels, it steals heat from the air. That cooled air is denser — it sinks, smothering the field in a cool, protective blanket that drops temperatures by up to 27°F."
+    body: "As saltwater evaporates through the panels, it absorbs heat from the air, so the air leaving the wall is cooler than ambient. How much of that drop persists downwind at crop height — and how it varies with wind, humidity and wall design — is the central measurement of our field trials."
   },
   {
     key: "wind_humid",
@@ -62,7 +62,7 @@ export default function Technology() {
     title: "Humidifies the Wind",
     color: "text-emerald-400",
     defaultImg: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6993b7c68cee7955d3266d09/e96f645e7_generated_image.png",
-    body: "The moisture doesn't vanish — it stays. Humid air clings to the field, slowing evaporation from soil and plant alike. Crops stop fighting the heat and start putting their energy into growth."
+    body: "The moisture does not vanish — it leaves the wall in the air. Higher humidity lowers the vapor-pressure deficit that drives transpiration, which is where any freshwater saving would come from. Whether that holds at field scale is the research question."
   }];
 
   return (
@@ -83,7 +83,7 @@ export default function Technology() {
           </div>
           <h1 className="text-5xl sm:text-6xl font-bold mb-6">Saltwater Cooling Walls</h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-            We substitute saltwater for fresh — cooling farms with the briny, unusable water hiding beneath our feet, unleashing abundance where the world thought only dust could exist.
+            We substitute saltwater for fresh — cooling farms with brackish water unsuitable for drinking or irrigation, where a site has a usable supply. The cooling physics is established. The open-field application is what we are setting out to prove.
           </p>
         </motion.div>
 
@@ -149,12 +149,12 @@ export default function Technology() {
           </div>
         }
 
-        {/* KPI Stats */}
+        {/* Research objectives */}
         <div className="grid md:grid-cols-3 gap-6 mb-20">
           {[
-          { number: "90%", label: "Water Savings", sub: "vs. conventional irrigation" },
-          { number: "27°F", label: "Temperature Reduction", sub: "ambient cooling effect" },
-          { number: "50%", label: "Humidity Increase", sub: "optimal growing conditions" }].
+          { status: "To Be Validated", label: "Net Freshwater Savings", sub: "Controlled field trials will measure whether cooling reduces irrigation demand after accounting for salinity-management water." },
+          { status: "Under Investigation", label: "Cooling Reach", sub: "Measuring temperature reduction and its persistence at increasing distances from the wall." },
+          { status: "Under Investigation", label: "Microclimate Modification", sub: "Measuring changes in relative humidity, vapor-pressure deficit, and crop-level conditions." }].
           map((stat, idx) =>
           <motion.div
             key={idx}
@@ -162,14 +162,16 @@ export default function Technology() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: idx * 0.1 }}
-            className="p-8 rounded-xl text-center bg-white/5 border border-white/10">
+            className="p-8 rounded-xl bg-white/5 border border-white/10">
 
-              <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
-              <div className="text-lg font-semibold text-white mb-1">{stat.label}</div>
-              <div className="text-sm text-white/40">{stat.sub}</div>
+              <div className="text-2xl font-bold text-amber-400 mb-2 leading-tight">{stat.status}</div>
+              <div className="text-lg font-semibold text-white mb-3">{stat.label}</div>
+              <div className="text-sm text-white/50 leading-relaxed">{stat.sub}</div>
             </motion.div>
           )}
         </div>
+
+        <ScienceFrontier embedded />
 
         <div className="grid md:grid-cols-3 gap-10 mb-24">
           {mechanisms.map((m, idx) =>
@@ -220,16 +222,16 @@ export default function Technology() {
               transition={{ duration: 0.6 }}
               className="mb-12">
 
-              <h2 className="text-4xl font-bold text-white mb-4">Most of our water is used in agriculture...</h2>
+              <h2 className="text-4xl font-bold text-white mb-4">Most of the West's water is used in agriculture...</h2>
               <p className="text-white/70 text-lg leading-relaxed max-w-2xl">
-                Farming is where the world's water is used, and where it must be saved.
+                Irrigated farming is the largest consumptive water user in the Southwest, and where the savings have to come from. The ranges below are published low-desert applied-water estimates; actual use varies by season, soil and practice.
               </p>
             </motion.div>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-              { crop: "Alfalfa", pct: "42%", acres: "~12M acres", water: "4-6 acre-feet/yr", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" },
-              { crop: "Cotton", pct: "18%", acres: "~9M acres", water: "3-4 acre-feet/yr", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=400&h=300&fit=crop" },
-              { crop: "Vegetables & Melons", pct: "15%", acres: "~7M acres", water: "2-3 acre-feet/yr", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=400&h=300&fit=crop" }].
+              { crop: "Alfalfa", water: "4–6 acre-feet", note: "Multi-cut forage with a long growing season — the highest-volume irrigated crop in the lower Colorado basin.", key: "crop_alfalfa", defaultImage: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" },
+              { crop: "Cotton", water: "3–4 acre-feet", note: "Heat-tolerant, but still dependent on a reliable seasonal supply to establish and finish.", key: "crop_cotton", defaultImage: "https://images.unsplash.com/photo-1556756822-42d30f2d6da0?w=400&h=300&fit=crop" },
+              { crop: "Vegetables & Melons", water: "2–3 acre-feet", note: "Heat-sensitive and high-value — the crops most likely to benefit from buffering peak temperatures.", key: "crop_veggies", defaultImage: "https://images.unsplash.com/photo-1464226184081-280282a34c6c?w=400&h=300&fit=crop" }].
               map((item, idx) =>
               <motion.div
                 key={idx}
@@ -253,19 +255,12 @@ export default function Technology() {
                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent backdrop-blur-sm z-10" />
                      <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                        <p className="text-white font-bold text-2xl mb-1">{item.crop}</p>
-                       <p className="text-amber-400 font-bold text-3xl">{item.pct}</p>
-                       <p className="text-white/70 text-sm mt-2">of Agricultural Water</p>
+                       <p className="text-amber-400 font-bold text-3xl">{item.water}</p>
+                       <p className="text-white/70 text-sm mt-2">per acre, per year</p>
                      </div>
                    </div>
                    <div className="p-6 bg-white/[0.04]">
-                     <div className="flex justify-between items-center mb-3">
-                       <span className="text-white/60 text-sm">Area</span>
-                       <span className="text-white font-semibold">{item.acres}</span>
-                     </div>
-                     <div className="flex justify-between items-center">
-                       <span className="text-white/60 text-sm">Annual Use</span>
-                       <span className="text-white font-semibold">{item.water}</span>
-                     </div>
+                     <p className="text-white/60 text-sm leading-relaxed">{item.note}</p>
                    </div>
                  </motion.div>
               )}
@@ -274,9 +269,9 @@ export default function Technology() {
 
           {/* The Cost Problem */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">...Where desalination is far too expensive...</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">...Where desalinated water is hard to justify...</h2>
              <p className="text-white/70 text-lg leading-relaxed mb-8">
-               Desalination costs 5x more than crops are worth.
+               Delivered desalinated supply costs roughly five times more per acre-foot than an irrigated field crop can pay for its water.
              </p>
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div
@@ -299,9 +294,9 @@ export default function Technology() {
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10" />
                 <div className="absolute inset-0 z-20 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white mb-2">Desalinated Water Cost</div>
-                    <div className="text-5xl font-bold text-red-400 mb-4">$20,000+</div>
-                    <p className="text-white/80 text-sm">per acre</p>
+                    <div className="text-2xl font-bold text-white mb-2">Desalinated Municipal Supply</div>
+                    <div className="text-5xl font-bold text-red-400 mb-4">$3,400</div>
+                    <p className="text-white/80 text-sm">per acre-foot · Carlsbad, 2024</p>
                   </div>
                 </div>
               </motion.div>
@@ -325,9 +320,9 @@ export default function Technology() {
                 <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-10" />
                 <div className="absolute inset-0 z-20 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white mb-2">Crop Value (Alfalfa)</div>
-                    <div className="text-5xl font-bold text-green-400 mb-4">$4,000</div>
-                    <p className="text-white/80 text-sm">per acre annually</p>
+                    <div className="text-2xl font-bold text-white mb-2">What Alfalfa Can Pay</div>
+                    <div className="text-5xl font-bold text-green-400 mb-4">$700–1,000</div>
+                    <p className="text-white/80 text-sm">gross value per acre-foot used</p>
                   </div>
                 </div>
               </motion.div>
@@ -337,9 +332,9 @@ export default function Technology() {
 
           {/* The Future Problem */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">...And it always will be</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">...And that gap is unlikely to close soon</h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Desalination costs have flatlined. We've hit the physics limit of the process. Energy inputs dominate the cost curve, and renewable energy improvements aren't enough to bridge a 5x gap.
+              Desalination continues to advance, but its cost and energy requirements can make it economically challenging for low-value, water-intensive agricultural applications. E2Eden is investigating an alternative approach: reducing freshwater demand rather than producing additional freshwater.
             </p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -348,68 +343,27 @@ export default function Technology() {
               transition={{ duration: 0.6 }}
               className="p-8 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-sm">
 
-              <ResponsiveContainer width="100%" height={350}>
-                <LineChart data={[
-                { year: "1970s", desal: 9700, iidfarmers: 25, farmers: 25 },
-                { year: "1980s", desal: 8500, iidfarmers: 25, farmers: 25 },
-                { year: "1990s", desal: 6000, iidfarmers: 20, farmers: 20 },
-                { year: "2000s", desal: 4500, iidfarmers: 20, farmers: 20 },
-                { year: "2010s", desal: 2500, iidfarmers: 20, farmers: 20 },
-                { year: "2020", desal: 2329, iidfarmers: 20, farmers: 20 },
-                { year: "2024", desal: 3400, iidfarmers: 25, farmers: 25 }]
-                } margin={{ top: 30, right: 30, left: 30, bottom: 30 }}>
-                  <CartesianGrid strokeDasharray="2 4" stroke="rgba(255,255,255,0.08)" vertical={false} />
-                  <XAxis dataKey="year" stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px", fontWeight: 500 }} />
-                  <YAxis stroke="rgba(255,255,255,0.4)" style={{ fontSize: "12px" }} tickFormatter={(val) => `$${(val / 1000).toFixed(0)}k`} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "rgba(0,0,0,0.9)",
-                      border: "1px solid rgba(59, 130, 246, 0.3)",
-                      borderRadius: "12px",
-                      padding: "12px"
-                    }}
-                    formatter={(value) => `$${value.toLocaleString()}/acre-ft`}
-                    labelStyle={{ color: "#ffffff" }}
-                    cursor={{ stroke: "rgba(59, 130, 246, 0.2)", strokeWidth: 2 }} />
-
-                  <Line
-                    type="natural"
-                    dataKey="desal"
-                    stroke="#3b82f6"
-                    dot={false}
-                    strokeWidth={3}
-                    isAnimationActive={true}
-                    name="Desalination Cost" />
-
-                  <Line
-                    type="linear"
-                    dataKey="iidfarmers"
-                    stroke="#60a5fa"
-                    dot={false}
-                    strokeWidth={2}
-                    strokeDasharray="5 5"
-                    isAnimationActive={true}
-                    name="What IID Farmers Pay" />
-
-                </LineChart>
-              </ResponsiveContainer>
-              <div className="mt-8 grid md:grid-cols-3 gap-4">
-                <div className="text-center">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">Current Standard (Carlsbad)</p>
-                  <p className="text-2xl font-bold text-blue-400">$3,400</p>
-                  <p className="text-white/40 text-xs mt-1">per acre-foot (2024)</p>
-                </div>
-                <div className="text-center border-l border-r border-white/10">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">The Gap</p>
-                  <p className="text-2xl font-bold text-white">136x</p>
-                  <p className="text-white/40 text-xs mt-1">vs. what farmers pay</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-white/50 text-xs uppercase tracking-widest mb-2">What Colorado River Farmers Pay</p>
-                  <p className="text-2xl font-bold text-blue-300">$25</p>
-                  <p className="text-white/40 text-xs mt-1">per acre-foot (IID 2024)</p>
-                </div>
+              <div className="space-y-6">
+                {[
+                { label: "Desalinated municipal supply (Carlsbad, 2024)", value: "$3,400", bar: 100, color: "#3b82f6" },
+                { label: "Gross value an acre of alfalfa can return per acre-foot used", value: "$700–1,000", bar: 26, color: "#34d399" },
+                { label: "Colorado River farm rate (IID tier rates)", value: "$20–25", bar: 1, color: "#f59e0b" }].
+                map((item) =>
+                <div key={item.label}>
+                    <div className="flex justify-between items-baseline gap-4 mb-2">
+                      <span className="text-white/70 text-sm">{item.label}</span>
+                      <span className="font-bold text-lg whitespace-nowrap" style={{ color: item.color }}>{item.value}</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-white/10">
+                      <div className="h-2 rounded-full" style={{ width: `${item.bar}%`, backgroundColor: item.color }} />
+                    </div>
+                  </div>
+                )}
               </div>
+              <p className="text-white/40 text-xs mt-6">All figures in dollars per acre-foot. Indicative published benchmarks, not project measurements.</p>
+              <p className="mt-8 text-white/70 text-sm leading-relaxed">
+                Desalinated supply costs well over <span className="text-white font-semibold">100x</span> what a Colorado River farm pays for the same acre-foot of water — and roughly five times what a field crop can return on it.
+              </p>
             </motion.div>
           </div>
 
@@ -417,28 +371,28 @@ export default function Technology() {
           <div>
             <h2 className="text-3xl font-bold text-white mb-4">...And there are few suitable tools for saving water in these environments</h2>
             <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Common water-saving technologies are unsuitable for large scale mechanized farming, and only deliver water more efficiently but do not reduce the plant's need for water.
+              The tools available to large, mechanized field farming mostly deliver water more efficiently. They rarely change the crop's underlying demand for water.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {[
               {
                 title: "Drip Irrigation",
-                problem: "Blocks heavy machinery. Incompatible with commodity crops.",
-                unsuitable: "Impossible at scale",
+                problem: "Complex to run under large-scale mechanized field operations, so it remains uncommon on commodity crops.",
+                unsuitable: "Rarely used on field crops",
                 key: "tech_drip",
                 defaultImage: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop"
               },
               {
                 title: "Greenhouses",
-                problem: "Block sunlight, machinery, and cost $100K+/acre.",
-                unsuitable: "Only for high-value crops",
+                problem: "Covered structures are capital-intensive and restrict field-scale mechanization.",
+                unsuitable: "Built for high-value crops",
                 key: "tech_greenhouses",
                 defaultImage: "https://images.unsplash.com/photo-1530836369250-ef72a3f26f0d?w=400&h=300&fit=crop"
               },
               {
                 title: "Pivot Irrigation",
-                problem: "Optimizes efficiency but doesn't stop evaporation.",
-                unsuitable: "Improves the wrong variable",
+                problem: "Delivers water efficiently, but does not reduce evaporative demand on the crop.",
+                unsuitable: "Addresses delivery, not demand",
                 key: "tech_precision",
                 defaultImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop"
               }].
@@ -503,22 +457,22 @@ export default function Technology() {
             { 
               title: "What we use", 
               icon: <Droplet className="w-8 h-8 text-cyan-400" />,
-              body: "Brackish groundwater — saline water that can't be used for drinking or irrigation. It sits unused beneath millions of acres of farmland worldwide. We pump it through our cooling panels, evaporate it, and discard the brine. It costs a fraction of freshwater." 
+              body: "Brackish groundwater — saline water that cannot be used for drinking or irrigation without treatment. Where a site has a usable supply, it is a far cheaper cooling input than freshwater. Availability varies by location, and assessing it is part of our field program." 
             },
             { 
               title: "What we replace", 
               icon: <Waves className="w-8 h-8 text-blue-400" />,
-              body: "Freshwater irrigation — the most precious resource on earth. By eliminating the need for fresh water in the cooling process and dramatically reducing crop transpiration, we cut total farm water demand by up to 90%." 
+              body: "Freshwater irrigation — the resource that actually constrains agriculture. If cooling lowers evaporative demand, some of the water a crop currently loses to the atmosphere would not need to be replaced. How large that saving is in an open field is precisely what our trials are designed to measure." 
             },
             { 
               title: "The physics", 
               icon: <Zap className="w-8 h-8 text-amber-400" />,
-              body: "Evaporative cooling is the same principle as sweating. As water evaporates, it absorbs heat. Our panels maximize the surface area for evaporation, creating the most efficient natural cooling system possible at agricultural scale." 
+              body: "Evaporative cooling is the same principle as sweating. As water evaporates, it absorbs heat from the air. Large wetted surface area lets that happen at scale with low-grade energy — the part of the system that is genuinely well established." 
             },
             { 
               title: "The scale", 
               icon: <Grid3X3 className="w-8 h-8 text-emerald-400" />,
-              body: "The technology works at any scale — from a single farm to an entire region. Each wall protects a strip of land downwind. Walls can be arranged in arrays to protect hundreds of acres, creating a new form of climate infrastructure for food production." 
+              body: "Each wall conditions the air that passes through it. How far that cooled air persists downwind determines how much land a wall can serve. Spacing, height and orientation are design variables our research will test at farm scale before any claim about regional systems can be made." 
             }].
             map((item, idx) =>
             <motion.div
