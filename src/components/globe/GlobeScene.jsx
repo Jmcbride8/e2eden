@@ -1,6 +1,101 @@
 import React, { useRef, useEffect, useMemo, useCallback } from "react";
 import * as THREE from "three";
 
+// Text sprites are drawn to a canvas that is sized to the actual text (wrapped
+// where needed), so long project names are never clipped at the edges.
+const LABEL_PX_TO_WORLD = 0.85 / 512; // same on-screen text size as before
+const LABEL_PADDING = 24;
+const LABEL_MAX_TEXT_WIDTH = 600;
+const LABEL_SUPERSAMPLE = 2;
+
+function wrapLabelText(context, text, maxWidth) {
+  const words = String(text).split(/\s+/).filter(Boolean);
+  const lines = [];
+  let line = "";
+  words.forEach((word) => {
+    const candidate = line ? `${line} ${word}` : word;
+    if (line && context.measureText(candidate).width > maxWidth) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = candidate;
+    }
+  });
+  if (line) lines.push(line);
+  return lines.length ? lines : [""];
+}
+
+function createLabelSprite(project) {
+  const specs = [
+    project.year && {
+      text: project.year,
+      font: "bold 36px Arial",
+      color: "#fbbf24",
+      lineHeight: 46,
+    },
+    {
+      text: project.name,
+      font: "bold 52px Arial",
+      color: "#ffffff",
+      lineHeight: 62,
+    },
+    project.location && {
+      text: project.location,
+      font: "bold 34px Arial",
+      color: "rgba(255, 255, 255, 0.7)",
+      lineHeight: 44,
+    },
+  ].filter(Boolean);
+
+  const measureCtx = document.createElement("canvas").getContext("2d");
+  let widest = 0;
+  const rows = specs.map((spec) => {
+    measureCtx.font = spec.font;
+    const lines = wrapLabelText(measureCtx, spec.text, LABEL_MAX_TEXT_WIDTH);
+    lines.forEach((line) => {
+      widest = Math.max(widest, measureCtx.measureText(line).width);
+    });
+    return { ...spec, lines };
+  });
+
+  const width = Math.ceil(widest) + LABEL_PADDING * 2;
+  const height =
+    rows.reduce((sum, row) => sum + row.lineHeight * row.lines.length, 0) +
+    LABEL_PADDING * 2;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = width * LABEL_SUPERSAMPLE;
+  canvas.height = height * LABEL_SUPERSAMPLE;
+  const context = canvas.getContext("2d");
+  context.scale(LABEL_SUPERSAMPLE, LABEL_SUPERSAMPLE);
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+
+  let y = LABEL_PADDING;
+  rows.forEach((row) => {
+    context.font = row.font;
+    context.fillStyle = row.color;
+    row.lines.forEach((line) => {
+      y += row.lineHeight / 2;
+      context.fillText(line, width / 2, y);
+      y += row.lineHeight / 2;
+    });
+  });
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.anisotropy = 4;
+  const sprite = new THREE.Sprite(
+    new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.9 })
+  );
+  sprite.scale.set(width * LABEL_PX_TO_WORLD, height * LABEL_PX_TO_WORLD, 1);
+
+  return {
+    sprite,
+    labelWidth: width * LABEL_PX_TO_WORLD,
+    labelHeight: height * LABEL_PX_TO_WORLD,
+  };
+}
+
 function latLonToVector3(lat, lon, radius) {
   const phi = (90 - lat) * (Math.PI / 180);
   const theta = (lon + 180) * (Math.PI / 180);
@@ -153,50 +248,9 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
     projects.forEach((project) => {
       const pos = latLonToVector3(project.lat, project.lon, globeRadius + 0.02);
 
-      // Create text label sprite (no background)
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      canvas.width = 512;
-      canvas.height = 220;
-      
-      let currentY = 30;
-      
-      // 1. Add year at top in yellow
-      if (project.year) {
-        context.font = 'bold 36px Arial';
-        context.fillStyle = '#fbbf24'; // amber-400
-        context.textAlign = 'center';
-        context.textBaseline = 'top';
-        context.fillText(project.year, canvas.width / 2, currentY);
-        currentY += 48;
-      }
-      
-      // 2. Add project name (bold, prominent)
-      context.font = 'bold 52px Arial';
-      context.fillStyle = 'white';
-      context.textAlign = 'center';
-      context.textBaseline = 'top';
-      context.fillText(project.name, canvas.width / 2, currentY);
-      currentY += 65;
-      
-      // 3. Add location below
-      context.font = 'bold 34px Arial';
-      context.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      context.textAlign = 'center';
-      context.textBaseline = 'top';
-      context.fillText(project.location || '', canvas.width / 2, currentY);
-      
-      const texture = new THREE.CanvasTexture(canvas);
-      const spriteMaterial = new THREE.SpriteMaterial({ 
-        map: texture,
-        transparent: true,
-        opacity: 0.9
-      });
-      const sprite = new THREE.Sprite(spriteMaterial);
-      
-      const labelPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.35);
-      sprite.position.copy(labelPos);
-      sprite.scale.set(0.85, 0.35, 1);
+      // Create text label sprite (sized to fit the whole name, wrapped if long)
+      const { sprite, labelWidth, labelHeight } = createLabelSprite(project);
+      sprite.position.copy(latLonToVector3(project.lat, project.lon, globeRadius + 0.35));
       sprite.userData = { project, clickable: true };
       globeGroup.add(sprite);
 
@@ -263,6 +317,8 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
         project,
         anchor: pos.clone(),
         offset: new THREE.Vector2(0, 0),
+        labelWidth,
+        labelHeight,
       });
     });
 
@@ -338,8 +394,8 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
           ppu,
           sx,
           sy,
-          halfW: 0.85 * ppu * 0.5,
-          halfH: 0.35 * ppu * 0.5,
+          halfW: marker.labelWidth * ppu * 0.5,
+          halfH: marker.labelHeight * ppu * 0.5,
         });
       });
 
