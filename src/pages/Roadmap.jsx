@@ -6,44 +6,71 @@ import { MapPin } from "lucide-react";
 import SaltonSeaInfrastructure from "@/components/roadmap/SaltonSeaInfrastructure";
 import GlobalTransformation from "@/components/roadmap/GlobalTransformation";
 
-// ─── Static narrative chapters ───────────────────────────────────────────────
+// ─── Static narrative acts ────────────────────────────────────────────────────
 const chapters = [
   {
     id: "legacy",
     act: "ACT I",
-    label: "The Technology Is Proven",
+    label: "The technology is proven",
     title: "Decades of Seawater Greenhouse Innovation",
     description:
       "Decades of Seawater Greenhouse projects show that saline water can cool protected crops in dry climates. E2Eden is building on that work to ask a different question: how much net freshwater can the same principle save in open or semi-open fields?",
     projects: "seawater_greenhouse",
   },
   {
-    id: "poc",
-    act: "ACT II · PHASE 1",
-    label: "The US Insight",
-    title: "Grant-Supported Proof of Concept",
+    id: "deployment",
+    act: "ACT II · PHASES 1–3",
+    label: "Proof of concept to commercial deployment",
+    title: "From One Field Test to Commercial Farms",
     description:
-      "E2Eden is pursuing grant support for a small, instrumented field test. The first site is not fixed. The goal is to measure cooling reach, check salt and brine handling, and identify which configurations merit a larger crop trial. Open-field water savings have not yet been established.",
-    phase: "R&D",
-  },
-  {
-    id: "scale",
-    act: "ACT II · PHASE 2",
-    label: "At-Scale Deployment",
-    title: "UC Desert Research & Extension Center",
-    description:
-      "The proposed second-site pilot at UC Desert Research & Extension Center in Holtville would compare cooled and untreated plots and independently measure net freshwater savings, crop performance and costs. E2Eden would bring those results to the Imperial Irrigation District and other water managers to seek conservation incentive eligibility. No rebate or payment is assumed.",
-    phase: "US Commercialization",
+      "Three connected steps, not three separate plans: measure open-field water savings in a small instrumented trial, repeat them at research scale with independent measurement, then bring a working commercial offer to growers. Each step has to earn the next one.",
+    phases: [
+      {
+        stage: "PHASE 1 · PROOF OF CONCEPT",
+        phase: "R&D",
+        title: "Grant-Supported Field Test",
+        description:
+          "E2Eden is pursuing grant support for a small, instrumented field test. The first site is not fixed. The goal is to measure cooling reach, check salt and brine handling, and identify which configurations merit a larger crop trial. Open-field water savings have not yet been established.",
+      },
+      {
+        stage: "PHASE 2 · AT-SCALE PILOT",
+        phase: "US Commercialization",
+        title: "UC Desert Research & Extension Center",
+        description:
+          "The proposed second-site pilot at UC Desert Research & Extension Center in Holtville would compare cooled and untreated plots and independently measure net freshwater savings, crop performance and costs. E2Eden would bring those results to the Imperial Irrigation District and other water managers to seek conservation incentive eligibility. No rebate or payment is assumed.",
+      },
+      {
+        stage: "PHASE 3 · COMMERCIALIZATION",
+        title: "Commercial Deployment Across the Southwest",
+        description:
+          "Commercial deployment would start with heat-sensitive specialty crops, where a longer growing window, better quality or an additional harvest could justify the investment. Larger-acreage field crops come later, once the model works commercially and a conservation payment mechanism is in place.",
+      },
+    ],
   },
   {
     id: "regional",
-    act: "ACT II · PHASE 3",
-    label: "Regional Transformation",
-    title: "Commercial Deployment Across the Southwest",
+    act: "ACT III",
+    label: "Regional terraforming & restoration",
+    title: "Pacific-to-Salton Sea: A Regional Water System",
     description:
-      "Commercial deployment would start with heat-sensitive specialty crops, where a longer growing window, better quality or an additional harvest could justify the investment. Larger-acreage field crops come later, once the model works commercially and a conservation payment mechanism is in place. Any benefits for the Salton Sea would require separate hydrological and environmental study.",
-    phase: "Salton Sea Transformation",
+      "Act II proves one component. Act III asks whether the pieces can be combined into a water system for an entire region — ocean intake, conveyance tunnels, receiving works, farm cooling and salt management working as one. This is the most ambitious step in the roadmap: a terraforming and restoration concept that is neither approved nor yet economic. E2Eden’s 2023 proposal is where the idea is being examined.",
+    component: SaltonSeaInfrastructure,
   },
+  {
+    id: "global",
+    act: "ACT IV",
+    label: "Going global",
+    title: "Global Transformation",
+    description:
+      "If a regional system can be built and operated here, the same combination of technologies could be studied basin by basin elsewhere. Act IV is the long horizon: assembling the final systems into something that could be deployed worldwide, wherever water, ecology and local agreement make the case.",
+    component: GlobalTransformation,
+  },
+];
+
+const CONNECTORS = [
+  "E2Eden reconfigures for the US",
+  "From farms to a regional system",
+  "From one basin to the globe",
 ];
 
 // ─── Project Card ─────────────────────────────────────────────────────────────
@@ -83,14 +110,19 @@ function ProjectCard({ project }) {
 
 // ─── Chapter Section ──────────────────────────────────────────────────────────
 function ChapterSection({ chapter, projects }) {
+  const Body = chapter.component;
+  const phaseNames = chapter.phases?.map((phase) => phase.phase).filter(Boolean) ?? [];
+
   const chapterProjects = chapter.projects === "seawater_greenhouse"
     ? projects.filter((p) => p.company === "Seawater Greenhouse")
-    : projects.filter(
-        (p) =>
-          (p.company === "E2Eden" || !p.company) &&
-          p.phase === chapter.phase &&
-          p.category !== "Visionary"
-      );
+    : phaseNames.length
+      ? projects.filter(
+          (p) =>
+            (p.company === "E2Eden" || !p.company) &&
+            phaseNames.includes(p.phase) &&
+            p.category !== "Visionary"
+        )
+      : [];
 
   return (
     <section aria-labelledby={`roadmap-${chapter.id}`}>
@@ -105,6 +137,21 @@ function ChapterSection({ chapter, projects }) {
         <p className="max-w-[68ch] text-base leading-relaxed text-secondary/75">{chapter.description}</p>
       </header>
 
+      {/* Phase breakdown within a single act */}
+      {chapter.phases && (
+        <ol className="mb-8 grid gap-6 sm:mb-10 sm:grid-cols-3">
+          {chapter.phases.map((phase, index) => (
+            <li key={phase.title} className="border-t border-border/20 pt-4">
+              <p className="mb-2 font-mono text-[11px] tracking-[0.08em] text-secondary/60">
+                {String(index + 1).padStart(2, "0")} · {phase.stage}
+              </p>
+              <h3 className="mb-2 text-base font-semibold leading-snug text-background">{phase.title}</h3>
+              <p className="text-sm leading-relaxed text-secondary/75">{phase.description}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+
       {/* Projects Grid */}
       {chapterProjects.length > 0 && (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -115,12 +162,13 @@ function ChapterSection({ chapter, projects }) {
             ))}
         </div>
       )}
-      {chapter.id === "regional" && <SaltonSeaInfrastructure />}
+
+      {Body && <Body />}
     </section>
   );
 }
 
-// ─── Chapter Transition ──────────────────────────────────────────────────────────
+// ─── Chapter Transition ───────────────────────────────────────────────────────
 function Connector({ label }) {
   return (
     <div className="flex items-center gap-4 py-10 sm:py-14">
@@ -157,20 +205,14 @@ export default function Roadmap() {
           </p>
         </motion.div>
 
-        {/* Narrative Chapters */}
+        {/* Narrative Acts */}
         <div className="space-y-0">
           {chapters.map((chapter, idx) => (
             <div key={chapter.id}>
               <ChapterSection chapter={chapter} projects={projects} />
-              {idx < chapters.length - 1 && (
-                <Connector
-                  label={idx === 0 ? "E2Eden reconfigures for the US" : idx === 1 ? "Validated → Scale" : idx === 2 ? "Blueprint → Region" : null}
-                />
-              )}
+              {idx < chapters.length - 1 && <Connector label={CONNECTORS[idx]} />}
             </div>
           ))}
-          <Connector label="From farms to global basins" />
-          <GlobalTransformation />
         </div>
 
       </div>
