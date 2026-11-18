@@ -23,27 +23,19 @@ const chapters = [
     label: "Proof of concept to commercial deployment",
     title: "From One Field Test to Commercial Farms",
     description:
-      "Three connected steps, not three separate plans: measure open-field water savings in a small instrumented trial, repeat them at research scale with independent measurement, then bring a working commercial offer to growers. Each step has to earn the next one.",
+      "Three connected steps, each one earning the next: a small instrumented trial, an independently measured pilot, then a working commercial offer to growers.",
     phases: [
-      {
-        stage: "PHASE 1 · PROOF OF CONCEPT",
-        phase: "R&D",
-        title: "Grant-Supported Field Test",
-        description:
-          "E2Eden is pursuing grant support for a small, instrumented field test. The first site is not fixed. The goal is to measure cooling reach, check salt and brine handling, and identify which configurations merit a larger crop trial. Open-field water savings have not yet been established.",
-      },
-      {
-        stage: "PHASE 2 · AT-SCALE PILOT",
-        phase: "US Commercialization",
-        title: "UC Desert Research & Extension Center",
-        description:
-          "The proposed second-site pilot at UC Desert Research & Extension Center in Holtville would compare cooled and untreated plots and independently measure net freshwater savings, crop performance and costs. E2Eden would bring those results to the Imperial Irrigation District and other water managers to seek conservation incentive eligibility. No rebate or payment is assumed.",
-      },
+      { stage: "PHASE 1 · PROOF OF CONCEPT", phase: "R&D" },
+      { stage: "PHASE 2 · AT-SCALE PILOT", phase: "US Commercialization" },
       {
         stage: "PHASE 3 · COMMERCIALIZATION",
-        title: "Commercial Deployment Across the Southwest",
-        description:
-          "Commercial deployment would start with heat-sensitive specialty crops, where a longer growing window, better quality or an additional harvest could justify the investment. Larger-acreage field crops come later, once the model works commercially and a conservation payment mechanism is in place.",
+        card: {
+          title: "Commercial Deployment Across the Southwest",
+          description:
+            "Sales would start with heat-sensitive specialty crops, where a longer growing window, better quality or an extra harvest could justify the investment. Larger-acreage field crops follow once the model works commercially and a conservation payment mechanism exists.",
+          image:
+            "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/92d3ade08_generated_image.png",
+        },
       },
     ],
   },
@@ -73,38 +65,64 @@ const CONNECTORS = [
   "From one basin to the globe",
 ];
 
-// ─── Project Card ─────────────────────────────────────────────────────────────
-function ProjectCard({ project }) {
-  const isCompleted = project.status === "completed";
-  const isActive = project.status === "active";
-
+// ─── Cards ────────────────────────────────────────────────────────────────────
+function CardShell({ stage, title, location, description, image, imageAlt }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-xl border border-border/[0.15] bg-muted/5">
-      {project.hero_image && (
+      {image && (
         <img
-          src={project.hero_image}
-          alt={project.name}
+          src={image}
+          alt={imageAlt || title}
+          loading="lazy"
+          decoding="async"
           className="aspect-[16/10] w-full object-cover"
-          style={{ objectPosition: project.hero_image_position || "center center" }}
         />
       )}
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <p className="mb-3 text-[11px] font-semibold tracking-[0.14em] text-secondary/60">
-          {isCompleted ? "COMPLETED" : isActive ? "IN PROGRESS" : "PLANNED"}
-          {project.year && ` · ${project.year}`}
-        </p>
-        <h3 className="mb-2 text-lg font-semibold leading-snug text-background">{project.name}</h3>
-        {project.location && (
+        {stage && (
+          <p className="mb-3 text-[11px] font-semibold tracking-[0.14em] text-secondary/60">{stage}</p>
+        )}
+        <h3 className="mb-2 text-lg font-semibold leading-snug text-background">{title}</h3>
+        {location && (
           <div className="mb-3 flex items-center gap-1.5 text-secondary/60">
             <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
-            <span className="text-xs">{project.location}</span>
+            <span className="text-xs">{location}</span>
           </div>
         )}
-        {project.description && (
-          <p className="text-sm leading-relaxed text-secondary/75">{project.description}</p>
+        {description && (
+          <p className="text-sm leading-relaxed text-secondary/75">{description}</p>
         )}
       </div>
     </article>
+  );
+}
+
+function ProjectCard({ project, stage }) {
+  const statusLabel = project.status === "completed"
+    ? "COMPLETED"
+    : project.status === "active" ? "IN PROGRESS" : "PLANNED";
+
+  return (
+    <CardShell
+      stage={stage ?? `${statusLabel}${project.year ? ` · ${project.year}` : ""}`}
+      title={project.name}
+      location={project.location}
+      description={project.description}
+      image={project.hero_image}
+      imageAlt={project.name}
+    />
+  );
+}
+
+function PhaseCard({ stage, card }) {
+  return (
+    <CardShell
+      stage={stage}
+      title={card.title}
+      description={card.description}
+      image={card.image}
+      imageAlt={card.title}
+    />
   );
 }
 
@@ -124,6 +142,18 @@ function ChapterSection({ chapter, projects }) {
         )
       : [];
 
+  const cards = chapter.phases
+    ? chapter.phases
+        .map((phase) => {
+          if (phase.card) return { key: phase.stage, stage: phase.stage, card: phase.card };
+          const project = chapterProjects.find((p) => p.phase === phase.phase);
+          return project ? { key: project.id, stage: phase.stage, project } : null;
+        })
+        .filter(Boolean)
+    : [...chapterProjects]
+        .sort((a, b) => (a.sort_order ?? 999) - (b.sort_order ?? 999) || (a.year || "").localeCompare(b.year || ""))
+        .map((project) => ({ key: project.id, project }));
+
   return (
     <section aria-labelledby={`roadmap-${chapter.id}`}>
       <header className="mb-7 max-w-3xl sm:mb-9">
@@ -137,29 +167,13 @@ function ChapterSection({ chapter, projects }) {
         <p className="max-w-[68ch] text-base leading-relaxed text-secondary/75">{chapter.description}</p>
       </header>
 
-      {/* Phase breakdown within a single act */}
-      {chapter.phases && (
-        <ol className="mb-8 grid gap-6 sm:mb-10 sm:grid-cols-3">
-          {chapter.phases.map((phase, index) => (
-            <li key={phase.title} className="border-t border-border/20 pt-4">
-              <p className="mb-2 font-mono text-[11px] tracking-[0.08em] text-secondary/60">
-                {String(index + 1).padStart(2, "0")} · {phase.stage}
-              </p>
-              <h3 className="mb-2 text-base font-semibold leading-snug text-background">{phase.title}</h3>
-              <p className="text-sm leading-relaxed text-secondary/75">{phase.description}</p>
-            </li>
-          ))}
-        </ol>
-      )}
-
-      {/* Projects Grid */}
-      {chapterProjects.length > 0 && (
+      {cards.length > 0 && (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {chapterProjects
-            .sort((a, b) => (a.sort_order ?? 999) - (b.sort_order ?? 999) || (a.year || "").localeCompare(b.year || ""))
-            .map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+          {cards.map((item) =>
+            item.card
+              ? <PhaseCard key={item.key} stage={item.stage} card={item.card} />
+              : <ProjectCard key={item.key} project={item.project} stage={item.stage} />
+          )}
         </div>
       )}
 
