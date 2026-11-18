@@ -1,5 +1,5 @@
-// Proposed research sites and consortium members for the MERC proposal.
-// Add one entry per site / per principal investigator here.
+// Proposed research sites and consortium leads for the MERC proposal.
+// One entry per site, one consortium lead per site.
 
 export const SITES = [
   {
@@ -14,6 +14,52 @@ export const SITES = [
       "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/public/6993b7c68cee7955d3266d09/fa3b93fe7_darla-hueske-fqoq39Jj5us-unsplash.jpg",
     image_alt: "UC Desert Research Center Pilot Farm",
   },
+  {
+    id: "israel",
+    label: "Proposed Research Site",
+    name: "Arava Institute for Environmental Studies",
+    location: "Kibbutz Ketura, Arava Valley, Israel · Sabha desalination brine",
+    blurb:
+      "The Israeli pilot site will use brine discharge from the Sabha desalination plant, which supplies potable water to Eilat, on plots irrigated from brackish groundwater. Temperature, humidity, vapour-pressure deficit, wind and crop water use are measured against untreated plots. A proposed site: field work begins only if the proposal is funded.",
+    image_key: "merc_site_israel",
+    image_default:
+      "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/6ea891ec5_generated_image.png",
+    image_alt: "Arid desert agricultural valley in the Arava",
+  },
+  {
+    id: "jordan",
+    label: "Proposed Research Site",
+    name: "Khayrat Wadi Araba First Agriculture Investment Company",
+    location: "Aqaba Governorate, Wadi Araba, Jordan · Brackish groundwater",
+    blurb:
+      "KWA will host the Jordanian pilot site on a working farm that irrigates from brackish groundwater. The same instrumentation, control hardware and test protocol as Israel and California are applied to locally relevant crops, water sources and soils. A proposed site, not an operating E2Eden facility.",
+    image_key: "merc_site_jordan",
+    image_default:
+      "https://media.base44.com/images/public/6993b7c68cee7955d3266d09/e9ffc11de_generated_image.png",
+    image_alt: "Desert farm plots in Wadi Araba, Jordan",
+  },
 ];
 
-export const CONSORTIUM = [];
+export const CONSORTIUM = [
+  {
+    region: "Israel",
+    name: "Dr. Clive Lipchin",
+    organization: "Arava Institute for Environmental Studies (AIES)",
+    focus:
+      "Prime Investigator. Leads the Israeli field site and, with KWA, the shared Israel–Jordan research framework.",
+  },
+  {
+    region: "Jordan",
+    name: "Waddah Maayta",
+    organization: "Khayrat Wadi Araba First Agriculture Investment Company (KWA)",
+    focus:
+      "MENA Investigator. Leads the Jordanian field site and the joint water, materials and microclimate work.",
+  },
+  {
+    region: "United States",
+    name: "Jason McBride",
+    organization: "E2Eden LLC",
+    focus:
+      "U.S. Investigator. Defines the shared instrumentation, controls and cloud-data system and runs the Imperial Valley test site.",
+  },
+];

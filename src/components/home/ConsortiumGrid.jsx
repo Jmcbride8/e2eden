@@ -11,8 +11,8 @@ export default function ConsortiumGrid({ members }) {
         <div className="h-px flex-1 bg-white/10" />
       </div>
       <p className="text-white/60 leading-relaxed mb-8 max-w-4xl">
-        The proposal brings together principal investigators from each region, pairing E2Eden's field engineering with
-        independent agronomic and hydrological research at every site.
+        One lead investigator per site: E2Eden's field engineering in California, paired with independent research
+        institutions in Israel and Jordan, each running the same test protocol on its own water, soils and crops.
       </p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {members.map((member) => (
