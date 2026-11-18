@@ -200,16 +200,17 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       sprite.userData = { project, clickable: true };
       globeGroup.add(sprite);
 
-      // Add line from marker to bottom center of label
-      const lineEndPos = latLonToVector3(project.lat, project.lon, globeRadius + 0.2);
+      // Leader line from the map point to wherever the label ends up on screen
       const lineMaterial = new THREE.LineBasicMaterial({ 
         color: 0xffffff, 
         transparent: true, 
-        opacity: 0.6,
-        linewidth: 2
+        opacity: 0.5
       });
-      const linePoints = [pos, lineEndPos];
-      const lineGeometry = new THREE.BufferGeometry().setFromPoints(linePoints);
+      const lineGeometry = new THREE.BufferGeometry();
+      lineGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(new Float32Array(6), 3)
+      );
       const line = new THREE.Line(lineGeometry, lineMaterial);
       globeGroup.add(line);
 
@@ -253,7 +254,16 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
       pulse.lookAt(new THREE.Vector3(0, 0, 0));
       globeGroup.add(pulse);
 
-      markerMeshes.current.push({ dot, ring, pulse, sprite, project });
+      markerMeshes.current.push({
+        dot,
+        ring,
+        pulse,
+        sprite,
+        line,
+        project,
+        anchor: pos.clone(),
+        offset: new THREE.Vector2(0, 0),
+      });
     });
 
     // Ambient particles
@@ -275,6 +285,129 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
     scene.add(new THREE.Points(particleGeo, particleMat));
 
     sceneRef.current = { scene, camera, renderer, globeGroup };
+
+    // ── Label layout ──────────────────────────────────────────────────────────
+    // Labels live on the globe, so nearby projects overlap. Each frame we project
+    // every marker to the screen, push overlapping labels apart in pixel space,
+    // then place the sprite back in 3D along the camera plane. The leader line
+    // keeps it visually tied to the true map point.
+    const fovHalfTan = Math.tan((camera.fov * Math.PI) / 180 / 2);
+    const camRight = new THREE.Vector3();
+    const camUp = new THREE.Vector3();
+    const scratch = new THREE.Vector3();
+
+    const layoutLabels = () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (!w || !h) return;
+
+      globeGroup.updateMatrixWorld(true);
+      camRight.setFromMatrixColumn(camera.matrixWorld, 0).normalize();
+      camUp.setFromMatrixColumn(camera.matrixWorld, 1).normalize();
+
+      const items = [];
+
+      markerMeshes.current.forEach((marker) => {
+        const world = marker.anchor.clone().applyMatrix4(globeGroup.matrixWorld);
+        scratch.copy(camera.position).sub(world);
+        const dist = scratch.length();
+        const facing = marker.anchor
+          .clone()
+          .normalize()
+          .dot(scratch.clone().normalize());
+
+        marker.sprite.visible = facing > 0.05;
+        marker.line.visible = facing > 0.05;
+        if (!marker.sprite.visible) return;
+
+        const ndc = world.clone().project(camera);
+        const sx = (ndc.x * 0.5 + 0.5) * w;
+        const sy = (-ndc.y * 0.5 + 0.5) * h;
+        const ppu = h / (2 * dist * fovHalfTan); // pixels per world unit at this depth
+
+        // Start labels slightly away from the globe centre so they clear the marker
+        let dx = sx - w / 2;
+        let dy = sy - h / 2;
+        const len = Math.hypot(dx, dy) || 1;
+        const push = 48;
+        marker.offset.set((dx / len) * push, (dy / len) * push - 6);
+
+        items.push({
+          marker,
+          world,
+          ppu,
+          sx,
+          sy,
+          halfW: 0.85 * ppu * 0.5,
+          halfH: 0.35 * ppu * 0.5,
+        });
+      });
+
+      const maxReach = Math.min(h * 0.45, 230);
+
+      for (let iter = 0; iter < 14; iter++) {
+        let moved = false;
+        for (let i = 0; i < items.length; i++) {
+          for (let j = i + 1; j < items.length; j++) {
+            const a = items[i];
+            const b = items[j];
+            const ax = a.sx + a.marker.offset.x;
+            const ay = a.sy + a.marker.offset.y;
+            const bx = b.sx + b.marker.offset.x;
+            const by = b.sy + b.marker.offset.y;
+            const needX = a.halfW + b.halfW + 12;
+            const needY = a.halfH + b.halfH + 8;
+            const gapX = bx - ax;
+            const gapY = by - ay;
+            const overX = needX - Math.abs(gapX);
+            const overY = needY - Math.abs(gapY);
+            if (overX <= 0 || overY <= 0) continue;
+
+            moved = true;
+            if (overX / needX < overY / needY) {
+              const shift = (overX / 2 + 0.5) * (gapX >= 0 ? 1 : -1);
+              a.marker.offset.x -= shift;
+              b.marker.offset.x += shift;
+            } else {
+              const shift = (overY / 2 + 0.5) * (gapY >= 0 ? 1 : -1);
+              a.marker.offset.y -= shift;
+              b.marker.offset.y += shift;
+            }
+          }
+        }
+
+        // Keep labels within reach of their marker
+        items.forEach(({ marker }) => {
+          const reach = Math.hypot(marker.offset.x, marker.offset.y);
+          if (reach > maxReach) {
+            marker.offset.multiplyScalar(maxReach / reach);
+          }
+        });
+
+        if (!moved) break;
+      }
+
+      items.forEach(({ marker, world, ppu }) => {
+        const { x: ox, y: oy } = marker.offset;
+        const spriteWorld = world
+          .clone()
+          .addScaledVector(camRight, ox / ppu)
+          .addScaledVector(camUp, -oy / ppu);
+        marker.sprite.position.copy(globeGroup.worldToLocal(spriteWorld));
+
+        const endWorld = world
+          .clone()
+          .addScaledVector(camRight, (ox * 0.68) / ppu)
+          .addScaledVector(camUp, (-oy * 0.68) / ppu);
+        const end = globeGroup.worldToLocal(endWorld);
+
+        const attr = marker.line.geometry.attributes.position;
+        attr.setXYZ(0, marker.anchor.x, marker.anchor.y, marker.anchor.z);
+        attr.setXYZ(1, end.x, end.y, end.z);
+        attr.needsUpdate = true;
+        marker.line.geometry.computeBoundingSphere();
+      });
+    };
 
     // Animation loop
     let frameId;
@@ -299,6 +432,9 @@ export default function GlobeScene({ projects, selectedProject, onSelectProject,
 
       // Clamp x rotation
       globeGroup.rotation.x = Math.max(-1.2, Math.min(1.2, globeGroup.rotation.x));
+
+      // Spread overlapping labels, keeping each tethered to its map point
+      layoutLabels();
 
       // Pulse animation on markers
       markerMeshes.current.forEach(({ pulse, ring, dot, project }, i) => {
