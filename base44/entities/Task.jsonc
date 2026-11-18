@@ -58,13 +58,52 @@
           }
         },
         {
-          "created_by_id": "{{user.id}}"
-        },
-        {
-          "data.assigned_to": "{{user.email}}"
-        },
-        {
-          "data.assigned_company": "{{user.data.company}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "$or": [
+                {
+                  "created_by_id": "{{user.id}}"
+                },
+                {
+                  "$and": [
+                    {
+                      "data.assigned_to": "{{user.email}}"
+                    },
+                    {
+                      "data.assigned_to": {
+                        "$nin": [
+                          null,
+                          ""
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$and": [
+                    {
+                      "data.assigned_company": "{{user.data.company}}"
+                    },
+                    {
+                      "data.assigned_company": {
+                        "$in": [
+                          "E2Eden",
+                          "Seawater Greenhouse",
+                          "Partner",
+                          "Other"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -77,7 +116,26 @@
         },
         {
           "user_condition": {
-            "role": "user"
+            "role": "user",
+            "data.company": "E2Eden"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Seawater Greenhouse"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Partner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Other"
           }
         }
       ]
@@ -90,10 +148,23 @@
           }
         },
         {
-          "created_by_id": "{{user.id}}"
-        },
-        {
-          "data.assigned_to": "{{user.email}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "$or": [
+                {
+                  "created_by_id": "{{user.id}}"
+                },
+                {
+                  "data.assigned_to": "{{user.email}}"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -105,7 +176,16 @@
           }
         },
         {
-          "created_by_id": "{{user.id}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "created_by_id": "{{user.id}}"
+            }
+          ]
         }
       ]
     }

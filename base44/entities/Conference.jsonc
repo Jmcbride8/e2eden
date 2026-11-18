@@ -18,7 +18,7 @@
     },
     "location": {
       "type": "string",
-      "description": "Conference location"
+      "description": "Conference website or registration link"
     },
     "link": {
       "type": "string",
@@ -52,7 +52,26 @@
         },
         {
           "user_condition": {
-            "role": "user"
+            "role": "user",
+            "data.company": "E2Eden"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Seawater Greenhouse"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Partner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Other"
           }
         }
       ]

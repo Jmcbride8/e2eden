@@ -6,6 +6,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Pencil, Check, X, Plus, Trash2 } from "lucide-react";
 import DonationModal from "../components/funding/DonationModal";
 import ContactModal from "../components/contact/ContactModal";
+import useFinanceSettings from '@/hooks/use-finance-settings';
 
 const FILLS = ["#F59E0B", "#FBBF24", "#FCD34D", "#FEF08A", "#D97706", "#B45309"];
 
@@ -163,7 +164,7 @@ export default function Funding() {
 
   useEffect(() => {
     base44.auth.me().then(user => {
-      if (user && (user.role === "admin" || (user.company && user.company.toLowerCase().includes("e2eden")))) {
+      if (user?.role === "admin") {
         setIsAdmin(true);
       }
     }).catch(() => {});
@@ -174,6 +175,7 @@ export default function Funding() {
     queryFn: () => base44.entities.FundingItem.list("sort_order"),
   });
 
+  const { data: finance, isLoading: financeLoading } = useFinanceSettings();
   const pocItems = fundingItems.filter(i => i.raise === "poc");
   const pilotItems = fundingItems.filter(i => i.raise === "pilot");
 
@@ -199,6 +201,8 @@ export default function Funding() {
 
   const openContact = () => setContactModal({ isOpen: true, defaultReason: "Venture Investment" });
 
+  if (!finance) return <div className="pt-32 text-center text-white" role="status">{financeLoading ? 'Loading funding details…' : 'Funding details are unavailable.'}</div>;
+
   return (
     <div className="min-h-screen bg-black">
       <div className="max-w-6xl mx-auto px-6 pt-32 pb-24 sm:px-8">
@@ -220,7 +224,7 @@ export default function Funding() {
             delay={0.2}
             image="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/49ed4c6ca_ChatGPTImageApr21202603_30_44PM.png"
             tag="Capital Raise · Proof of Concept"
-            amount="$50,000"
+            amount={`$${finance.proof_of_concept_goal.toLocaleString('en-US')}`}
             subtitle="Initial Proof of Concept Deployment"
             description="Validate core technology with a small-scale deployment to prove concept viability and gather essential performance data before scaling."
             items={pocItems}
@@ -233,7 +237,7 @@ export default function Funding() {
             delay={0.35}
             image="https://media.base44.com/images/public/6993b7c68cee7955d3266d09/c77b2ee30_ChatGPTImageApr21202603_25_40PM.png"
             tag="Capital Raise · USA Pilot Project"
-            amount="$5,000,000"
+            amount={`$${finance.pilot_goal.toLocaleString('en-US')}`}
             subtitle="Imperial Valley Pilot Deployment"
             description="Validate technology performance at scale, demonstrate economic viability, and establish a repeatable blueprint for global expansion."
             items={pilotItems}

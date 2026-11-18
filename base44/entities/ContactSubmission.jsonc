@@ -3,16 +3,25 @@
   "type": "object",
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
     },
     "email": {
-      "type": "string"
+      "type": "string",
+      "format": "email",
+      "minLength": 3,
+      "maxLength": 254
     },
     "reason": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 180
     },
     "message": {
-      "type": "string"
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000
     }
   },
   "required": [

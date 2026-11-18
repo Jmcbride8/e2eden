@@ -25,14 +25,20 @@ export default function UserMenu() {
   };
 
   const menuItems = [
-    { icon: Briefcase, label: "Projects", path: createPageUrl("Projects") },
-    { icon: Users, label: "CRM", path: createPageUrl("CRM") },
-    { icon: Calendar, label: "Conferences", path: createPageUrl("Conferences") },
-    { icon: ListChecks, label: "Task Manager", path: createPageUrl("TaskManager") },
+    ...(user?.role === 'admin' ? [
+      { icon: Briefcase, label: "Projects", path: createPageUrl("Projects") },
+      { icon: Users, label: "CRM", path: createPageUrl("CRM") },
+    ] : []),
+    ...(user?.role === 'admin' || user?.company ? [
+      { icon: Calendar, label: "Conferences", path: createPageUrl("Conferences") },
+      { icon: ListChecks, label: "Task Manager", path: createPageUrl("TaskManager") },
+    ] : []),
     ...(user?.role === 'admin' ? [{ icon: Shield, label: "User Management", path: createPageUrl("UserManagement") }] : []),
     ...(user?.role === 'admin' ? [{ icon: Info, label: "About", path: createPageUrl("About") }] : []),
-    ...(user?.company === 'E2Eden' || user?.role === 'admin' ? [{ icon: TrendingUp, label: "Cap Table", path: createPageUrl("CapTable") }] : []),
-    ...(user?.role === 'admin' && user?.company === 'E2Eden' ? [{ icon: Inbox, label: "Contact Responses", path: createPageUrl("ContactSubmissions") }] : []),
+    ...(user?.role === 'admin' ? [
+      { icon: TrendingUp, label: "Cap Table", path: createPageUrl("CapTable") },
+      { icon: Inbox, label: "Contact Responses", path: createPageUrl("ContactSubmissions") },
+    ] : []),
     { icon: Settings, label: "Profile Settings", path: createPageUrl("Profile") },
   ];
 

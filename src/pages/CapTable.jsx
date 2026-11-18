@@ -12,6 +12,7 @@ import InvestorEditModal from "../components/cap-table/InvestorEditModal";
 import Pie3D from "../components/cap-table/Pie3D";
 import { createPageUrl } from "../utils";
 import { format } from "date-fns";
+import useFinanceSettings from '@/hooks/use-finance-settings';
 
 const COLORS = ['#fbbf24', '#60a5fa', '#34d399', '#f87171', '#a78bfa', '#fb923c'];
 
@@ -22,15 +23,9 @@ export default function CapTable() {
   const [isAdmin, setIsAdmin] = useState(false);
   const queryClient = useQueryClient();
 
-  const SEED_ROUNDS = [
-    { id: 'seed-1', name: 'Seed 1', ownership: 0.5 },
-    { id: 'seed-2', name: 'Seed 2', ownership: 1 },
-    { id: 'seed-3', name: 'Seed 3', ownership: 2 },
-    { id: 'seed-4', name: 'Seed 4', ownership: 3 },
-    { id: 'seed-5', name: 'Seed 5', ownership: 3.5 }
-  ];
-  const VALUATION = 5000000;
-  const FOUNDER_OWNERSHIP = 90; // After removing 10%
+  const { data: finance, isLoading: financeLoading } = useFinanceSettings();
+  const SEED_ROUNDS = (finance?.seed_ownership ?? []).map((ownership, index) => ({ id: `seed-${index + 1}`, name: `Seed ${index + 1}`, ownership }));
+  const VALUATION = finance?.valuation;
 
   React.useEffect(() => {
     const checkAdmin = async () => {
@@ -59,6 +54,8 @@ export default function CapTable() {
     },
   });
 
+  if (!finance) return <div className="pt-32 text-center text-white" role="status">{financeLoading ? 'Loading cap table…' : 'Cap table settings are unavailable.'}</div>;
+
   // Calculate totals for approved investors
   const approvedInvestors = investors.filter(inv => inv.status === 'approved');
   const totalInvestment = approvedInvestors.reduce((sum, inv) => sum + (inv.investment_amount || 0), 0);
@@ -71,7 +68,7 @@ export default function CapTable() {
 
   // Create pie chart data including seeds
   const allChartData = [
-    ...investorsWithCalculatedOwnership.filter(inv => inv.name !== 'Amy Cunha').map(inv => ({
+    ...investorsWithCalculatedOwnership.filter(inv => inv.name !== finance?.excluded_investor_name).map(inv => ({
       name: inv.name,
       value: parseFloat(inv.ownership_percentage)
     })),
@@ -245,7 +242,7 @@ export default function CapTable() {
 
                     {/* Investor Rows */}
                     {investors.length === 0 ? null : (
-                      investors.filter(inv => inv.name !== 'Amy Cunha').map((investor) => {
+                      investors.filter(inv => inv.name !== finance?.excluded_investor_name).map((investor) => {
                         const config = statusConfig[investor.status] || statusConfig.pending;
                         const Icon = config.icon;
                         return (

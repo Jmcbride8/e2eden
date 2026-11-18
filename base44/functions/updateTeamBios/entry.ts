@@ -1,19 +1,16 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.20';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 
-Deno.serve(async (req) => {
+export default async function(req: Request): Promise<Response> {
   try {
+    if (req.method !== 'POST') return Response.json({ error: 'Method not allowed' }, { status: 405 });
     const base44 = createClientFromRequest(req);
-
-    let user = null;
-    try {
-      user = await base44.auth.me();
-    } catch {
-      user = null;
-    }
-
-    if (!user || user.role !== 'admin') {
-      return Response.json({ error: 'Unauthorized' }, { status: 403 });
-    }
+    const user = await base44.auth.me().catch(error => {
+      if ([401, 403].includes(error.status ?? error.response?.status)) return null;
+      throw error;
+    });
+    if (user?.role !== 'admin') return Response.json({ error: 'Forbidden' }, { status: 403 });
+    const body = await req.json().catch(() => null);
+    if (body?.confirm !== true) return Response.json({ error: 'Explicit confirmation is required' }, { status: 400 });
 
     // Fetch LinkedIn data for the three team members
     const linkedInProfiles = [
@@ -43,12 +40,12 @@ Deno.serve(async (req) => {
     }
 
     // Get all team members
-    const teamMembers = await base44.asServiceRole.entities.Team.list();
+    const teamMembers = await base44.entities.Team.list();
 
     // Update the three team members with their new bios
     for (const member of teamMembers) {
       if (bioData[member.name]) {
-        await base44.asServiceRole.entities.Team.update(member.id, {
+        await base44.entities.Team.update(member.id, {
           bio: bioData[member.name]
         });
       }
@@ -59,7 +56,7 @@ Deno.serve(async (req) => {
       message: 'Team bios updated successfully',
       bios: bioData
     });
-  } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+  } catch {
+    return Response.json({ error: 'Unable to update team bios' }, { status: 500 });
   }
-});
+}

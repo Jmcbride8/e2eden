@@ -1,0 +1,38 @@
+{
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "guard_core_integrations",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "authorize_integration": {
+          "call": "calculate_field",
+          "with": {
+            "field": "response",
+            "value": {
+              "allow": "${ .trigger.app_user.role == \"admin\" or (.trigger.app_user.role == \"user\" and (.trigger.data.operation | IN(\"UploadFile\", \"UploadPublicFile\", \"UploadPrivateFile\"))) }",
+              "reason": "This operation is restricted."
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Check integration permission"
+          }
+        }
+      }
+    ]
+  },
+  "description": "Limits integrations to admins, except signed-in profile uploads.",
+  "name": "Protect paid integrations",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "hook",
+      "events": [],
+      "hook_type": "core_usage_eligibility"
+    }
+  }
+}

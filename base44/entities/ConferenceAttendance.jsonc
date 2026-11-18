@@ -4,11 +4,25 @@
   "properties": {
     "conference_id": {
       "type": "string",
-      "description": "ID of the conference"
+      "description": "ID of the conference",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "user_email": {
       "type": "string",
-      "description": "Email of the user"
+      "description": "Email of the user",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "status": {
       "type": "string",
@@ -34,9 +48,16 @@
           }
         },
         {
-          "user_condition": {
-            "role": "user"
-          }
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.user_email": "{{user.email}}"
+            }
+          ]
         }
       ]
     },
@@ -48,7 +69,39 @@
           }
         },
         {
-          "data.user_email": "{{user.email}}"
+          "$and": [
+            {
+              "data.user_email": "{{user.email}}"
+            },
+            {
+              "$or": [
+                {
+                  "user_condition": {
+                    "role": "user",
+                    "data.company": "E2Eden"
+                  }
+                },
+                {
+                  "user_condition": {
+                    "role": "user",
+                    "data.company": "Seawater Greenhouse"
+                  }
+                },
+                {
+                  "user_condition": {
+                    "role": "user",
+                    "data.company": "Partner"
+                  }
+                },
+                {
+                  "user_condition": {
+                    "role": "user",
+                    "data.company": "Other"
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -60,7 +113,16 @@
           }
         },
         {
-          "data.user_email": "{{user.email}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.user_email": "{{user.email}}"
+            }
+          ]
         }
       ]
     },
@@ -72,7 +134,16 @@
           }
         },
         {
-          "data.user_email": "{{user.email}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.user_email": "{{user.email}}"
+            }
+          ]
         }
       ]
     }

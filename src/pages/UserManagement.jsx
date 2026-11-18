@@ -35,7 +35,8 @@ export default function UserManagement() {
   });
 
   const updateUserMutation = useMutation({
-    mutationFn: ({ id, data }) => base44.entities.User.update(id, data),
+    mutationFn: ({ id, data }) => base44.functions.invoke('assignUserCompany', { id, company: data.company }),
+    onError: () => alert('Unable to save the company assignment. Please try again.'),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] });
     },

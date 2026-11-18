@@ -129,11 +129,25 @@
     },
     "funding": {
       "type": "string",
-      "description": "Funding information"
+      "description": "Funding information",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "partners": {
       "type": "string",
-      "description": "Project partners"
+      "description": "Project partners",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "video_url": {
       "type": "string",

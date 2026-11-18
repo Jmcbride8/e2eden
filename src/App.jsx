@@ -33,11 +33,8 @@ const ADMIN_ONLY_PAGES = new Set([
 
 // Pages that require a logged-in user (internal/admin tools).
 // All other pages remain publicly accessible when the app is set to Public.
-const PROTECTED_PAGES = new Set([
-  'TaskManager',
-  'Conferences',
-  'Profile',
-]);
+const PROTECTED_PAGES = new Set(['TaskManager', 'Conferences', 'Profile']);
+const STAFF_PAGES = new Set(['TaskManager', 'Conferences']);
 
 const AuthenticatedApp = () => {
   const { user, isAuthenticated, isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -79,7 +76,7 @@ const AuthenticatedApp = () => {
               {ADMIN_ONLY_PAGES.has(path) ? (
                 isAuthenticated && user?.role === 'admin' ? <Page /> : <Navigate to="/" replace />
               ) : PROTECTED_PAGES.has(path) ? (
-                <ProtectedRoute>
+                <ProtectedRoute requireCompany={STAFF_PAGES.has(path)}>
                   <Page />
                 </ProtectedRoute>
               ) : (

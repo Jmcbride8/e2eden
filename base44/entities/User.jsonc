@@ -31,7 +31,7 @@
       "rls": {
         "update": {
           "user_condition": {
-            "role": "admin"
+            "collaborator_role": "editor"
           }
         }
       }
@@ -45,8 +45,5 @@
       "description": "CSS object-position for profile picture",
       "default": "center center"
     }
-  },
-  "required": [
-    "company"
-  ]
+  }
 }

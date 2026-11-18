@@ -1,0 +1,61 @@
+{
+  "name": "FinanceSettings",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "enum": [
+        "current"
+      ]
+    },
+    "valuation": {
+      "type": "number",
+      "minimum": 1
+    },
+    "proof_of_concept_goal": {
+      "type": "number",
+      "minimum": 1
+    },
+    "pilot_goal": {
+      "type": "number",
+      "minimum": 1
+    },
+    "excluded_investor_name": {
+      "type": "string"
+    },
+    "seed_ownership": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "required": [
+    "key",
+    "valuation",
+    "proof_of_concept_goal",
+    "pilot_goal"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

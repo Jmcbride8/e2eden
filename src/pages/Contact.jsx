@@ -34,13 +34,19 @@ export default function Contact() {
     }
 
     setSubmitting(true);
-    await base44.integrations.Core.SendEmail({
-      to: "info@e2eden.com",
-      subject: `Contact Form: ${form.subject}`,
-      body: `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-    });
-    setSubmitted(true);
-    setSubmitting(false);
+    try {
+      await base44.entities.ContactSubmission.create({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        reason: form.subject.trim(),
+        message: form.message.trim(),
+      });
+      setSubmitted(true);
+    } catch {
+      setError("We couldn't send your message. Please check your entries and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {

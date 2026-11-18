@@ -48,14 +48,19 @@ export default function ContactModal({ isOpen, onClose, defaultReason }) {
       return;
     }
     setSubmitting(true);
-    await base44.entities.ContactSubmission.create({
-      name: form.name,
-      email: form.email,
-      reason: form.reason,
-      message: form.message,
-    });
-    setSubmitted(true);
-    setSubmitting(false);
+    try {
+      await base44.entities.ContactSubmission.create({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        reason: form.reason.trim(),
+        message: form.message.trim(),
+      });
+      setSubmitted(true);
+    } catch {
+      setError("We couldn't send your message. Please check your entries and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

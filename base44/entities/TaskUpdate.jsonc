@@ -4,7 +4,14 @@
   "properties": {
     "task_id": {
       "type": "string",
-      "description": "ID of the task this update belongs to"
+      "description": "ID of the task this update belongs to",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "comment": {
       "type": "string",
@@ -30,7 +37,16 @@
           }
         },
         {
-          "created_by_id": "{{user.id}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "created_by_id": "{{user.id}}"
+            }
+          ]
         }
       ]
     },
@@ -43,7 +59,26 @@
         },
         {
           "user_condition": {
-            "role": "user"
+            "role": "user",
+            "data.company": "E2Eden"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Seawater Greenhouse"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Partner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user",
+            "data.company": "Other"
           }
         }
       ]
@@ -56,7 +91,16 @@
           }
         },
         {
-          "created_by_id": "{{user.id}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "created_by_id": "{{user.id}}"
+            }
+          ]
         }
       ]
     },
@@ -68,7 +112,16 @@
           }
         },
         {
-          "created_by_id": "{{user.id}}"
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "created_by_id": "{{user.id}}"
+            }
+          ]
         }
       ]
     }

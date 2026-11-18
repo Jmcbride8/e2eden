@@ -147,7 +147,7 @@ export default function Conferences() {
                     <TableHead className="text-white/80 font-semibold">Dates</TableHead>
                     <TableHead className="text-white/80 font-semibold">Location</TableHead>
                     <TableHead className="text-white/80 font-semibold">Cost</TableHead>
-                    <TableHead className="text-white/80 font-semibold">Attendance</TableHead>
+                    {isAdmin && <TableHead className="text-white/80 font-semibold">Attendance</TableHead>}
                     <TableHead className="text-white/80 font-semibold">Actions</TableHead>
                     {isAdmin && <TableHead className="text-white/80 font-semibold">Admin</TableHead>}
                   </TableRow>
@@ -191,18 +191,20 @@ export default function Conferences() {
                         <TableCell className="text-white/70 text-sm">
                           {conference.cost === 0 ? 'Free' : `$${conference.cost}`}
                         </TableCell>
-                        <TableCell>
-                          <div className="flex gap-3 text-xs text-white/60">
-                            <span className="flex items-center gap-1">
-                              <Check className="w-3 h-3 text-emerald-400" />
-                              {counts.attending}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <HelpCircle className="w-3 h-3 text-amber-400" />
-                              {counts.maybe}
-                            </span>
-                          </div>
-                        </TableCell>
+                        {isAdmin && (
+                          <TableCell>
+                            <div className="flex gap-3 text-xs text-white/60">
+                              <span className="flex items-center gap-1">
+                                <Check className="w-3 h-3 text-emerald-400" />
+                                {counts.attending}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <HelpCircle className="w-3 h-3 text-amber-400" />
+                                {counts.maybe}
+                              </span>
+                            </div>
+                          </TableCell>
+                        )}
                         <TableCell>
                           {user && !isPast && (
                             <TooltipProvider>
@@ -332,16 +334,18 @@ export default function Conferences() {
                           <span>{conference.cost === 0 ? 'Free' : `$${conference.cost}`}</span>
                         </div>
                         
-                        <div className="flex items-center gap-4 text-xs text-white/60">
-                          <span className="flex items-center gap-1">
-                            <Check className="w-3 h-3 text-emerald-400" />
-                            {counts.attending} attending
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <HelpCircle className="w-3 h-3 text-amber-400" />
-                            {counts.maybe} maybe
-                          </span>
-                        </div>
+                        {isAdmin && (
+                          <div className="flex items-center gap-4 text-xs text-white/60">
+                            <span className="flex items-center gap-1">
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              {counts.attending} attending
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <HelpCircle className="w-3 h-3 text-amber-400" />
+                              {counts.maybe} maybe
+                            </span>
+                          </div>
+                        )}
                       </div>
                       
                       {user && !isPast && (
