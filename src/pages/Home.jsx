@@ -12,6 +12,9 @@ import AdminImageUpload from "../components/home/AdminImageUpload";
 import { Button } from "@/components/ui/button";
 import { FertilizerChart, SaltwaterChart } from "../components/home/PopulationCharts";
 import ScienceFrontier from "../components/science/ScienceFrontier";
+import ResearchSiteCard from "../components/home/ResearchSiteCard";
+import ConsortiumGrid from "../components/home/ConsortiumGrid";
+import { SITES, CONSORTIUM } from "../data/mercSites";
 
 
 export default function Home() {
@@ -578,13 +581,14 @@ export default function Home() {
                 <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">Where We Begin</span>
                 <div className="h-px flex-1 bg-white/10" />
               </div>
-              <h2 className="text-5xl font-bold mb-6 text-white">Imperial Valley, California
+              <h2 className="text-5xl font-bold mb-6 text-white">Three Proposed Research Sites
 
               </h2>
               <p className="text-xl leading-relaxed mb-8 text-white/70">
-                We are proposing Imperial Valley as our proving ground—one of the hottest, driest places in North America, yet 
-                one of the most productive agricultural regions in the world. If the cooling economics can be made to work here, 
-                they can be tested anywhere.
+                We are proposing three field sites in California, Israel and Jordan, where the same question is asked under
+                the same conditions: extreme heat, scarce freshwater, and agriculture that cannot afford to stop. We begin in
+                Imperial Valley—one of the hottest, driest places in North America, yet one of the most productive
+                agricultural regions in the world. If the cooling economics can be made to work here, they can be tested anywhere.
               </p>
               <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 mb-6" style={{ minHeight: '400px' }}>
                 <AdminImageUpload
@@ -635,24 +639,19 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              {/* Pilot Project Spotlight */}
-              <div className="mt-10 grid md:grid-cols-2 gap-8 items-center rounded-2xl overflow-hidden border border-white/10 bg-white/5">
-                <div className="p-8">
-                  <span className="text-amber-400 text-xs font-semibold uppercase tracking-widest">Proposed Research Site</span>
-                  <h3 className="text-2xl font-bold text-white mt-2 mb-3">UC Desert Research &amp; Extension Center</h3>
-                  <p className="text-amber-400/80 text-sm mb-4">Holtville, Imperial Valley, CA · Prospective collaboration</p>
-                  <p className="text-white/70 leading-relaxed">The site we are proposing for our proof-of-concept field trial: an instrumented comparison of cooled and untreated plots in one of the hottest, driest agricultural regions on Earth. This is a planned trial, not an operating E2Eden farm.</p>
-                </div>
-                <div className="h-64 md:h-full min-h-[260px]">
-                  <AdminImageUpload
-                    src={getHomeImg("iv_pilot_project", "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/public/6993b7c68cee7955d3266d09/fa3b93fe7_darla-hueske-fqoq39Jj5us-unsplash.jpg")}
-                    alt="UC Desert Research Center Pilot Farm"
+              {/* Proposed research sites */}
+              <div className="mt-10 space-y-8">
+                {SITES.map((site) => (
+                  <ResearchSiteCard
+                    key={site.id}
+                    site={site}
                     isAdmin={isAdmin}
-                    onUploaded={(url) => setHomeImg("iv_pilot_project", url)}
-                    className="w-full h-full"
-                    imgClassName="w-full h-full object-cover" />
-                </div>
+                    getHomeImg={getHomeImg}
+                    setHomeImg={setHomeImg} />
+                ))}
               </div>
+
+              <ConsortiumGrid members={CONSORTIUM} />
             </motion.div>
           </div>
         </section>
