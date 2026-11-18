@@ -5,8 +5,8 @@ import { base44 } from "@/api/base44Client";
 
 const GROUPS = [
   { label: "Current", statuses: ["active"], color: "text-amber-400" },
-  { label: "Past", statuses: ["completed"], color: "text-white/50" },
   { label: "Future", statuses: ["planned"], color: "text-blue-400" },
+  { label: "Past", statuses: ["completed"], color: "text-white/50" },
 ];
 
 export default function ProjectsDropdown() {
