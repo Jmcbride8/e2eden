@@ -29,9 +29,11 @@ export default function GlobalTransformation() {
         <h2 id="roadmap-global" className="mb-3 text-2xl font-semibold leading-tight tracking-tight text-background sm:text-4xl">Global Transformation</h2>
         <p className="max-w-[68ch] text-base leading-relaxed text-secondary/75">Start with farms. Prove net freshwater savings in the field, then scale what works with growers across the Southwest. The Salton Sea is the first basin-scale concept. From there, the ambition goes global: apply what we learn where local water, ecology and communities make a case for it.</p>
       </header>
-      {basins.map(([name, slug, image, description, tags]) => (
-        <BasinStoryCard key={slug} name={name} description={description} tags={tags} image={IMAGES + image} href={`${SITE}seas/${slug}`} />
-      ))}
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        {basins.map(([name, slug, image, description, tags]) => (
+          <BasinStoryCard key={slug} name={name} description={description} tags={tags} image={IMAGES + image} href={`${SITE}seas/${slug}`} />
+        ))}
+      </div>
       <p className="mt-7 max-w-[75ch] text-sm leading-relaxed text-secondary/75">These are places to study, not committed projects. Each basin would need its own water and salt balance, ecological review, and local agreement. <a href={`${SITE}going-global`} target="_blank" rel="noopener noreferrer" className="text-background underline underline-offset-4">Explore the full Going Global vision</a>.</p>
     </section>
   );
