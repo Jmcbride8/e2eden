@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
-import { ArrowUpRight, Heart, MapPin } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, MapPin } from 'lucide-react';
 
-export default function BasinStoryCard({ name, description, tags, image, href }) {
-  const key = `e2eden:basin-favourite:${name}`;
-  const [saved, setSaved] = useState(() => localStorage.getItem(key) === 'true');
+export default function BasinStoryCard({ name, description, tags, image, imagePosition = 'center 25%', href }) {
   const [location, ...topics] = tags;
 
   return (
-    <article className="relative flex flex-col overflow-hidden rounded-xl border border-border/[0.15] bg-muted/5">
-      <img src={image} alt={`Satellite view of ${name}`} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-      <button
-        type="button"
-        className="absolute right-3 top-3 grid size-10 place-items-center rounded-full bg-foreground/80 text-background hover:bg-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
-        title={saved ? 'Remove from favourites' : 'Save to favourites'}
-        aria-pressed={saved}
-        aria-label={`Favourite ${name}`}
-        onClick={() => { localStorage.setItem(key, String(!saved)); setSaved(!saved); }}
-      >
-        <Heart size={16} className={saved ? 'fill-current' : undefined} aria-hidden="true" />
-      </button>
+    <article className="flex flex-col overflow-hidden rounded-xl border border-border/[0.15] bg-muted/5">
+      <img
+        src={image}
+        alt={`View of ${name}`}
+        loading="lazy"
+        decoding="async"
+        className="aspect-[16/10] w-full object-cover"
+        style={{ objectPosition: imagePosition }}
+      />
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <h3 className="mb-2 text-lg font-semibold leading-snug text-background">{name}</h3>
         <p className="mb-3 flex items-center gap-1.5 text-xs text-secondary/60">
