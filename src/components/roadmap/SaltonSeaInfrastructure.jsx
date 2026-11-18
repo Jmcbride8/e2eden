@@ -10,6 +10,15 @@ const components = [
   ["Optional Water & Mineral Recovery", "Condensers could recover some freshwater from humid air. Lithium recovery from suitable geothermal brines is a separate opportunity that would need its own testing and business case."],
 ];
 
+const illustrations = {
+  "Pacific Seawater Intake": ["366bc6ad1", "Concept illustration of a screened seawater intake on the Pacific coast"],
+  "Gravity-Fed Import Tunnels": ["8717906a3", "Conceptual cutaway of a water tunnel beneath the coastal mountains"],
+  "Salton Sea Receiving Works": ["957ea08d6", "Concept illustration of a gated outlet and shoreline habitat at the Salton Sea"],
+  "Brine Distribution & Farm Cooling": ["86b6c1bad", "Concept illustration of an evaporative cooling wall beside crop rows"],
+  "Inland Salt & Brine Management": ["2584098c5", "Concept illustration of lined brine basins and salt deposits in the desert"],
+  "Optional Water & Mineral Recovery": ["3f8703428", "Concept illustration of a condenser and separate mineral recovery equipment"],
+};
+
 export default function SaltonSeaInfrastructure() {
   return (
     <section aria-labelledby="salton-sea-infrastructure" className="mt-9 border-t border-border/20 pt-8 sm:mt-12 sm:pt-10">
@@ -20,10 +29,19 @@ export default function SaltonSeaInfrastructure() {
       </p>
       <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {components.map(([title, description], index) => (
-          <li key={title} className="rounded-xl border border-border/[0.15] bg-muted/5 p-5 sm:p-6">
-            <p className="mb-3 font-mono text-xs text-secondary/60" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
-            <h4 className="mb-2 text-lg font-semibold leading-snug text-background">{title}</h4>
-            <p className="text-sm leading-relaxed text-secondary/75">{description}</p>
+          <li key={title} className="overflow-hidden rounded-xl border border-border/[0.15] bg-muted/5">
+            <img
+              src={`https://media.base44.com/images/public/6993b7c68cee7955d3266d09/${illustrations[title][0]}_generated_image.png`}
+              alt={illustrations[title][1]}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[16/10] w-full object-cover"
+            />
+            <div className="p-5 sm:p-6">
+              <p className="mb-3 font-mono text-xs text-secondary/60" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
+              <h4 className="mb-2 text-lg font-semibold leading-snug text-background">{title}</h4>
+              <p className="text-sm leading-relaxed text-secondary/75">{description}</p>
+            </div>
           </li>
         ))}
       </ol>
