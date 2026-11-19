@@ -24,11 +24,9 @@ export const SITES = [
       "The Israeli pilot site will use brine discharge from the Sabha desalination plant, which supplies potable water to Eilat, on plots irrigated from brackish groundwater. Temperature, humidity, vapour-pressure deficit, wind and crop water use are measured against untreated plots. A proposed site: field work begins only if the proposal is funded.",
     image_key: "merc_site_israel",
     image_default:
-      "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/PikiWiki_Israel_41827_Yair_experimental_station_in_Arava_valley.JPG/1280px-PikiWiki_Israel_41827_Yair_experimental_station_in_Arava_valley.JPG",
-    image_alt: "Experimental agricultural station in the Arava valley",
+      "https://base44.app/api/apps/6993b7c68cee7955d3266d09/files/mp/public/6993b7c68cee7955d3266d09/37842d4ff_arava-institute-campus.png",
+    image_alt: "Arava Institute campus at Kibbutz Ketura, Israel",
     lead: "Dr. Clive Lipchin · Prime Investigator, AIES",
-    image_credit:
-      "Yair agricultural research station, Arava Valley · Dr. Avishai Teicher / Pikiwiki Israel, CC BY 2.5",
   },
   {
     id: "jordan",
