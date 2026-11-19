@@ -361,23 +361,23 @@ export default function Home() {
               </p>
             </motion.div>
 
-            {/* Research objectives */}
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {/* Reported performance — Seawater Greenhouse research */}
+            <div className="grid md:grid-cols-3 gap-6 mb-6">
               {[
               {
-                status: "To Be Validated",
-                metric: "Net Freshwater Savings",
-                body: "Controlled field trials will measure whether saline-water microclimate cooling reduces irrigation demand after accounting for additional salinity-management water."
+                number: "90%",
+                label: "Water Savings",
+                source: "Reported reduction in irrigation water use in enclosed greenhouse deployments."
               },
               {
-                status: "Under Investigation",
-                metric: "Cooling Reach",
-                body: "Measuring temperature reduction and its persistence at increasing distances from the cooling wall."
+                number: "27°F",
+                label: "Temperature Reduction",
+                source: "Reported cooling of the air passing through the saltwater-drenched wall."
               },
               {
-                status: "Under Investigation",
-                metric: "Microclimate Modification",
-                body: "Measuring changes in relative humidity, vapor-pressure deficit, and crop-level conditions."
+                number: "50%",
+                label: "Humidity Increase",
+                source: "Reported rise in relative humidity inside the cooled greenhouse environment."
               }].
               map((stat, idx) =>
               <motion.div
@@ -386,13 +386,25 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="p-6 rounded-xl bg-white/5 border border-white/10">
-                  <div className="text-3xl font-bold text-amber-400 mb-2 leading-tight">{stat.status}</div>
-                  <div className="text-lg font-semibold text-white mb-3">{stat.metric}</div>
-                  <p className="text-sm leading-relaxed text-white/50">{stat.body}</p>
+                className="p-6 rounded-xl text-center bg-white/5 border border-white/10">
+                  <div className="text-5xl font-bold text-amber-400 mb-2">{stat.number}</div>
+                  <div className="text-lg font-semibold text-white">{stat.label}</div>
+                  <p className="text-sm leading-relaxed text-white/50 mt-3">{stat.source}</p>
+                  <div className="mt-4 inline-block px-3 py-1 rounded-full border border-amber-500/40 text-[11px] font-semibold uppercase tracking-wider text-amber-400/90">
+                    Requires validation in target climates
+                  </div>
                 </motion.div>
               )}
             </div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-sm leading-relaxed text-white/50 max-w-4xl mb-12">
+              These figures are reported results from Seawater Greenhouse research in enclosed greenhouse systems. They are not yet verified for open-field agriculture, and their transferability to the specific climatic regions we intend to deploy in — extreme heat, very low humidity, high evaporative demand — remains to be demonstrated. Proving that transferability, region by region, is the purpose of our field trials.
+            </motion.p>
 
             {/* Hero Image */}
             <motion.div
